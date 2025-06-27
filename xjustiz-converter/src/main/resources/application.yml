@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: @project.artifactId@
+
+xjustiz:
+  route:
+    converter:
+      from: ...

@@ -1,0 +1,5 @@
+
+xjustiz:
+  route:
+    converter:
+      from: direct:start
