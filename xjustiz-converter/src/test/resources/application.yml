@@ -1,4 +1,8 @@
 
+logging:
+  level:
+    de.muenchen.xjustiz.xjustiz-document-converter: DEBUG
+
 xjustiz:
   route:
     converter:

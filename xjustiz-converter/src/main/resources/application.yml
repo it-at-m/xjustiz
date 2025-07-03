@@ -2,6 +2,10 @@ spring:
   application:
     name: @project.artifactId@
 
+logging:
+  level:
+    de.muenchen.xjustiz.xjustiz-document-converter: INFO
+
 xjustiz:
   route:
     converter:

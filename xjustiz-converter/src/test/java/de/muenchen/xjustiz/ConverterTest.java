@@ -10,15 +10,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootApplication( scanBasePackages = "de.muenchen.xjustiz" )
 @CamelSpringBootTest
 @SpringBootTest(classes = {ConverterRouteBuilder.class})
 public class ConverterTest {
-
-    @Autowired
-    private CamelContext camelContext;
 
     @Produce("direct:start")
     private ProducerTemplate startTest;
@@ -27,12 +24,11 @@ public class ConverterTest {
     private String testRoute;
 
     @Test
-    void test_HelloWorld() throws Exception {
+    void test_externAnJustiz_0500010() throws Exception {
 
         var response  = startTest.requestBody(testRoute,"Hello World", String.class);
-        assertEquals("Hello World", response);
+        assertTrue(response.startsWith("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<ns2:nachricht.straf.owi.verfahrensmitteilung.externAnJustiz.0500010 xmlns:ns2=\"http://www.xjustiz.de\">"));
 
     }
-
 
 }
