@@ -1,4 +1,4 @@
-package de.muenchen.xjustiz.config.contents.beteiligte;
+package de.muenchen.xjustiz.xjustiz0500straf.content.beteiligung;
 
 import lombok.NoArgsConstructor;
 

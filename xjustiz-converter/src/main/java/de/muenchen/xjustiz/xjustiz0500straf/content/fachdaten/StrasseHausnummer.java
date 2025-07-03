@@ -1,9 +1,8 @@
-package de.muenchen.xjustiz.config.contents.fachdaten;
+package de.muenchen.xjustiz.xjustiz0500straf.content.fachdaten;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter

@@ -1,6 +1,6 @@
-package de.muenchen.xjustiz.config.contents;
+package de.muenchen.xjustiz.xjustiz0500straf.content;
 
-import de.muenchen.xjustiz.config.contents.fachdaten.Tatort;
+import de.muenchen.xjustiz.xjustiz0500straf.content.fachdaten.Tatort;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @NoArgsConstructor
-public class Fachdaten {
+public class FachdatenContent {
 
     @Getter
     @Setter
