@@ -1,0 +1,41 @@
+package de.muenchen.xjustiz;
+
+import org.apache.camel.Produce;
+import org.apache.camel.ProducerTemplate;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootApplication(scanBasePackages = "de.muenchen.xjustiz")
+@CamelSpringBootTest
+@SpringBootTest(classes = {ConverterRouteBuilder.class})
+@ActiveProfiles({"default"})
+public class ExternAnJustiz0500010ConfigurationTest extends ExternAnJustiz0500010TestEnvironment {
+
+    @Produce("direct:start")
+    private ProducerTemplate startTest;
+
+    @Value("${xjustiz.route.converter.from}")
+    private String testRoute;
+
+    /*
+       Read default spring profile application.yml without organisation configuration.
+     */
+    @Test
+    void test_organisationNotConfigured() throws Exception {
+
+        var xml  = startTest.requestBody(testRoute, createAffectedTestPerson(), String.class);
+
+        var externAnJustiz0500010 = parseXML(xml);
+
+        assertEquals("1" , externAnJustiz0500010.getGrunddaten().getVerfahrensdaten().getBeteiligungs().getLast().getBeteiligter().getBeteiligtennummer(), "All participants are numbered incrementally. Only one beteiligter in whole document expected.");
+        assertNotNull(externAnJustiz0500010.getGrunddaten().getVerfahrensdaten().getBeteiligungs().getLast().getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson(), "Natuerliche Person expected.");
+        assertNull(externAnJustiz0500010.getGrunddaten().getVerfahrensdaten().getBeteiligungs().getLast().getBeteiligter().getAuswahlBeteiligter().getOrganisation(), "Organisation not expected");
+    }
+
+}

@@ -1,6 +1,6 @@
 package de.muenchen.xjustiz.xjustiz0500straf.content.fachdaten;
 
-import de.muenchen.xjustiz.xjustiz0500straf.content.beteiligung.Anschrift;
+import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Anschrift;
 import lombok.Getter;
 
 import java.util.ArrayList;

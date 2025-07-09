@@ -6,6 +6,8 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component(value = "builderConnector")
 @AllArgsConstructor
 public class BuilderConnector implements Processor {
@@ -14,7 +16,7 @@ public class BuilderConnector implements Processor {
 
     @Override
     public void process(Exchange exchange) throws Exception {
-        exchange.getIn().setBody(externAnJustiz0500010Builder.build());
+        exchange.getIn().setBody(externAnJustiz0500010Builder.build(exchange.getIn().getBody(List.class)));
     }
 
 }

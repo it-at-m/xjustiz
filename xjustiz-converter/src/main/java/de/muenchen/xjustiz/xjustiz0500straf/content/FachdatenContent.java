@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @NoArgsConstructor
 public class FachdatenContent {
 
@@ -21,7 +20,7 @@ public class FachdatenContent {
     @Setter
     private LocalDateTime endeDatumUhrzeit;
 
-    private List<Tatort> tatorte = new ArrayList<>();
+    private final List<Tatort> tatorte = new ArrayList<>();
 
     public List<Tatort> getTatorte() {
         return tatorte;

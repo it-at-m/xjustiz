@@ -3,6 +3,7 @@ package de.muenchen.xjustiz;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class ConverterRouteBuilder extends RouteBuilder {
 

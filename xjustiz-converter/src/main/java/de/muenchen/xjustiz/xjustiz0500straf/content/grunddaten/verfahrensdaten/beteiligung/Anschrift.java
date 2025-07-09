@@ -1,17 +1,13 @@
-package de.muenchen.xjustiz.xjustiz0500straf.content.beteiligung;
+package de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Anschrift {
 
     protected String anschriftsTyp;
+    protected String listVersionID;
     private String strasse;
     private String hausnummer;
     protected String plz;

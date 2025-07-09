@@ -1,21 +1,28 @@
 package de.muenchen.xjustiz.xjustiz0500straf.builder;
 
 import de.muenchen.xjustiz.generated.*;
+import de.muenchen.xjustiz.xjustiz0500straf.config.NachrichtenkopfProperty;
+import de.muenchen.xjustiz.xjustiz0500straf.content.NachrichtenkopfContent;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
+import java.util.UUID;
 
 @Component
+@RequiredArgsConstructor
 public class NachrichtenkopfBuilder {
+
+    @Value("${xjustiz.version}")
+    protected String xJustizVersion;
 
     public final static String CHANGEIT = "TODO";
 
-    public final static String NACHRICHTENKOPF_AUSWAHL_ABSENDER_SONSTIGE = "SKA 2.222";
-    public final static String NACHRICHTENKOPF_AUSWAHL_EMPFAENGER_GERICHT = "D2601";
-    public final static String NACHRICHTENKOPF_HERSTELLERINFORMATION_PRODUKT = "KVUweb";
+    private final NachrichtenkopfProperty nachrichtenkopfProperty;
+    private final NachrichtenkopfContent nachrichtenkopfContent;
 
-
-    public TypeGDSNachrichtenkopf build(Calendar uniformMessageTime) {
+    public TypeGDSNachrichtenkopf build() {
 
         /**
          *
@@ -32,59 +39,47 @@ public class NachrichtenkopfBuilder {
 
         TypeGDSNachrichtenkopf nachrichtenkopf = new TypeGDSNachrichtenkopf();
 
-        // xJustizVersion
-        nachrichtenkopf.setXjustizVersion("3.6.2");
+        nachrichtenkopf.setXjustizVersion(xJustizVersion);
 
-        // Dynamisch : Aktenzeichen : KVU: "EH-KASSZ" (Kassenzeichen) aus KVU Daten
         TypeGDSNachrichtenkopf.Absender absender = new TypeGDSNachrichtenkopf.Absender();
-        absender.setAktenzeichen(CHANGEIT);
+        absender.setAktenzeichen(nachrichtenkopfContent.getAktenzeichen());
         nachrichtenkopf.setAbsender(absender);
 
-        //       Statisch : AuswahlAktenzeichen
         TypeGDSNachrichtenkopf.Empfaenger empfaenger = new TypeGDSNachrichtenkopf.Empfaenger();
         TypeGDSNachrichtenkopf.Empfaenger.AuswahlAktenzeichen auswahlAktenzeichen = new TypeGDSNachrichtenkopf.Empfaenger.AuswahlAktenzeichen();
         auswahlAktenzeichen.setAktenzeichenNeu(true);
         empfaenger.setAuswahlAktenzeichen(auswahlAktenzeichen);
         nachrichtenkopf.setEmpfaenger(empfaenger);
 
-        //Dynamisch : Erstellzeitpunkt
-        nachrichtenkopf.setErstellungszeitpunkt(uniformMessageTime);
+        nachrichtenkopf.setErstellungszeitpunkt(Calendar.getInstance());
 
-        // Statisch : Auswahl_Absender
         TypeGDSKommunikationspartner.AuswahlKommunikationspartner kommunikationspartnerSka = new TypeGDSKommunikationspartner.AuswahlKommunikationspartner();
-        kommunikationspartnerSka.setSonstige(NACHRICHTENKOPF_AUSWAHL_ABSENDER_SONSTIGE);
+        kommunikationspartnerSka.setSonstige(nachrichtenkopfProperty.getAuswahlAbsenderSonstige());
         TypeGDSKommunikationspartner kommunikationsPartnerAbsender = new TypeGDSKommunikationspartner();
         kommunikationsPartnerAbsender.setAuswahlKommunikationspartner(kommunikationspartnerSka);
         nachrichtenkopf.getAbsender().setInformationen(kommunikationsPartnerAbsender);
 
-        // Statisch : Auswahl_Empfaenger
         TypeGDSKommunikationspartner.AuswahlKommunikationspartner kommunikationspartnerGericht = new TypeGDSKommunikationspartner.AuswahlKommunikationspartner();
         CodeGDSGerichteTyp3 gerichtKommunikationsparter = new CodeGDSGerichteTyp3();
-        gerichtKommunikationsparter.setCode(NACHRICHTENKOPF_AUSWAHL_EMPFAENGER_GERICHT);
-        gerichtKommunikationsparter.setListVersionID(CHANGEIT);
+        gerichtKommunikationsparter.setListVersionID(nachrichtenkopfProperty.getCodelisten().get("gds-gericht").getCurrentVersion());
+        gerichtKommunikationsparter.setCode(nachrichtenkopfProperty.getCodelisten().get("gds-gericht").currentCodelistValueWithKey("auswahl-empfaenger-gericht"));
         kommunikationspartnerGericht.setGericht(gerichtKommunikationsparter);
         TypeGDSKommunikationspartner kommunikationsPartnerEmpfaenger = new TypeGDSKommunikationspartner();
         kommunikationsPartnerEmpfaenger.setAuswahlKommunikationspartner(kommunikationspartnerGericht);
         nachrichtenkopf.getEmpfaenger().setInformationen(kommunikationsPartnerEmpfaenger);
 
-        /*
-           Dynamisch : Eigene_Nachricht_ID
-           Hier ist eine eindeutige Identifikation der bei diesem Übermittlungsvorgang erstellten Nachricht anzugeben, um spätere Referenzen zu ermöglichen.
-           Von EAI-XML-Generator zu vergebene, fortlaufende ID.
-        */
-        nachrichtenkopf.getAbsender().setEigeneNachrichtenID("3f9a9e40-0b4a-4d65-8e24-89f9fce51f97");
+        nachrichtenkopf.getAbsender().setEigeneNachrichtenID(UUID.randomUUID().toString());
         CodeGDSEreignisTyp3 ereignis = new CodeGDSEreignisTyp3();
 
-        //  Statisch : Ereignis
-        ereignis.setCode(CHANGEIT);
-        ereignis.setListVersionID(CHANGEIT);
+        ereignis.setListVersionID(nachrichtenkopfProperty.getCodelisten().get("gds-ereignis").getCurrentVersion());
+        ereignis.setCode(nachrichtenkopfProperty.getCodelisten().get("gds-ereignis").currentCodelistValueWithKey("nachrichtenkopf-ereignis"));
+
         nachrichtenkopf.getEreignises().add(ereignis);
 
-        // Statisch : Herstellerinformation
         TypeGDSHerstellerinformation herstellerinformation = new TypeGDSHerstellerinformation();
-        herstellerinformation.setNameDesProdukts(NACHRICHTENKOPF_HERSTELLERINFORMATION_PRODUKT);
-        herstellerinformation.setHerstellerDesProdukts(CHANGEIT);
-        herstellerinformation.setVersion(CHANGEIT);
+        herstellerinformation.setNameDesProdukts(nachrichtenkopfProperty.getAuswahlHerstellerinformationProduktName());
+        herstellerinformation.setHerstellerDesProdukts(nachrichtenkopfProperty.getAuswahlHerstellerinformationProdukt());
+        herstellerinformation.setVersion(nachrichtenkopfProperty.getAuswahlHerstellerinformationProduktVersion());
         nachrichtenkopf.setHerstellerinformation(herstellerinformation);
 
         return nachrichtenkopf;

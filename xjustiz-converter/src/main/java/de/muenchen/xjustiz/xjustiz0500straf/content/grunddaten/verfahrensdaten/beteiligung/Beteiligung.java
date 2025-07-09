@@ -1,24 +1,25 @@
-package de.muenchen.xjustiz.xjustiz0500straf.content.beteiligung;
+package de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung;
 
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
-@NoArgsConstructor
 public class Beteiligung {
 
-    private Rolle rolle;
+    private List<Rolle> rollen;
     private Beteiligter beteiligter;
 
-    public Optional<Rolle> getRolle() {
-        return Optional.ofNullable(rolle);
+    public Optional<List<Rolle>> getRollen() {
+        return Optional.ofNullable(rollen);
     }
 
-    public Rolle generateRolle() {
-        if (rolle == null) {
-            rolle = new Rolle();
+    public void addRolle(Rolle rolle) {
+        if (this.rollen == null) {
+            this.rollen = new ArrayList<Rolle>();
         }
-        return rolle;
+        this.rollen.add(rolle);
     }
 
     public Optional<Beteiligter> getBeteiligter() {

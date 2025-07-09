@@ -1,4 +1,4 @@
-package de.muenchen.xjustiz.xjustiz0500straf.content.beteiligung;
+package de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung;
 
 import lombok.Getter;
 import lombok.Setter;

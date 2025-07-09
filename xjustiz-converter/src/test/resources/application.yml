@@ -4,6 +4,50 @@ logging:
     de.muenchen.xjustiz.xjustiz-document-converter: DEBUG
 
 xjustiz:
+  version: 3.6.2
+  xjustiz0500straf:
+    nachrichtenkopf:
+      auswahl-absender-sonstige: ABC 1.234
+      auswahl-herstellerinformation-produkt: myProdukt
+      auswahl-herstellerinformation-produkt-name: myProduktname
+      auswahl-herstellerinformation-produkt-version: myProduktversion
+      codelisten:
+        gds-gericht:
+          current-version: 3.6
+          codelist-versions:
+            gds-gericht-3-6:
+              auswahl-empfaenger-gericht: D2601
+        gds-ereignis:
+          current-version: 1.11
+          codelist-versions:
+            gds-ereignis-1-11:
+              nachrichtenkopf-ereignis: 117
+            gds-ereignis-1-10:
+              nachrichtenkopf-ereignis: 117
+    grunddaten:
+      verfahrensdaten:
+        instanzdaten:
+          codelisten:
+            gds-gericht:
+              current-version: 3.6
+              codelist-versions:
+                gds-gericht-3-6:
+                  auswahl-empfaenger-gericht: D2601
+            gds-sachgebiet:
+              current-version: 2.3
+              codelist-versions:
+                gds-gericht-2-3:
+                  sachgebiet: '026'
+        codelisten:
+          gds-rollenbezeichnung:
+            current-version: 3.5
+            codelist-versions:
+              gds-rollenbezeichnung-3-5:
+                natuerliche-person: '040'
+                organisation: '016'
+#        natuerliche-person:
+#          rollenbezeichnung: '040'
+
   route:
     converter:
       from: direct:start
