@@ -12,15 +12,9 @@ xjustiz:
             bezeichnung-aktuell: Landeshauptstadt München Referat
             bezeichnung-anschrift-strasse: Straße
             bezeichnung-anschrift-hausnummer: 1
-            bezeichnung-anschrift-plz: 80000
+            bezeichnung-anschrift-plz: 8000
             bezeichnung-anschrift-ort: München
             bezeichnung-bankverbindung: DE99 9999 9999 9999 9999 00
-            codelisten:
-              gds-anschriftstyp:
-                current-version: 3.0
-                codelist-versions:
-                  gds-anschriftstyp-3-0:
-                    anschriftstyp: '003'
 
   route:
     converter:

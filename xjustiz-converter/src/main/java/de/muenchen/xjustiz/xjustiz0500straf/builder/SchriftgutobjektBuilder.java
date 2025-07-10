@@ -10,6 +10,7 @@ import java.util.List;
 @Component
 public class SchriftgutobjektBuilder {
 
+    public final static String CHANGEIT = "TODO";
     private final static String SCHRIFTGUTOBJEKTE_DOKUMENT_FACHSPEZIFISCHE_DATEN_DOKUMENTKLASSE= "016";
 
     public TypeGDSSchriftgutobjekte build() {
@@ -56,13 +57,13 @@ public class SchriftgutobjektBuilder {
 
             xDOMEA: xdomea:information-information-0101.schriftgutobjekt.vorgang.dokument.version.format.name.code -> DOCX
             BRE:
-            Schriftgutobjekt OKV - Dokumentklasse: "016", Bestandteiltyp: "001" (Original) gemäß FB (Erik Weber)
-            Schriftgutobjekt BUS Urschrift - "017", Bestandteiltyp: "002" (Repräsentant) gemäß FB (Erik Weber)
+            Schriftgutobjekt OKV - Dokumentklasse: "016", Bestandteiltyp: "001" (Original) gemäß FB
+            Schriftgutobjekt BUS Urschrift - "017", Bestandteiltyp: "002" (Repräsentant) gemäß FB
             Siehe Codeliste GDS.Dokumentklasse_1.4.xlsx
          */
         CodeGDSDokumentklasseTyp3 dokumentklasse = new CodeGDSDokumentklasseTyp3();
         dokumentklasse.setCode(SCHRIFTGUTOBJEKTE_DOKUMENT_FACHSPEZIFISCHE_DATEN_DOKUMENTKLASSE);
-        dokumentklasse.setListVersionID(NachrichtenkopfBuilder.CHANGEIT);
+        dokumentklasse.setListVersionID(CHANGEIT);
         fachspezifischeDaten.setDokumentklasse(dokumentklasse);
 
         /* Anzeigename

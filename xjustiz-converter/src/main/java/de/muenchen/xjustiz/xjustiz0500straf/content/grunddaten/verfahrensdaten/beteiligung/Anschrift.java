@@ -6,8 +6,6 @@ import lombok.*;
 @Setter
 public class Anschrift {
 
-    protected String anschriftsTyp;
-    protected String listVersionID;
     private String strasse;
     private String hausnummer;
     protected String plz;

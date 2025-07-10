@@ -1,5 +1,7 @@
 package de.muenchen.xjustiz;
 
+import de.muenchen.xjustiz.xjustiz0500straf.content.ContentContainer;
+import de.muenchen.xjustiz.xjustiz0500straf.content.GrunddatenContent;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
@@ -29,7 +31,7 @@ public class ExternAnJustiz0500010ConfigurationTest extends ExternAnJustiz050001
     @Test
     void test_organisationNotConfigured() throws Exception {
 
-        var xml  = startTest.requestBody(testRoute, createAffectedTestPerson(), String.class);
+        var xml  = startTest.requestBody(testRoute, new ContentContainer(createFachdaten(), new GrunddatenContent(createAffectedTestPerson())), String.class);
 
         var externAnJustiz0500010 = parseXML(xml);
 

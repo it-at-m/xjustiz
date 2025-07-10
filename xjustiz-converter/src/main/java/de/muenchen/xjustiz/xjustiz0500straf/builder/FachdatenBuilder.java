@@ -1,33 +1,20 @@
 package de.muenchen.xjustiz.xjustiz0500straf.builder;
 
 import de.muenchen.xjustiz.generated.*;
+import de.muenchen.xjustiz.xjustiz0500straf.config.NachrichtenProperty;
 import de.muenchen.xjustiz.xjustiz0500straf.content.FachdatenContent;
-import de.muenchen.xjustiz.xjustiz0500straf.content.fachdaten.StrasseHausnummer;
-import de.muenchen.xjustiz.xjustiz0500straf.content.fachdaten.Tatort;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@RequiredArgsConstructor
 @Component
 public class FachdatenBuilder {
 
+    private final NachrichtenProperty nachrichtenProperty;
 
-    public NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.Fachdaten build() {
-
-
-        FachdatenContent fachdatenContent = new FachdatenContent();
-        fachdatenContent.setAnfangsDatumUhrzeit(LocalDateTime.of(2024, 10, 1, 12, 0));
-        fachdatenContent.setEndeDatumUhrzeit(LocalDateTime.of(2024, 10, 1, 13, 5));
-        Tatort tatortContent = new Tatort();
-        tatortContent.setAnschriftsTyp("006");
-        tatortContent.getStrasseHausnummer().add(new StrasseHausnummer("KVU EH-TATSTR1", "KVU EH-TATHNR1"));
-        tatortContent.getStrasseHausnummer().add(new StrasseHausnummer("KVU EH-TATSTR2", "KVU EH-TATHNR2"));
-        tatortContent.setOrt("KVU EH-TATORT");
-        tatortContent.setOrtsbeschreibung("KVU ???");
-
-        fachdatenContent.getTatorte().add(tatortContent);
-
+    public NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.Fachdaten build(FachdatenContent fachdatenContent) {
 
         /**
          *  Fachdaten
@@ -54,8 +41,8 @@ public class FachdatenBuilder {
 
                 TypeSTRAFTatort.Anschrift anschrift = new TypeSTRAFTatort.Anschrift();
                 CodeGDSAnschriftstyp anschriftTyp = new CodeGDSAnschriftstyp();
-                anschriftTyp.setCode(t.getAnschriftsTyp());
-                anschriftTyp.setListVersionID("3.0");
+                anschriftTyp.setCode(nachrichtenProperty.getCodelisten().get("gds-anschriftstyp").currentCodelistValueWithKey("tatortanschrift"));
+                anschriftTyp.setListVersionID(nachrichtenProperty.getCodelisten().get("gds-anschriftstyp").getCurrentVersion());
                 anschrift.setAnschriftstyp(anschriftTyp);
 
                 anschrift.setStrasse(sh.getStrasse());

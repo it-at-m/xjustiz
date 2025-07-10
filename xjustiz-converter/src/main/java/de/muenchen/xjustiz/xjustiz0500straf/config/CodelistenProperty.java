@@ -8,6 +8,7 @@ import java.util.Map;
 public class CodelistenProperty {
 
         private String currentVersion;
+        private String kennung;
         private Map<String, Map<String, String> > codelistVersions;
 
         public String currentCodelistValueWithKey(String key) {

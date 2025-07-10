@@ -6,47 +6,63 @@ logging:
 xjustiz:
   version: 3.6.2
   xjustiz0500straf:
+    codelisten:
+      gds-rollenbezeichnung:
+        current-version: 3.5
+        kennung: urn:xoev-de:xjustiz:codeliste:gds.rollenbezeichnung
+        codelist-versions:
+          gds-rollenbezeichnung-3-5:
+            betroffener: '040'
+            antragsteller: '016'
+      gds-gerichte:
+        current-version: 3.6
+        kennung: urn:xoev-de:xjustiz:codeliste:gds.gerichte
+        codelist-versions:
+          gds-gericht-3-6:
+            amtsgericht-muenchen: D2601
+      gds-ereignis:
+        current-version: 1.11
+        kennung: urn:xoev-de:xjustiz:codeliste:gds.ereignis
+        codelist-versions:
+          gds-ereignis-1-11:
+            neueingang-e-haft: 117
+          gds-ereignis-1-10:
+            neueingang-e-haft: 117
+      gds-sachgebiet:
+        current-version: 2.3
+        kennung: urn:xoev-de:xjustiz:codeliste:gds.sachgebiet
+        codelist-versions:
+          gds-sachgebiet-2-3:
+            owi-sachen: '026'
+      gds-anschriftstyp:
+        current-version: 3.0
+        kennung: urn:xoev-de:xjustiz:codeliste:gds.anschriftstyp
+        codelist-versions:
+          gds-anschriftstyp-3-0:
+            tatortanschrift: '006'
+            dienst-geschaeftsanschrift: '003'
+      bjf-staat:
+        current-version: 7.0
+        kennung: urn:xoev-de:bund:bfj:codeliste:bfj.staat
+        codelist-versions:
+          bjf-staat-7-0:
+            deutschland: '000'
+      gds-geschlecht:
+        current-version: 2.1
+        kennung: urn:xoev-de:xjustiz:codeliste:gds.geschlecht
+        codelist-versions:
+          gds-geschlecht-2-1:
+            unbekannt: 0
+            maennlich: 1
+            weiblich: 2
+            divers: 3
+            saechlich: 4
     nachrichtenkopf:
       auswahl-absender-sonstige: ABC 1.234
       auswahl-herstellerinformation-produkt: myProdukt
       auswahl-herstellerinformation-produkt-name: myProduktname
       auswahl-herstellerinformation-produkt-version: myProduktversion
       codelisten:
-        gds-gericht:
-          current-version: 3.6
-          codelist-versions:
-            gds-gericht-3-6:
-              auswahl-empfaenger-gericht: D2601
-        gds-ereignis:
-          current-version: 1.11
-          codelist-versions:
-            gds-ereignis-1-11:
-              nachrichtenkopf-ereignis: 117
-            gds-ereignis-1-10:
-              nachrichtenkopf-ereignis: 117
-    grunddaten:
-      verfahrensdaten:
-        instanzdaten:
-          codelisten:
-            gds-gericht:
-              current-version: 3.6
-              codelist-versions:
-                gds-gericht-3-6:
-                  auswahl-empfaenger-gericht: D2601
-            gds-sachgebiet:
-              current-version: 2.3
-              codelist-versions:
-                gds-gericht-2-3:
-                  sachgebiet: '026'
-        codelisten:
-          gds-rollenbezeichnung:
-            current-version: 3.5
-            codelist-versions:
-              gds-rollenbezeichnung-3-5:
-                natuerliche-person: '040'
-                organisation: '016'
-#        natuerliche-person:
-#          rollenbezeichnung: '040'
 
   route:
     converter:

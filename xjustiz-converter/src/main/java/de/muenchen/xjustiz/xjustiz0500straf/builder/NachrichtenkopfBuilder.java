@@ -1,7 +1,7 @@
 package de.muenchen.xjustiz.xjustiz0500straf.builder;
 
 import de.muenchen.xjustiz.generated.*;
-import de.muenchen.xjustiz.xjustiz0500straf.config.NachrichtenkopfProperty;
+import de.muenchen.xjustiz.xjustiz0500straf.config.NachrichtenProperty;
 import de.muenchen.xjustiz.xjustiz0500straf.content.NachrichtenkopfContent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,9 +17,7 @@ public class NachrichtenkopfBuilder {
     @Value("${xjustiz.version}")
     protected String xJustizVersion;
 
-    public final static String CHANGEIT = "TODO";
-
-    private final NachrichtenkopfProperty nachrichtenkopfProperty;
+    private final NachrichtenProperty nachrichtenProperty;
     private final NachrichtenkopfContent nachrichtenkopfContent;
 
     public TypeGDSNachrichtenkopf build() {
@@ -54,15 +52,15 @@ public class NachrichtenkopfBuilder {
         nachrichtenkopf.setErstellungszeitpunkt(Calendar.getInstance());
 
         TypeGDSKommunikationspartner.AuswahlKommunikationspartner kommunikationspartnerSka = new TypeGDSKommunikationspartner.AuswahlKommunikationspartner();
-        kommunikationspartnerSka.setSonstige(nachrichtenkopfProperty.getAuswahlAbsenderSonstige());
+        kommunikationspartnerSka.setSonstige(nachrichtenProperty.getNachrichtenkopf().getAuswahlAbsenderSonstige());
         TypeGDSKommunikationspartner kommunikationsPartnerAbsender = new TypeGDSKommunikationspartner();
         kommunikationsPartnerAbsender.setAuswahlKommunikationspartner(kommunikationspartnerSka);
         nachrichtenkopf.getAbsender().setInformationen(kommunikationsPartnerAbsender);
 
         TypeGDSKommunikationspartner.AuswahlKommunikationspartner kommunikationspartnerGericht = new TypeGDSKommunikationspartner.AuswahlKommunikationspartner();
         CodeGDSGerichteTyp3 gerichtKommunikationsparter = new CodeGDSGerichteTyp3();
-        gerichtKommunikationsparter.setListVersionID(nachrichtenkopfProperty.getCodelisten().get("gds-gericht").getCurrentVersion());
-        gerichtKommunikationsparter.setCode(nachrichtenkopfProperty.getCodelisten().get("gds-gericht").currentCodelistValueWithKey("auswahl-empfaenger-gericht"));
+        gerichtKommunikationsparter.setListVersionID(nachrichtenProperty.getCodelisten().get("gds-gerichte").getCurrentVersion());
+        gerichtKommunikationsparter.setCode(nachrichtenProperty.getCodelisten().get("gds-gerichte").currentCodelistValueWithKey("amtsgericht-muenchen"));
         kommunikationspartnerGericht.setGericht(gerichtKommunikationsparter);
         TypeGDSKommunikationspartner kommunikationsPartnerEmpfaenger = new TypeGDSKommunikationspartner();
         kommunikationsPartnerEmpfaenger.setAuswahlKommunikationspartner(kommunikationspartnerGericht);
@@ -71,15 +69,15 @@ public class NachrichtenkopfBuilder {
         nachrichtenkopf.getAbsender().setEigeneNachrichtenID(UUID.randomUUID().toString());
         CodeGDSEreignisTyp3 ereignis = new CodeGDSEreignisTyp3();
 
-        ereignis.setListVersionID(nachrichtenkopfProperty.getCodelisten().get("gds-ereignis").getCurrentVersion());
-        ereignis.setCode(nachrichtenkopfProperty.getCodelisten().get("gds-ereignis").currentCodelistValueWithKey("nachrichtenkopf-ereignis"));
+        ereignis.setListVersionID(nachrichtenProperty.getCodelisten().get("gds-ereignis").getCurrentVersion());
+        ereignis.setCode(nachrichtenProperty.getCodelisten().get("gds-ereignis").currentCodelistValueWithKey("neueingang-e-haft"));
 
         nachrichtenkopf.getEreignises().add(ereignis);
 
         TypeGDSHerstellerinformation herstellerinformation = new TypeGDSHerstellerinformation();
-        herstellerinformation.setNameDesProdukts(nachrichtenkopfProperty.getAuswahlHerstellerinformationProduktName());
-        herstellerinformation.setHerstellerDesProdukts(nachrichtenkopfProperty.getAuswahlHerstellerinformationProdukt());
-        herstellerinformation.setVersion(nachrichtenkopfProperty.getAuswahlHerstellerinformationProduktVersion());
+        herstellerinformation.setNameDesProdukts(nachrichtenProperty.getNachrichtenkopf().getAuswahlHerstellerinformationProduktName());
+        herstellerinformation.setHerstellerDesProdukts(nachrichtenProperty.getNachrichtenkopf().getAuswahlHerstellerinformationProdukt());
+        herstellerinformation.setVersion(nachrichtenProperty.getNachrichtenkopf().getAuswahlHerstellerinformationProduktVersion());
         nachrichtenkopf.setHerstellerinformation(herstellerinformation);
 
         return nachrichtenkopf;

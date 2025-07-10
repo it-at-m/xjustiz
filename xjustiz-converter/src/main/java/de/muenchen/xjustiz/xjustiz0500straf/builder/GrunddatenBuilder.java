@@ -1,36 +1,30 @@
 package de.muenchen.xjustiz.xjustiz0500straf.builder;
 
 import de.muenchen.xjustiz.generated.*;
+import de.muenchen.xjustiz.xjustiz0500straf.config.NachrichtenProperty;
 import de.muenchen.xjustiz.xjustiz0500straf.content.GrunddatenContent;
-import de.muenchen.xjustiz.xjustiz0500straf.config.VerfahrensdatenProperty;
-import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Anschrift;
-import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Beteiligter;
-import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Beteiligung;
-import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Rolle;
+import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @Component
 public class GrunddatenBuilder {
 
-    private final VerfahrensdatenProperty verfahrensdatenProperty;
-    IncrementCounters incrementCounters = new IncrementCounters();
+    private final NachrichtenProperty nachrichtenProperty;
+    private final Geschlecht geschlecht;
 
-    public TypeGDSGrunddaten build(List<Beteiligung> beteiligungen) {
+    private final IncrementCounters incrementCounters = new IncrementCounters();
 
-        GrunddatenContent grunddatenContent = new GrunddatenContent();
+    public TypeGDSGrunddaten build(GrunddatenContent grunddatenContent) {
+
         incrementCounters.reset();
 
         /*
            The organization can be defined statically once in the properties or transferred dynamically with the natural persons.
         */
-        if (verfahrensdatenProperty.isOrganisationConfiguredInApplicationProperties())
-            grunddatenContent.getBeteiligungen().add(generateBeteiligungOrganisation());
-
-       beteiligungen.forEach(b -> grunddatenContent.getBeteiligungen().add(b));
+        if (nachrichtenProperty.isOrganisationConfiguredInApplicationProperties())
+              grunddatenContent.getBeteiligungen().ifPresent( b -> b.add(generateBeteiligungOrganisation()) );
 
         /**
          * Grunddaten
@@ -54,12 +48,11 @@ public class GrunddatenBuilder {
 
         TypeGDSGrunddaten.Verfahrensdaten verfahrensdaten = new TypeGDSGrunddaten.Verfahrensdaten();
         TypeGDSInstanzdaten instanzSachgebiet = new TypeGDSInstanzdaten();
-        instanzSachgebiet.setSachgebietszusatz(NachrichtenkopfBuilder.CHANGEIT);
         instanzSachgebiet.setAuswahlInstanzbehoerde(behoerde);
 
         CodeGDSSachgebietTyp3 sachgebiet = new CodeGDSSachgebietTyp3();
-        sachgebiet.setCode(verfahrensdatenProperty.getInstanzdaten().getCodelisten().get("gds-sachgebiet").currentCodelistValueWithKey("sachgebiet"));
-        sachgebiet.setListVersionID(verfahrensdatenProperty.getInstanzdaten().getCodelisten().get("gds-sachgebiet").getCurrentVersion());
+        sachgebiet.setCode(nachrichtenProperty.getCodelisten().get("gds-sachgebiet").currentCodelistValueWithKey("owi-sachen"));
+        sachgebiet.setListVersionID(nachrichtenProperty.getCodelisten().get("gds-sachgebiet").getCurrentVersion());
 
         instanzSachgebiet.setSachgebiet(sachgebiet);
         verfahrensdaten.getInstanzdatens().add(instanzSachgebiet);
@@ -67,12 +60,12 @@ public class GrunddatenBuilder {
 
         instanzGericht.setAuswahlInstanzbehoerde(behoerde);
         CodeGDSGerichteTyp3 gerichtInstanzBehoerde = new CodeGDSGerichteTyp3();
-        gerichtInstanzBehoerde.setCode(verfahrensdatenProperty.getInstanzdaten().getCodelisten().get("gds-gericht").currentCodelistValueWithKey("auswahl-empfaenger-gericht"));
-        gerichtInstanzBehoerde.setListVersionID(verfahrensdatenProperty.getInstanzdaten().getCodelisten().get("gds-gericht").getCurrentVersion());
+        gerichtInstanzBehoerde.setCode(nachrichtenProperty.getCodelisten().get("gds-gerichte").currentCodelistValueWithKey("amtsgericht-muenchen"));
+        gerichtInstanzBehoerde.setListVersionID(nachrichtenProperty.getCodelisten().get("gds-gerichte").getCurrentVersion());
         instanzGericht.getAuswahlInstanzbehoerde().setGericht(gerichtInstanzBehoerde);
         verfahrensdaten.getInstanzdatens().add(instanzGericht);
 
-        grunddatenContent.getBeteiligungen().forEach(b -> verfahrensdaten.getBeteiligungs().add(beteiligungBuilder(b)));
+        grunddatenContent.getBeteiligungen().ifPresent(beteiligungen -> beteiligungen.forEach(beteiligung -> verfahrensdaten.getBeteiligungs().add(beteiligungBuilder(beteiligung))));
 
         return grunddaten;
     }
@@ -90,7 +83,7 @@ public class GrunddatenBuilder {
 
                 CodeGDSRollenbezeichnungTyp3 rollenbez = new CodeGDSRollenbezeichnungTyp3();
                 rollenbez.setCode(r.getRollenbezeichnung());
-                rollenbez.setListVersionID(verfahrensdatenProperty.getCodelisten().get("gds-rollenbezeichnung").getCurrentVersion());
+                rollenbez.setListVersionID(nachrichtenProperty.getCodelisten().get("gds-rollenbezeichnung").getCurrentVersion());
                 rolle.setRollenbezeichnung(rollenbez);
                 xjustizBeteiligung.getRolles().add(rolle);
             });
@@ -125,8 +118,8 @@ public class GrunddatenBuilder {
                 anschriften.forEach(a -> {
                     TypeGDSAnschrift anschrift = new TypeGDSAnschrift();
                     CodeGDSAnschriftstyp anschriftstyp = new CodeGDSAnschriftstyp();
-                    anschriftstyp.setCode(a.getAnschriftsTyp());
-                    anschriftstyp.setListVersionID(a.getListVersionID());
+                    anschriftstyp.setCode(nachrichtenProperty.getCodelisten().get("gds-anschriftstyp").currentCodelistValueWithKey("dienst-geschaeftsanschrift"));
+                    anschriftstyp.setListVersionID(nachrichtenProperty.getCodelisten().get("gds-anschriftstyp").getCurrentVersion());
                     anschrift.setAnschriftstyp(anschriftstyp);
                     anschrift.setStrasse(a.getStrasse());
                     anschrift.setHausnummer(a.getHausnummer());
@@ -176,6 +169,12 @@ public class GrunddatenBuilder {
                 person.setGeburt(geburt);
             });
 
+            p.getGeschlecht().ifPresent( g-> {
+              CodeGDSGeschlecht geschlecht = new CodeGDSGeschlecht();
+              geschlecht.setCode(this.geschlecht.getGeschlechtCode(g));
+              person.setGeschlecht(geschlecht);
+            });
+
             p.getAnschriften().ifPresent(anschriften -> {
                 anschriften.forEach(a -> {
                     TypeGDSAnschrift anschrift = new TypeGDSAnschrift();
@@ -186,10 +185,12 @@ public class GrunddatenBuilder {
                     anschrift.setOrt(a.getOrt());
                     anschrift.setWohnungsgeber(a.getWohnungsgeber());
                     CodeGDSStaatenTyp3 staatenTyp = new CodeGDSStaatenTyp3();
-                    staatenTyp.setCode(a.getStaat());
-                    staatenTyp.setListVersionID(NachrichtenkopfBuilder.CHANGEIT);
+                    staatenTyp.setCode(nachrichtenProperty.getCodelisten().get("bjf-staat").currentCodelistValueWithKey("deutschland"));
+                    staatenTyp.setListVersionID(nachrichtenProperty.getCodelisten().get("bjf-staat").getCurrentVersion());
                     anschrift.setStaat(staatenTyp);
+                    anschrift.getAnschriftenzusatzs().add(a.getAnschriftenzusatz());
                     person.getAnschrifts().add(anschrift);
+
                 });
             });
             beteiligter.getAuswahlBeteiligter().setNatuerlichePerson(person);
@@ -202,21 +203,19 @@ public class GrunddatenBuilder {
         Beteiligung beteiligungOrganisation = new Beteiligung();
 
         var rolle = new Rolle();
-        rolle.setRollenbezeichnung(verfahrensdatenProperty.getCodelisten().get("gds-rollenbezeichnung").currentCodelistValueWithKey("organisation"));
+        rolle.setRollenbezeichnung(nachrichtenProperty.getCodelisten().get("gds-rollenbezeichnung").currentCodelistValueWithKey("antragsteller"));
         beteiligungOrganisation.addRolle(rolle);
 
-        beteiligungOrganisation.generateBeteiligter().generateOrganisation().setBezeichnungAktuell(verfahrensdatenProperty.getBeteiligung().getOrganisation().getBezeichnungAktuell());
+        beteiligungOrganisation.generateBeteiligter().generateOrganisation().setBezeichnungAktuell(nachrichtenProperty.getGrunddaten().getVerfahrensdaten().getBeteiligung().getOrganisation().getBezeichnungAktuell());
 
         var anschrift = new Anschrift();
-        anschrift.setListVersionID(verfahrensdatenProperty.getBeteiligung().getOrganisation().getCodelisten().get("gds-anschriftstyp").getCurrentVersion());
-        anschrift.setAnschriftsTyp(verfahrensdatenProperty.getBeteiligung().getOrganisation().getCodelisten().get("gds-anschriftstyp").currentCodelistValueWithKey("anschriftstyp"));
-        anschrift.setStrasse(verfahrensdatenProperty.getBeteiligung().getOrganisation().getBezeichnungAnschriftStrasse());
-        anschrift.setHausnummer(verfahrensdatenProperty.getBeteiligung().getOrganisation().getBezeichnungAnschriftHausnummer());
-        anschrift.setPlz(verfahrensdatenProperty.getBeteiligung().getOrganisation().getBezeichnungAnschriftPlz());
-        anschrift.setOrt(verfahrensdatenProperty.getBeteiligung().getOrganisation().getBezeichnungAnschriftOrt());
+        anschrift.setStrasse(nachrichtenProperty.getGrunddaten().getVerfahrensdaten().getBeteiligung().getOrganisation().getBezeichnungAnschriftStrasse());
+        anschrift.setHausnummer(nachrichtenProperty.getGrunddaten().getVerfahrensdaten().getBeteiligung().getOrganisation().getBezeichnungAnschriftHausnummer());
+        anschrift.setPlz(nachrichtenProperty.getGrunddaten().getVerfahrensdaten().getBeteiligung().getOrganisation().getBezeichnungAnschriftPlz());
+        anschrift.setOrt(nachrichtenProperty.getGrunddaten().getVerfahrensdaten().getBeteiligung().getOrganisation().getBezeichnungAnschriftOrt());
         beteiligungOrganisation.generateBeteiligter().generateOrganisation().addAnschrift(anschrift);
 
-        beteiligungOrganisation.generateBeteiligter().generateOrganisation().setIban(verfahrensdatenProperty.getBeteiligung().getOrganisation().getBezeichnungBankverbindung());
+        beteiligungOrganisation.generateBeteiligter().generateOrganisation().setIban(nachrichtenProperty.getGrunddaten().getVerfahrensdaten().getBeteiligung().getOrganisation().getBezeichnungBankverbindung());
 
         return beteiligungOrganisation;
     }

@@ -14,5 +14,4 @@ public class OrganisationProperty {
     private String bezeichnungAnschriftOrt;
     private String bezeichnungBankverbindung;
 
-    private Map<String, CodelistenProperty> codelisten;
 }

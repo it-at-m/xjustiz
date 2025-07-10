@@ -1,6 +1,8 @@
 package de.muenchen.xjustiz;
 
 import de.muenchen.xjustiz.generated.*;
+import de.muenchen.xjustiz.xjustiz0500straf.content.ContentContainer;
+import de.muenchen.xjustiz.xjustiz0500straf.content.GrunddatenContent;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
@@ -32,7 +34,8 @@ public class ExternAnJustiz0500010Test extends ExternAnJustiz0500010TestEnvironm
 
     @BeforeEach
     public void init() throws Exception {
-        var xml  = startxJustiz0500strafBuilderTest.requestBody(testRoute, createAffectedTestPerson(), String.class);
+
+        var xml  = startxJustiz0500strafBuilderTest.requestBody(testRoute, new ContentContainer(createFachdaten(), new GrunddatenContent(createAffectedTestPerson())), String.class);
         this.externAnJustiz0500010 = parseXML(xml);
     }
 
@@ -70,8 +73,27 @@ public class ExternAnJustiz0500010Test extends ExternAnJustiz0500010TestEnvironm
 
         List<TypeGDSNatuerlichePerson> natuerlichePersonen = beteiligungenNatuerlichePerson.stream().filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson() != null).map(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson()).toList();
         assertEquals(1, natuerlichePersonen.size(), "Wrong number of natuerlichePerson property.");
-        assertEquals(NatuerlichePerson.nachname, natuerlichePersonen.getFirst().getVollerName().getNachname());
-        assertEquals(NatuerlichePerson.vorname, natuerlichePersonen.getFirst().getVollerName().getVorname());
+        assertEquals(NatuerlichePerson.NACHNAME, natuerlichePersonen.getFirst().getVollerName().getNachname());
+        assertEquals(NatuerlichePerson.VORNAME, natuerlichePersonen.getFirst().getVollerName().getVorname());
+        assertEquals(NatuerlichePerson.STRASSE, natuerlichePersonen.getFirst().getAnschrifts().getFirst().getStrasse());
+        assertEquals(NatuerlichePerson.HAUSNUMMER, natuerlichePersonen.getFirst().getAnschrifts().getFirst().getHausnummer());
+        assertEquals(NatuerlichePerson.POSTFACHNUMMER, natuerlichePersonen.getFirst().getAnschrifts().getFirst().getPostfachnummer());
+        assertEquals(NatuerlichePerson.ANSCHRIFTENZUATZ, natuerlichePersonen.getFirst().getAnschrifts().getFirst().getAnschriftenzusatzs().getFirst());
+        assertEquals(NatuerlichePerson.PLZ, natuerlichePersonen.getFirst().getAnschrifts().getFirst().getPostleitzahl());
+        assertEquals(NatuerlichePerson.POSTFACHNUMMER, natuerlichePersonen.getFirst().getAnschrifts().getFirst().getPostfachnummer());
+
+        assertEquals(NatuerlichePerson.STAAT, natuerlichePersonen.getFirst().getAnschrifts().getFirst().getStaat().getCode());
+        assertEquals("7.0", natuerlichePersonen.getFirst().getAnschrifts().getFirst().getStaat().getListVersionID());
+        assertEquals(NatuerlichePerson.ORT, natuerlichePersonen.getFirst().getAnschrifts().getFirst().getOrt());
+        assertEquals(NatuerlichePerson.WOHNUNGSGEBER, natuerlichePersonen.getFirst().getAnschrifts().getFirst().getWohnungsgeber());
+
+        assertEquals(NatuerlichePerson.GEBURTSSORT, natuerlichePersonen.getFirst().getGeburt().getGeburtsort().getOrt());
+        assertEquals(NatuerlichePerson.GEBURTSNAME, natuerlichePersonen.getFirst().getVollerName().getGeburtsname());
+        assertEquals(NatuerlichePerson.NAMENSVORSATZ, natuerlichePersonen.getFirst().getVollerName().getNamensvorsatz());
+        assertEquals(NatuerlichePerson.TITEL, natuerlichePersonen.getFirst().getVollerName().getTitel());
+        assertEquals(NatuerlichePerson.GEBURTSDATUM, natuerlichePersonen.getFirst().getGeburt().getGeburtsdatum());
+
+        assertEquals("1", natuerlichePersonen.getFirst().getGeschlecht().getCode());
 
         List<TypeGDSBeteiligung> beteiligungenOrganisation = verfahrensdaten.getBeteiligungs().stream().filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation() != null).toList();
         assertEquals(1, beteiligungenOrganisation.size(), "Wrong number of beteiligungen property.");
@@ -82,9 +104,35 @@ public class ExternAnJustiz0500010Test extends ExternAnJustiz0500010TestEnvironm
         List<TypeGDSOrganisation> organisationen = verfahrensdaten.getBeteiligungs().stream().filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation() != null).map(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation()).toList();
         assertEquals(1, organisationen.size(), "Wrong number of organisationen property.");
         assertEquals("Landeshauptstadt München Referat", organisationen.getFirst().getBezeichnung().getBezeichnungAktuell());
+        assertEquals("Straße", organisationen.getFirst().getAnschrifts().getFirst().getStrasse());
+        assertEquals("1", organisationen.getFirst().getAnschrifts().getFirst().getHausnummer());
+        assertEquals("8000", organisationen.getFirst().getAnschrifts().getFirst().getPostleitzahl());
+        assertEquals("München", organisationen.getFirst().getAnschrifts().getFirst().getOrt());
 
         assertEquals("003", organisationen.getFirst().getAnschrifts().getFirst().getAnschriftstyp().getCode());
         assertEquals("3.0", organisationen.getFirst().getAnschrifts().getFirst().getAnschriftstyp().getListVersionID());
 
     }
+
+    @Test
+    void test_fachdaten() {
+
+        NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.Fachdaten fachdaten = this.externAnJustiz0500010.getFachdaten();
+        assertEquals("2024-10-01", fachdaten.getBussgeldbescheid().getTat().getAnfangsdatum());
+        assertEquals("12:00", fachdaten.getBussgeldbescheid().getTat().getAnfangsuhrzeit());
+        assertEquals("2024-10-01", fachdaten.getBussgeldbescheid().getTat().getEndedatum());
+        assertEquals("13:05", fachdaten.getBussgeldbescheid().getTat().getEndeuhrzeit());
+
+        assertEquals("KVU EH-TATSTR1", fachdaten.getBussgeldbescheid().getTat().getTatorts().getFirst().getAnschrifts().getFirst().getStrasse());
+        assertEquals("KVU EH-TATHNR1", fachdaten.getBussgeldbescheid().getTat().getTatorts().getFirst().getAnschrifts().getFirst().getHausnummer());
+        assertEquals("KVU EH-TATORT", fachdaten.getBussgeldbescheid().getTat().getTatorts().getFirst().getAnschrifts().getFirst().getOrt());
+        assertEquals("KVU ???", fachdaten.getBussgeldbescheid().getTat().getTatorts().getFirst().getOrtsbeschreibung());
+
+        assertEquals("KVU EH-TATSTR2", fachdaten.getBussgeldbescheid().getTat().getTatorts().getLast().getAnschrifts().getLast().getStrasse());
+        assertEquals("KVU EH-TATHNR2", fachdaten.getBussgeldbescheid().getTat().getTatorts().getLast().getAnschrifts().getLast().getHausnummer());
+        assertEquals("KVU EH-TATORT", fachdaten.getBussgeldbescheid().getTat().getTatorts().getLast().getAnschrifts().getLast().getOrt());
+        assertEquals("KVU ???", fachdaten.getBussgeldbescheid().getTat().getTatorts().getLast().getOrtsbeschreibung());
+
+    }
+
 }

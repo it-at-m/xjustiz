@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class BeteiligungProperty {
 
-    private NatuerlichePersonProperty natuerlichePerson;
     private OrganisationProperty organisation;
+
 }
