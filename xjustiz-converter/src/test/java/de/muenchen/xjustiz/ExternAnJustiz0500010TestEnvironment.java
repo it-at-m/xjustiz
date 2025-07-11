@@ -21,22 +21,22 @@ public class ExternAnJustiz0500010TestEnvironment {
     @Value("${xjustiz.xjustiz0500straf.codelisten.gds-rollenbezeichnung.codelist-versions.gds-rollenbezeichnung-3-5.betroffener}")
     protected String rollenbezeichnung;
 
-    protected List<Beteiligung> createAffectedTestPerson() {
+    protected List<Beteiligung> createDefendant() {
 
-        Beteiligung affectedPerson = new Beteiligung();
+        Beteiligung defendant = new Beteiligung();
         var rolle = new Rolle();
 
         rolle.setRollenbezeichnung(rollenbezeichnung);
-        affectedPerson.addRolle(rolle);
+        defendant.addRolle(rolle);
 
-        affectedPerson.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setVorname(NatuerlichePerson.VORNAME);
-        affectedPerson.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setNachname(NatuerlichePerson.NACHNAME);
-        affectedPerson.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setTitel(NatuerlichePerson.TITEL);
-        affectedPerson.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setNamensvorsatz(NatuerlichePerson.NAMENSVORSATZ);
-        affectedPerson.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setGeburtsname(NatuerlichePerson.GEBURTSNAME);
-        affectedPerson.generateBeteiligter().generateNatuerlichePerson().generateGeburt().setGeburtsdatum(NatuerlichePerson.GEBURTSDATUM);
-        affectedPerson.generateBeteiligter().generateNatuerlichePerson().generateGeburt().setGeburtsort(NatuerlichePerson.GEBURTSSORT);
-        affectedPerson.generateBeteiligter().generateNatuerlichePerson().setGeschlecht(Geschlecht.GESCHLECHT.MAENNLICH);
+        defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setVorname(NatuerlichePerson.VORNAME);
+        defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setNachname(NatuerlichePerson.NACHNAME);
+        defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setTitel(NatuerlichePerson.TITEL);
+        defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setNamensvorsatz(NatuerlichePerson.NAMENSVORSATZ);
+        defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setGeburtsname(NatuerlichePerson.GEBURTSNAME);
+        defendant.generateBeteiligter().generateNatuerlichePerson().generateGeburt().setGeburtsdatum(NatuerlichePerson.GEBURTSDATUM);
+        defendant.generateBeteiligter().generateNatuerlichePerson().generateGeburt().setGeburtsort(NatuerlichePerson.GEBURTSSORT);
+        defendant.generateBeteiligter().generateNatuerlichePerson().setGeschlecht(Geschlecht.GESCHLECHT.MAENNLICH);
 
         var anschrift = new Anschrift();
         anschrift.setAnschriftenzusatz(NatuerlichePerson.ANSCHRIFTENZUATZ);
@@ -47,9 +47,9 @@ public class ExternAnJustiz0500010TestEnvironment {
         anschrift.setOrt(NatuerlichePerson.ORT);
         anschrift.setWohnungsgeber(NatuerlichePerson.WOHNUNGSGEBER);
         anschrift.setStaat(NatuerlichePerson.STAAT);
-        affectedPerson.generateBeteiligter().generateNatuerlichePerson().addAnschrift(anschrift);
+        defendant.generateBeteiligter().generateNatuerlichePerson().addAnschrift(anschrift);
 
-        return new ArrayList<>(List.of(affectedPerson));
+        return new ArrayList<>(List.of(defendant));
     }
 
     protected NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 parseXML(String xml) throws Exception {
@@ -90,6 +90,21 @@ public class ExternAnJustiz0500010TestEnvironment {
 
         fachdatenContent.getTatorte().add(tatortContent);
         return fachdatenContent;
+    }
+
+    protected List<Beteiligung> xmlValidationErrorMissingNachname() {
+
+        Beteiligung defendant = new Beteiligung();
+
+        defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setVorname(NatuerlichePerson.VORNAME);
+        defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setTitel(ExternAnJustiz0500010TestEnvironment.NatuerlichePerson.TITEL);
+        defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setNamensvorsatz(ExternAnJustiz0500010TestEnvironment.NatuerlichePerson.NAMENSVORSATZ);
+        defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setGeburtsname(ExternAnJustiz0500010TestEnvironment.NatuerlichePerson.GEBURTSNAME);
+        defendant.generateBeteiligter().generateNatuerlichePerson().generateGeburt().setGeburtsdatum(ExternAnJustiz0500010TestEnvironment.NatuerlichePerson.GEBURTSDATUM);
+        defendant.generateBeteiligter().generateNatuerlichePerson().generateGeburt().setGeburtsort(ExternAnJustiz0500010TestEnvironment.NatuerlichePerson.GEBURTSSORT);
+        defendant.generateBeteiligter().generateNatuerlichePerson().setGeschlecht(Geschlecht.GESCHLECHT.MAENNLICH);
+
+        return new ArrayList<>(List.of(defendant));
     }
 
 }

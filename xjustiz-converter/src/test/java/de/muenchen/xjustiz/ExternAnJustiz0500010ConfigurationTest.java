@@ -15,14 +15,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootApplication(scanBasePackages = "de.muenchen.xjustiz")
 @CamelSpringBootTest
-@SpringBootTest(classes = {ConverterRouteBuilder.class})
+@SpringBootTest(classes = {XJustizDocumentRouteBuilder.class})
 @ActiveProfiles({"default"})
 public class ExternAnJustiz0500010ConfigurationTest extends ExternAnJustiz0500010TestEnvironment {
 
-    @Produce("direct:start")
+    @Produce()
     private ProducerTemplate startTest;
 
-    @Value("${xjustiz.route.converter.from}")
+    @Value("${xjustiz.document.processor}")
     private String testRoute;
 
     /*
@@ -31,7 +31,7 @@ public class ExternAnJustiz0500010ConfigurationTest extends ExternAnJustiz050001
     @Test
     void test_organisationNotConfigured() throws Exception {
 
-        var xml  = startTest.requestBody(testRoute, new ContentContainer(createFachdaten(), new GrunddatenContent(createAffectedTestPerson())), String.class);
+        var xml  = startTest.requestBody(testRoute, new ContentContainer(createFachdaten(), new GrunddatenContent(createDefendant())), String.class);
 
         var externAnJustiz0500010 = parseXML(xml);
 

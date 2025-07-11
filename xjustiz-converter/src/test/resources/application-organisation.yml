@@ -15,7 +15,3 @@ xjustiz:
             bezeichnung-anschrift-plz: 8000
             bezeichnung-anschrift-ort: München
             bezeichnung-bankverbindung: DE99 9999 9999 9999 9999 00
-
-  route:
-    converter:
-      from: direct:start

@@ -3,11 +3,15 @@ package de.muenchen.xjustiz;
 import de.muenchen.xjustiz.generated.*;
 import de.muenchen.xjustiz.xjustiz0500straf.content.ContentContainer;
 import de.muenchen.xjustiz.xjustiz0500straf.content.GrunddatenContent;
+import org.apache.camel.CamelContext;
+import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
+import org.apache.camel.builder.ExchangeBuilder;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,22 +24,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootApplication(scanBasePackages = "de.muenchen.xjustiz")
 @CamelSpringBootTest
-@SpringBootTest(classes = {ConverterRouteBuilder.class})
+@SpringBootTest(classes = {XJustizDocumentRouteBuilder.class})
 @ActiveProfiles({"default", "organisation"})
 public class ExternAnJustiz0500010Test extends ExternAnJustiz0500010TestEnvironment {
 
-    @Produce("direct:start")
+    @Produce()
     private ProducerTemplate startxJustiz0500strafBuilderTest;
 
-    @Value("${xjustiz.route.converter.from}")
+    @Value("${xjustiz.document.processor}")
     private String testRoute;
+
+    @Autowired
+    private CamelContext camelContext;
 
     private NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 externAnJustiz0500010;
 
     @BeforeEach
     public void init() throws Exception {
 
-        var xml  = startxJustiz0500strafBuilderTest.requestBody(testRoute, new ContentContainer(createFachdaten(), new GrunddatenContent(createAffectedTestPerson())), String.class);
+        Exchange request = ExchangeBuilder.anExchange(camelContext).withBody(new ContentContainer(createFachdaten(), new GrunddatenContent(createDefendant()))).build();
+        var response  = startxJustiz0500strafBuilderTest.send(testRoute, request);
+        var xml = response.getMessage().getBody(String.class);
         this.externAnJustiz0500010 = parseXML(xml);
     }
 

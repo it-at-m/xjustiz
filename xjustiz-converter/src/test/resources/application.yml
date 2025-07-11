@@ -1,7 +1,7 @@
 
 logging:
   level:
-    de.muenchen.xjustiz.xjustiz-document-converter: DEBUG
+    de.muenchen.xjustiz.xjustiz-document-processor: DEBUG
 
 xjustiz:
   version: 3.6.2
@@ -64,6 +64,5 @@ xjustiz:
       auswahl-herstellerinformation-produkt-version: myProduktversion
       codelisten:
 
-  route:
-    converter:
-      from: direct:start
+  document:
+    processor: direct:xjustiz-document-processor
