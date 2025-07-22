@@ -9,7 +9,6 @@ import de.muenchen.xjustiz.xjustiz0500straf.content.NachrichtenkopfContent;
 import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDS;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
 import java.util.Calendar;
 import java.util.UUID;
 

@@ -4,6 +4,7 @@ import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDSRollenbezeichnungTyp3;
 import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDSStaatenTyp3;
 import de.muenchen.xjustiz.generated.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010;
 import de.muenchen.xjustiz.xoev.codelisten.XoevGeschlecht;
+
 import de.muenchen.xjustiz.xjustiz0500straf.content.FachdatenContent;
 import de.muenchen.xjustiz.xjustiz0500straf.content.fachdaten.StrasseHausnummer;
 import de.muenchen.xjustiz.xjustiz0500straf.content.fachdaten.Tatort;

@@ -1,5 +1,4 @@
 package de.muenchen.xjustiz.xoev.codelisten;
-
 import lombok.Getter;
 
 @Getter
