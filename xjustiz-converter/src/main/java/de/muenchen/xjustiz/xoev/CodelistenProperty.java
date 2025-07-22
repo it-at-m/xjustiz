@@ -1,6 +1,6 @@
 package de.muenchen.xjustiz.xoev;
 
-import de.muenchen.xjustiz.xjustiz0500straf.XJustizException;
+import de.muenchen.xjustiz.XJustizException;
 import lombok.Data;
 
 import java.util.Map;

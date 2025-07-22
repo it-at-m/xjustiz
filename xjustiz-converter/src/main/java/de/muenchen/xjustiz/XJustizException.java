@@ -1,4 +1,4 @@
-package de.muenchen.xjustiz.xjustiz0500straf;
+package de.muenchen.xjustiz;
 
 public class XJustizException extends RuntimeException {
     public XJustizException(String message, Throwable cause) {
