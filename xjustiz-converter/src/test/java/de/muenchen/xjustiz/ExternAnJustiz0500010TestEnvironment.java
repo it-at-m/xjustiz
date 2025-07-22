@@ -1,7 +1,9 @@
 package de.muenchen.xjustiz;
 
+import de.muenchen.xjustiz.codelisten.XoevCodeGDSRollenbezeichnungTyp3;
+import de.muenchen.xjustiz.codelisten.XoevCodeGDSStaatenTyp3;
 import de.muenchen.xjustiz.generated.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010;
-import de.muenchen.xjustiz.xjustiz0500straf.builder.Geschlecht;
+import de.muenchen.xjustiz.codelisten.XoevGeschlecht;
 import de.muenchen.xjustiz.xjustiz0500straf.content.FachdatenContent;
 import de.muenchen.xjustiz.xjustiz0500straf.content.fachdaten.StrasseHausnummer;
 import de.muenchen.xjustiz.xjustiz0500straf.content.fachdaten.Tatort;
@@ -9,7 +11,6 @@ import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.b
 import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Beteiligung;
 import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Rolle;
 import jakarta.xml.bind.JAXBContext;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.io.StringReader;
 import java.time.LocalDateTime;
@@ -18,15 +19,12 @@ import java.util.List;
 
 public class ExternAnJustiz0500010TestEnvironment {
 
-    @Value("${xjustiz.xjustiz0500straf.codelisten.gds-rollenbezeichnung.codelist-versions.gds-rollenbezeichnung-3-5.betroffener}")
-    protected String rollenbezeichnung;
-
     protected List<Beteiligung> createDefendant() {
 
         Beteiligung defendant = new Beteiligung();
         var rolle = new Rolle();
 
-        rolle.setRollenbezeichnung(rollenbezeichnung);
+        rolle.setRollenbezeichnung(XoevCodeGDSRollenbezeichnungTyp3.BETROFFENER.getDescriptor());
         defendant.addRolle(rolle);
 
         defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setVorname(NatuerlichePerson.VORNAME);
@@ -36,7 +34,7 @@ public class ExternAnJustiz0500010TestEnvironment {
         defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setGeburtsname(NatuerlichePerson.GEBURTSNAME);
         defendant.generateBeteiligter().generateNatuerlichePerson().generateGeburt().setGeburtsdatum(NatuerlichePerson.GEBURTSDATUM);
         defendant.generateBeteiligter().generateNatuerlichePerson().generateGeburt().setGeburtsort(NatuerlichePerson.GEBURTSSORT);
-        defendant.generateBeteiligter().generateNatuerlichePerson().setGeschlecht(Geschlecht.GESCHLECHT.MAENNLICH);
+        defendant.generateBeteiligter().generateNatuerlichePerson().setGeschlecht(XoevGeschlecht.MAENNLICH);
 
         var anschrift = new Anschrift();
         anschrift.setAnschriftenzusatz(NatuerlichePerson.ANSCHRIFTENZUATZ);
@@ -46,7 +44,7 @@ public class ExternAnJustiz0500010TestEnvironment {
         anschrift.setPlz(NatuerlichePerson.PLZ);
         anschrift.setOrt(NatuerlichePerson.ORT);
         anschrift.setWohnungsgeber(NatuerlichePerson.WOHNUNGSGEBER);
-        anschrift.setStaat(NatuerlichePerson.STAAT);
+        anschrift.setStaat(XoevCodeGDSStaatenTyp3.DEUTSCHLAND.getDescriptor());
         defendant.generateBeteiligter().generateNatuerlichePerson().addAnschrift(anschrift);
 
         return new ArrayList<>(List.of(defendant));
@@ -59,21 +57,20 @@ public class ExternAnJustiz0500010TestEnvironment {
 
     protected static class NatuerlichePerson {
 
-       final static String VORNAME = "Maximilian";
-       final static String NACHNAME = "Mustermann";
-       final static String STRASSE = "Musterstrasse";
-       final static String HAUSNUMMER = "1";
-       final static String POSTFACHNUMMER = "1234";
-       final static String TITEL = "Dr.";
-       final static String NAMENSVORSATZ = "von";
-       final static String GEBURTSNAME = "Mueller";
-       final static String GEBURTSDATUM = "2000-01-01";
-       final static String GEBURTSSORT = "Musterhausen";
-       final static String ANSCHRIFTENZUATZ = "im Hinterhof";
-       final static String PLZ = "1234";
-       final static String ORT = "Musterhausen";
-       final static String WOHNUNGSGEBER = "???";
-       final static String STAAT = "000";
+        final static String VORNAME = "Maximilian";
+        final static String NACHNAME = "Mustermann";
+        final static String STRASSE = "Musterstrasse";
+        final static String HAUSNUMMER = "1";
+        final static String POSTFACHNUMMER = "1234";
+        final static String TITEL = "Dr.";
+        final static String NAMENSVORSATZ = "von";
+        final static String GEBURTSNAME = "Mueller";
+        final static String GEBURTSDATUM = "2000-01-01";
+        final static String GEBURTSSORT = "Musterhausen";
+        final static String ANSCHRIFTENZUATZ = "im Hinterhof";
+        final static String PLZ = "1234";
+        final static String ORT = "Musterhausen";
+        final static String WOHNUNGSGEBER = "???";
 
     }
 
@@ -102,7 +99,7 @@ public class ExternAnJustiz0500010TestEnvironment {
         defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setGeburtsname(ExternAnJustiz0500010TestEnvironment.NatuerlichePerson.GEBURTSNAME);
         defendant.generateBeteiligter().generateNatuerlichePerson().generateGeburt().setGeburtsdatum(ExternAnJustiz0500010TestEnvironment.NatuerlichePerson.GEBURTSDATUM);
         defendant.generateBeteiligter().generateNatuerlichePerson().generateGeburt().setGeburtsort(ExternAnJustiz0500010TestEnvironment.NatuerlichePerson.GEBURTSSORT);
-        defendant.generateBeteiligter().generateNatuerlichePerson().setGeschlecht(Geschlecht.GESCHLECHT.MAENNLICH);
+        defendant.generateBeteiligter().generateNatuerlichePerson().setGeschlecht(XoevGeschlecht.MAENNLICH);
 
         return new ArrayList<>(List.of(defendant));
     }

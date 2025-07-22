@@ -1,6 +1,6 @@
 package de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung;
 
-import de.muenchen.xjustiz.xjustiz0500straf.builder.Geschlecht;
+import de.muenchen.xjustiz.codelisten.XoevGeschlecht;
 import lombok.Setter;
 
 import java.util.Optional;
@@ -12,7 +12,7 @@ public class NatuerlichePerson extends Anschriften {
     private Geburt geburt;
 
     @Setter
-    private Geschlecht.GESCHLECHT geschlecht;
+    private XoevGeschlecht geschlecht;
 
     public Optional<VollerName> getVollerName() {
         return Optional.ofNullable(vollerName);
@@ -37,7 +37,7 @@ public class NatuerlichePerson extends Anschriften {
         return geburt;
     }
 
-    public Optional<Geschlecht.GESCHLECHT> getGeschlecht() {
+    public Optional<XoevGeschlecht> getGeschlecht() {
         return Optional.ofNullable(geschlecht);
     }
 

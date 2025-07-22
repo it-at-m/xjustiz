@@ -1,9 +1,11 @@
 package de.muenchen.xjustiz.xjustiz0500straf.builder;
 
+import de.muenchen.xjustiz.codelisten.XoevCodeGDSEreignisTyp3;
+import de.muenchen.xjustiz.codelisten.XoevCodeGDSGerichteTyp3;
 import de.muenchen.xjustiz.generated.*;
 import de.muenchen.xjustiz.xjustiz0500straf.config.NachrichtenProperty;
 import de.muenchen.xjustiz.xjustiz0500straf.content.NachrichtenkopfContent;
-import lombok.RequiredArgsConstructor;
+import de.muenchen.xjustiz.codelisten.XoevCodeGDS;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -11,14 +13,17 @@ import java.util.Calendar;
 import java.util.UUID;
 
 @Component
-@RequiredArgsConstructor
-public class NachrichtenkopfBuilder {
+public class NachrichtenkopfBuilder extends Builder {
 
     @Value("${xjustiz.version}")
     protected String xJustizVersion;
 
-    private final NachrichtenProperty nachrichtenProperty;
     private final NachrichtenkopfContent nachrichtenkopfContent;
+
+    public NachrichtenkopfBuilder(NachrichtenProperty nachrichtenProperty, NachrichtenkopfContent nachrichtenkopfContent) {
+        super(nachrichtenProperty);
+        this.nachrichtenkopfContent = nachrichtenkopfContent;
+    }
 
     public TypeGDSNachrichtenkopf build() {
 
@@ -59,20 +64,13 @@ public class NachrichtenkopfBuilder {
 
         TypeGDSKommunikationspartner.AuswahlKommunikationspartner kommunikationspartnerGericht = new TypeGDSKommunikationspartner.AuswahlKommunikationspartner();
         CodeGDSGerichteTyp3 gerichtKommunikationsparter = new CodeGDSGerichteTyp3();
-        gerichtKommunikationsparter.setListVersionID(nachrichtenProperty.getCodelisten().get("gds-gerichte").getCurrentVersion());
-        gerichtKommunikationsparter.setCode(nachrichtenProperty.getCodelisten().get("gds-gerichte").currentCodelistValueWithKey("amtsgericht-muenchen"));
-        kommunikationspartnerGericht.setGericht(gerichtKommunikationsparter);
+        kommunikationspartnerGericht.setGericht((CodeGDSGerichteTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_GERICHTE_TYP_3, XoevCodeGDSGerichteTyp3.AMTSGERICHT_MUENCHEN.getDescriptor()));
         TypeGDSKommunikationspartner kommunikationsPartnerEmpfaenger = new TypeGDSKommunikationspartner();
         kommunikationsPartnerEmpfaenger.setAuswahlKommunikationspartner(kommunikationspartnerGericht);
         nachrichtenkopf.getEmpfaenger().setInformationen(kommunikationsPartnerEmpfaenger);
 
         nachrichtenkopf.getAbsender().setEigeneNachrichtenID(UUID.randomUUID().toString());
-        CodeGDSEreignisTyp3 ereignis = new CodeGDSEreignisTyp3();
-
-        ereignis.setListVersionID(nachrichtenProperty.getCodelisten().get("gds-ereignis").getCurrentVersion());
-        ereignis.setCode(nachrichtenProperty.getCodelisten().get("gds-ereignis").currentCodelistValueWithKey("neueingang-e-haft"));
-
-        nachrichtenkopf.getEreignises().add(ereignis);
+        nachrichtenkopf.getEreignises().add((CodeGDSEreignisTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_EREIGNIS_TYP_3, XoevCodeGDSEreignisTyp3.NEUEINGANG_E_HAFT.getDescriptor()));
 
         TypeGDSHerstellerinformation herstellerinformation = new TypeGDSHerstellerinformation();
         herstellerinformation.setNameDesProdukts(nachrichtenProperty.getNachrichtenkopf().getAuswahlHerstellerinformationProduktName());

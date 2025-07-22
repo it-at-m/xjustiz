@@ -3,16 +3,18 @@ package de.muenchen.xjustiz.xjustiz0500straf.builder;
 import de.muenchen.xjustiz.generated.*;
 import de.muenchen.xjustiz.xjustiz0500straf.config.NachrichtenProperty;
 import de.muenchen.xjustiz.xjustiz0500straf.content.FachdatenContent;
-import lombok.RequiredArgsConstructor;
+import de.muenchen.xjustiz.codelisten.XoevCodeGDS;
+import de.muenchen.xjustiz.codelisten.XoevCodeGDSAnschriftstypen;
 import org.springframework.stereotype.Component;
 
 import java.time.format.DateTimeFormatter;
 
-@RequiredArgsConstructor
 @Component
-public class FachdatenBuilder {
+public class FachdatenBuilder extends Builder {
 
-    private final NachrichtenProperty nachrichtenProperty;
+    public FachdatenBuilder(NachrichtenProperty nachrichtenProperty) {
+        super(nachrichtenProperty);
+    }
 
     public NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.Fachdaten build(FachdatenContent fachdatenContent) {
 
@@ -40,10 +42,7 @@ public class FachdatenBuilder {
             t.getStrasseHausnummer().forEach( sh -> {
 
                 TypeSTRAFTatort.Anschrift anschrift = new TypeSTRAFTatort.Anschrift();
-                CodeGDSAnschriftstyp anschriftTyp = new CodeGDSAnschriftstyp();
-                anschriftTyp.setCode(nachrichtenProperty.getCodelisten().get("gds-anschriftstyp").currentCodelistValueWithKey("tatortanschrift"));
-                anschriftTyp.setListVersionID(nachrichtenProperty.getCodelisten().get("gds-anschriftstyp").getCurrentVersion());
-                anschrift.setAnschriftstyp(anschriftTyp);
+                anschrift.setAnschriftstyp((CodeGDSAnschriftstyp) createCodeGDSClass(XoevCodeGDS.CODE_GDS_ANSCHRIFTSTYP, XoevCodeGDSAnschriftstypen.TATORTANSCHRIFT.getDescriptor()));
 
                 anschrift.setStrasse(sh.getStrasse());
                 anschrift.setHausnummer(sh.getHausnummer());
@@ -59,5 +58,6 @@ public class FachdatenBuilder {
 
         return fachdaten;
     }
+
 
 }

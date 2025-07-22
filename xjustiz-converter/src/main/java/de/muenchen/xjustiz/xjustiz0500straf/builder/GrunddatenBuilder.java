@@ -1,20 +1,21 @@
 package de.muenchen.xjustiz.xjustiz0500straf.builder;
 
+import de.muenchen.xjustiz.codelisten.*;
 import de.muenchen.xjustiz.generated.*;
 import de.muenchen.xjustiz.xjustiz0500straf.config.NachrichtenProperty;
 import de.muenchen.xjustiz.xjustiz0500straf.content.GrunddatenContent;
 import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.*;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-@RequiredArgsConstructor
-@Component
-public class GrunddatenBuilder {
 
-    private final NachrichtenProperty nachrichtenProperty;
-    private final Geschlecht geschlecht;
+@Component
+public class GrunddatenBuilder extends Builder {
 
     private final IncrementCounters incrementCounters = new IncrementCounters();
+
+    public GrunddatenBuilder(NachrichtenProperty nachrichtenProperty) {
+        super(nachrichtenProperty);
+    }
 
     public TypeGDSGrunddaten build(GrunddatenContent grunddatenContent) {
 
@@ -24,7 +25,7 @@ public class GrunddatenBuilder {
            The organization can be defined statically once in the properties or transferred dynamically with the natural persons.
         */
         if (nachrichtenProperty.isOrganisationConfiguredInApplicationProperties())
-              grunddatenContent.getBeteiligungen().ifPresent( b -> b.add(generateBeteiligungOrganisation()) );
+            grunddatenContent.getBeteiligungen().ifPresent(b -> b.add(generateBeteiligungOrganisation()));
 
         /**
          * Grunddaten
@@ -50,19 +51,12 @@ public class GrunddatenBuilder {
         TypeGDSInstanzdaten instanzSachgebiet = new TypeGDSInstanzdaten();
         instanzSachgebiet.setAuswahlInstanzbehoerde(behoerde);
 
-        CodeGDSSachgebietTyp3 sachgebiet = new CodeGDSSachgebietTyp3();
-        sachgebiet.setCode(nachrichtenProperty.getCodelisten().get("gds-sachgebiet").currentCodelistValueWithKey("owi-sachen"));
-        sachgebiet.setListVersionID(nachrichtenProperty.getCodelisten().get("gds-sachgebiet").getCurrentVersion());
-
-        instanzSachgebiet.setSachgebiet(sachgebiet);
+        instanzSachgebiet.setSachgebiet((CodeGDSSachgebietTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_SACHGEBIET_TYP_3, XoevCodeGDSSachgebietTyp3.OWI_SACHEN.getDescriptor()));
         verfahrensdaten.getInstanzdatens().add(instanzSachgebiet);
         grunddaten.setVerfahrensdaten(verfahrensdaten);
 
         instanzGericht.setAuswahlInstanzbehoerde(behoerde);
-        CodeGDSGerichteTyp3 gerichtInstanzBehoerde = new CodeGDSGerichteTyp3();
-        gerichtInstanzBehoerde.setCode(nachrichtenProperty.getCodelisten().get("gds-gerichte").currentCodelistValueWithKey("amtsgericht-muenchen"));
-        gerichtInstanzBehoerde.setListVersionID(nachrichtenProperty.getCodelisten().get("gds-gerichte").getCurrentVersion());
-        instanzGericht.getAuswahlInstanzbehoerde().setGericht(gerichtInstanzBehoerde);
+        instanzGericht.getAuswahlInstanzbehoerde().setGericht((CodeGDSGerichteTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_GERICHTE_TYP_3, XoevCodeGDSGerichteTyp3.AMTSGERICHT_MUENCHEN.getDescriptor()));
         verfahrensdaten.getInstanzdatens().add(instanzGericht);
 
         grunddatenContent.getBeteiligungen().ifPresent(beteiligungen -> beteiligungen.forEach(beteiligung -> verfahrensdaten.getBeteiligungs().add(beteiligungBuilder(beteiligung))));
@@ -70,26 +64,21 @@ public class GrunddatenBuilder {
         return grunddaten;
     }
 
-    private TypeGDSBeteiligung beteiligungBuilder(Beteiligung beteiligung) {
+    private TypeGDSBeteiligung beteiligungBuilder(Beteiligung beteiligungContent) {
 
         TypeGDSBeteiligung xjustizBeteiligung = new TypeGDSBeteiligung();
 
-        beteiligung.getRollen().ifPresent(rollen -> {
+        beteiligungContent.getRollen().ifPresent(rollen -> {
             rollen.forEach(r -> {
-
                 TypeGDSBeteiligung.Rolle rolle = new TypeGDSBeteiligung.Rolle();
                 rolle.setRollennummer(String.valueOf(incrementCounters.incrementEntireXmlRollennummer()));
                 rolle.setNr(incrementCounters.incrementRollenbezeichnungCounter(r.getRollenbezeichnung()));
-
-                CodeGDSRollenbezeichnungTyp3 rollenbez = new CodeGDSRollenbezeichnungTyp3();
-                rollenbez.setCode(r.getRollenbezeichnung());
-                rollenbez.setListVersionID(nachrichtenProperty.getCodelisten().get("gds-rollenbezeichnung").getCurrentVersion());
-                rolle.setRollenbezeichnung(rollenbez);
+                rolle.setRollenbezeichnung((CodeGDSRollenbezeichnungTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_ROLLENBEZEICHNUNG_TYP_3, r.getRollenbezeichnung()));
                 xjustizBeteiligung.getRolles().add(rolle);
             });
         });
 
-        beteiligung.getBeteiligter().ifPresent(b -> {
+        beteiligungContent.getBeteiligter().ifPresent(b -> {
 
             if (b.getOrganisation().isPresent())
                 xjustizBeteiligung.setBeteiligter(beteiligteOrganisation(b));
@@ -117,10 +106,7 @@ public class GrunddatenBuilder {
             o.getAnschriften().ifPresent(anschriften -> {
                 anschriften.forEach(a -> {
                     TypeGDSAnschrift anschrift = new TypeGDSAnschrift();
-                    CodeGDSAnschriftstyp anschriftstyp = new CodeGDSAnschriftstyp();
-                    anschriftstyp.setCode(nachrichtenProperty.getCodelisten().get("gds-anschriftstyp").currentCodelistValueWithKey("dienst-geschaeftsanschrift"));
-                    anschriftstyp.setListVersionID(nachrichtenProperty.getCodelisten().get("gds-anschriftstyp").getCurrentVersion());
-                    anschrift.setAnschriftstyp(anschriftstyp);
+                    anschrift.setAnschriftstyp((CodeGDSAnschriftstyp) createCodeGDSClass(XoevCodeGDS.CODE_GDS_ANSCHRIFTSTYP, a.getAnschriftstyp()));
                     anschrift.setStrasse(a.getStrasse());
                     anschrift.setHausnummer(a.getHausnummer());
                     anschrift.setPostleitzahl(a.getPlz());
@@ -169,10 +155,10 @@ public class GrunddatenBuilder {
                 person.setGeburt(geburt);
             });
 
-            p.getGeschlecht().ifPresent( g-> {
-              CodeGDSGeschlecht geschlecht = new CodeGDSGeschlecht();
-              geschlecht.setCode(this.geschlecht.getGeschlechtCode(g));
-              person.setGeschlecht(geschlecht);
+            p.getGeschlecht().ifPresent(g -> {
+                CodeGDSGeschlecht geschlecht = new CodeGDSGeschlecht();
+                geschlecht.setCode(g.getDescriptor());
+                person.setGeschlecht(geschlecht);
             });
 
             p.getAnschriften().ifPresent(anschriften -> {
@@ -184,10 +170,7 @@ public class GrunddatenBuilder {
                     anschrift.setPostleitzahl(a.getPlz());
                     anschrift.setOrt(a.getOrt());
                     anschrift.setWohnungsgeber(a.getWohnungsgeber());
-                    CodeGDSStaatenTyp3 staatenTyp = new CodeGDSStaatenTyp3();
-                    staatenTyp.setCode(nachrichtenProperty.getCodelisten().get("bjf-staat").currentCodelistValueWithKey("deutschland"));
-                    staatenTyp.setListVersionID(nachrichtenProperty.getCodelisten().get("bjf-staat").getCurrentVersion());
-                    anschrift.setStaat(staatenTyp);
+                    anschrift.setStaat((CodeGDSStaatenTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_STAATEN_TYP_3, a.getStaat()));
                     anschrift.getAnschriftenzusatzs().add(a.getAnschriftenzusatz());
                     person.getAnschrifts().add(anschrift);
 
@@ -203,7 +186,7 @@ public class GrunddatenBuilder {
         Beteiligung beteiligungOrganisation = new Beteiligung();
 
         var rolle = new Rolle();
-        rolle.setRollenbezeichnung(nachrichtenProperty.getCodelisten().get("gds-rollenbezeichnung").currentCodelistValueWithKey("antragsteller"));
+        rolle.setRollenbezeichnung(XoevCodeGDSRollenbezeichnungTyp3.ANTRAGSTELLER.getDescriptor());
         beteiligungOrganisation.addRolle(rolle);
 
         beteiligungOrganisation.generateBeteiligter().generateOrganisation().setBezeichnungAktuell(nachrichtenProperty.getGrunddaten().getVerfahrensdaten().getBeteiligung().getOrganisation().getBezeichnungAktuell());
@@ -213,6 +196,7 @@ public class GrunddatenBuilder {
         anschrift.setHausnummer(nachrichtenProperty.getGrunddaten().getVerfahrensdaten().getBeteiligung().getOrganisation().getBezeichnungAnschriftHausnummer());
         anschrift.setPlz(nachrichtenProperty.getGrunddaten().getVerfahrensdaten().getBeteiligung().getOrganisation().getBezeichnungAnschriftPlz());
         anschrift.setOrt(nachrichtenProperty.getGrunddaten().getVerfahrensdaten().getBeteiligung().getOrganisation().getBezeichnungAnschriftOrt());
+        anschrift.setAnschriftstyp(XoevCodeGDSAnschriftstypen.DIENST_GESCHAEFTSANSCHRIFT.getDescriptor());
         beteiligungOrganisation.generateBeteiligter().generateOrganisation().addAnschrift(anschrift);
 
         beteiligungOrganisation.generateBeteiligter().generateOrganisation().setIban(nachrichtenProperty.getGrunddaten().getVerfahrensdaten().getBeteiligung().getOrganisation().getBezeichnungBankverbindung());

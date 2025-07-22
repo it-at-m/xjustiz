@@ -15,5 +15,6 @@ public class Anschrift {
     protected String wohnungsgeber;
     protected String staat;
     protected String ortsbeschreibung;
+    private String anschriftstyp;
 
 }
