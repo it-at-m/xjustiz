@@ -3,14 +3,13 @@ package de.muenchen.xjustiz;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
-
 @Component
 public class XJustizDocumentRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
 
-        onException(Exception.class)
+       onException(RuntimeException.class, Exception.class)
                 .handled(false);
 
        from("{{xjustiz.document.processor}}").routeId("xjustiz-document-processor").description("Insert values into xjustiz document and marshal to xml.")
