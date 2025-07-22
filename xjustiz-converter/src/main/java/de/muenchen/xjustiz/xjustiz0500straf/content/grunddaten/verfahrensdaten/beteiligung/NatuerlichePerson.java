@@ -1,6 +1,6 @@
 package de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung;
 
-import de.muenchen.xjustiz.codelisten.XoevGeschlecht;
+import de.muenchen.xjustiz.config.codelisten.XoevGeschlecht;
 import lombok.Setter;
 
 import java.util.Optional;

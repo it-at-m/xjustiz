@@ -1,11 +1,12 @@
 package de.muenchen.xjustiz.xjustiz0500straf.builder;
 
-import de.muenchen.xjustiz.codelisten.XoevCodeGDSEreignisTyp3;
-import de.muenchen.xjustiz.codelisten.XoevCodeGDSGerichteTyp3;
+import de.muenchen.xjustiz.config.codelisten.XoevCodeGDSEreignisTyp3;
+import de.muenchen.xjustiz.config.codelisten.XoevCodeGDSGerichteTyp3;
 import de.muenchen.xjustiz.generated.*;
 import de.muenchen.xjustiz.xjustiz0500straf.config.NachrichtenProperty;
+import de.muenchen.xjustiz.config.XJustizProperty;
 import de.muenchen.xjustiz.xjustiz0500straf.content.NachrichtenkopfContent;
-import de.muenchen.xjustiz.codelisten.XoevCodeGDS;
+import de.muenchen.xjustiz.config.codelisten.XoevCodeGDS;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -20,8 +21,8 @@ public class NachrichtenkopfBuilder extends Builder {
 
     private final NachrichtenkopfContent nachrichtenkopfContent;
 
-    public NachrichtenkopfBuilder(NachrichtenProperty nachrichtenProperty, NachrichtenkopfContent nachrichtenkopfContent) {
-        super(nachrichtenProperty);
+    public NachrichtenkopfBuilder(XJustizProperty xjustizProperty, NachrichtenProperty nachrichtenProperty, NachrichtenkopfContent nachrichtenkopfContent) {
+        super(xjustizProperty, nachrichtenProperty);
         this.nachrichtenkopfContent = nachrichtenkopfContent;
     }
 

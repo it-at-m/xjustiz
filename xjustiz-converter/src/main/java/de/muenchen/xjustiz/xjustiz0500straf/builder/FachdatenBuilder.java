@@ -2,9 +2,10 @@ package de.muenchen.xjustiz.xjustiz0500straf.builder;
 
 import de.muenchen.xjustiz.generated.*;
 import de.muenchen.xjustiz.xjustiz0500straf.config.NachrichtenProperty;
+import de.muenchen.xjustiz.config.XJustizProperty;
 import de.muenchen.xjustiz.xjustiz0500straf.content.FachdatenContent;
-import de.muenchen.xjustiz.codelisten.XoevCodeGDS;
-import de.muenchen.xjustiz.codelisten.XoevCodeGDSAnschriftstypen;
+import de.muenchen.xjustiz.config.codelisten.XoevCodeGDS;
+import de.muenchen.xjustiz.config.codelisten.XoevCodeGDSAnschriftstypen;
 import org.springframework.stereotype.Component;
 
 import java.time.format.DateTimeFormatter;
@@ -12,8 +13,8 @@ import java.time.format.DateTimeFormatter;
 @Component
 public class FachdatenBuilder extends Builder {
 
-    public FachdatenBuilder(NachrichtenProperty nachrichtenProperty) {
-        super(nachrichtenProperty);
+    public FachdatenBuilder(XJustizProperty xjustizProperty, NachrichtenProperty nachrichtenProperty) {
+        super(xjustizProperty, nachrichtenProperty);
     }
 
     public NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.Fachdaten build(FachdatenContent fachdatenContent) {

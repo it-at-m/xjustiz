@@ -1,9 +1,9 @@
 package de.muenchen.xjustiz;
 
-import de.muenchen.xjustiz.codelisten.XoevCodeGDSRollenbezeichnungTyp3;
-import de.muenchen.xjustiz.codelisten.XoevCodeGDSStaatenTyp3;
+import de.muenchen.xjustiz.config.codelisten.XoevCodeGDSRollenbezeichnungTyp3;
+import de.muenchen.xjustiz.config.codelisten.XoevCodeGDSStaatenTyp3;
 import de.muenchen.xjustiz.generated.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010;
-import de.muenchen.xjustiz.codelisten.XoevGeschlecht;
+import de.muenchen.xjustiz.config.codelisten.XoevGeschlecht;
 import de.muenchen.xjustiz.xjustiz0500straf.content.FachdatenContent;
 import de.muenchen.xjustiz.xjustiz0500straf.content.fachdaten.StrasseHausnummer;
 import de.muenchen.xjustiz.xjustiz0500straf.content.fachdaten.Tatort;
