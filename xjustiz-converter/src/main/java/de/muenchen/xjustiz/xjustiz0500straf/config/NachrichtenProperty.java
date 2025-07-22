@@ -14,8 +14,6 @@ public class NachrichtenProperty {
     private NachrichtenkopfProperty nachrichtenkopf;
     private GrunddatenProperty grunddaten;
 
-    private Map<String, CodelistenProperty> codelisten;
-
     public boolean isOrganisationConfiguredInApplicationProperties() {
         return     getGrunddaten() != null
                 && getGrunddaten().getVerfahrensdaten() !=null

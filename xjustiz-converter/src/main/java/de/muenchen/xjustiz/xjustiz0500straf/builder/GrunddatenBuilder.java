@@ -1,8 +1,9 @@
 package de.muenchen.xjustiz.xjustiz0500straf.builder;
 
-import de.muenchen.xjustiz.codelisten.*;
+import de.muenchen.xjustiz.xoev.codelisten.*;
 import de.muenchen.xjustiz.generated.*;
 import de.muenchen.xjustiz.xjustiz0500straf.config.NachrichtenProperty;
+import de.muenchen.xjustiz.xoev.XJustizProperty;
 import de.muenchen.xjustiz.xjustiz0500straf.content.GrunddatenContent;
 import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.*;
 import org.springframework.stereotype.Component;
@@ -13,8 +14,8 @@ public class GrunddatenBuilder extends Builder {
 
     private final IncrementCounters incrementCounters = new IncrementCounters();
 
-    public GrunddatenBuilder(NachrichtenProperty nachrichtenProperty) {
-        super(nachrichtenProperty);
+    public GrunddatenBuilder(XJustizProperty xjustizProperty, NachrichtenProperty nachrichtenProperty) {
+        super(xjustizProperty, nachrichtenProperty);
     }
 
     public TypeGDSGrunddaten build(GrunddatenContent grunddatenContent) {

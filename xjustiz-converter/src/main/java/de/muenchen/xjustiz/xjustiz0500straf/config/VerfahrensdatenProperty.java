@@ -8,6 +8,5 @@ import java.util.Map;
 public class VerfahrensdatenProperty {
 
     private BeteiligungProperty beteiligung;
-    private Map<String, CodelistenProperty> codelisten;
 
 }

@@ -1,4 +1,4 @@
-package de.muenchen.xjustiz.xjustiz0500straf.config;
+package de.muenchen.xjustiz.xoev;
 
 import de.muenchen.xjustiz.xjustiz0500straf.XJustizException;
 import lombok.Data;
