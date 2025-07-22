@@ -1,8 +1,7 @@
 package de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung;
+
 import de.muenchen.xjustiz.xoev.codelisten.XoevGeschlecht;
-
 import lombok.Setter;
-
 import java.util.Optional;
 
 public class NatuerlichePerson extends Anschriften {
