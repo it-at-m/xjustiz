@@ -105,14 +105,31 @@ return code;
 Der xJustizStarter kann über eine Apache Camel Route direkt oder in einer Spring-Boot Componente aufgerufen werden.
 Die Fachdaten für das zu erstellende xJsutiz Dokument müssen in der _ContentContainer.class_ übergeben werden. 
 
-### Direkte Apache Camel Einbindung
+### Konfiguration der Spring-Boot-Starter Klasse : _XJustizAutoConfiguration_
+Die Spring-Boot Autokonfiguration braucht im Minimum die folgenden Attribute in der application.yml damit sie aktiviert wird.
+Damit kann die Apache Camel Route zur Generierung der xJustiz Dokumente gestartet werden. Ohne die Konfiguration der XÖV Codelisten ist aber keine erfolgreiche XSD Validierung möglich. 
+
+```
+...
+xjustiz:
+  version: 3.6.2        # Version der xJustiz. 
+  document:
+    processor: direct:xjustiz-document-processor      #  Einstiegspunkt der Apache Camel Route fuer die Konvertierung. 
+...
+
+```
+#### Direkte Apache Camel Einbindung
 In einer Apache Camel Anwendung kann die XJustiz Document Generierung in die eigene Camel Routen Konfiguration eingebunden werden :
 ```
+...
 xjustiz:
   document:
-    processor: direct:xjustiz-document-processor  
+    processor: direct:xjustiz-document-processor 
+... 
 ```
 Dokumentation [Apache Camel Direct](https://camel.apache.org/components/4.10.x/direct-component.html).
+
+Das Apache Camel Protokoll _direct_ mit seinem _Bezeichner_ ist Variabel und kann angepasst werden.
 
 ### Einbindung aus Spring Kontext
 Beispiele für eine Anbindung ohne Apache Camel Kontext finden sich in den _Testfällen_.

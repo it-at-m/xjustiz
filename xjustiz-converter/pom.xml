@@ -48,18 +48,6 @@
             <artifactId>camel-jaxb-starter</artifactId>
         </dependency>
 
-        <!-- jaxb -->
-<!--        <dependency>-->
-<!--            <groupId>jakarta.xml.bind</groupId>-->
-<!--            <artifactId>jakarta.xml.bind-api</artifactId>-->
-<!--            <version>${jakarta.xml.bind}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.glassfish.jaxb</groupId>-->
-<!--            <artifactId>jaxb-runtime</artifactId>-->
-<!--            <version>${org.glassfish.jaxb}</version>-->
-<!--        </dependency>-->
-
         <!-- json -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
