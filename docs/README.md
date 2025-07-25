@@ -113,8 +113,9 @@ Damit kann die Apache Camel Route zur Generierung der xJustiz Dokumente gestarte
 ...
 xjustiz:
   version: 3.6.2        # Version der xJustiz. 
-  document:
-    processor: direct:xjustiz-document-processor      #  Einstiegspunkt der Apache Camel Route fuer die Konvertierung. 
+  interface:
+      document:
+        processor: direct:xjustiz-document-processor      #  Einstiegspunkt der Apache Camel Route fuer die Konvertierung. 
 ...
 
 ```
@@ -123,8 +124,9 @@ In einer Apache Camel Anwendung kann die XJustiz Document Generierung in die eig
 ```
 ...
 xjustiz:
-  document:
-    processor: direct:xjustiz-document-processor 
+  interface:
+    document:
+      processor: direct:xjustiz-document-processor 
 ... 
 ```
 Dokumentation [Apache Camel Direct](https://camel.apache.org/components/4.10.x/direct-component.html).
@@ -159,7 +161,7 @@ Dokumentation [Apache Camel Producer](https://camel.apache.org/manual/producerte
 
 ### Error Handling
 Das Error Handling der verarbeitenden Camel Route im XJustizDocumentRouteBuilder fängt alle Exceptions und gibt diese an den Aufrufer zurück, 
-wenn die _xjustiz.document.processor_ Route, wie im Beispiel oben, mit meinem _Camel Exchange aufgerufen_ wird.
+wenn die _xjustiz.interface.document.processor_ Route, wie im Beispiel oben, mit meinem _Camel Exchange aufgerufen_ wird.
 
 Sie auch die Beispiele im _ErrorHandlingTest_.
 

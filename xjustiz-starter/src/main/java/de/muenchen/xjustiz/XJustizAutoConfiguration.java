@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Bean;
 public class XJustizAutoConfiguration {
 
     @Bean
-    @ConditionalOnProperty(prefix = "xjustiz", name={"version", "document.processor"})
+    @ConditionalOnProperty(prefix = "xjustiz", name={"version", "interface.document.processor"})
     public XJustizDocumentRouteBuilder xJustizDocumentRouteBuilder() {
         return new XJustizDocumentRouteBuilder();
     }

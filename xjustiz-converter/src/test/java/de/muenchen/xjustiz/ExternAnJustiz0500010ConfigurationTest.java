@@ -22,7 +22,7 @@ public class ExternAnJustiz0500010ConfigurationTest extends ExternAnJustiz050001
     @Produce()
     private ProducerTemplate startTest;
 
-    @Value("${xjustiz.document.processor}")
+    @Value("${xjustiz.interface.document.processor}")
     private String testRoute;
 
     /*

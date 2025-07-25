@@ -30,7 +30,7 @@ public class ErrorHandlingTest extends ExternAnJustiz0500010TestEnvironment {
     @Produce()
     private ProducerTemplate startxJustiz0500strafBuilderTest;
 
-    @Value("${xjustiz.document.processor}")
+    @Value("${xjustiz.interface.document.processor}")
     private String testRoute;
 
     @Autowired

@@ -56,14 +56,12 @@ xjustiz:
           weiblich: 2
           divers: 3
           saechlich: 4
-
   xjustiz0500straf:
     nachrichtenkopf:
       auswahl-absender-sonstige: ABC 1.234
       auswahl-herstellerinformation-produkt: myProdukt
       auswahl-herstellerinformation-produkt-name: myProduktname
       auswahl-herstellerinformation-produkt-version: myProduktversion
-      codelisten:
-
-  document:
-    processor: direct:xjustiz-document-processor
+  interface:
+    document:
+      processor: direct:xjustiz-document-processor

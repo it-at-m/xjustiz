@@ -12,7 +12,7 @@ public class XJustizDocumentRouteBuilder extends RouteBuilder {
        onException(RuntimeException.class, Exception.class)
                 .handled(false);
 
-       from("{{xjustiz.document.processor}}").routeId("xjustiz-document-processor").description("Insert values into xjustiz document and marshal to xml.")
+       from("{{xjustiz.interface.document.processor}}").routeId("xjustiz-document-processor").description("Insert values into xjustiz document and marshal to xml.")
                 .to("log:de.muenchen.xjustiz.xjustiz-document-processor?level=DEBUG")
                 .process("builderConnector")
                 .marshal().jaxb()

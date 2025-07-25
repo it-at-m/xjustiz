@@ -31,7 +31,7 @@ public class ExternAnJustiz0500010Test extends ExternAnJustiz0500010TestEnvironm
     @Produce()
     private ProducerTemplate startxJustiz0500strafBuilderTest;
 
-    @Value("${xjustiz.document.processor}")
+    @Value("${xjustiz.interface.document.processor}")
     private String testRoute;
 
     @Autowired
