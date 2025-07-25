@@ -1,9 +1,12 @@
 package de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung;
 
+import lombok.Data;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Data
 public class Anschriften {
 
     protected List<Anschrift> anschriften;

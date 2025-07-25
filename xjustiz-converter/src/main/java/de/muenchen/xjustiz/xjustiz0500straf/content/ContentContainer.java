@@ -1,9 +1,11 @@
 package de.muenchen.xjustiz.xjustiz0500straf.content;
 
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
 
+@Data
 @RequiredArgsConstructor
 public class ContentContainer {
 

@@ -1,16 +1,18 @@
 package de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung;
 
 import de.muenchen.xjustiz.xoev.codelisten.XoevGeschlecht;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import java.util.Optional;
 
+@Data
+@EqualsAndHashCode(callSuper=false)
 public class NatuerlichePerson extends Anschriften {
 
     private VollerName vollerName;
 
     private Geburt geburt;
 
-    @Setter
     private XoevGeschlecht geschlecht;
 
     public Optional<VollerName> getVollerName() {

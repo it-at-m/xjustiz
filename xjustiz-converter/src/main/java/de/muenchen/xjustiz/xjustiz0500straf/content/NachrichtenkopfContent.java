@@ -1,12 +1,10 @@
 package de.muenchen.xjustiz.xjustiz0500straf.content;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.stereotype.Component;
 
 @Component
-@Getter
-@Setter
+@Data
 public class NachrichtenkopfContent {
 
     private String aktenzeichen;

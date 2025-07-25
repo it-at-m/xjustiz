@@ -2,8 +2,7 @@ package de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.
 
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 public class Anschrift {
 
     private String strasse;
