@@ -13,6 +13,7 @@ xjustiz:
         gds-rollenbezeichnung-3-5:
           betroffener: '040'
           antragsteller: '016'
+          bussgeldempfaenger: '046'
     gds-gerichte:
       current-version: 3.6
       kennung: urn:xoev-de:xjustiz:codeliste:gds.gerichte
@@ -58,10 +59,10 @@ xjustiz:
           saechlich: 4
   xjustiz0500straf:
     nachrichtenkopf:
-      auswahl-absender-sonstige: ABC 1.234
-      auswahl-herstellerinformation-produkt: myProdukt
-      auswahl-herstellerinformation-produkt-name: myProduktname
-      auswahl-herstellerinformation-produkt-version: myProduktversion
+      auswahl-absender-sonstige: Stadt München
+      auswahl-herstellerinformation-produkt: KVU
+      auswahl-herstellerinformation-produkt-name: KVU-Name
+      auswahl-herstellerinformation-produkt-version: KVU-Version
   interface:
     document:
       processor: direct:xjustiz-document-processor

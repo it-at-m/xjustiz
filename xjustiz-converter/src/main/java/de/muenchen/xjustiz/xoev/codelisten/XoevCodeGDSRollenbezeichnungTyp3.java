@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum XoevCodeGDSRollenbezeichnungTyp3 {
 
-    BETROFFENER("betroffener"), ANTRAGSTELLER("antragsteller");
+    BETROFFENER("betroffener"), ANTRAGSTELLER("antragsteller"), BUSSGELDEMPFAENGER("bussgeldempfaenger"),;
 
     private final String descriptor;
 

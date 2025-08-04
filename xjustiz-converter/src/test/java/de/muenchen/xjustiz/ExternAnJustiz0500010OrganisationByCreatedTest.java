@@ -18,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,8 +26,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootApplication(scanBasePackages = "de.muenchen.xjustiz")
 @CamelSpringBootTest
 @SpringBootTest(classes = {XJustizDocumentRouteBuilder.class})
-@ActiveProfiles({"default", "organisation"})
-public class ExternAnJustiz0500010Test extends ExternAnJustiz0500010TestEnvironment {
+@ActiveProfiles({"default"})
+public class ExternAnJustiz0500010OrganisationByCreatedTest extends ExternAnJustiz0500010TestEnvironment {
 
     @Produce()
     private ProducerTemplate startxJustiz0500strafBuilderTest;
@@ -42,8 +43,8 @@ public class ExternAnJustiz0500010Test extends ExternAnJustiz0500010TestEnvironm
     @BeforeEach
     public void init() throws Exception {
 
-        Exchange request = ExchangeBuilder.anExchange(camelContext).withBody(new ContentContainer(createFachdaten(), new GrunddatenContent(createDefendant()))).build();
-        var response  = startxJustiz0500strafBuilderTest.send(testRoute, request);
+        Exchange request = ExchangeBuilder.anExchange(camelContext).withBody(new ContentContainer(createFachdaten(), new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention(), createApplicant()))))).build();
+        var response = startxJustiz0500strafBuilderTest.send(testRoute, request);
         var xml = response.getMessage().getBody(String.class);
         this.externAnJustiz0500010 = parseXML(xml);
     }
@@ -53,9 +54,14 @@ public class ExternAnJustiz0500010Test extends ExternAnJustiz0500010TestEnvironm
 
         TypeGDSNachrichtenkopf nachrichtenkopf = this.externAnJustiz0500010.getNachrichtenkopf();
         assertEquals("D2601", nachrichtenkopf.getEmpfaenger().getInformationen().getAuswahlKommunikationspartner().getGericht().getCode(), "Error auswahl-empfaenger-gericht property.");
+        assertEquals("Stadt München", nachrichtenkopf.getAbsender().getInformationen().getAuswahlKommunikationspartner().getSonstige(), "Error auswahl-absender-kommunikationspartner-sonstige property.");
         var ereignis = nachrichtenkopf.getEreignises().getFirst();
         assertEquals("117", ereignis.getCode(), "Error nachrichtenkopf-ereignis property.");
-        assertEquals( "1.11", ereignis.getListVersionID(), "Error nachrichtenkopf-ereignis current-version property.");
+        assertEquals("1.11", ereignis.getListVersionID(), "Error nachrichtenkopf-ereignis current-version property.");
+
+        assertEquals("KVU", nachrichtenkopf.getHerstellerinformation().getHerstellerDesProdukts());
+        assertEquals("KVU-Name", nachrichtenkopf.getHerstellerinformation().getNameDesProdukts());
+        assertEquals("KVU-Version", nachrichtenkopf.getHerstellerinformation().getVersion());
     }
 
     @Test
@@ -70,14 +76,14 @@ public class ExternAnJustiz0500010Test extends ExternAnJustiz0500010TestEnvironm
         assertEquals("D2601", instanzbehoerde.getCode(), "Error auswahl-instanzbehoerde-gericht property.");
         assertEquals("3.6", instanzbehoerde.getListVersionID(), "Error auswahl-instanzbehoerde-gericht current-version property.");
 
-        assertEquals("2" , verfahrensdaten.getBeteiligungs().getLast().getRolles().getLast().getRollennummer(), "Two rollen in whole document expected.");
-        assertEquals(BigInteger.ONE , verfahrensdaten.getBeteiligungs().getLast().getRolles().getLast().getNr(), "Only one rolle with same rollenbezeichnung expected.");
-        assertEquals("2" , verfahrensdaten.getBeteiligungs().getLast().getBeteiligter().getBeteiligtennummer(), "Two beteiligter in whole document expected.");
+        assertEquals("2", verfahrensdaten.getBeteiligungs().getLast().getRolles().getLast().getRollennummer(), "Two rollen in whole document expected.");
+        assertEquals(BigInteger.ONE, verfahrensdaten.getBeteiligungs().getLast().getRolles().getLast().getNr(), "Only one rolle with same rollenbezeichnung expected.");
+        assertEquals("2", verfahrensdaten.getBeteiligungs().getLast().getBeteiligter().getBeteiligtennummer(), "Two beteiligter in whole document expected.");
 
-       List<TypeGDSBeteiligung> beteiligungenNatuerlichePerson = verfahrensdaten.getBeteiligungs().stream().filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson() != null).toList();
-       assertEquals(1, beteiligungenNatuerlichePerson.size(), "Wrong number of beteiligungen property.");
+        List<TypeGDSBeteiligung> beteiligungenNatuerlichePerson = verfahrensdaten.getBeteiligungs().stream().filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson() != null).toList();
+        assertEquals(1, beteiligungenNatuerlichePerson.size(), "Wrong number of beteiligungen property.");
         var rolleNatuerlichePerson = beteiligungenNatuerlichePerson.getFirst().getRolles().getFirst();
-       assertEquals("040", rolleNatuerlichePerson.getRollenbezeichnung().getCode());
+        assertEquals("040", rolleNatuerlichePerson.getRollenbezeichnung().getCode());
         assertEquals("3.5", rolleNatuerlichePerson.getRollenbezeichnung().getListVersionID());
 
         List<TypeGDSNatuerlichePerson> natuerlichePersonen = beteiligungenNatuerlichePerson.stream().filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson() != null).map(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson()).toList();
@@ -107,16 +113,18 @@ public class ExternAnJustiz0500010Test extends ExternAnJustiz0500010TestEnvironm
         List<TypeGDSBeteiligung> beteiligungenOrganisation = verfahrensdaten.getBeteiligungs().stream().filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation() != null).toList();
         assertEquals(1, beteiligungenOrganisation.size(), "Wrong number of beteiligungen property.");
         var rolleOrganisation = beteiligungenOrganisation.getFirst().getRolles().getFirst();
-        assertEquals("016", rolleOrganisation.getRollenbezeichnung().getCode());
+        assertEquals("046", rolleOrganisation.getRollenbezeichnung().getCode());
         assertEquals("3.5", rolleOrganisation.getRollenbezeichnung().getListVersionID());
 
         List<TypeGDSOrganisation> organisationen = verfahrensdaten.getBeteiligungs().stream().filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation() != null).map(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation()).toList();
         assertEquals(1, organisationen.size(), "Wrong number of organisationen property.");
-        assertEquals("Landeshauptstadt München Referat", organisationen.getFirst().getBezeichnung().getBezeichnungAktuell());
-        assertEquals("Straße", organisationen.getFirst().getAnschrifts().getFirst().getStrasse());
-        assertEquals("1", organisationen.getFirst().getAnschrifts().getFirst().getHausnummer());
-        assertEquals("8000", organisationen.getFirst().getAnschrifts().getFirst().getPostleitzahl());
-        assertEquals("München", organisationen.getFirst().getAnschrifts().getFirst().getOrt());
+        assertEquals("Created Bezeichnung Aktuell", organisationen.getFirst().getBezeichnung().getBezeichnungAktuell());
+        assertEquals("Created Strasse", organisationen.getFirst().getAnschrifts().getFirst().getStrasse());
+        assertEquals("Created Hausnummer", organisationen.getFirst().getAnschrifts().getFirst().getHausnummer());
+        assertEquals("Created Plz", organisationen.getFirst().getAnschrifts().getFirst().getPostleitzahl());
+        assertEquals("Created Ort", organisationen.getFirst().getAnschrifts().getFirst().getOrt());
+
+        assertEquals("Created Iban", organisationen.getFirst().getBankverbindungs().getFirst().getIban());
 
         assertEquals("003", organisationen.getFirst().getAnschrifts().getFirst().getAnschriftstyp().getCode());
         assertEquals("3.0", organisationen.getFirst().getAnschrifts().getFirst().getAnschriftstyp().getListVersionID());

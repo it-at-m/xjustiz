@@ -1,5 +1,6 @@
 package de.muenchen.xjustiz;
 
+import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDSAnschriftstypen;
 import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDSRollenbezeichnungTyp3;
 import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDSStaatenTyp3;
 import de.muenchen.xjustiz.generated.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010;
@@ -20,22 +21,21 @@ import java.util.List;
 
 public class ExternAnJustiz0500010TestEnvironment {
 
-    protected List<Beteiligung> createDefendant() {
-
-        Beteiligung defendant = new Beteiligung();
+       protected Beteiligung createPersonSubjectToCoerceiveDetention() {
+        Beteiligung beteiligung = new Beteiligung();
         var rolle = new Rolle();
 
         rolle.setRollenbezeichnung(XoevCodeGDSRollenbezeichnungTyp3.BETROFFENER.getDescriptor());
-        defendant.addRolle(rolle);
+        beteiligung.addRolle(rolle);
 
-        defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setVorname(NatuerlichePerson.VORNAME);
-        defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setNachname(NatuerlichePerson.NACHNAME);
-        defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setTitel(NatuerlichePerson.TITEL);
-        defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setNamensvorsatz(NatuerlichePerson.NAMENSVORSATZ);
-        defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setGeburtsname(NatuerlichePerson.GEBURTSNAME);
-        defendant.generateBeteiligter().generateNatuerlichePerson().generateGeburt().setGeburtsdatum(NatuerlichePerson.GEBURTSDATUM);
-        defendant.generateBeteiligter().generateNatuerlichePerson().generateGeburt().setGeburtsort(NatuerlichePerson.GEBURTSSORT);
-        defendant.generateBeteiligter().generateNatuerlichePerson().setGeschlecht(XoevGeschlecht.MAENNLICH);
+        beteiligung.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setVorname(NatuerlichePerson.VORNAME);
+        beteiligung.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setNachname(NatuerlichePerson.NACHNAME);
+        beteiligung.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setTitel(NatuerlichePerson.TITEL);
+        beteiligung.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setNamensvorsatz(NatuerlichePerson.NAMENSVORSATZ);
+        beteiligung.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setGeburtsname(NatuerlichePerson.GEBURTSNAME);
+        beteiligung.generateBeteiligter().generateNatuerlichePerson().generateGeburt().setGeburtsdatum(NatuerlichePerson.GEBURTSDATUM);
+        beteiligung.generateBeteiligter().generateNatuerlichePerson().generateGeburt().setGeburtsort(NatuerlichePerson.GEBURTSSORT);
+        beteiligung.generateBeteiligter().generateNatuerlichePerson().setGeschlecht(XoevGeschlecht.MAENNLICH);
 
         var anschrift = new Anschrift();
         anschrift.setAnschriftenzusatz(NatuerlichePerson.ANSCHRIFTENZUATZ);
@@ -46,10 +46,34 @@ public class ExternAnJustiz0500010TestEnvironment {
         anschrift.setOrt(NatuerlichePerson.ORT);
         anschrift.setWohnungsgeber(NatuerlichePerson.WOHNUNGSGEBER);
         anschrift.setStaat(XoevCodeGDSStaatenTyp3.DEUTSCHLAND.getDescriptor());
-        defendant.generateBeteiligter().generateNatuerlichePerson().addAnschrift(anschrift);
-
-        return new ArrayList<>(List.of(defendant));
+        beteiligung.generateBeteiligter().generateNatuerlichePerson().addAnschrift(anschrift);
+        return beteiligung;
     }
+
+    protected Beteiligung createApplicant() {
+
+        Beteiligung beteiligung = new Beteiligung();
+
+        var rolle = new Rolle();
+        rolle.setRollenbezeichnung(XoevCodeGDSRollenbezeichnungTyp3.BUSSGELDEMPFAENGER.getDescriptor());
+        beteiligung.addRolle(rolle);
+
+        beteiligung.generateBeteiligter().generateOrganisation().setBezeichnungAktuell("Created Bezeichnung Aktuell");
+
+        var anschrift = new Anschrift();
+        anschrift.setStrasse("Created Strasse");
+        anschrift.setHausnummer("Created Hausnummer");
+        anschrift.setPlz("Created Plz");
+        anschrift.setOrt("Created Ort");
+        anschrift.setAnschriftstyp(XoevCodeGDSAnschriftstypen.DIENST_GESCHAEFTSANSCHRIFT.getDescriptor());
+        beteiligung.generateBeteiligter().generateOrganisation().addAnschrift(anschrift);
+
+        beteiligung.generateBeteiligter().generateOrganisation().setIban("Created Iban");
+
+        return beteiligung;
+    }
+
+
 
     protected NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 parseXML(String xml) throws Exception {
         JAXBContext context = JAXBContext.newInstance(NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.class);

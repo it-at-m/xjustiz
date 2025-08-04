@@ -26,7 +26,7 @@ public class GrunddatenBuilder extends Builder {
            The organization can be defined statically once in the properties or transferred dynamically with the natural persons.
         */
         if (nachrichtenProperty.isOrganisationConfiguredInApplicationProperties())
-            grunddatenContent.getBeteiligungen().ifPresent(b -> b.add(generateBeteiligungOrganisation()));
+            grunddatenContent.getBeteiligungen().ifPresent(b -> b.add(createApplicant()));
 
         /**
          * Grunddaten
@@ -182,15 +182,15 @@ public class GrunddatenBuilder extends Builder {
         return beteiligter.getAuswahlBeteiligter() != null ? beteiligter : null;
     }
 
-    private Beteiligung generateBeteiligungOrganisation() {
+    private Beteiligung createApplicant() {
 
-        Beteiligung beteiligungOrganisation = new Beteiligung();
+        Beteiligung beteiligung = new Beteiligung();
 
         var rolle = new Rolle();
-        rolle.setRollenbezeichnung(XoevCodeGDSRollenbezeichnungTyp3.ANTRAGSTELLER.getDescriptor());
-        beteiligungOrganisation.addRolle(rolle);
+        rolle.setRollenbezeichnung(XoevCodeGDSRollenbezeichnungTyp3.BUSSGELDEMPFAENGER.getDescriptor());
+        beteiligung.addRolle(rolle);
 
-        beteiligungOrganisation.generateBeteiligter().generateOrganisation().setBezeichnungAktuell(nachrichtenProperty.getGrunddaten().getVerfahrensdaten().getBeteiligung().getOrganisation().getBezeichnungAktuell());
+        beteiligung.generateBeteiligter().generateOrganisation().setBezeichnungAktuell(nachrichtenProperty.getGrunddaten().getVerfahrensdaten().getBeteiligung().getOrganisation().getBezeichnungAktuell());
 
         var anschrift = new Anschrift();
         anschrift.setStrasse(nachrichtenProperty.getGrunddaten().getVerfahrensdaten().getBeteiligung().getOrganisation().getBezeichnungAnschriftStrasse());
@@ -198,11 +198,11 @@ public class GrunddatenBuilder extends Builder {
         anschrift.setPlz(nachrichtenProperty.getGrunddaten().getVerfahrensdaten().getBeteiligung().getOrganisation().getBezeichnungAnschriftPlz());
         anschrift.setOrt(nachrichtenProperty.getGrunddaten().getVerfahrensdaten().getBeteiligung().getOrganisation().getBezeichnungAnschriftOrt());
         anschrift.setAnschriftstyp(XoevCodeGDSAnschriftstypen.DIENST_GESCHAEFTSANSCHRIFT.getDescriptor());
-        beteiligungOrganisation.generateBeteiligter().generateOrganisation().addAnschrift(anschrift);
+        beteiligung.generateBeteiligter().generateOrganisation().addAnschrift(anschrift);
 
-        beteiligungOrganisation.generateBeteiligter().generateOrganisation().setIban(nachrichtenProperty.getGrunddaten().getVerfahrensdaten().getBeteiligung().getOrganisation().getBezeichnungBankverbindung());
+        beteiligung.generateBeteiligter().generateOrganisation().setIban(nachrichtenProperty.getGrunddaten().getVerfahrensdaten().getBeteiligung().getOrganisation().getBezeichnungBankverbindung());
 
-        return beteiligungOrganisation;
+        return beteiligung;
     }
 
 }

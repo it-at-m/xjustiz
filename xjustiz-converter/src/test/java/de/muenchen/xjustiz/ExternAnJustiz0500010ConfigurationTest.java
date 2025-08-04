@@ -11,6 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootApplication(scanBasePackages = "de.muenchen.xjustiz")
@@ -31,7 +34,7 @@ public class ExternAnJustiz0500010ConfigurationTest extends ExternAnJustiz050001
     @Test
     void test_organisationNotConfigured() throws Exception {
 
-        var xml  = startTest.requestBody(testRoute, new ContentContainer(createFachdaten(), new GrunddatenContent(createDefendant())), String.class);
+        var xml  = startTest.requestBody(testRoute, new ContentContainer(createFachdaten(), new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention())))), String.class);
 
         var externAnJustiz0500010 = parseXML(xml);
 
