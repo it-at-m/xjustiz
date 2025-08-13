@@ -1,120 +1,142 @@
 package de.muenchen.xjustiz.xjustiz0500straf.builder;
 
 import de.muenchen.xjustiz.generated.*;
+import de.muenchen.xjustiz.xjustiz0500straf.content.SchriftgutContent;
+import de.muenchen.xjustiz.xjustiz0500straf.content.schriftgutobjekte.Akte;
+import de.muenchen.xjustiz.xjustiz0500straf.content.schriftgutobjekte.Dokument;
+import de.muenchen.xjustiz.xjustiz0500straf.content.schriftgutobjekte.Identifikation;
+import de.muenchen.xjustiz.xoev.XJustizProperty;
+import de.muenchen.xjustiz.xoev.codelisten.*;
 import org.springframework.stereotype.Component;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class SchriftgutobjektBuilder {
+public class SchriftgutobjektBuilder extends XJustizBuilder {
 
-    public final static String CHANGEIT = "TODO";
-    private final static String SCHRIFTGUTOBJEKTE_DOKUMENT_FACHSPEZIFISCHE_DATEN_DOKUMENTKLASSE= "016";
+    public SchriftgutobjektBuilder(XJustizProperty xjustizProperty) {
+        super(xjustizProperty);
+    }
 
-    public TypeGDSSchriftgutobjekte build() {
-
-
-        /**
-         *  Schriftgutobjekte
-         *  !!!!   Kommen aus der eAkte. Müssen erst im 2.ten Schritt nach dem erneuten abholen
-         *         aus der eAkte hinzugefügt werden. Erst dann sind die erforderlichen Schriftgut.Attribut
-         *         Inhalte verfügbar.
-         *         Die Implementierung der Schriftgutobjekt muss getrennt nachrichtenkopf, grunddaten und fachdaten
-         *         erfolgen
-         */
+    public TypeGDSSchriftgutobjekte build(SchriftgutContent schriftgutContent) {
 
         TypeGDSSchriftgutobjekte schriftobjekte = new TypeGDSSchriftgutobjekte();
 
-        List<TypeGDSDokument> dokumente = new ArrayList<>();
+        schriftgutContent.getAnschreiben().ifPresent(refsgo -> {
+            TypeGDSRefSGO anschreiben = new TypeGDSRefSGO();
+            anschreiben.setRefSgo(refsgo);
+            schriftobjekte.setAnschreiben(anschreiben);
+        });
 
-        TypeGDSDokument dokument = new TypeGDSDokument();
+        schriftgutContent.getDokumente().ifPresent(contentDokumente -> {
+            createDocuments(contentDokumente).forEach(d -> schriftobjekte.getDokuments().add(d));
+        });
 
-        // Anschreiben
-        TypeGDSRefSGO anschreiben = new TypeGDSRefSGO();
-        anschreiben.setRefSgo("CEEF2150-F915-1F1F-1177-906D00000000");
-        schriftobjekte.setAnschreiben(anschreiben);
-
-        // Identifikation
-        TypeGDSXdomeaIdentifikationObjektType identifikation = new TypeGDSXdomeaIdentifikationObjektType();
-        /*
-            xDOMEA: xdomea:information-information-0101.schriftgutobjekt.vorgang.dokument.identifikation.id
-            Bsp. für ID: CEEF2150-F915-1F1F-1177-906D00000000
-         */
-        identifikation.setId("CEEF2150-F915-1F1F-1177-906D00000000");
-        /*
-            xDOMEA: xdomea:information-information-0101.schriftgutobjekt.vorgang.dokument.identifikation.nummerImUebergeordnetenContainer
-            Bsp. für nummerImUebergeordnetenContainer: 1
-         */
-        identifikation.setNummerImUebergeordnetenContainer(BigInteger.ONE);
-        dokument.setIdentifikation(identifikation);
-
-        // Fachspezifische Daten
-        TypeGDSDokument.XjustizFachspezifischeDaten fachspezifischeDaten = new TypeGDSDokument.XjustizFachspezifischeDaten();
-
-        /* Dokumentenklasse
-
-            xDOMEA: xdomea:information-information-0101.schriftgutobjekt.vorgang.dokument.version.format.name.code -> DOCX
-            BRE:
-            Schriftgutobjekt OKV - Dokumentklasse: "016", Bestandteiltyp: "001" (Original) gemäß FB
-            Schriftgutobjekt BUS Urschrift - "017", Bestandteiltyp: "002" (Repräsentant) gemäß FB
-            Siehe Codeliste GDS.Dokumentklasse_1.4.xlsx
-         */
-        CodeGDSDokumentklasseTyp3 dokumentklasse = new CodeGDSDokumentklasseTyp3();
-        dokumentklasse.setCode(SCHRIFTGUTOBJEKTE_DOKUMENT_FACHSPEZIFISCHE_DATEN_DOKUMENTKLASSE);
-        dokumentklasse.setListVersionID(CHANGEIT);
-        fachspezifischeDaten.setDokumentklasse(dokumentklasse);
-
-        /* Anzeigename
-            xDOMEA: xdomea:information-information-0101.schriftgutobjekt.vorgang.dokument.version.format.primaerdokument.dateiname
-            Bsp. für anzeigename: CEEF2150-F915-1F1F-1177-908D00000000_Neufassung von Micro_1.docx
-         */
-        fachspezifischeDaten.setAnzeigename("CEEF2150-F915-1F1F-1177-908D00000000_Neufassung von Micro_1.docx");
-
-        // Datei
-        List<TypeGDSDokument.XjustizFachspezifischeDaten.Datei> dateien = new ArrayList<>();
-        TypeGDSDokument.XjustizFachspezifischeDaten.Datei datei = new TypeGDSDokument.XjustizFachspezifischeDaten.Datei();
-        /* Dateiname
-              xDOMEA: xdomea:information-information-0101.schriftgutobjekt.vorgang.dokument.version.format.primaerdokument.dateiname
-              Bsp. für anzeigename: CEEF2150-F915-1F1F-1177-908D00000000_Neufassung von Micro_1.docx
-        */
-        datei.setDateiname("CEEF2150-F915-1F1F-1177-908D00000000_Neufassung von Micro_1.docx");
-
-        /* Bestandteil
-            TODO BRE: Bitte prüfen ob Code 002 Repräsentant richtig. Übertragung im beBPo muss per .pdf stattfinden, daher Vorschlag 002.
-            Codeliste: GDS.Bestandteiltyp_2.4.xlsx
-         */
-        CodeGDSBestandteiltyp bestandteiltyp = new CodeGDSBestandteiltyp();
-        bestandteiltyp.setCode("002");
-        datei.setBestandteil(bestandteiltyp);
-
-        /* Versionsnummer
-             xDOMEA: xdomea:information-information-0101.schriftgutobjekt.vorgang.dokument.version.nummer
-             Bsp. für versionsnummer: 1
-         */
-        datei.setVersionsnummer(BigInteger.ONE);
-
-        /* Erstellungszeitpunkt    alias   Veraktungsdatum
-            xDOMEA: xdomea:information-information-0101.schriftgutobjekt.vorgang.dokument.version.format.primaerdokument.datumuhrzeit
-         */
-        // fachspezifischeDaten.setVeraktungsdatum(new XMLGregorianCalendar());
-
-        /*
-                @TODO Fehlende Attribute ergänzen ...
-         */
-
-        dateien.add(datei);
-
-        dateien.forEach(d -> fachspezifischeDaten.getDateis().add(d));
-
-        dokument.setXjustizFachspezifischeDaten(fachspezifischeDaten);
-        dokumente.add(dokument);
-
-        dokumente.forEach(d -> schriftobjekte.getDokuments().add(d));
+        schriftgutContent.getAkten().ifPresent(contentAkten -> {
+            createDossier(contentAkten).forEach(a -> schriftobjekte.getAktes().add(a));
+        });
 
         return schriftobjekte;
+    }
 
+
+    private List<TypeGDSDokument> createDocuments(List<Dokument> contentDokumente) {
+
+        List<TypeGDSDokument> documents = new ArrayList<>();
+
+        contentDokumente.forEach(contentDokument -> {
+
+            TypeGDSDokument document = new TypeGDSDokument();
+
+            document.setIdentifikation(createIdentifikation(contentDokument.getIdentifikation()));
+
+            TypeGDSDokument.XjustizFachspezifischeDaten fachspezifischeDaten = new TypeGDSDokument.XjustizFachspezifischeDaten();
+
+            fachspezifischeDaten.setDokumentklasse((CodeGDSDokumentklasseTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_DOKUMENTKLASSE, contentDokument.getFachspezifischeDatenDokument().getDokumentklasse().getDescriptor()));
+            fachspezifischeDaten.setAnzeigename(contentDokument.getFachspezifischeDatenDokument().getAnzeigename());
+
+            List<TypeGDSDokument.XjustizFachspezifischeDaten.Datei> dateien = new ArrayList<>();
+
+            contentDokument.getFachspezifischeDatenDokument().getDateien().forEach(d -> {
+                TypeGDSDokument.XjustizFachspezifischeDaten.Datei datei = new TypeGDSDokument.XjustizFachspezifischeDaten.Datei();
+                datei.setDateiname(d.getDateiname());
+
+                if (contentDokument.getFachspezifischeDatenDokument().getDokumentklasse() == XoevCodeGDSDokumentklasse.ANTRAG)
+                    datei.setBestandteil((CodeGDSBestandteiltyp) createCodeGDSClass(XoevCodeGDS.CODE_GDS_BESTANDTEILTYP, XoevCodeGDSBestandteiltyp.ORIGINAL.getDescriptor()));
+                else
+                    datei.setBestandteil((CodeGDSBestandteiltyp) createCodeGDSClass(XoevCodeGDS.CODE_GDS_BESTANDTEILTYP, XoevCodeGDSBestandteiltyp.REPRAESENTANT.getDescriptor()));
+
+                datei.setVersionsnummer(d.getVersionsnummer());
+                dateien.add(datei);
+            });
+            dateien.forEach(d -> fachspezifischeDaten.getDateis().add(d));
+
+            document.setXjustizFachspezifischeDaten(fachspezifischeDaten);
+
+            documents.add(document);
+
+        });
+        return documents;
+    }
+
+    private List<TypeGDSAkte> createDossier(List<Akte> contentAkten) {
+
+        List<TypeGDSAkte> dossiers = new ArrayList<>();
+        contentAkten.forEach(contentAkte -> {
+
+            TypeGDSAkte dossier = new TypeGDSAkte();
+            dossier.setIdentifikation(createIdentifikation(contentAkte.getIdentifikation()));
+
+            TypeGDSXdomeaZeitraumType zeitraum = new TypeGDSXdomeaZeitraumType();
+            zeitraum.setBeginn(contentAkte.getLaufzeit().getBeginn());
+            zeitraum.setEnde(contentAkte.getLaufzeit().getEnde());
+            dossier.setLaufzeit(zeitraum);
+
+            TypeGDSXdomeaAnwendungsspezifischeErweiterungType erweiterung = new TypeGDSXdomeaAnwendungsspezifischeErweiterungType();
+            erweiterung.setKennung(contentAkte.getAnwendungspezifischeErweiterung().getKennung());
+            erweiterung.setName(contentAkte.getAnwendungspezifischeErweiterung().getName());
+            dossier.setAnwendungsspezifischeErweiterung(erweiterung);
+
+            TypeGDSAkte.XjustizFachspezifischeDaten fachspezifischeDaten = new TypeGDSAkte.XjustizFachspezifischeDaten();
+            fachspezifischeDaten.setAktentyp((CodeGDSAktentyp) createCodeGDSClass(XoevCodeGDS.CODE_GDS_AKTENTYP, XoevCodeGDSAktentyp.BUSSGELDAKTE.getDescriptor()));
+
+            TypeGDSAktenzeichen aktenzeichen = new TypeGDSAktenzeichen();
+            aktenzeichen.setAzArt((CodeGDSAktenzeichenart) createCodeGDSClass(XoevCodeGDS.CODE_GDS_AKTENZEICHENART, XoevCodeGDSAktenzeichenart.AKTUELL.getDescriptor()));
+
+            TypeGDSBehoerde behoerde = new TypeGDSBehoerde();
+            behoerde.setGericht((CodeGDSGerichteTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_GERICHTE_TYP_3, XoevCodeGDSGerichteTyp3.AMTSGERICHT_MUENCHEN.getDescriptor()));
+            aktenzeichen.setAuswahlAzVergebendeStation(behoerde);
+
+            TypeGDSAktenzeichen.AuswahlAktenzeichen auswahlAktenzeichen = new TypeGDSAktenzeichen.AuswahlAktenzeichen();
+            TypeGDSAktenzeichen.AuswahlAktenzeichen.AktenzeichenStrukturiert strukturiert = new TypeGDSAktenzeichen.AuswahlAktenzeichen.AktenzeichenStrukturiert();
+            strukturiert.setSachgebietsschluessel(contentAkte.getFachspezifischeDatenAkte().getAktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert().getSachgebietsschluessel());
+            strukturiert.setZusatzkennung(contentAkte.getFachspezifischeDatenAkte().getAktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert().getZusatzkennung());
+            strukturiert.setAbteilung(contentAkte.getFachspezifischeDatenAkte().getAktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert().getAbteilung());
+            strukturiert.setLaufendeNummer(contentAkte.getFachspezifischeDatenAkte().getAktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert().getLaufendeNummer());
+            strukturiert.setJahr(contentAkte.getFachspezifischeDatenAkte().getAktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert().getJahr());
+            auswahlAktenzeichen.setAktenzeichenStrukturiert(strukturiert);
+
+            strukturiert.setRegister((CodeGDSRegisterzeichenTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_REGISTERZEICHEN, XoevCodeGDSRegisterzeichen.BUSSGELDVERFAHREN.getDescriptor()));
+            auswahlAktenzeichen.setAktenzeichenStrukturiert(strukturiert);
+            aktenzeichen.setAuswahlAktenzeichen(auswahlAktenzeichen);
+
+            fachspezifischeDaten.getAktenzeichens().add(aktenzeichen);
+
+            fachspezifischeDaten.setHybridakte(true);
+            dossier.setXjustizFachspezifischeDaten(fachspezifischeDaten);
+
+            dossiers.add(dossier);
+
+        });
+        return dossiers;
+    }
+
+    private static TypeGDSXdomeaIdentifikationObjektType createIdentifikation(Identifikation contentIdentifikation) {
+        TypeGDSXdomeaIdentifikationObjektType identifikation = new TypeGDSXdomeaIdentifikationObjektType();
+        identifikation.setId(contentIdentifikation.getId());
+        identifikation.setNummerImUebergeordnetenContainer(contentIdentifikation.getNummerImUebergeornetenenContainer());
+        return identifikation;
     }
 
 }

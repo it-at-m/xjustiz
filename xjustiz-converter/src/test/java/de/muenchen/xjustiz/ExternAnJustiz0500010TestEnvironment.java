@@ -1,10 +1,9 @@
 package de.muenchen.xjustiz;
 
-import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDSAnschriftstypen;
-import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDSRollenbezeichnungTyp3;
-import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDSStaatenTyp3;
+import de.muenchen.xjustiz.xjustiz0500straf.content.SchriftgutContent;
+import de.muenchen.xjustiz.xjustiz0500straf.content.schriftgutobjekte.*;
+import de.muenchen.xjustiz.xoev.codelisten.*;
 import de.muenchen.xjustiz.generated.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010;
-import de.muenchen.xjustiz.xoev.codelisten.XoevGeschlecht;
 
 import de.muenchen.xjustiz.xjustiz0500straf.content.FachdatenContent;
 import de.muenchen.xjustiz.xjustiz0500straf.content.fachdaten.StrasseHausnummer;
@@ -14,10 +13,14 @@ import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.b
 import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Rolle;
 import jakarta.xml.bind.JAXBContext;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 import java.io.StringReader;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ExternAnJustiz0500010TestEnvironment {
 
@@ -129,4 +132,65 @@ public class ExternAnJustiz0500010TestEnvironment {
         return new ArrayList<>(List.of(defendant));
     }
 
+    protected SchriftgutContent createSchriftgut() {
+
+         SchriftgutContent schriftgutContent = new SchriftgutContent();
+         schriftgutContent.setAnschreiben(Optional.of("CEEF2150-F915-1F1F-1176-906D00000000"));
+
+         schriftgutContent.setDokumente(Optional.of(createDocuments()));
+         schriftgutContent.setAkten(Optional.of(createDossiers()));
+
+         return schriftgutContent;
+
+    }
+
+
+    private List<Dokument> createDocuments() {
+
+       List<Dokument> documents = new ArrayList<>();
+
+       // Antrag
+       var uuidIdentAntrag = "CEEF2150-F915-1F1F-1177-906D00000000";
+        List<Datei> antraege = new ArrayList<>();
+        var antragDateiName = "1000809085_5793341761427_20240807_EH.pdf";
+
+       Identifikation identifikationAntrag = new Identifikation(uuidIdentAntrag, BigInteger.valueOf(1));
+       Datei antrag = new Datei(antragDateiName, BigInteger.valueOf(1));
+       antraege.add(antrag);
+       FachspezifischeDatenDokument fachspezifischeDatenDokumentAntrag = new FachspezifischeDatenDokument(XoevCodeGDSDokumentklasse.ANTRAG, uuidIdentAntrag.concat("_").concat(antragDateiName), antraege);
+       documents.add(new Dokument(identifikationAntrag, fachspezifischeDatenDokumentAntrag));
+
+        // Bescheid
+        var uuidIdentBescheid = "CEEF2150-F915-1F1F-1178-906D00000000";
+        List<Datei> bescheide = new ArrayList<>();
+        var bescheidDateiName = "1000809085_5793341761427_20240807_URB.pdf";
+
+        Identifikation identifikationBescheid = new Identifikation(uuidIdentBescheid, BigInteger.valueOf(1));
+        Datei Bescheid = new Datei(bescheidDateiName, BigInteger.valueOf(1));
+        bescheide.add(Bescheid);
+        FachspezifischeDatenDokument fachspezifischeDatenDokumentBescheid = new FachspezifischeDatenDokument(XoevCodeGDSDokumentklasse.BESCHEID, uuidIdentBescheid.concat("_").concat(bescheidDateiName), bescheide);
+        documents.add(new Dokument(identifikationBescheid, fachspezifischeDatenDokumentBescheid));
+
+       return documents;
+    }
+
+
+    private List<Akte> createDossiers() {
+           List<Akte> dossiers = new ArrayList<>();
+
+        try {
+            Identifikation identifikation = new Identifikation("CEEF2150-F915-1F1F-1180-906D00000000", BigInteger.valueOf(1));
+            Laufzeit laufzeit = new Laufzeit(DatatypeFactory.newInstance().newXMLGregorianCalendar("2024-03-02"), DatatypeFactory.newInstance().newXMLGregorianCalendar("2025-12-31"));
+
+            AnwendungspezifischeErweiterung erweiterung = new AnwendungspezifischeErweiterung("XDOMEA-BY", "XDOMEA-Erweiterung");
+            AktenzeichenStrukuriert aktenzeichenStrukuriert = new AktenzeichenStrukuriert("MusterSachgebietsschlüssel", "MusterZusatzkennung", "MusterAbteilung", "1", "2025");
+            FachspezifischeDatenAkte fachspezifischeDatenAkte = new FachspezifischeDatenAkte(aktenzeichenStrukuriert);
+            dossiers.add(new Akte(identifikation, laufzeit, erweiterung, fachspezifischeDatenAkte ));
+
+        } catch (DatatypeConfigurationException e) {
+            throw new RuntimeException(e);
+        }
+
+        return dossiers;
+    }
 }

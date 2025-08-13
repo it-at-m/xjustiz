@@ -57,6 +57,39 @@ xjustiz:
           weiblich: 2
           divers: 3
           saechlich: 4
+    gds-dokumentklasse:
+      current-version: 1.4
+      kennung: urn:xoev-de:xjustiz:codeliste:gds.dokumentklasse
+      codelist-versions:
+        gds-dokumentklasse-1-4:
+          antrag-behoerde: '016'
+          bescheid: '017'
+    gds-bestandteiltyp:
+#      current-version: 2.4  : org.xml.sax.SAXParseException: cvc-complex-type.3.1: Wert '2.4' des Attributs 'listVersionID' des Elements 'ns2:bestandteil' ist ungültig in Bezug auf die entsprechende Attributverwendung. Attribut 'listVersionID' hat den festen Wert '2.5'., Line : 165, Column : 58
+      current-version: 2.5
+      kennung: urn:xoev-de:xjustiz:codeliste:gds.bestandteiltyp
+      codelist-versions:
+        gds-bestandteiltyp-2-5:
+          original: '001'
+          repraesentant: '002'
+    gds-aktentyp:
+      current-version: 2.2
+      kennung: urn:xoev-de:xjustiz:codeliste:gds.aktentyp
+      codelist-versions:
+        gds-aktentyp-2-2:
+          bussgeldakte: '010'
+    gds-aktenzeichenart:
+      current-version: 2.0
+      kennung: urn:xoev-de:xjustiz:codeliste:gds.aktenzeichenart
+      codelist-versions:
+        gds-aktenzeichenart-2-0:
+          aktuell: '001'
+    gds-registerzeichen:
+      current-version: 3.4
+      kennung: urn:xoev-de:xjustiz:codeliste:gds.registerzeichen
+      codelist-versions:
+        gds-registerzeichen-3-4:
+          bussgeldverfahren: OWi
   xjustiz0500straf:
     nachrichtenkopf:
       auswahl-absender-sonstige: Stadt München

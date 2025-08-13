@@ -51,8 +51,8 @@ public class XJustizAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public SchriftgutobjektBuilder schriftgutobjektBuilder(XJustizProperty xJustizProperty, NachrichtenProperty nachrichtenProperty) {
-        return new SchriftgutobjektBuilder();
+    public SchriftgutobjektBuilder schriftgutobjektBuilder(XJustizProperty xJustizProperty) {
+        return new SchriftgutobjektBuilder(xJustizProperty);
     };
 
     @Bean
@@ -72,6 +72,5 @@ public class XJustizAutoConfiguration {
     public NachrichtenkopfContent nachrichtenkopfContent() {
         return new NachrichtenkopfContent();
     };
-
 
 }

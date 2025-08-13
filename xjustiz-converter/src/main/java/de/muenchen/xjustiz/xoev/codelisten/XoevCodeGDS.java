@@ -11,7 +11,12 @@ public enum XoevCodeGDS {
         CODE_GDS_ROLLENBEZEICHNUNG_TYP_3("gds-rollenbezeichnung"),
         CODE_GDS_STAATEN_TYP_3("bjf-staat"),
         CODE_GDS_EREIGNIS_TYP_3("gds-ereignis"),
-        GESCHLECHT("gds-geschlecht"),;
+        GESCHLECHT("gds-geschlecht"),
+        CODE_GDS_DOKUMENTKLASSE("gds-dokumentklasse"),
+        CODE_GDS_BESTANDTEILTYP("gds-bestandteiltyp"),
+        CODE_GDS_AKTENTYP("gds-aktentyp"),
+        CODE_GDS_AKTENZEICHENART("gds-aktenzeichenart"),
+        CODE_GDS_REGISTERZEICHEN("gds-registerzeichen");
 
         private final String descriptor;
 

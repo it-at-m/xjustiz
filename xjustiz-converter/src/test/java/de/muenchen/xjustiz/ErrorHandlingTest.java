@@ -3,6 +3,7 @@ package de.muenchen.xjustiz;
 import de.muenchen.xjustiz.xjustiz0500straf.content.ContentContainer;
 import de.muenchen.xjustiz.xjustiz0500straf.content.FachdatenContent;
 import de.muenchen.xjustiz.xjustiz0500straf.content.GrunddatenContent;
+import de.muenchen.xjustiz.xjustiz0500straf.content.SchriftgutContent;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
@@ -42,7 +43,7 @@ public class ErrorHandlingTest extends ExternAnJustiz0500010TestEnvironment {
        /*
            List.of() creates an immutable list. GrunddatenBuilder is not able to add a new configured organisation.
         */
-       Exchange request = ExchangeBuilder.anExchange(camelContext).withBody(new ContentContainer(new FachdatenContent(), new GrunddatenContent(List.of()))).build();
+       Exchange request = ExchangeBuilder.anExchange(camelContext).withBody(new ContentContainer(new FachdatenContent(), new GrunddatenContent(List.of()), new SchriftgutContent())).build();
         var response  = startxJustiz0500strafBuilderTest.send(testRoute, request);
         assertNotNull(response.getException());
         var exception = response.getException();
@@ -52,7 +53,7 @@ public class ErrorHandlingTest extends ExternAnJustiz0500010TestEnvironment {
     @Test
     void test_xmlValidationError() {
 
-        Exchange request = ExchangeBuilder.anExchange(camelContext).withBody(new ContentContainer(createFachdaten(), new GrunddatenContent(xmlValidationErrorMissingNachname()))).build();
+        Exchange request = ExchangeBuilder.anExchange(camelContext).withBody(new ContentContainer(createFachdaten(), new GrunddatenContent(xmlValidationErrorMissingNachname()), createSchriftgut())).build();
         var response  = startxJustiz0500strafBuilderTest.send(testRoute, request);
         assertNotNull(response.getException());
         var exception = response.getException();

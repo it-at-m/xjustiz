@@ -21,10 +21,7 @@ public class NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director 
     message0500010.setNachrichtenkopf(nachrichtenkopfBuilder.build());
     contentContainer.getGrunddatenContent().ifPresentOrElse(g ->message0500010.setGrunddaten(grunddatenBuilder.build(g)), () -> {throw new IllegalArgumentException("Grunddaten expected");});
     contentContainer.getFachdatenContent().ifPresentOrElse(f -> message0500010.setFachdaten(fachdatenBuilder.build(f)), () -> {throw new IllegalArgumentException("Fachdaten expected");});
-
-    // TODO
-    message0500010.setSchriftgutobjekte(schriftgutobjektBuilder.build());
-
+    contentContainer.getSchriftgutContent().ifPresentOrElse(s -> message0500010.setSchriftgutobjekte(schriftgutobjektBuilder.build(s)), () -> {throw new IllegalArgumentException("Schriftgut expected");});
 
     return message0500010;
 
