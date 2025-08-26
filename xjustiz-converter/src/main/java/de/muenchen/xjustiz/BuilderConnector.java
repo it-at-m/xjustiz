@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class BuilderConnector implements Processor {
 
-   private NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director externAnJustiz0500010Builder;
+    private NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director externAnJustiz0500010Builder;
 
     @Override
     public void process(Exchange exchange) throws Exception {

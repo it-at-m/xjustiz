@@ -9,7 +9,6 @@ public enum XoevCodeGDSEreignisTyp3 {
 
     private final String descriptor;
 
-
     XoevCodeGDSEreignisTyp3(String descriptor) {
         this.descriptor = descriptor;
     }

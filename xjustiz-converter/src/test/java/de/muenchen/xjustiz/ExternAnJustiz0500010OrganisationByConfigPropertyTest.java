@@ -1,8 +1,13 @@
 package de.muenchen.xjustiz;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import de.muenchen.xjustiz.generated.*;
 import de.muenchen.xjustiz.xjustiz0500straf.content.ContentContainer;
 import de.muenchen.xjustiz.xjustiz0500straf.content.GrunddatenContent;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
@@ -17,16 +22,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 @SpringBootApplication(scanBasePackages = "de.muenchen.xjustiz")
 @CamelSpringBootTest
-@SpringBootTest(classes = {XJustizDocumentRouteBuilder.class})
-@ActiveProfiles({"default", "organisation"})
+@SpringBootTest(classes = { XJustizDocumentRouteBuilder.class })
+@ActiveProfiles({ "default", "organisation" })
 public class ExternAnJustiz0500010OrganisationByConfigPropertyTest extends ExternAnJustiz0500010TestEnvironment {
 
     @Produce()
@@ -43,8 +42,9 @@ public class ExternAnJustiz0500010OrganisationByConfigPropertyTest extends Exter
     @BeforeEach
     public void init() throws Exception {
 
-        Exchange request = ExchangeBuilder.anExchange(camelContext).withBody(new ContentContainer(createFachdaten(), new GrunddatenContent( new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention()))), createSchriftgut())).build();
-        var response  = startxJustiz0500strafBuilderTest.send(testRoute, request);
+        Exchange request = ExchangeBuilder.anExchange(camelContext).withBody(new ContentContainer(createFachdaten(),
+                new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention()))), createSchriftgut())).build();
+        var response = startxJustiz0500strafBuilderTest.send(testRoute, request);
         var xml = response.getMessage().getBody(String.class);
         this.externAnJustiz0500010 = parseXML(xml);
     }
@@ -53,11 +53,13 @@ public class ExternAnJustiz0500010OrganisationByConfigPropertyTest extends Exter
     void test_nachrichtenkopf() {
 
         TypeGDSNachrichtenkopf nachrichtenkopf = this.externAnJustiz0500010.getNachrichtenkopf();
-        assertEquals("D2601", nachrichtenkopf.getEmpfaenger().getInformationen().getAuswahlKommunikationspartner().getGericht().getCode(), "Error auswahl-empfaenger-gericht property.");
-        assertEquals("Stadt München", nachrichtenkopf.getAbsender().getInformationen().getAuswahlKommunikationspartner().getSonstige(), "Error auswahl-absender-kommunikationspartner-sonstige property.");
+        assertEquals("D2601", nachrichtenkopf.getEmpfaenger().getInformationen().getAuswahlKommunikationspartner().getGericht().getCode(),
+                "Error auswahl-empfaenger-gericht property.");
+        assertEquals("Stadt München", nachrichtenkopf.getAbsender().getInformationen().getAuswahlKommunikationspartner().getSonstige(),
+                "Error auswahl-absender-kommunikationspartner-sonstige property.");
         var ereignis = nachrichtenkopf.getEreignises().getFirst();
         assertEquals("117", ereignis.getCode(), "Error nachrichtenkopf-ereignis property.");
-        assertEquals( "1.11", ereignis.getListVersionID(), "Error nachrichtenkopf-ereignis current-version property.");
+        assertEquals("1.11", ereignis.getListVersionID(), "Error nachrichtenkopf-ereignis current-version property.");
 
         assertEquals("KVU", nachrichtenkopf.getHerstellerinformation().getHerstellerDesProdukts());
         assertEquals("KVU-Name", nachrichtenkopf.getHerstellerinformation().getNameDesProdukts());
@@ -77,17 +79,21 @@ public class ExternAnJustiz0500010OrganisationByConfigPropertyTest extends Exter
         assertEquals("D2601", instanzbehoerde.getCode(), "Error auswahl-instanzbehoerde-gericht property.");
         assertEquals("3.6", instanzbehoerde.getListVersionID(), "Error auswahl-instanzbehoerde-gericht current-version property.");
 
-        assertEquals("2" , verfahrensdaten.getBeteiligungs().getLast().getRolles().getLast().getRollennummer(), "Two rollen in whole document expected.");
-        assertEquals(BigInteger.ONE , verfahrensdaten.getBeteiligungs().getLast().getRolles().getLast().getNr(), "Only one rolle with same rollenbezeichnung expected.");
-        assertEquals("2" , verfahrensdaten.getBeteiligungs().getLast().getBeteiligter().getBeteiligtennummer(), "Two beteiligter in whole document expected.");
+        assertEquals("2", verfahrensdaten.getBeteiligungs().getLast().getRolles().getLast().getRollennummer(), "Two rollen in whole document expected.");
+        assertEquals(BigInteger.ONE, verfahrensdaten.getBeteiligungs().getLast().getRolles().getLast().getNr(),
+                "Only one rolle with same rollenbezeichnung expected.");
+        assertEquals("2", verfahrensdaten.getBeteiligungs().getLast().getBeteiligter().getBeteiligtennummer(), "Two beteiligter in whole document expected.");
 
-        List<TypeGDSBeteiligung> beteiligungenNatuerlichePerson = verfahrensdaten.getBeteiligungs().stream().filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson() != null).toList();
+        List<TypeGDSBeteiligung> beteiligungenNatuerlichePerson = verfahrensdaten.getBeteiligungs().stream()
+                .filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson() != null).toList();
         assertEquals(1, beteiligungenNatuerlichePerson.size(), "Wrong number of beteiligungen property.");
         var rolleNatuerlichePerson = beteiligungenNatuerlichePerson.getFirst().getRolles().getFirst();
         assertEquals("040", rolleNatuerlichePerson.getRollenbezeichnung().getCode());
         assertEquals("3.5", rolleNatuerlichePerson.getRollenbezeichnung().getListVersionID());
 
-        List<TypeGDSNatuerlichePerson> natuerlichePersonen = beteiligungenNatuerlichePerson.stream().filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson() != null).map(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson()).toList();
+        List<TypeGDSNatuerlichePerson> natuerlichePersonen = beteiligungenNatuerlichePerson.stream()
+                .filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson() != null)
+                .map(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson()).toList();
         assertEquals(1, natuerlichePersonen.size(), "Wrong number of natuerlichePerson property.");
         assertEquals(NatuerlichePerson.NACHNAME, natuerlichePersonen.getFirst().getVollerName().getNachname());
         assertEquals(NatuerlichePerson.VORNAME, natuerlichePersonen.getFirst().getVollerName().getVorname());
@@ -111,13 +117,16 @@ public class ExternAnJustiz0500010OrganisationByConfigPropertyTest extends Exter
 
         assertEquals("1", natuerlichePersonen.getFirst().getGeschlecht().getCode());
 
-        List<TypeGDSBeteiligung> beteiligungenOrganisation = verfahrensdaten.getBeteiligungs().stream().filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation() != null).toList();
+        List<TypeGDSBeteiligung> beteiligungenOrganisation = verfahrensdaten.getBeteiligungs().stream()
+                .filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation() != null).toList();
         assertEquals(1, beteiligungenOrganisation.size(), "Wrong number of beteiligungen property.");
         var rolleOrganisation = beteiligungenOrganisation.getFirst().getRolles().getFirst();
         assertEquals("046", rolleOrganisation.getRollenbezeichnung().getCode());
         assertEquals("3.5", rolleOrganisation.getRollenbezeichnung().getListVersionID());
 
-        List<TypeGDSOrganisation> organisationen = verfahrensdaten.getBeteiligungs().stream().filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation() != null).map(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation()).toList();
+        List<TypeGDSOrganisation> organisationen = verfahrensdaten.getBeteiligungs().stream()
+                .filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation() != null)
+                .map(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation()).toList();
         assertEquals(1, organisationen.size(), "Wrong number of organisationen property.");
         assertEquals("Landeshauptstadt München Referat", organisationen.getFirst().getBezeichnung().getBezeichnungAktuell());
         assertEquals("Straße", organisationen.getFirst().getAnschrifts().getFirst().getStrasse());

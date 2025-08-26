@@ -5,7 +5,11 @@ import lombok.Getter;
 @Getter
 public enum XoevGeschlecht {
 
-        UNBEKANNT("0"), MAENNLICH("1"), WEIBLICH("2"), DIVERS("3"), SAECHLICH("4");
+    UNBEKANNT("0"),
+    MAENNLICH("1"),
+    WEIBLICH("2"),
+    DIVERS("3"),
+    SAECHLICH("4");
 
     private final String descriptor;
 

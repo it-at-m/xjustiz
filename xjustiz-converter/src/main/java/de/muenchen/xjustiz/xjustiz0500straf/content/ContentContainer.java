@@ -1,9 +1,8 @@
 package de.muenchen.xjustiz.xjustiz0500straf.content;
 
+import java.util.Optional;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-
-import java.util.Optional;
 
 @Data
 @RequiredArgsConstructor
@@ -16,9 +15,11 @@ public class ContentContainer {
     public Optional<FachdatenContent> getFachdatenContent() {
         return Optional.ofNullable(fachdatenContent);
     }
+
     public Optional<GrunddatenContent> getGrunddatenContent() {
         return Optional.ofNullable(grunddatenContent);
     }
+
     public Optional<SchriftgutContent> getSchriftgutContent() {
         return Optional.ofNullable(schriftgutContent);
     }

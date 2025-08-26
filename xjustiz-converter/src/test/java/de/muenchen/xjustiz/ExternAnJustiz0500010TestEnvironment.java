@@ -1,30 +1,28 @@
 package de.muenchen.xjustiz;
 
-import de.muenchen.xjustiz.xjustiz0500straf.content.SchriftgutContent;
-import de.muenchen.xjustiz.xjustiz0500straf.content.schriftgutobjekte.*;
-import de.muenchen.xjustiz.xoev.codelisten.*;
 import de.muenchen.xjustiz.generated.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010;
-
 import de.muenchen.xjustiz.xjustiz0500straf.content.FachdatenContent;
+import de.muenchen.xjustiz.xjustiz0500straf.content.SchriftgutContent;
 import de.muenchen.xjustiz.xjustiz0500straf.content.fachdaten.StrasseHausnummer;
 import de.muenchen.xjustiz.xjustiz0500straf.content.fachdaten.Tatort;
 import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Anschrift;
 import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Beteiligung;
 import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Rolle;
+import de.muenchen.xjustiz.xjustiz0500straf.content.schriftgutobjekte.*;
+import de.muenchen.xjustiz.xoev.codelisten.*;
 import jakarta.xml.bind.JAXBContext;
-
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
 import java.io.StringReader;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 
 public class ExternAnJustiz0500010TestEnvironment {
 
-       protected Beteiligung createPersonSubjectToCoerceiveDetention() {
+    protected Beteiligung createPersonSubjectToCoerceiveDetention() {
         Beteiligung beteiligung = new Beteiligung();
         var rolle = new Rolle();
 
@@ -76,8 +74,6 @@ public class ExternAnJustiz0500010TestEnvironment {
         return beteiligung;
     }
 
-
-
     protected NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 parseXML(String xml) throws Exception {
         JAXBContext context = JAXBContext.newInstance(NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.class);
         return (NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010) context.createUnmarshaller().unmarshal(new StringReader(xml));
@@ -123,10 +119,14 @@ public class ExternAnJustiz0500010TestEnvironment {
 
         defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setVorname(NatuerlichePerson.VORNAME);
         defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setTitel(ExternAnJustiz0500010TestEnvironment.NatuerlichePerson.TITEL);
-        defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setNamensvorsatz(ExternAnJustiz0500010TestEnvironment.NatuerlichePerson.NAMENSVORSATZ);
-        defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setGeburtsname(ExternAnJustiz0500010TestEnvironment.NatuerlichePerson.GEBURTSNAME);
-        defendant.generateBeteiligter().generateNatuerlichePerson().generateGeburt().setGeburtsdatum(ExternAnJustiz0500010TestEnvironment.NatuerlichePerson.GEBURTSDATUM);
-        defendant.generateBeteiligter().generateNatuerlichePerson().generateGeburt().setGeburtsort(ExternAnJustiz0500010TestEnvironment.NatuerlichePerson.GEBURTSSORT);
+        defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName()
+                .setNamensvorsatz(ExternAnJustiz0500010TestEnvironment.NatuerlichePerson.NAMENSVORSATZ);
+        defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName()
+                .setGeburtsname(ExternAnJustiz0500010TestEnvironment.NatuerlichePerson.GEBURTSNAME);
+        defendant.generateBeteiligter().generateNatuerlichePerson().generateGeburt()
+                .setGeburtsdatum(ExternAnJustiz0500010TestEnvironment.NatuerlichePerson.GEBURTSDATUM);
+        defendant.generateBeteiligter().generateNatuerlichePerson().generateGeburt()
+                .setGeburtsort(ExternAnJustiz0500010TestEnvironment.NatuerlichePerson.GEBURTSSORT);
         defendant.generateBeteiligter().generateNatuerlichePerson().setGeschlecht(XoevGeschlecht.MAENNLICH);
 
         return new ArrayList<>(List.of(defendant));
@@ -134,31 +134,31 @@ public class ExternAnJustiz0500010TestEnvironment {
 
     protected SchriftgutContent createSchriftgut() {
 
-         SchriftgutContent schriftgutContent = new SchriftgutContent();
-         schriftgutContent.setAnschreiben(Optional.of("CEEF2150-F915-1F1F-1176-906D00000000"));
+        SchriftgutContent schriftgutContent = new SchriftgutContent();
+        schriftgutContent.setAnschreiben(Optional.of("CEEF2150-F915-1F1F-1176-906D00000000"));
 
-         schriftgutContent.setDokumente(Optional.of(createDocuments()));
-         schriftgutContent.setAkten(Optional.of(createDossiers()));
+        schriftgutContent.setDokumente(Optional.of(createDocuments()));
+        schriftgutContent.setAkten(Optional.of(createDossiers()));
 
-         return schriftgutContent;
+        return schriftgutContent;
 
     }
 
-
     private List<Dokument> createDocuments() {
 
-       List<Dokument> documents = new ArrayList<>();
+        List<Dokument> documents = new ArrayList<>();
 
-       // Antrag
-       var uuidIdentAntrag = "CEEF2150-F915-1F1F-1177-906D00000000";
+        // Antrag
+        var uuidIdentAntrag = "CEEF2150-F915-1F1F-1177-906D00000000";
         List<Datei> antraege = new ArrayList<>();
         var antragDateiName = "1000809085_5793341761427_20240807_EH.pdf";
 
-       Identifikation identifikationAntrag = new Identifikation(uuidIdentAntrag, BigInteger.valueOf(1));
-       Datei antrag = new Datei(antragDateiName, BigInteger.valueOf(1));
-       antraege.add(antrag);
-       FachspezifischeDatenDokument fachspezifischeDatenDokumentAntrag = new FachspezifischeDatenDokument(XoevCodeGDSDokumentklasse.ANTRAG, uuidIdentAntrag.concat("_").concat(antragDateiName), antraege);
-       documents.add(new Dokument(identifikationAntrag, fachspezifischeDatenDokumentAntrag));
+        Identifikation identifikationAntrag = new Identifikation(uuidIdentAntrag, BigInteger.valueOf(1));
+        Datei antrag = new Datei(antragDateiName, BigInteger.valueOf(1));
+        antraege.add(antrag);
+        FachspezifischeDatenDokument fachspezifischeDatenDokumentAntrag = new FachspezifischeDatenDokument(XoevCodeGDSDokumentklasse.ANTRAG,
+                uuidIdentAntrag.concat("_").concat(antragDateiName), antraege);
+        documents.add(new Dokument(identifikationAntrag, fachspezifischeDatenDokumentAntrag));
 
         // Bescheid
         var uuidIdentBescheid = "CEEF2150-F915-1F1F-1178-906D00000000";
@@ -168,24 +168,26 @@ public class ExternAnJustiz0500010TestEnvironment {
         Identifikation identifikationBescheid = new Identifikation(uuidIdentBescheid, BigInteger.valueOf(1));
         Datei Bescheid = new Datei(bescheidDateiName, BigInteger.valueOf(1));
         bescheide.add(Bescheid);
-        FachspezifischeDatenDokument fachspezifischeDatenDokumentBescheid = new FachspezifischeDatenDokument(XoevCodeGDSDokumentklasse.BESCHEID, uuidIdentBescheid.concat("_").concat(bescheidDateiName), bescheide);
+        FachspezifischeDatenDokument fachspezifischeDatenDokumentBescheid = new FachspezifischeDatenDokument(XoevCodeGDSDokumentklasse.BESCHEID,
+                uuidIdentBescheid.concat("_").concat(bescheidDateiName), bescheide);
         documents.add(new Dokument(identifikationBescheid, fachspezifischeDatenDokumentBescheid));
 
-       return documents;
+        return documents;
     }
 
-
     private List<Akte> createDossiers() {
-           List<Akte> dossiers = new ArrayList<>();
+        List<Akte> dossiers = new ArrayList<>();
 
         try {
             Identifikation identifikation = new Identifikation("CEEF2150-F915-1F1F-1180-906D00000000", BigInteger.valueOf(1));
-            Laufzeit laufzeit = new Laufzeit(DatatypeFactory.newInstance().newXMLGregorianCalendar("2024-03-02"), DatatypeFactory.newInstance().newXMLGregorianCalendar("2025-12-31"));
+            Laufzeit laufzeit = new Laufzeit(DatatypeFactory.newInstance().newXMLGregorianCalendar("2024-03-02"),
+                    DatatypeFactory.newInstance().newXMLGregorianCalendar("2025-12-31"));
 
             AnwendungspezifischeErweiterung erweiterung = new AnwendungspezifischeErweiterung("XDOMEA-BY", "XDOMEA-Erweiterung");
-            AktenzeichenStrukuriert aktenzeichenStrukuriert = new AktenzeichenStrukuriert("MusterSachgebietsschlüssel", "MusterZusatzkennung", "MusterAbteilung", "1", "2025");
+            AktenzeichenStrukuriert aktenzeichenStrukuriert = new AktenzeichenStrukuriert("MusterSachgebietsschlüssel", "MusterZusatzkennung",
+                    "MusterAbteilung", "1", "2025");
             FachspezifischeDatenAkte fachspezifischeDatenAkte = new FachspezifischeDatenAkte(aktenzeichenStrukuriert);
-            dossiers.add(new Akte(identifikation, laufzeit, erweiterung, fachspezifischeDatenAkte ));
+            dossiers.add(new Akte(identifikation, laufzeit, erweiterung, fachspezifischeDatenAkte));
 
         } catch (DatatypeConfigurationException e) {
             throw new RuntimeException(e);

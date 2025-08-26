@@ -1,10 +1,9 @@
 package de.muenchen.xjustiz.xjustiz0500straf.content.schriftgutobjekte;
 
+import java.math.BigInteger;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-
-import java.math.BigInteger;
 
 @Getter
 @RequiredArgsConstructor
