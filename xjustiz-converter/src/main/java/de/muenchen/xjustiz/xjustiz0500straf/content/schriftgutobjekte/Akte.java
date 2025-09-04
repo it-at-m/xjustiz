@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Getter
 @RequiredArgsConstructor
-public class Akte{
+public class Akte {
 
     @NonNull
     private final Identifikation identifikation;

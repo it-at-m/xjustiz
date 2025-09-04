@@ -9,22 +9,28 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director {
 
-  private GrunddatenBuilder grunddatenBuilder;
-  private SchriftgutobjektBuilder schriftgutobjektBuilder;
-  private NachrichtenkopfBuilder nachrichtenkopfBuilder;
-  private FachdatenBuilder fachdatenBuilder;
+    private GrunddatenBuilder grunddatenBuilder;
+    private SchriftgutobjektBuilder schriftgutobjektBuilder;
+    private NachrichtenkopfBuilder nachrichtenkopfBuilder;
+    private FachdatenBuilder fachdatenBuilder;
 
-  public NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 build(ContentContainer contentContainer) {
+    public NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 build(ContentContainer contentContainer) {
 
-    NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 message0500010 = new NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010();
+        NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 message0500010 = new NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010();
 
-    message0500010.setNachrichtenkopf(nachrichtenkopfBuilder.build());
-    contentContainer.getGrunddatenContent().ifPresentOrElse(g ->message0500010.setGrunddaten(grunddatenBuilder.build(g)), () -> {throw new IllegalArgumentException("Grunddaten expected");});
-    contentContainer.getFachdatenContent().ifPresentOrElse(f -> message0500010.setFachdaten(fachdatenBuilder.build(f)), () -> {throw new IllegalArgumentException("Fachdaten expected");});
-    contentContainer.getSchriftgutContent().ifPresentOrElse(s -> message0500010.setSchriftgutobjekte(schriftgutobjektBuilder.build(s)), () -> {throw new IllegalArgumentException("Schriftgut expected");});
+        message0500010.setNachrichtenkopf(nachrichtenkopfBuilder.build());
+        contentContainer.getGrunddatenContent().ifPresentOrElse(g -> message0500010.setGrunddaten(grunddatenBuilder.build(g)), () -> {
+            throw new IllegalArgumentException("Grunddaten expected");
+        });
+        contentContainer.getFachdatenContent().ifPresentOrElse(f -> message0500010.setFachdaten(fachdatenBuilder.build(f)), () -> {
+            throw new IllegalArgumentException("Fachdaten expected");
+        });
+        contentContainer.getSchriftgutContent().ifPresentOrElse(s -> message0500010.setSchriftgutobjekte(schriftgutobjektBuilder.build(s)), () -> {
+            throw new IllegalArgumentException("Schriftgut expected");
+        });
 
-    return message0500010;
+        return message0500010;
 
-  }
+    }
 
 }

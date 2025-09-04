@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class FachspezifischeDatenAkte {
 
-   @NonNull
+    @NonNull
     private AktenzeichenStrukuriert aktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert;
 
 }

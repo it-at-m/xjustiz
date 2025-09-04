@@ -1,11 +1,8 @@
 package de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import lombok.Data;
 
 @Data
 public class Geburt {

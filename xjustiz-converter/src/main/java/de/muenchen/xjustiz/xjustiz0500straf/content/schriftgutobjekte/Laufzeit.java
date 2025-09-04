@@ -1,10 +1,9 @@
 package de.muenchen.xjustiz.xjustiz0500straf.content.schriftgutobjekte;
 
+import javax.xml.datatype.XMLGregorianCalendar;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-
-import javax.xml.datatype.XMLGregorianCalendar;
 
 @Getter
 @RequiredArgsConstructor

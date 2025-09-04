@@ -7,10 +7,9 @@ import de.muenchen.xjustiz.xjustiz0500straf.content.schriftgutobjekte.Dokument;
 import de.muenchen.xjustiz.xjustiz0500straf.content.schriftgutobjekte.Identifikation;
 import de.muenchen.xjustiz.xoev.XJustizProperty;
 import de.muenchen.xjustiz.xoev.codelisten.*;
-import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
 @Component
 public class SchriftgutobjektBuilder extends XJustizBuilder {
@@ -40,7 +39,6 @@ public class SchriftgutobjektBuilder extends XJustizBuilder {
         return schriftobjekte;
     }
 
-
     private List<TypeGDSDokument> createDocuments(List<Dokument> contentDokumente) {
 
         List<TypeGDSDokument> documents = new ArrayList<>();
@@ -53,7 +51,8 @@ public class SchriftgutobjektBuilder extends XJustizBuilder {
 
             TypeGDSDokument.XjustizFachspezifischeDaten fachspezifischeDaten = new TypeGDSDokument.XjustizFachspezifischeDaten();
 
-            fachspezifischeDaten.setDokumentklasse((CodeGDSDokumentklasseTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_DOKUMENTKLASSE, contentDokument.getFachspezifischeDatenDokument().getDokumentklasse().getDescriptor()));
+            fachspezifischeDaten.setDokumentklasse((CodeGDSDokumentklasseTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_DOKUMENTKLASSE,
+                    contentDokument.getFachspezifischeDatenDokument().getDokumentklasse().getDescriptor()));
             fachspezifischeDaten.setAnzeigename(contentDokument.getFachspezifischeDatenDokument().getAnzeigename());
 
             List<TypeGDSDokument.XjustizFachspezifischeDaten.Datei> dateien = new ArrayList<>();
@@ -63,9 +62,11 @@ public class SchriftgutobjektBuilder extends XJustizBuilder {
                 datei.setDateiname(d.getDateiname());
 
                 if (contentDokument.getFachspezifischeDatenDokument().getDokumentklasse() == XoevCodeGDSDokumentklasse.ANTRAG)
-                    datei.setBestandteil((CodeGDSBestandteiltyp) createCodeGDSClass(XoevCodeGDS.CODE_GDS_BESTANDTEILTYP, XoevCodeGDSBestandteiltyp.ORIGINAL.getDescriptor()));
+                    datei.setBestandteil((CodeGDSBestandteiltyp) createCodeGDSClass(XoevCodeGDS.CODE_GDS_BESTANDTEILTYP,
+                            XoevCodeGDSBestandteiltyp.ORIGINAL.getDescriptor()));
                 else
-                    datei.setBestandteil((CodeGDSBestandteiltyp) createCodeGDSClass(XoevCodeGDS.CODE_GDS_BESTANDTEILTYP, XoevCodeGDSBestandteiltyp.REPRAESENTANT.getDescriptor()));
+                    datei.setBestandteil((CodeGDSBestandteiltyp) createCodeGDSClass(XoevCodeGDS.CODE_GDS_BESTANDTEILTYP,
+                            XoevCodeGDSBestandteiltyp.REPRAESENTANT.getDescriptor()));
 
                 datei.setVersionsnummer(d.getVersionsnummer());
                 dateien.add(datei);
@@ -99,25 +100,32 @@ public class SchriftgutobjektBuilder extends XJustizBuilder {
             dossier.setAnwendungsspezifischeErweiterung(erweiterung);
 
             TypeGDSAkte.XjustizFachspezifischeDaten fachspezifischeDaten = new TypeGDSAkte.XjustizFachspezifischeDaten();
-            fachspezifischeDaten.setAktentyp((CodeGDSAktentyp) createCodeGDSClass(XoevCodeGDS.CODE_GDS_AKTENTYP, XoevCodeGDSAktentyp.BUSSGELDAKTE.getDescriptor()));
+            fachspezifischeDaten
+                    .setAktentyp((CodeGDSAktentyp) createCodeGDSClass(XoevCodeGDS.CODE_GDS_AKTENTYP, XoevCodeGDSAktentyp.BUSSGELDAKTE.getDescriptor()));
 
             TypeGDSAktenzeichen aktenzeichen = new TypeGDSAktenzeichen();
-            aktenzeichen.setAzArt((CodeGDSAktenzeichenart) createCodeGDSClass(XoevCodeGDS.CODE_GDS_AKTENZEICHENART, XoevCodeGDSAktenzeichenart.AKTUELL.getDescriptor()));
+            aktenzeichen.setAzArt(
+                    (CodeGDSAktenzeichenart) createCodeGDSClass(XoevCodeGDS.CODE_GDS_AKTENZEICHENART, XoevCodeGDSAktenzeichenart.AKTUELL.getDescriptor()));
 
             TypeGDSBehoerde behoerde = new TypeGDSBehoerde();
-            behoerde.setGericht((CodeGDSGerichteTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_GERICHTE_TYP_3, XoevCodeGDSGerichteTyp3.AMTSGERICHT_MUENCHEN.getDescriptor()));
+            behoerde.setGericht((CodeGDSGerichteTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_GERICHTE_TYP_3,
+                    XoevCodeGDSGerichteTyp3.AMTSGERICHT_MUENCHEN.getDescriptor()));
             aktenzeichen.setAuswahlAzVergebendeStation(behoerde);
 
             TypeGDSAktenzeichen.AuswahlAktenzeichen auswahlAktenzeichen = new TypeGDSAktenzeichen.AuswahlAktenzeichen();
             TypeGDSAktenzeichen.AuswahlAktenzeichen.AktenzeichenStrukturiert strukturiert = new TypeGDSAktenzeichen.AuswahlAktenzeichen.AktenzeichenStrukturiert();
-            strukturiert.setSachgebietsschluessel(contentAkte.getFachspezifischeDatenAkte().getAktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert().getSachgebietsschluessel());
-            strukturiert.setZusatzkennung(contentAkte.getFachspezifischeDatenAkte().getAktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert().getZusatzkennung());
+            strukturiert.setSachgebietsschluessel(
+                    contentAkte.getFachspezifischeDatenAkte().getAktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert().getSachgebietsschluessel());
+            strukturiert.setZusatzkennung(
+                    contentAkte.getFachspezifischeDatenAkte().getAktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert().getZusatzkennung());
             strukturiert.setAbteilung(contentAkte.getFachspezifischeDatenAkte().getAktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert().getAbteilung());
-            strukturiert.setLaufendeNummer(contentAkte.getFachspezifischeDatenAkte().getAktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert().getLaufendeNummer());
+            strukturiert.setLaufendeNummer(
+                    contentAkte.getFachspezifischeDatenAkte().getAktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert().getLaufendeNummer());
             strukturiert.setJahr(contentAkte.getFachspezifischeDatenAkte().getAktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert().getJahr());
             auswahlAktenzeichen.setAktenzeichenStrukturiert(strukturiert);
 
-            strukturiert.setRegister((CodeGDSRegisterzeichenTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_REGISTERZEICHEN, XoevCodeGDSRegisterzeichen.BUSSGELDVERFAHREN.getDescriptor()));
+            strukturiert.setRegister((CodeGDSRegisterzeichenTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_REGISTERZEICHEN,
+                    XoevCodeGDSRegisterzeichen.BUSSGELDVERFAHREN.getDescriptor()));
             auswahlAktenzeichen.setAktenzeichenStrukturiert(strukturiert);
             aktenzeichen.setAuswahlAktenzeichen(auswahlAktenzeichen);
 

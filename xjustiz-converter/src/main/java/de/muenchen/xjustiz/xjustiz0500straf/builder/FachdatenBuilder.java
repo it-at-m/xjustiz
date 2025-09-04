@@ -2,15 +2,12 @@ package de.muenchen.xjustiz.xjustiz0500straf.builder;
 
 import de.muenchen.xjustiz.generated.*;
 import de.muenchen.xjustiz.xjustiz0500straf.config.NachrichtenProperty;
-
-import de.muenchen.xjustiz.xoev.XJustizProperty;
 import de.muenchen.xjustiz.xjustiz0500straf.content.FachdatenContent;
+import de.muenchen.xjustiz.xoev.XJustizProperty;
 import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDS;
 import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDSAnschriftstypen;
-
-import org.springframework.stereotype.Component;
-
 import java.time.format.DateTimeFormatter;
+import org.springframework.stereotype.Component;
 
 @Component
 public class FachdatenBuilder extends Builder {
@@ -22,7 +19,7 @@ public class FachdatenBuilder extends Builder {
     public NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.Fachdaten build(FachdatenContent fachdatenContent) {
 
         /**
-         *  Fachdaten
+         * Fachdaten
          */
         NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.Fachdaten fachdaten = new NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.Fachdaten();
 
@@ -38,14 +35,15 @@ public class FachdatenBuilder extends Builder {
         tat.setAnfangsuhrzeit(fachdatenContent.getAnfangsDatumUhrzeit().format(timeFormatter));
         tat.setEndeuhrzeit(fachdatenContent.getEndeDatumUhrzeit().format(timeFormatter));
 
-        fachdatenContent.getTatorte().forEach(t-> {
+        fachdatenContent.getTatorte().forEach(t -> {
             TypeSTRAFTatort tatort = new TypeSTRAFTatort();
             tatort.setOrtsbeschreibung(t.getOrtsbeschreibung());
 
-            t.getStrasseHausnummer().forEach( sh -> {
+            t.getStrasseHausnummer().forEach(sh -> {
 
                 TypeSTRAFTatort.Anschrift anschrift = new TypeSTRAFTatort.Anschrift();
-                anschrift.setAnschriftstyp((CodeGDSAnschriftstyp) createCodeGDSClass(XoevCodeGDS.CODE_GDS_ANSCHRIFTSTYP, XoevCodeGDSAnschriftstypen.TATORTANSCHRIFT.getDescriptor()));
+                anschrift.setAnschriftstyp((CodeGDSAnschriftstyp) createCodeGDSClass(XoevCodeGDS.CODE_GDS_ANSCHRIFTSTYP,
+                        XoevCodeGDSAnschriftstypen.TATORTANSCHRIFT.getDescriptor()));
 
                 anschrift.setStrasse(sh.getStrasse());
                 anschrift.setHausnummer(sh.getHausnummer());
@@ -61,6 +59,5 @@ public class FachdatenBuilder extends Builder {
 
         return fachdaten;
     }
-
 
 }

@@ -1,8 +1,14 @@
 package de.muenchen.xjustiz;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import de.muenchen.xjustiz.generated.*;
 import de.muenchen.xjustiz.xjustiz0500straf.content.ContentContainer;
 import de.muenchen.xjustiz.xjustiz0500straf.content.GrunddatenContent;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
@@ -17,17 +23,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 @SpringBootApplication(scanBasePackages = "de.muenchen.xjustiz")
 @CamelSpringBootTest
-@SpringBootTest(classes = {XJustizDocumentRouteBuilder.class})
-@ActiveProfiles({"default"})
+@SpringBootTest(classes = { XJustizDocumentRouteBuilder.class })
+@ActiveProfiles({ "default" })
 public class ExternAnJustiz0500010OrganisationByCreatedTest extends ExternAnJustiz0500010TestEnvironment {
 
     @Produce()
@@ -44,7 +43,10 @@ public class ExternAnJustiz0500010OrganisationByCreatedTest extends ExternAnJust
     @BeforeEach
     public void init() throws Exception {
 
-        Exchange request = ExchangeBuilder.anExchange(camelContext).withBody(new ContentContainer(createFachdaten(), new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention(), createApplicant()))), createSchriftgut())).build();
+        Exchange request = ExchangeBuilder.anExchange(camelContext)
+                .withBody(new ContentContainer(createFachdaten(),
+                        new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention(), createApplicant()))), createSchriftgut()))
+                .build();
         var response = startxJustiz0500strafBuilderTest.send(testRoute, request);
         assertNull(response.getException(), "Error during XML creation.");
         var xml = response.getMessage().getBody(String.class);
@@ -55,8 +57,10 @@ public class ExternAnJustiz0500010OrganisationByCreatedTest extends ExternAnJust
     void test_nachrichtenkopf() {
 
         TypeGDSNachrichtenkopf nachrichtenkopf = this.externAnJustiz0500010.getNachrichtenkopf();
-        assertEquals("D2601", nachrichtenkopf.getEmpfaenger().getInformationen().getAuswahlKommunikationspartner().getGericht().getCode(), "Error auswahl-empfaenger-gericht property.");
-        assertEquals("Stadt München", nachrichtenkopf.getAbsender().getInformationen().getAuswahlKommunikationspartner().getSonstige(), "Error auswahl-absender-kommunikationspartner-sonstige property.");
+        assertEquals("D2601", nachrichtenkopf.getEmpfaenger().getInformationen().getAuswahlKommunikationspartner().getGericht().getCode(),
+                "Error auswahl-empfaenger-gericht property.");
+        assertEquals("Stadt München", nachrichtenkopf.getAbsender().getInformationen().getAuswahlKommunikationspartner().getSonstige(),
+                "Error auswahl-absender-kommunikationspartner-sonstige property.");
         var ereignis = nachrichtenkopf.getEreignises().getFirst();
         assertEquals("117", ereignis.getCode(), "Error nachrichtenkopf-ereignis property.");
         assertEquals("1.11", ereignis.getListVersionID(), "Error nachrichtenkopf-ereignis current-version property.");
@@ -79,16 +83,20 @@ public class ExternAnJustiz0500010OrganisationByCreatedTest extends ExternAnJust
         assertEquals("3.6", instanzbehoerde.getListVersionID(), "Error auswahl-instanzbehoerde-gericht current-version property.");
 
         assertEquals("2", verfahrensdaten.getBeteiligungs().getLast().getRolles().getLast().getRollennummer(), "Two rollen in whole document expected.");
-        assertEquals(BigInteger.ONE, verfahrensdaten.getBeteiligungs().getLast().getRolles().getLast().getNr(), "Only one rolle with same rollenbezeichnung expected.");
+        assertEquals(BigInteger.ONE, verfahrensdaten.getBeteiligungs().getLast().getRolles().getLast().getNr(),
+                "Only one rolle with same rollenbezeichnung expected.");
         assertEquals("2", verfahrensdaten.getBeteiligungs().getLast().getBeteiligter().getBeteiligtennummer(), "Two beteiligter in whole document expected.");
 
-        List<TypeGDSBeteiligung> beteiligungenNatuerlichePerson = verfahrensdaten.getBeteiligungs().stream().filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson() != null).toList();
+        List<TypeGDSBeteiligung> beteiligungenNatuerlichePerson = verfahrensdaten.getBeteiligungs().stream()
+                .filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson() != null).toList();
         assertEquals(1, beteiligungenNatuerlichePerson.size(), "Wrong number of beteiligungen property.");
         var rolleNatuerlichePerson = beteiligungenNatuerlichePerson.getFirst().getRolles().getFirst();
         assertEquals("040", rolleNatuerlichePerson.getRollenbezeichnung().getCode());
         assertEquals("3.5", rolleNatuerlichePerson.getRollenbezeichnung().getListVersionID());
 
-        List<TypeGDSNatuerlichePerson> natuerlichePersonen = beteiligungenNatuerlichePerson.stream().filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson() != null).map(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson()).toList();
+        List<TypeGDSNatuerlichePerson> natuerlichePersonen = beteiligungenNatuerlichePerson.stream()
+                .filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson() != null)
+                .map(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson()).toList();
         assertEquals(1, natuerlichePersonen.size(), "Wrong number of natuerlichePerson property.");
         assertEquals(NatuerlichePerson.NACHNAME, natuerlichePersonen.getFirst().getVollerName().getNachname());
         assertEquals(NatuerlichePerson.VORNAME, natuerlichePersonen.getFirst().getVollerName().getVorname());
@@ -112,13 +120,16 @@ public class ExternAnJustiz0500010OrganisationByCreatedTest extends ExternAnJust
 
         assertEquals("1", natuerlichePersonen.getFirst().getGeschlecht().getCode());
 
-        List<TypeGDSBeteiligung> beteiligungenOrganisation = verfahrensdaten.getBeteiligungs().stream().filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation() != null).toList();
+        List<TypeGDSBeteiligung> beteiligungenOrganisation = verfahrensdaten.getBeteiligungs().stream()
+                .filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation() != null).toList();
         assertEquals(1, beteiligungenOrganisation.size(), "Wrong number of beteiligungen property.");
         var rolleOrganisation = beteiligungenOrganisation.getFirst().getRolles().getFirst();
         assertEquals("046", rolleOrganisation.getRollenbezeichnung().getCode());
         assertEquals("3.5", rolleOrganisation.getRollenbezeichnung().getListVersionID());
 
-        List<TypeGDSOrganisation> organisationen = verfahrensdaten.getBeteiligungs().stream().filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation() != null).map(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation()).toList();
+        List<TypeGDSOrganisation> organisationen = verfahrensdaten.getBeteiligungs().stream()
+                .filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation() != null)
+                .map(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation()).toList();
         assertEquals(1, organisationen.size(), "Wrong number of organisationen property.");
         assertEquals("Created Bezeichnung Aktuell", organisationen.getFirst().getBezeichnung().getBezeichnungAktuell());
         assertEquals("Created Strasse", organisationen.getFirst().getAnschrifts().getFirst().getStrasse());
@@ -164,16 +175,20 @@ public class ExternAnJustiz0500010OrganisationByCreatedTest extends ExternAnJust
         assertEquals(BigInteger.ONE, schriftgutobjekte.getDokuments().getFirst().getIdentifikation().getNummerImUebergeordnetenContainer());
         assertEquals("016", schriftgutobjekte.getDokuments().getFirst().getXjustizFachspezifischeDaten().getDokumentklasse().getCode());
         assertEquals("1.4", schriftgutobjekte.getDokuments().getFirst().getXjustizFachspezifischeDaten().getDokumentklasse().getListVersionID());
-        assertEquals("CEEF2150-F915-1F1F-1177-906D00000000_1000809085_5793341761427_20240807_EH.pdf", schriftgutobjekte.getDokuments().getFirst().getXjustizFachspezifischeDaten().getAnzeigename());
-        assertEquals("1000809085_5793341761427_20240807_EH.pdf", schriftgutobjekte.getDokuments().getFirst().getXjustizFachspezifischeDaten().getDateis().getFirst().getDateiname());
+        assertEquals("CEEF2150-F915-1F1F-1177-906D00000000_1000809085_5793341761427_20240807_EH.pdf",
+                schriftgutobjekte.getDokuments().getFirst().getXjustizFachspezifischeDaten().getAnzeigename());
+        assertEquals("1000809085_5793341761427_20240807_EH.pdf",
+                schriftgutobjekte.getDokuments().getFirst().getXjustizFachspezifischeDaten().getDateis().getFirst().getDateiname());
         assertEquals(BigInteger.ONE, schriftgutobjekte.getDokuments().getFirst().getXjustizFachspezifischeDaten().getDateis().getFirst().getVersionsnummer());
         assertEquals("001", schriftgutobjekte.getDokuments().getFirst().getXjustizFachspezifischeDaten().getDateis().getFirst().getBestandteil().getCode());
 
         assertEquals("CEEF2150-F915-1F1F-1178-906D00000000", schriftgutobjekte.getDokuments().getLast().getIdentifikation().getId());
         assertEquals(BigInteger.ONE, schriftgutobjekte.getDokuments().getLast().getIdentifikation().getNummerImUebergeordnetenContainer());
         assertEquals("017", schriftgutobjekte.getDokuments().getLast().getXjustizFachspezifischeDaten().getDokumentklasse().getCode());
-        assertEquals("CEEF2150-F915-1F1F-1178-906D00000000_1000809085_5793341761427_20240807_URB.pdf", schriftgutobjekte.getDokuments().getLast().getXjustizFachspezifischeDaten().getAnzeigename());
-        assertEquals("1000809085_5793341761427_20240807_URB.pdf", schriftgutobjekte.getDokuments().getLast().getXjustizFachspezifischeDaten().getDateis().getFirst().getDateiname());
+        assertEquals("CEEF2150-F915-1F1F-1178-906D00000000_1000809085_5793341761427_20240807_URB.pdf",
+                schriftgutobjekte.getDokuments().getLast().getXjustizFachspezifischeDaten().getAnzeigename());
+        assertEquals("1000809085_5793341761427_20240807_URB.pdf",
+                schriftgutobjekte.getDokuments().getLast().getXjustizFachspezifischeDaten().getDateis().getFirst().getDateiname());
         assertEquals(BigInteger.ONE, schriftgutobjekte.getDokuments().getLast().getXjustizFachspezifischeDaten().getDateis().getLast().getVersionsnummer());
         assertEquals("002", schriftgutobjekte.getDokuments().getLast().getXjustizFachspezifischeDaten().getDateis().getLast().getBestandteil().getCode());
 
@@ -183,11 +198,16 @@ public class ExternAnJustiz0500010OrganisationByCreatedTest extends ExternAnJust
         assertEquals("XDOMEA-BY", schriftgutobjekte.getAktes().getFirst().getAnwendungsspezifischeErweiterung().getKennung());
         assertEquals("XDOMEA-Erweiterung", schriftgutobjekte.getAktes().getFirst().getAnwendungsspezifischeErweiterung().getName());
 
-        assertEquals("MusterSachgebietsschlüssel", schriftgutobjekte.getAktes().getFirst().getXjustizFachspezifischeDaten().getAktenzeichens().getFirst().getAuswahlAktenzeichen().getAktenzeichenStrukturiert().getSachgebietsschluessel());
-        assertEquals("MusterAbteilung", schriftgutobjekte.getAktes().getFirst().getXjustizFachspezifischeDaten().getAktenzeichens().getFirst().getAuswahlAktenzeichen().getAktenzeichenStrukturiert().getAbteilung());
-        assertEquals("MusterZusatzkennung", schriftgutobjekte.getAktes().getFirst().getXjustizFachspezifischeDaten().getAktenzeichens().getFirst().getAuswahlAktenzeichen().getAktenzeichenStrukturiert().getZusatzkennung());
-        assertEquals("1", schriftgutobjekte.getAktes().getFirst().getXjustizFachspezifischeDaten().getAktenzeichens().getFirst().getAuswahlAktenzeichen().getAktenzeichenStrukturiert().getLaufendeNummer());
-        assertEquals("2025", schriftgutobjekte.getAktes().getFirst().getXjustizFachspezifischeDaten().getAktenzeichens().getFirst().getAuswahlAktenzeichen().getAktenzeichenStrukturiert().getJahr());
+        assertEquals("MusterSachgebietsschlüssel", schriftgutobjekte.getAktes().getFirst().getXjustizFachspezifischeDaten().getAktenzeichens().getFirst()
+                .getAuswahlAktenzeichen().getAktenzeichenStrukturiert().getSachgebietsschluessel());
+        assertEquals("MusterAbteilung", schriftgutobjekte.getAktes().getFirst().getXjustizFachspezifischeDaten().getAktenzeichens().getFirst()
+                .getAuswahlAktenzeichen().getAktenzeichenStrukturiert().getAbteilung());
+        assertEquals("MusterZusatzkennung", schriftgutobjekte.getAktes().getFirst().getXjustizFachspezifischeDaten().getAktenzeichens().getFirst()
+                .getAuswahlAktenzeichen().getAktenzeichenStrukturiert().getZusatzkennung());
+        assertEquals("1", schriftgutobjekte.getAktes().getFirst().getXjustizFachspezifischeDaten().getAktenzeichens().getFirst().getAuswahlAktenzeichen()
+                .getAktenzeichenStrukturiert().getLaufendeNummer());
+        assertEquals("2025", schriftgutobjekte.getAktes().getFirst().getXjustizFachspezifischeDaten().getAktenzeichens().getFirst().getAuswahlAktenzeichen()
+                .getAktenzeichenStrukturiert().getJahr());
 
     }
 

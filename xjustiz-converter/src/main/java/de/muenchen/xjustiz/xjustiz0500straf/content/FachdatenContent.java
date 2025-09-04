@@ -1,11 +1,10 @@
 package de.muenchen.xjustiz.xjustiz0500straf.content;
 
 import de.muenchen.xjustiz.xjustiz0500straf.content.fachdaten.Tatort;
-import lombok.*;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.*;
 
 @Data
 @NoArgsConstructor

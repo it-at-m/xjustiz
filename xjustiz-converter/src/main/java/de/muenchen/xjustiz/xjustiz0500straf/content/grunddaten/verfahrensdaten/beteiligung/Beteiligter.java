@@ -1,13 +1,12 @@
 package de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung;
 
-import lombok.Data;
-
 import java.util.Optional;
+import lombok.Data;
 
 @Data
 public class Beteiligter {
 
-       private String beteiligtenNummer;
+    private String beteiligtenNummer;
 
     private Organisation organisation;
 

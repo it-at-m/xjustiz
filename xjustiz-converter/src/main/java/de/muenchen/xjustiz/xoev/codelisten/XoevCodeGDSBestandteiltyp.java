@@ -5,7 +5,8 @@ import lombok.Getter;
 @Getter
 public enum XoevCodeGDSBestandteiltyp {
 
-    ORIGINAL("original"), REPRAESENTANT("repraesentant");
+    ORIGINAL("original"),
+    REPRAESENTANT("repraesentant");
 
     private final String descriptor;
 

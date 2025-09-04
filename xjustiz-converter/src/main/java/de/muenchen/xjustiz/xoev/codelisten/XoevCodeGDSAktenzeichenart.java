@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum XoevCodeGDSAktenzeichenart {
-    AKTUELL("aktuell") ;
+    AKTUELL("aktuell");
 
     private final String descriptor;
 

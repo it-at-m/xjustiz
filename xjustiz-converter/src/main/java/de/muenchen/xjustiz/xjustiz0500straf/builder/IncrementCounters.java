@@ -1,10 +1,9 @@
 package de.muenchen.xjustiz.xjustiz0500straf.builder;
 
-import lombok.NoArgsConstructor;
-
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class IncrementCounters {
