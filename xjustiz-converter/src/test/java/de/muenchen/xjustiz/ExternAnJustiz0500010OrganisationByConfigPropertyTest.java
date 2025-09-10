@@ -72,6 +72,7 @@ public class ExternAnJustiz0500010OrganisationByConfigPropertyTest extends Exter
 
         TypeGDSGrunddaten.Verfahrensdaten verfahrensdaten = this.externAnJustiz0500010.getGrunddaten().getVerfahrensdaten();
 
+        assertEquals(1, verfahrensdaten.getInstanzdatens().size());
         var sachgebiet = verfahrensdaten.getInstanzdatens().getFirst().getSachgebiet();
         assertEquals("026", sachgebiet.getCode(), "Error sachgebiet property.");
         assertEquals("2.3", sachgebiet.getListVersionID(), "Error sachgebiet current-version property.");

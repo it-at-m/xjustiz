@@ -60,7 +60,6 @@ public class GrunddatenBuilder extends Builder {
         instanzGericht.setAuswahlInstanzbehoerde(behoerde);
         instanzGericht.getAuswahlInstanzbehoerde().setGericht(
                 (CodeGDSGerichteTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_GERICHTE_TYP_3, XoevCodeGDSGerichteTyp3.AMTSGERICHT_MUENCHEN.getDescriptor()));
-        verfahrensdaten.getInstanzdatens().add(instanzGericht);
 
         grunddatenContent.getBeteiligungen()
                 .ifPresent(beteiligungen -> beteiligungen.forEach(beteiligung -> verfahrensdaten.getBeteiligungs().add(beteiligungBuilder(beteiligung))));
