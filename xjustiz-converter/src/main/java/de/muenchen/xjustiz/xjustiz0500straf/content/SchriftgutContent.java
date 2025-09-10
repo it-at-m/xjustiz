@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SchriftgutContent {
 
-    private Optional<String> anschreiben;
-    private Optional<List<Dokument>> dokumente;
-    private Optional<List<Akte>> akten;
+    private Optional<String> anschreiben = Optional.empty();
+    private Optional<List<Dokument>> dokumente = Optional.empty();
+    private Optional<List<Akte>> akten = Optional.empty();
 
 }
