@@ -55,7 +55,7 @@ public class ErrorHandlingTest extends ExternAnJustiz0500010TestEnvironment {
     void test_xmlValidationError() {
 
         Exchange request = ExchangeBuilder.anExchange(camelContext)
-                .withBody(new ContentContainer(createFachdaten(), new GrunddatenContent(xmlValidationErrorMissingNachname()), createSchriftgut())).build();
+                .withBody(new ContentContainer(createFachdaten(), new GrunddatenContent(xmlValidationErrorMissingNachname()), createSchriftgutAktenzeichenStrukuriert())).build();
         var response = startxJustiz0500strafBuilderTest.send(testRoute, request);
         assertNotNull(response.getException());
         var exception = response.getException();

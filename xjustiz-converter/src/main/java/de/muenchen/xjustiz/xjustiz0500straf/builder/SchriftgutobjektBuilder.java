@@ -87,53 +87,74 @@ public class SchriftgutobjektBuilder extends XJustizBuilder {
         contentAkten.forEach(contentAkte -> {
 
             TypeGDSAkte dossier = new TypeGDSAkte();
-            dossier.setIdentifikation(createIdentifikation(contentAkte.getIdentifikation()));
 
-            TypeGDSXdomeaZeitraumType zeitraum = new TypeGDSXdomeaZeitraumType();
-            zeitraum.setBeginn(contentAkte.getLaufzeit().getBeginn());
-            zeitraum.setEnde(contentAkte.getLaufzeit().getEnde());
-            dossier.setLaufzeit(zeitraum);
+            contentAkte.getIdentifikation().ifPresent(identifikation -> {
+                dossier.setIdentifikation(createIdentifikation(identifikation));
+            });
 
-            TypeGDSXdomeaAnwendungsspezifischeErweiterungType erweiterung = new TypeGDSXdomeaAnwendungsspezifischeErweiterungType();
-            erweiterung.setKennung(contentAkte.getAnwendungspezifischeErweiterung().getKennung());
-            erweiterung.setName(contentAkte.getAnwendungspezifischeErweiterung().getName());
-            dossier.setAnwendungsspezifischeErweiterung(erweiterung);
+            contentAkte.getLaufzeit().ifPresent(laufzeit -> {
+                TypeGDSXdomeaZeitraumType zeitraum = new TypeGDSXdomeaZeitraumType();
+                laufzeit.getBeginn().ifPresent(beginn -> zeitraum.setBeginn(beginn));
+                laufzeit.getEnde().ifPresent(ende -> zeitraum.setEnde(ende));
+                dossier.setLaufzeit(zeitraum);
+            });
+
+            contentAkte.getAnwendungspezifischeErweiterung().ifPresent(anwendungsspezifischeErweiterung -> {
+                TypeGDSXdomeaAnwendungsspezifischeErweiterungType erweiterung = new TypeGDSXdomeaAnwendungsspezifischeErweiterungType();
+                erweiterung.setKennung(anwendungsspezifischeErweiterung.getKennung());
+                erweiterung.setName(anwendungsspezifischeErweiterung.getName());
+                dossier.setAnwendungsspezifischeErweiterung(erweiterung);
+            });
+
 
             TypeGDSAkte.XjustizFachspezifischeDaten fachspezifischeDaten = new TypeGDSAkte.XjustizFachspezifischeDaten();
             fachspezifischeDaten
                     .setAktentyp((CodeGDSAktentyp) createCodeGDSClass(XoevCodeGDS.CODE_GDS_AKTENTYP, XoevCodeGDSAktentyp.BUSSGELDAKTE.getDescriptor()));
 
             TypeGDSAktenzeichen aktenzeichen = new TypeGDSAktenzeichen();
-            aktenzeichen.setAzArt(
-                    (CodeGDSAktenzeichenart) createCodeGDSClass(XoevCodeGDS.CODE_GDS_AKTENZEICHENART, XoevCodeGDSAktenzeichenart.AKTUELL.getDescriptor()));
 
             TypeGDSBehoerde behoerde = new TypeGDSBehoerde();
             behoerde.setGericht((CodeGDSGerichteTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_GERICHTE_TYP_3,
                     XoevCodeGDSGerichteTyp3.AMTSGERICHT_MUENCHEN.getDescriptor()));
             aktenzeichen.setAuswahlAzVergebendeStation(behoerde);
 
-            TypeGDSAktenzeichen.AuswahlAktenzeichen auswahlAktenzeichen = new TypeGDSAktenzeichen.AuswahlAktenzeichen();
-            TypeGDSAktenzeichen.AuswahlAktenzeichen.AktenzeichenStrukturiert strukturiert = new TypeGDSAktenzeichen.AuswahlAktenzeichen.AktenzeichenStrukturiert();
-            strukturiert.setSachgebietsschluessel(
-                    contentAkte.getFachspezifischeDatenAkte().getAktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert().getSachgebietsschluessel());
-            strukturiert.setZusatzkennung(
-                    contentAkte.getFachspezifischeDatenAkte().getAktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert().getZusatzkennung());
-            strukturiert.setAbteilung(contentAkte.getFachspezifischeDatenAkte().getAktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert().getAbteilung());
-            strukturiert.setLaufendeNummer(
-                    contentAkte.getFachspezifischeDatenAkte().getAktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert().getLaufendeNummer());
-            strukturiert.setJahr(contentAkte.getFachspezifischeDatenAkte().getAktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert().getJahr());
-            auswahlAktenzeichen.setAktenzeichenStrukturiert(strukturiert);
-
-            strukturiert.setRegister((CodeGDSRegisterzeichenTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_REGISTERZEICHEN,
-                    XoevCodeGDSRegisterzeichen.BUSSGELDVERFAHREN.getDescriptor()));
-            auswahlAktenzeichen.setAktenzeichenStrukturiert(strukturiert);
-            aktenzeichen.setAuswahlAktenzeichen(auswahlAktenzeichen);
-
             fachspezifischeDaten.getAktenzeichens().add(aktenzeichen);
 
-            fachspezifischeDaten.setHybridakte(true);
-            dossier.setXjustizFachspezifischeDaten(fachspezifischeDaten);
+            contentAkte.getFachspezifischeDatenAkte().ifPresent(fachspezifischeDatenAkte -> {
 
+                if (fachspezifischeDatenAkte.isAktenzeichenArt())
+                    aktenzeichen.setAzArt((CodeGDSAktenzeichenart) createCodeGDSClass(XoevCodeGDS.CODE_GDS_AKTENZEICHENART, XoevCodeGDSAktenzeichenart.AKTUELL.getDescriptor()));
+
+                TypeGDSAktenzeichen.AuswahlAktenzeichen auswahlAktenzeichen = new TypeGDSAktenzeichen.AuswahlAktenzeichen();
+                fachspezifischeDatenAkte.getFreitext().ifPresent(freitext -> {
+                    auswahlAktenzeichen.setAktenzeichenFreitext(freitext);
+                });
+
+                fachspezifischeDatenAkte.getAktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert().ifPresent(auswahlAktenzeichenStrukturiert -> {
+                    TypeGDSAktenzeichen.AuswahlAktenzeichen.AktenzeichenStrukturiert strukturiert = new TypeGDSAktenzeichen.AuswahlAktenzeichen.AktenzeichenStrukturiert();
+                    strukturiert.setSachgebietsschluessel(
+                            auswahlAktenzeichenStrukturiert.getSachgebietsschluessel());
+                    strukturiert.setZusatzkennung(
+                            auswahlAktenzeichenStrukturiert.getZusatzkennung());
+                    strukturiert.setAbteilung(auswahlAktenzeichenStrukturiert.getAbteilung());
+                    strukturiert.setLaufendeNummer(
+                            auswahlAktenzeichenStrukturiert.getLaufendeNummer());
+                    strukturiert.setJahr(auswahlAktenzeichenStrukturiert.getJahr());
+
+                    auswahlAktenzeichen.setAktenzeichenStrukturiert(strukturiert);
+
+                    strukturiert.setRegister((CodeGDSRegisterzeichenTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_REGISTERZEICHEN,
+                            XoevCodeGDSRegisterzeichen.BUSSGELDVERFAHREN.getDescriptor()));
+                    auswahlAktenzeichen.setAktenzeichenStrukturiert(strukturiert);
+
+                    aktenzeichen.setAuswahlAktenzeichen(auswahlAktenzeichen);
+                });
+
+                aktenzeichen.setAuswahlAktenzeichen(auswahlAktenzeichen);
+
+            });
+
+            dossier.setXjustizFachspezifischeDaten(fachspezifischeDaten);
             dossiers.add(dossier);
 
         });
@@ -143,7 +164,7 @@ public class SchriftgutobjektBuilder extends XJustizBuilder {
     private static TypeGDSXdomeaIdentifikationObjektType createIdentifikation(Identifikation contentIdentifikation) {
         TypeGDSXdomeaIdentifikationObjektType identifikation = new TypeGDSXdomeaIdentifikationObjektType();
         identifikation.setId(contentIdentifikation.getId());
-        identifikation.setNummerImUebergeordnetenContainer(contentIdentifikation.getNummerImUebergeornetenenContainer());
+        identifikation.setNummerImUebergeordnetenContainer(contentIdentifikation.getNummerImUebergeordnetenContainer());
         return identifikation;
     }
 

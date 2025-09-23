@@ -12,6 +12,6 @@ public class Identifikation {
     @NonNull
     private final String id;
     @NonNull
-    private final BigInteger nummerImUebergeornetenenContainer;
+    private final BigInteger nummerImUebergeordnetenContainer;
 
 }

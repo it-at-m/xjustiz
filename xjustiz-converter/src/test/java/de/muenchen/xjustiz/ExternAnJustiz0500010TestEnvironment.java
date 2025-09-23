@@ -132,13 +132,25 @@ public class ExternAnJustiz0500010TestEnvironment {
         return new ArrayList<>(List.of(defendant));
     }
 
-    protected SchriftgutContent createSchriftgut() {
+    protected SchriftgutContent createSchriftgutAktenzeichenStrukuriert() {
 
         SchriftgutContent schriftgutContent = new SchriftgutContent();
         schriftgutContent.setAnschreiben(Optional.of("CEEF2150-F915-1F1F-1176-906D00000000"));
 
         schriftgutContent.setDokumente(Optional.of(createDocuments()));
-        schriftgutContent.setAkten(Optional.of(createDossiers()));
+        schriftgutContent.setAkten(Optional.of(createDossiersIdentifikationLaufzeitErweiterungFachspezifischeDaten()));
+
+        return schriftgutContent;
+
+    }
+
+    protected SchriftgutContent createSchriftgutFreitext() {
+
+        SchriftgutContent schriftgutContent = new SchriftgutContent();
+        schriftgutContent.setAnschreiben(Optional.of("CEEF2150-F915-1F1F-1176-906D00000000"));
+
+        schriftgutContent.setDokumente(Optional.of(createDocuments()));
+        schriftgutContent.setAkten(Optional.of(createDossiersFreitext()));
 
         return schriftgutContent;
 
@@ -175,7 +187,7 @@ public class ExternAnJustiz0500010TestEnvironment {
         return documents;
     }
 
-    private List<Akte> createDossiers() {
+    private List<Akte> createDossiersIdentifikationLaufzeitErweiterungFachspezifischeDaten() {
         List<Akte> dossiers = new ArrayList<>();
 
         try {
@@ -186,7 +198,28 @@ public class ExternAnJustiz0500010TestEnvironment {
             AnwendungspezifischeErweiterung erweiterung = new AnwendungspezifischeErweiterung("XDOMEA-BY", "XDOMEA-Erweiterung");
             AktenzeichenStrukuriert aktenzeichenStrukuriert = new AktenzeichenStrukuriert("MusterSachgebietsschlüssel", "MusterZusatzkennung",
                     "MusterAbteilung", "1", "2025");
-            FachspezifischeDatenAkte fachspezifischeDatenAkte = new FachspezifischeDatenAkte(aktenzeichenStrukuriert);
+            FachspezifischeDatenAkte fachspezifischeDatenAkte = new FachspezifischeDatenAkte(aktenzeichenStrukuriert, null, false);
+            dossiers.add(new Akte(identifikation, laufzeit, erweiterung, fachspezifischeDatenAkte));
+
+        } catch (DatatypeConfigurationException e) {
+            throw new RuntimeException(e);
+        }
+
+        return dossiers;
+    }
+
+    private List<Akte> createDossiersFreitext() {
+        List<Akte> dossiers = new ArrayList<>();
+
+        try {
+            Identifikation identifikation = new Identifikation("CEEF2150-F915-1F1F-1180-906D00000000", BigInteger.valueOf(1));
+            Laufzeit laufzeit = new Laufzeit(DatatypeFactory.newInstance().newXMLGregorianCalendar("2024-03-02"),
+                    DatatypeFactory.newInstance().newXMLGregorianCalendar("2025-12-31"));
+
+            AnwendungspezifischeErweiterung erweiterung = new AnwendungspezifischeErweiterung("XDOMEA-BY", "XDOMEA-Erweiterung");
+            AktenzeichenStrukuriert aktenzeichenStrukuriert = new AktenzeichenStrukuriert("MusterSachgebietsschlüssel", "MusterZusatzkennung",
+                    "MusterAbteilung", "1", "2025");
+            FachspezifischeDatenAkte fachspezifischeDatenAkte = new FachspezifischeDatenAkte(null, "freitext", false);
             dossiers.add(new Akte(identifikation, laufzeit, erweiterung, fachspezifischeDatenAkte));
 
         } catch (DatatypeConfigurationException e) {

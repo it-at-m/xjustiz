@@ -27,7 +27,7 @@ import org.springframework.test.context.ActiveProfiles;
 @CamelSpringBootTest
 @SpringBootTest(classes = { XJustizDocumentRouteBuilder.class })
 @ActiveProfiles({ "default" })
-public class ExternAnJustiz0500010OrganisationByCreatedTest extends ExternAnJustiz0500010TestEnvironment {
+public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends ExternAnJustiz0500010TestEnvironment {
 
     @Produce()
     private ProducerTemplate startxJustiz0500strafBuilderTest;
@@ -45,7 +45,7 @@ public class ExternAnJustiz0500010OrganisationByCreatedTest extends ExternAnJust
 
         Exchange request = ExchangeBuilder.anExchange(camelContext)
                 .withBody(new ContentContainer(createFachdaten(),
-                        new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention(), createApplicant()))), createSchriftgut()))
+                        new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention(), createApplicant()))), createSchriftgutAktenzeichenStrukuriert()))
                 .build();
         var response = startxJustiz0500strafBuilderTest.send(testRoute, request);
         assertNull(response.getException(), "Error during XML creation.");
