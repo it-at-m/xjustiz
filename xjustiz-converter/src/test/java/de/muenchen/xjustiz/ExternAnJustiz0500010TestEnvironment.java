@@ -198,7 +198,7 @@ public class ExternAnJustiz0500010TestEnvironment {
             AnwendungspezifischeErweiterung erweiterung = new AnwendungspezifischeErweiterung("XDOMEA-BY", "XDOMEA-Erweiterung");
             AktenzeichenStrukuriert aktenzeichenStrukuriert = new AktenzeichenStrukuriert("MusterSachgebietsschlüssel", "MusterZusatzkennung",
                     "MusterAbteilung", "1", "2025");
-            FachspezifischeDatenAkte fachspezifischeDatenAkte = new FachspezifischeDatenAkte(aktenzeichenStrukuriert, null, false);
+            FachspezifischeDatenAkte fachspezifischeDatenAkte = new FachspezifischeDatenAkte.Builder().choiceAktenzeichen(aktenzeichenStrukuriert, false).build();
             dossiers.add(new Akte(identifikation, laufzeit, erweiterung, fachspezifischeDatenAkte));
 
         } catch (DatatypeConfigurationException e) {
@@ -219,7 +219,7 @@ public class ExternAnJustiz0500010TestEnvironment {
             AnwendungspezifischeErweiterung erweiterung = new AnwendungspezifischeErweiterung("XDOMEA-BY", "XDOMEA-Erweiterung");
             AktenzeichenStrukuriert aktenzeichenStrukuriert = new AktenzeichenStrukuriert("MusterSachgebietsschlüssel", "MusterZusatzkennung",
                     "MusterAbteilung", "1", "2025");
-            FachspezifischeDatenAkte fachspezifischeDatenAkte = new FachspezifischeDatenAkte(null, "freitext", false);
+            FachspezifischeDatenAkte fachspezifischeDatenAkte = new FachspezifischeDatenAkte.Builder().choiceFreitext("freitext", false).build();
             dossiers.add(new Akte(identifikation, laufzeit, erweiterung, fachspezifischeDatenAkte));
 
         } catch (DatatypeConfigurationException e) {
