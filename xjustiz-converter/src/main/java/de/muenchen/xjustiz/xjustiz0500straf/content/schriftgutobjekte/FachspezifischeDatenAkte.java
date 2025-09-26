@@ -14,6 +14,10 @@ public class FachspezifischeDatenAkte {
         this.aktenzeichenArt = builder.aktenzeichenArt;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private AktenzeichenStrukuriert aktenzeichen;
         private String freitext;
