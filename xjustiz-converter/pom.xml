@@ -95,7 +95,7 @@
                 </execution>
             </executions>
             <configuration>
-                <sources>${project.basedir}/src/main/resources/xsd/XJustiz-3.6.2-XSD/xjustiz_0500_straf_3_6.xsd</sources>
+                <sources>${project.basedir}/src/main/resources/xsd/XJustiz-3.5.1-XSD/xjustiz_0500_straf_3_5.xsd</sources>
                 <outputDirectory>${project.basedir}/target/generated-sources/jaxb</outputDirectory>
                 <packageName>de.muenchen.xjustiz.generated</packageName>
                 <extension>true</extension>

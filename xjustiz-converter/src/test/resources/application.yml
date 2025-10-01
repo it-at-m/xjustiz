@@ -4,7 +4,7 @@ logging:
     de.muenchen.xjustiz.xjustiz-document-processor: DEBUG
 
 xjustiz:
-  version: 3.6.2
+  version: 3.5.1
   codelisten:
     gds-rollenbezeichnung:
       current-version: 3.5
@@ -65,11 +65,10 @@ xjustiz:
           antrag-behoerde: '016'
           bescheid: '017'
     gds-bestandteiltyp:
-#      current-version: 2.4  : org.xml.sax.SAXParseException: cvc-complex-type.3.1: Wert '2.4' des Attributs 'listVersionID' des Elements 'ns2:bestandteil' ist ungültig in Bezug auf die entsprechende Attributverwendung. Attribut 'listVersionID' hat den festen Wert '2.5'., Line : 165, Column : 58
-      current-version: 2.5
+      current-version: 2.4
       kennung: urn:xoev-de:xjustiz:codeliste:gds.bestandteiltyp
       codelist-versions:
-        gds-bestandteiltyp-2-5:
+        gds-bestandteiltyp-2-4:
           original: '001'
           repraesentant: '002'
     gds-aktentyp:

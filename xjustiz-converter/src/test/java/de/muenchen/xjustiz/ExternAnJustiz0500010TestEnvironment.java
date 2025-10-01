@@ -2,6 +2,7 @@ package de.muenchen.xjustiz;
 
 import de.muenchen.xjustiz.generated.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010;
 import de.muenchen.xjustiz.xjustiz0500straf.content.FachdatenContent;
+import de.muenchen.xjustiz.xjustiz0500straf.content.NachrichtenkopfContent;
 import de.muenchen.xjustiz.xjustiz0500straf.content.SchriftgutContent;
 import de.muenchen.xjustiz.xjustiz0500straf.content.fachdaten.StrasseHausnummer;
 import de.muenchen.xjustiz.xjustiz0500straf.content.fachdaten.Tatort;
@@ -228,4 +229,12 @@ public class ExternAnJustiz0500010TestEnvironment {
 
         return dossiers;
     }
+
+    protected NachrichtenkopfContent createNachrichtenkopfContent() {
+        NachrichtenkopfContent nachrichtenkopfContent = new NachrichtenkopfContent();
+        nachrichtenkopfContent.setAktenzeichen("Aktenzeichen");
+        return nachrichtenkopfContent;
+
+    }
+
 }

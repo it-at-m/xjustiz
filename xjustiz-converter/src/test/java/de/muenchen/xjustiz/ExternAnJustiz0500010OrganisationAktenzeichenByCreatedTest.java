@@ -44,7 +44,7 @@ public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends 
     public void init() throws Exception {
 
         Exchange request = ExchangeBuilder.anExchange(camelContext)
-                .withBody(new ContentContainer(createFachdaten(),
+                .withBody(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
                         new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention(), createApplicant()))), createSchriftgutAktenzeichenStrukuriert()))
                 .build();
         var response = startxJustiz0500strafBuilderTest.send(testRoute, request);
@@ -57,9 +57,9 @@ public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends 
     void test_nachrichtenkopf() {
 
         TypeGDSNachrichtenkopf nachrichtenkopf = this.externAnJustiz0500010.getNachrichtenkopf();
-        assertEquals("D2601", nachrichtenkopf.getEmpfaenger().getInformationen().getAuswahlKommunikationspartner().getGericht().getCode(),
+        assertEquals("D2601", nachrichtenkopf.getAuswahlEmpfaenger().getEmpfaengerGericht().getCode(),
                 "Error auswahl-empfaenger-gericht property.");
-        assertEquals("Stadt München", nachrichtenkopf.getAbsender().getInformationen().getAuswahlKommunikationspartner().getSonstige(),
+        assertEquals("Stadt München", nachrichtenkopf.getAuswahlAbsender().getAbsenderSonstige(),
                 "Error auswahl-absender-kommunikationspartner-sonstige property.");
         var ereignis = nachrichtenkopf.getEreignises().getFirst();
         assertEquals("117", ereignis.getCode(), "Error nachrichtenkopf-ereignis property.");

@@ -8,9 +8,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ContentContainer {
 
+    private final NachrichtenkopfContent nachrichtenkopfContent;
     private final FachdatenContent fachdatenContent;
     private final GrunddatenContent grunddatenContent;
     private final SchriftgutContent schriftgutContent;
+
+    public Optional<NachrichtenkopfContent> getNachrichtenkopfContent() {
+        return Optional.ofNullable(nachrichtenkopfContent);
+    }
 
     public Optional<FachdatenContent> getFachdatenContent() {
         return Optional.ofNullable(fachdatenContent);

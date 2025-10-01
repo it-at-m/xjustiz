@@ -45,7 +45,7 @@ public class ExternAnJustiz0500010OrganisationFreitextByCreatedTest extends Exte
     public void init() throws Exception {
 
         Exchange request = ExchangeBuilder.anExchange(camelContext)
-                .withBody(new ContentContainer(createFachdaten(),
+                .withBody(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
                         new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention(), createApplicant()))), createSchriftgutFreitext()))
                 .build();
         var response = startxJustiz0500strafBuilderTest.send(testRoute, request);

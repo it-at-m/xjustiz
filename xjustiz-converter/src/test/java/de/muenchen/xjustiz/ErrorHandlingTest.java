@@ -3,10 +3,8 @@ package de.muenchen.xjustiz;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import de.muenchen.xjustiz.xjustiz0500straf.content.ContentContainer;
-import de.muenchen.xjustiz.xjustiz0500straf.content.FachdatenContent;
-import de.muenchen.xjustiz.xjustiz0500straf.content.GrunddatenContent;
-import de.muenchen.xjustiz.xjustiz0500straf.content.SchriftgutContent;
+import de.muenchen.xjustiz.xjustiz0500straf.content.*;
+
 import java.util.List;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
@@ -44,7 +42,7 @@ public class ErrorHandlingTest extends ExternAnJustiz0500010TestEnvironment {
          * organisation.
          */
         Exchange request = ExchangeBuilder.anExchange(camelContext)
-                .withBody(new ContentContainer(new FachdatenContent(), new GrunddatenContent(List.of()), new SchriftgutContent())).build();
+                .withBody(new ContentContainer(new NachrichtenkopfContent(), new FachdatenContent(), new GrunddatenContent(List.of()), new SchriftgutContent())).build();
         var response = startxJustiz0500strafBuilderTest.send(testRoute, request);
         assertNotNull(response.getException());
         var exception = response.getException();
@@ -55,7 +53,7 @@ public class ErrorHandlingTest extends ExternAnJustiz0500010TestEnvironment {
     void test_xmlValidationError() {
 
         Exchange request = ExchangeBuilder.anExchange(camelContext)
-                .withBody(new ContentContainer(createFachdaten(), new GrunddatenContent(xmlValidationErrorMissingNachname()), createSchriftgutAktenzeichenStrukuriert())).build();
+                .withBody(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(), new GrunddatenContent(xmlValidationErrorMissingNachname()), createSchriftgutAktenzeichenStrukuriert())).build();
         var response = startxJustiz0500strafBuilderTest.send(testRoute, request);
         assertNotNull(response.getException());
         var exception = response.getException();

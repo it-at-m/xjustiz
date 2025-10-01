@@ -18,7 +18,8 @@ public class NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director 
 
         NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 message0500010 = new NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010();
 
-        message0500010.setNachrichtenkopf(nachrichtenkopfBuilder.build());
+        contentContainer.getNachrichtenkopfContent().ifPresentOrElse( n -> message0500010.setNachrichtenkopf(nachrichtenkopfBuilder.build(n)), () -> {throw new IllegalArgumentException("Grunddaten expected");});
+
         contentContainer.getGrunddatenContent().ifPresentOrElse(g -> message0500010.setGrunddaten(grunddatenBuilder.build(g)), () -> {
             throw new IllegalArgumentException("Grunddaten expected");
         });
