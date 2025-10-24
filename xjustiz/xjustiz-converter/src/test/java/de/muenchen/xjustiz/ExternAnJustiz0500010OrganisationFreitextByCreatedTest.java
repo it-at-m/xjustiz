@@ -27,7 +27,7 @@ import org.springframework.test.context.ActiveProfiles;
 @CamelSpringBootTest
 @SpringBootTest(classes = { XJustizDocumentRouteBuilder.class })
 @ActiveProfiles({ "default" })
-public class ExternAnJustiz0500010OrganisationFreitextByCreatedTest extends ExternAnJustiz0500010TestEnvironment {
+class ExternAnJustiz0500010OrganisationFreitextByCreatedTest extends ExternAnJustiz0500010TestEnvironment {
 
     @Produce()
     private ProducerTemplate startxJustiz0500strafBuilderTest;
@@ -43,21 +43,21 @@ public class ExternAnJustiz0500010OrganisationFreitextByCreatedTest extends Exte
     @BeforeEach
     public void init() throws Exception {
 
-        Exchange request = ExchangeBuilder.anExchange(camelContext)
+        final Exchange request = ExchangeBuilder.anExchange(camelContext)
                 .withBody(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
                         new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention(), createApplicant()))),
                         createSchriftgutFreitext()))
                 .build();
-        var response = startxJustiz0500strafBuilderTest.send(testRoute, request);
+        final Exchange response = startxJustiz0500strafBuilderTest.send(testRoute, request);
         assertNull(response.getException(), "Error during XML creation.");
-        var xml = response.getMessage().getBody(String.class);
+        final String xml = response.getMessage().getBody(String.class);
         this.externAnJustiz0500010 = parseXML(xml);
     }
 
     @Test
     void test_schriftgutobjekte() {
 
-        TypeGDSSchriftgutobjekte schriftgutobjekte = this.externAnJustiz0500010.getSchriftgutobjekte();
+        final TypeGDSSchriftgutobjekte schriftgutobjekte = this.externAnJustiz0500010.getSchriftgutobjekte();
         assertEquals("CEEF2150-F915-1F1F-1176-906D00000000", schriftgutobjekte.getAnschreiben().getRefSgo());
 
         assertEquals("CEEF2150-F915-1F1F-1177-906D00000000", schriftgutobjekte.getDokuments().getFirst().getIdentifikation().getId());

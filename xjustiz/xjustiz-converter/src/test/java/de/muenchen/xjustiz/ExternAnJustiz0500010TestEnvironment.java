@@ -24,8 +24,8 @@ import javax.xml.datatype.DatatypeFactory;
 public class ExternAnJustiz0500010TestEnvironment {
 
     protected Beteiligung createPersonSubjectToCoerceiveDetention() {
-        Beteiligung beteiligung = new Beteiligung();
-        var rolle = new Rolle();
+        final Beteiligung beteiligung = new Beteiligung();
+        final Rolle rolle = new Rolle();
 
         rolle.setRollenbezeichnung(XoevCodeGDSRollenbezeichnungTyp3.BETROFFENER.getDescriptor());
         beteiligung.addRolle(rolle);
@@ -39,7 +39,7 @@ public class ExternAnJustiz0500010TestEnvironment {
         beteiligung.generateBeteiligter().generateNatuerlichePerson().generateGeburt().setGeburtsort(NatuerlichePerson.GEBURTSSORT);
         beteiligung.generateBeteiligter().generateNatuerlichePerson().setGeschlecht(XoevGeschlecht.MAENNLICH);
 
-        var anschrift = new Anschrift();
+        final Anschrift anschrift = new Anschrift();
         anschrift.setAnschriftenzusatz(NatuerlichePerson.ANSCHRIFTENZUATZ);
         anschrift.setStrasse(NatuerlichePerson.STRASSE);
         anschrift.setHausnummer(NatuerlichePerson.HAUSNUMMER);
@@ -54,15 +54,15 @@ public class ExternAnJustiz0500010TestEnvironment {
 
     protected Beteiligung createApplicant() {
 
-        Beteiligung beteiligung = new Beteiligung();
+        final Beteiligung beteiligung = new Beteiligung();
 
-        var rolle = new Rolle();
+        final Rolle rolle = new Rolle();
         rolle.setRollenbezeichnung(XoevCodeGDSRollenbezeichnungTyp3.BUSSGELDEMPFAENGER.getDescriptor());
         beteiligung.addRolle(rolle);
 
         beteiligung.generateBeteiligter().generateOrganisation().setBezeichnungAktuell("Created Bezeichnung Aktuell");
 
-        var anschrift = new Anschrift();
+        final Anschrift anschrift = new Anschrift();
         anschrift.setStrasse("Created Strasse");
         anschrift.setHausnummer("Created Hausnummer");
         anschrift.setPlz("Created Plz");
@@ -75,8 +75,8 @@ public class ExternAnJustiz0500010TestEnvironment {
         return beteiligung;
     }
 
-    protected NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 parseXML(String xml) throws Exception {
-        JAXBContext context = JAXBContext.newInstance(NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.class);
+    protected NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 parseXML(final String xml) throws Exception {
+        final JAXBContext context = JAXBContext.newInstance(NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.class);
         return (NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010) context.createUnmarshaller().unmarshal(new StringReader(xml));
     }
 
@@ -101,10 +101,10 @@ public class ExternAnJustiz0500010TestEnvironment {
 
     protected FachdatenContent createFachdaten() {
 
-        FachdatenContent fachdatenContent = new FachdatenContent();
+        final FachdatenContent fachdatenContent = new FachdatenContent();
         fachdatenContent.setAnfangsDatumUhrzeit(LocalDateTime.of(2024, 10, 1, 12, 0));
         fachdatenContent.setEndeDatumUhrzeit(LocalDateTime.of(2024, 10, 1, 13, 5));
-        Tatort tatortContent = new Tatort();
+        final Tatort tatortContent = new Tatort();
         tatortContent.getStrasseHausnummer().add(new StrasseHausnummer("KVU EH-TATSTR1", "KVU EH-TATHNR1"));
         tatortContent.getStrasseHausnummer().add(new StrasseHausnummer("KVU EH-TATSTR2", "KVU EH-TATHNR2"));
         tatortContent.setOrt("KVU EH-TATORT");
@@ -116,7 +116,7 @@ public class ExternAnJustiz0500010TestEnvironment {
 
     protected List<Beteiligung> xmlValidationErrorMissingNachname() {
 
-        Beteiligung defendant = new Beteiligung();
+        final Beteiligung defendant = new Beteiligung();
 
         defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setVorname(NatuerlichePerson.VORNAME);
         defendant.generateBeteiligter().generateNatuerlichePerson().generateVollerName().setTitel(ExternAnJustiz0500010TestEnvironment.NatuerlichePerson.TITEL);
@@ -135,7 +135,7 @@ public class ExternAnJustiz0500010TestEnvironment {
 
     protected SchriftgutContent createSchriftgutAktenzeichenStrukuriert() {
 
-        SchriftgutContent schriftgutContent = new SchriftgutContent();
+        final SchriftgutContent schriftgutContent = new SchriftgutContent();
         schriftgutContent.setAnschreiben(Optional.of("CEEF2150-F915-1F1F-1176-906D00000000"));
 
         schriftgutContent.setDokumente(Optional.of(createDocuments()));
@@ -147,7 +147,7 @@ public class ExternAnJustiz0500010TestEnvironment {
 
     protected SchriftgutContent createSchriftgutFreitext() {
 
-        SchriftgutContent schriftgutContent = new SchriftgutContent();
+        final SchriftgutContent schriftgutContent = new SchriftgutContent();
         schriftgutContent.setAnschreiben(Optional.of("CEEF2150-F915-1F1F-1176-906D00000000"));
 
         schriftgutContent.setDokumente(Optional.of(createDocuments()));
@@ -159,29 +159,29 @@ public class ExternAnJustiz0500010TestEnvironment {
 
     private List<Dokument> createDocuments() {
 
-        List<Dokument> documents = new ArrayList<>();
+        final List<Dokument> documents = new ArrayList<>();
 
         // Antrag
-        var uuidIdentAntrag = "CEEF2150-F915-1F1F-1177-906D00000000";
-        List<Datei> antraege = new ArrayList<>();
-        var antragDateiName = "1000809085_5793341761427_20240807_EH.pdf";
+        final String uuidIdentAntrag = "CEEF2150-F915-1F1F-1177-906D00000000";
+        final List<Datei> antraege = new ArrayList<>();
+        final String antragDateiName = "1000809085_5793341761427_20240807_EH.pdf";
 
-        Identifikation identifikationAntrag = new Identifikation(uuidIdentAntrag, BigInteger.valueOf(1));
-        Datei antrag = new Datei(antragDateiName, BigInteger.valueOf(1));
+        final  Identifikation identifikationAntrag = new Identifikation(uuidIdentAntrag, BigInteger.valueOf(1));
+        final Datei antrag = new Datei(antragDateiName, BigInteger.valueOf(1));
         antraege.add(antrag);
-        FachspezifischeDatenDokument fachspezifischeDatenDokumentAntrag = new FachspezifischeDatenDokument(XoevCodeGDSDokumentklasse.ANTRAG,
+        final FachspezifischeDatenDokument fachspezifischeDatenDokumentAntrag = new FachspezifischeDatenDokument(XoevCodeGDSDokumentklasse.ANTRAG,
                 uuidIdentAntrag.concat("_").concat(antragDateiName), antraege);
         documents.add(new Dokument(identifikationAntrag, fachspezifischeDatenDokumentAntrag));
 
         // Bescheid
-        var uuidIdentBescheid = "CEEF2150-F915-1F1F-1178-906D00000000";
-        List<Datei> bescheide = new ArrayList<>();
-        var bescheidDateiName = "1000809085_5793341761427_20240807_URB.pdf";
+        final String uuidIdentBescheid = "CEEF2150-F915-1F1F-1178-906D00000000";
+        final List<Datei> bescheide = new ArrayList<>();
+        final String bescheidDateiName = "1000809085_5793341761427_20240807_URB.pdf";
 
-        Identifikation identifikationBescheid = new Identifikation(uuidIdentBescheid, BigInteger.valueOf(1));
-        Datei Bescheid = new Datei(bescheidDateiName, BigInteger.valueOf(1));
+        final Identifikation identifikationBescheid = new Identifikation(uuidIdentBescheid, BigInteger.valueOf(1));
+        final Datei Bescheid = new Datei(bescheidDateiName, BigInteger.valueOf(1));
         bescheide.add(Bescheid);
-        FachspezifischeDatenDokument fachspezifischeDatenDokumentBescheid = new FachspezifischeDatenDokument(XoevCodeGDSDokumentklasse.BESCHEID,
+        final FachspezifischeDatenDokument fachspezifischeDatenDokumentBescheid = new FachspezifischeDatenDokument(XoevCodeGDSDokumentklasse.BESCHEID,
                 uuidIdentBescheid.concat("_").concat(bescheidDateiName), bescheide);
         documents.add(new Dokument(identifikationBescheid, fachspezifischeDatenDokumentBescheid));
 
@@ -189,17 +189,17 @@ public class ExternAnJustiz0500010TestEnvironment {
     }
 
     private List<Akte> createDossiersIdentifikationLaufzeitErweiterungFachspezifischeDaten() {
-        List<Akte> dossiers = new ArrayList<>();
+        final List<Akte> dossiers = new ArrayList<>();
 
         try {
-            Identifikation identifikation = new Identifikation("CEEF2150-F915-1F1F-1180-906D00000000", BigInteger.valueOf(1));
-            Laufzeit laufzeit = new Laufzeit(DatatypeFactory.newInstance().newXMLGregorianCalendar("2024-03-02"),
+            final Identifikation identifikation = new Identifikation("CEEF2150-F915-1F1F-1180-906D00000000", BigInteger.valueOf(1));
+            final Laufzeit laufzeit = new Laufzeit(DatatypeFactory.newInstance().newXMLGregorianCalendar("2024-03-02"),
                     DatatypeFactory.newInstance().newXMLGregorianCalendar("2025-12-31"));
 
-            AnwendungspezifischeErweiterung erweiterung = new AnwendungspezifischeErweiterung("XDOMEA-BY", "XDOMEA-Erweiterung");
+            final AnwendungspezifischeErweiterung erweiterung = new AnwendungspezifischeErweiterung("XDOMEA-BY", "XDOMEA-Erweiterung");
             AktenzeichenStrukuriert aktenzeichenStrukuriert = new AktenzeichenStrukuriert("MusterSachgebietsschlüssel", "MusterZusatzkennung",
                     "MusterAbteilung", "1", "2025");
-            FachspezifischeDatenAkte fachspezifischeDatenAkte = FachspezifischeDatenAkte.builder().choiceAktenzeichen(aktenzeichenStrukuriert, false).build();
+            final FachspezifischeDatenAkte fachspezifischeDatenAkte = FachspezifischeDatenAkte.builder().choiceAktenzeichen(aktenzeichenStrukuriert, false).build();
             dossiers.add(new Akte(identifikation, laufzeit, erweiterung, fachspezifischeDatenAkte));
 
         } catch (DatatypeConfigurationException e) {
@@ -210,17 +210,17 @@ public class ExternAnJustiz0500010TestEnvironment {
     }
 
     private List<Akte> createDossiersFreitext() {
-        List<Akte> dossiers = new ArrayList<>();
+        final List<Akte> dossiers = new ArrayList<>();
 
         try {
-            Identifikation identifikation = new Identifikation("CEEF2150-F915-1F1F-1180-906D00000000", BigInteger.valueOf(1));
-            Laufzeit laufzeit = new Laufzeit(DatatypeFactory.newInstance().newXMLGregorianCalendar("2024-03-02"),
+            final Identifikation identifikation = new Identifikation("CEEF2150-F915-1F1F-1180-906D00000000", BigInteger.valueOf(1));
+            final Laufzeit laufzeit = new Laufzeit(DatatypeFactory.newInstance().newXMLGregorianCalendar("2024-03-02"),
                     DatatypeFactory.newInstance().newXMLGregorianCalendar("2025-12-31"));
 
-            AnwendungspezifischeErweiterung erweiterung = new AnwendungspezifischeErweiterung("XDOMEA-BY", "XDOMEA-Erweiterung");
-            AktenzeichenStrukuriert aktenzeichenStrukuriert = new AktenzeichenStrukuriert("MusterSachgebietsschlüssel", "MusterZusatzkennung",
+            final AnwendungspezifischeErweiterung erweiterung = new AnwendungspezifischeErweiterung("XDOMEA-BY", "XDOMEA-Erweiterung");
+            final AktenzeichenStrukuriert aktenzeichenStrukuriert = new AktenzeichenStrukuriert("MusterSachgebietsschlüssel", "MusterZusatzkennung",
                     "MusterAbteilung", "1", "2025");
-            FachspezifischeDatenAkte fachspezifischeDatenAkte = FachspezifischeDatenAkte.builder().choiceFreitext("freitext", false).build();
+            final FachspezifischeDatenAkte fachspezifischeDatenAkte = FachspezifischeDatenAkte.builder().choiceFreitext("freitext", false).build();
             dossiers.add(new Akte(identifikation, laufzeit, erweiterung, fachspezifischeDatenAkte));
 
         } catch (DatatypeConfigurationException e) {
@@ -231,7 +231,7 @@ public class ExternAnJustiz0500010TestEnvironment {
     }
 
     protected NachrichtenkopfContent createNachrichtenkopfContent() {
-        NachrichtenkopfContent nachrichtenkopfContent = new NachrichtenkopfContent();
+        final NachrichtenkopfContent nachrichtenkopfContent = new NachrichtenkopfContent();
         nachrichtenkopfContent.setAktenzeichen("Aktenzeichen");
         return nachrichtenkopfContent;
 

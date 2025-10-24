@@ -71,13 +71,13 @@ public class ExternAnJustiz0500010OrganisationByConfigPropertyTest extends Exter
     @Test
     void test_grunddaten() {
 
-        TypeGDSGrunddaten.Verfahrensdaten verfahrensdaten = this.externAnJustiz0500010.getGrunddaten().getVerfahrensdaten();
+        final TypeGDSGrunddaten.Verfahrensdaten verfahrensdaten = this.externAnJustiz0500010.getGrunddaten().getVerfahrensdaten();
 
         assertEquals(1, verfahrensdaten.getInstanzdatens().size());
-        var sachgebiet = verfahrensdaten.getInstanzdatens().getFirst().getSachgebiet();
+        final TypeGDSInstanzdaten sachgebiet = verfahrensdaten.getInstanzdatens().getFirst().getSachgebiet();
         assertEquals("026", sachgebiet.getCode(), "Error sachgebiet property.");
         assertEquals("2.3", sachgebiet.getListVersionID(), "Error sachgebiet current-version property.");
-        var instanzbehoerde = verfahrensdaten.getInstanzdatens().getFirst().getAuswahlInstanzbehoerde().getGericht();
+        final var instanzbehoerde = verfahrensdaten.getInstanzdatens().getFirst().getAuswahlInstanzbehoerde().getGericht();
         assertEquals("D2601", instanzbehoerde.getCode(), "Error auswahl-instanzbehoerde-gericht property.");
         assertEquals("3.6", instanzbehoerde.getListVersionID(), "Error auswahl-instanzbehoerde-gericht current-version property.");
 
@@ -86,14 +86,14 @@ public class ExternAnJustiz0500010OrganisationByConfigPropertyTest extends Exter
                 "Only one rolle with same rollenbezeichnung expected.");
         assertEquals("2", verfahrensdaten.getBeteiligungs().getLast().getBeteiligter().getBeteiligtennummer(), "Two beteiligter in whole document expected.");
 
-        List<TypeGDSBeteiligung> beteiligungenNatuerlichePerson = verfahrensdaten.getBeteiligungs().stream()
+        final List<TypeGDSBeteiligung> beteiligungenNatuerlichePerson = verfahrensdaten.getBeteiligungs().stream()
                 .filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson() != null).toList();
         assertEquals(1, beteiligungenNatuerlichePerson.size(), "Wrong number of beteiligungen property.");
-        var rolleNatuerlichePerson = beteiligungenNatuerlichePerson.getFirst().getRolles().getFirst();
+        final TypeGDSBeteiligung.Rolle rolleNatuerlichePerson = beteiligungenNatuerlichePerson.getFirst().getRolles().getFirst();
         assertEquals("040", rolleNatuerlichePerson.getRollenbezeichnung().getCode());
         assertEquals("3.5", rolleNatuerlichePerson.getRollenbezeichnung().getListVersionID());
 
-        List<TypeGDSNatuerlichePerson> natuerlichePersonen = beteiligungenNatuerlichePerson.stream()
+        final List<TypeGDSNatuerlichePerson> natuerlichePersonen = beteiligungenNatuerlichePerson.stream()
                 .filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson() != null)
                 .map(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson()).toList();
         assertEquals(1, natuerlichePersonen.size(), "Wrong number of natuerlichePerson property.");
@@ -119,14 +119,14 @@ public class ExternAnJustiz0500010OrganisationByConfigPropertyTest extends Exter
 
         assertEquals("1", natuerlichePersonen.getFirst().getGeschlecht().getCode());
 
-        List<TypeGDSBeteiligung> beteiligungenOrganisation = verfahrensdaten.getBeteiligungs().stream()
+        final List<TypeGDSBeteiligung> beteiligungenOrganisation = verfahrensdaten.getBeteiligungs().stream()
                 .filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation() != null).toList();
         assertEquals(1, beteiligungenOrganisation.size(), "Wrong number of beteiligungen property.");
-        var rolleOrganisation = beteiligungenOrganisation.getFirst().getRolles().getFirst();
+        final  TypeGDSBeteiligung.Rolle rolleOrganisation = beteiligungenOrganisation.getFirst().getRolles().getFirst();
         assertEquals("046", rolleOrganisation.getRollenbezeichnung().getCode());
         assertEquals("3.5", rolleOrganisation.getRollenbezeichnung().getListVersionID());
 
-        List<TypeGDSOrganisation> organisationen = verfahrensdaten.getBeteiligungs().stream()
+        final List<TypeGDSOrganisation> organisationen = verfahrensdaten.getBeteiligungs().stream()
                 .filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation() != null)
                 .map(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation()).toList();
         assertEquals(1, organisationen.size(), "Wrong number of organisationen property.");
