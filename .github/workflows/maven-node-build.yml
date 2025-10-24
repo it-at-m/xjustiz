@@ -15,10 +15,8 @@ jobs:
       fail-fast: false
       matrix:
         include: # hier müssen die Pfade angegeben werden
-          - app-path: refarch-backend
-          - app-path: refarch-frontend
-          - app-path: refarch-eai
-          - app-path: refarch-webcomponent
+          - app-path: xjustiz-converter
+          - app-path: xjustiz-starter
 
     steps:
       - uses: it-at-m/lhm_actions/action-templates/actions/action-checkout@691ffa2542ed7cc1c53c416d22ace9a153d5152f # v1.0.21
