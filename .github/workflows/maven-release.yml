@@ -16,8 +16,7 @@ on:
         description: Service-Name
         required: true
         options:
-          - xjustiz-starter
-          - xjustiz-converter
+          - xjustiz
       skipDeployment:
         type: choice
         description: "Skip deployment to Maven Central?"
