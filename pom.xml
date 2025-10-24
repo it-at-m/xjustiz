@@ -18,6 +18,7 @@
     <description>Spring Boot Starter to generate https://xjustiz.justiz.de messages.</description>
     <url>https://github.com/it-at-m/xjustiz-starter</url>
 
+
     <licenses>
         <license>
             <name>MIT</name>
@@ -43,6 +44,10 @@
             <organization>it@M</organization>
             <email>opensource@muenchen.de</email>
             <url>https://github.com/it-at-m</url>
+            <roles>
+                <role>Developer</role>
+                <role>Maintainer</role>
+            </roles>
         </developer>
     </developers>
 
@@ -137,6 +142,25 @@
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>3.0.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>3.0.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.sonatype.central</groupId>
+                    <artifactId>central-publishing-maven-plugin</artifactId>
+                    <version>0.4.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <!-- Build -->
             <plugin>
@@ -247,12 +271,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>${maven-release-plugin.version}</version>
                 <configuration>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <useReleaseProfile>false</useReleaseProfile>
                     <releaseProfiles>release</releaseProfiles>
                     <goals>deploy</goals>
+                    <tagNameFormat>@{project.version}</tagNameFormat>
                 </configuration>
             </plugin>
 
@@ -344,9 +368,9 @@
                     <plugin>
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
-                        <version>${central-publishing-maven-plugin.version}</version>
                         <extensions>true</extensions>
                         <configuration>
+                            <tokenAuth>true</tokenAuth>
                             <autoPublish>true</autoPublish>
                             <deploymentName>${project.groupId}:${project.artifactId}:${project.version}</deploymentName>
                         </configuration>
@@ -355,7 +379,9 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>${maven-gpg-plugin.version}</version>
+                        <configuration>
+                            <skip>${skipGpg}</skip>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
