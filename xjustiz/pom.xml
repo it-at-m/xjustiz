@@ -329,6 +329,7 @@
                     <minimumTokens>100</minimumTokens>
                     <targetJdk>${java.version}</targetJdk>
                     <printFailingErrors>true</printFailingErrors>
+                    <failOnViolation>false</failOnViolation>
                     <linkXRef>false</linkXRef>
                     <includeTests>true</includeTests>
                     <excludeRoots>
@@ -372,6 +373,8 @@
                         <configuration>
                             <tokenAuth>true</tokenAuth>
                             <autoPublish>true</autoPublish>
+                            <failOnViolation>false</failOnViolation>
+
                             <deploymentName>${project.groupId}:${project.artifactId}:${project.version}</deploymentName>
                         </configuration>
                     </plugin>

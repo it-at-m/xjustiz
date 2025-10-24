@@ -166,7 +166,7 @@ public class ExternAnJustiz0500010TestEnvironment {
         final List<Datei> antraege = new ArrayList<>();
         final String antragDateiName = "1000809085_5793341761427_20240807_EH.pdf";
 
-        final  Identifikation identifikationAntrag = new Identifikation(uuidIdentAntrag, BigInteger.valueOf(1));
+        final Identifikation identifikationAntrag = new Identifikation(uuidIdentAntrag, BigInteger.valueOf(1));
         final Datei antrag = new Datei(antragDateiName, BigInteger.valueOf(1));
         antraege.add(antrag);
         final FachspezifischeDatenDokument fachspezifischeDatenDokumentAntrag = new FachspezifischeDatenDokument(XoevCodeGDSDokumentklasse.ANTRAG,
@@ -199,7 +199,8 @@ public class ExternAnJustiz0500010TestEnvironment {
             final AnwendungspezifischeErweiterung erweiterung = new AnwendungspezifischeErweiterung("XDOMEA-BY", "XDOMEA-Erweiterung");
             AktenzeichenStrukuriert aktenzeichenStrukuriert = new AktenzeichenStrukuriert("MusterSachgebietsschlüssel", "MusterZusatzkennung",
                     "MusterAbteilung", "1", "2025");
-            final FachspezifischeDatenAkte fachspezifischeDatenAkte = FachspezifischeDatenAkte.builder().choiceAktenzeichen(aktenzeichenStrukuriert, false).build();
+            final FachspezifischeDatenAkte fachspezifischeDatenAkte = FachspezifischeDatenAkte.builder().choiceAktenzeichen(aktenzeichenStrukuriert, false)
+                    .build();
             dossiers.add(new Akte(identifikation, laufzeit, erweiterung, fachspezifischeDatenAkte));
 
         } catch (DatatypeConfigurationException e) {

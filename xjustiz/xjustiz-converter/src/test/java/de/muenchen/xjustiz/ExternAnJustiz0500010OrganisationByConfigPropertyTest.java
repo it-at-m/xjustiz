@@ -74,7 +74,7 @@ public class ExternAnJustiz0500010OrganisationByConfigPropertyTest extends Exter
         final TypeGDSGrunddaten.Verfahrensdaten verfahrensdaten = this.externAnJustiz0500010.getGrunddaten().getVerfahrensdaten();
 
         assertEquals(1, verfahrensdaten.getInstanzdatens().size());
-        final TypeGDSInstanzdaten sachgebiet = verfahrensdaten.getInstanzdatens().getFirst().getSachgebiet();
+        final CodeGDSSachgebietTyp3 sachgebiet = verfahrensdaten.getInstanzdatens().getFirst().getSachgebiet();
         assertEquals("026", sachgebiet.getCode(), "Error sachgebiet property.");
         assertEquals("2.3", sachgebiet.getListVersionID(), "Error sachgebiet current-version property.");
         final var instanzbehoerde = verfahrensdaten.getInstanzdatens().getFirst().getAuswahlInstanzbehoerde().getGericht();
@@ -122,7 +122,7 @@ public class ExternAnJustiz0500010OrganisationByConfigPropertyTest extends Exter
         final List<TypeGDSBeteiligung> beteiligungenOrganisation = verfahrensdaten.getBeteiligungs().stream()
                 .filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation() != null).toList();
         assertEquals(1, beteiligungenOrganisation.size(), "Wrong number of beteiligungen property.");
-        final  TypeGDSBeteiligung.Rolle rolleOrganisation = beteiligungenOrganisation.getFirst().getRolles().getFirst();
+        final TypeGDSBeteiligung.Rolle rolleOrganisation = beteiligungenOrganisation.getFirst().getRolles().getFirst();
         assertEquals("046", rolleOrganisation.getRollenbezeichnung().getCode());
         assertEquals("3.5", rolleOrganisation.getRollenbezeichnung().getListVersionID());
 
