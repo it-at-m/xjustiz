@@ -34,7 +34,8 @@ public class ExternAnJustiz0500010ConfigurationTest extends ExternAnJustiz050001
     void test_organisationNotConfigured() throws Exception {
 
         var xml = startTest.requestBody(testRoute, new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
-                new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention()))), createSchriftgutAktenzeichenStrukuriert()), String.class);
+                new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention()))), createSchriftgutAktenzeichenStrukuriert()),
+                String.class);
 
         var externAnJustiz0500010 = parseXML(xml);
 

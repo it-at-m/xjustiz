@@ -1,15 +1,13 @@
 package de.muenchen.xjustiz.xjustiz0500straf.content.schriftgutobjekte;
 
+import java.util.Optional;
 import javax.xml.datatype.XMLGregorianCalendar;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Optional;
-
 @Getter
 @RequiredArgsConstructor
 public class Laufzeit {
-
 
     private final XMLGregorianCalendar beginn;
     private final XMLGregorianCalendar ende;
@@ -17,6 +15,9 @@ public class Laufzeit {
     public Optional<XMLGregorianCalendar> getBeginn() {
         return Optional.ofNullable(beginn);
     }
-    public Optional<XMLGregorianCalendar> getEnde() {return Optional.ofNullable(ende);}
+
+    public Optional<XMLGregorianCalendar> getEnde() {
+        return Optional.ofNullable(ende);
+    }
 
 }

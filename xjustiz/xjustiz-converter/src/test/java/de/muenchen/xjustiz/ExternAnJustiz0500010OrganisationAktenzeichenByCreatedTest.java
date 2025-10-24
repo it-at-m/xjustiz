@@ -45,7 +45,8 @@ public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends 
 
         Exchange request = ExchangeBuilder.anExchange(camelContext)
                 .withBody(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
-                        new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention(), createApplicant()))), createSchriftgutAktenzeichenStrukuriert()))
+                        new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention(), createApplicant()))),
+                        createSchriftgutAktenzeichenStrukuriert()))
                 .build();
         var response = startxJustiz0500strafBuilderTest.send(testRoute, request);
         assertNull(response.getException(), "Error during XML creation.");

@@ -9,26 +9,29 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 
-
 @AutoConfiguration
 public class XJustizAutoConfiguration {
 
     @Bean
-    @ConditionalOnProperty(prefix = "xjustiz", name={"version", "interface.document.processor"})
+    @ConditionalOnProperty(prefix = "xjustiz", name = { "version", "interface.document.processor" })
     public XJustizDocumentRouteBuilder xJustizDocumentRouteBuilder() {
         return new XJustizDocumentRouteBuilder();
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public BuilderConnector builderConnector(NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director nachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director) {
+    public BuilderConnector builderConnector(
+            NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director nachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director) {
         return new BuilderConnector(nachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director);
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director nachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director(GrunddatenBuilder grunddatenBuilder, SchriftgutobjektBuilder schriftgutobjektBuilder, NachrichtenkopfBuilder nachrichtenkopfBuilder, FachdatenBuilder fachdatenBuilder) {
-        return new NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director(grunddatenBuilder, schriftgutobjektBuilder, nachrichtenkopfBuilder, fachdatenBuilder );
+    public NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director nachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director(
+            GrunddatenBuilder grunddatenBuilder, SchriftgutobjektBuilder schriftgutobjektBuilder, NachrichtenkopfBuilder nachrichtenkopfBuilder,
+            FachdatenBuilder fachdatenBuilder) {
+        return new NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director(grunddatenBuilder, schriftgutobjektBuilder, nachrichtenkopfBuilder,
+                fachdatenBuilder);
     }
 
     @Bean
@@ -39,7 +42,8 @@ public class XJustizAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public NachrichtenkopfBuilder nachrichtenkopfBuilder(XJustizProperty xJustizProperty, NachrichtenProperty nachrichtenProperty, NachrichtenkopfContent nachrichtenkopfContent) {
+    public NachrichtenkopfBuilder nachrichtenkopfBuilder(XJustizProperty xJustizProperty, NachrichtenProperty nachrichtenProperty,
+            NachrichtenkopfContent nachrichtenkopfContent) {
         return new NachrichtenkopfBuilder(xJustizProperty, nachrichtenProperty, nachrichtenkopfContent);
     };
 

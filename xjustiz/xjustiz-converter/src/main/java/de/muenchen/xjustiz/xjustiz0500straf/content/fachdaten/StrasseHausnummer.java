@@ -12,5 +12,4 @@ public class StrasseHausnummer {
     private final String strasse;
     private final String hausnummer;
 
-
 }
