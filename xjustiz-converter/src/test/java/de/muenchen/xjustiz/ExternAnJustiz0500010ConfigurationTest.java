@@ -6,6 +6,8 @@ import de.muenchen.xjustiz.xjustiz0500straf.content.ContentContainer;
 import de.muenchen.xjustiz.xjustiz0500straf.content.GrunddatenContent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
@@ -34,7 +36,7 @@ public class ExternAnJustiz0500010ConfigurationTest extends ExternAnJustiz050001
     void test_organisationNotConfigured() throws Exception {
 
         var xml = startTest.requestBody(testRoute, new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
-                new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention()))), createSchriftgutAktenzeichenStrukuriert()), String.class);
+                new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention())), Map.of()), createSchriftgutAktenzeichenStrukuriert()), String.class);
 
         var externAnJustiz0500010 = parseXML(xml);
 

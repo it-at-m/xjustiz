@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import de.muenchen.xjustiz.xjustiz0500straf.content.*;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
@@ -42,7 +44,7 @@ public class ErrorHandlingTest extends ExternAnJustiz0500010TestEnvironment {
          * organisation.
          */
         Exchange request = ExchangeBuilder.anExchange(camelContext)
-                .withBody(new ContentContainer(new NachrichtenkopfContent(), new FachdatenContent(), new GrunddatenContent(List.of()), new SchriftgutContent())).build();
+                .withBody(new ContentContainer(new NachrichtenkopfContent(), new FachdatenContent(), new GrunddatenContent(List.of(), Map.of()), new SchriftgutContent())).build();
         var response = startxJustiz0500strafBuilderTest.send(testRoute, request);
         assertNotNull(response.getException());
         var exception = response.getException();
@@ -53,7 +55,7 @@ public class ErrorHandlingTest extends ExternAnJustiz0500010TestEnvironment {
     void test_xmlValidationError() {
 
         Exchange request = ExchangeBuilder.anExchange(camelContext)
-                .withBody(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(), new GrunddatenContent(xmlValidationErrorMissingNachname()), createSchriftgutAktenzeichenStrukuriert())).build();
+                .withBody(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(), new GrunddatenContent(xmlValidationErrorMissingNachname(), Map.of()), createSchriftgutAktenzeichenStrukuriert())).build();
         var response = startxJustiz0500strafBuilderTest.send(testRoute, request);
         assertNotNull(response.getException());
         var exception = response.getException();

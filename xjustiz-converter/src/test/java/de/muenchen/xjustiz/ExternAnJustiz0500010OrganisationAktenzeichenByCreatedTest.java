@@ -45,7 +45,7 @@ public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends 
 
         Exchange request = ExchangeBuilder.anExchange(camelContext)
                 .withBody(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
-                        new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention(), createApplicant()))), createSchriftgutAktenzeichenStrukuriert()))
+                        new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention(), createApplicant())), createInstanzdaten()), createSchriftgutAktenzeichenStrukuriert()))
                 .build();
         var response = startxJustiz0500strafBuilderTest.send(testRoute, request);
         assertNull(response.getException(), "Error during XML creation.");
@@ -75,12 +75,19 @@ public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends 
 
         TypeGDSGrunddaten.Verfahrensdaten verfahrensdaten = this.externAnJustiz0500010.getGrunddaten().getVerfahrensdaten();
 
-        var sachgebiet = verfahrensdaten.getInstanzdatens().getFirst().getSachgebiet();
-        assertEquals("026", sachgebiet.getCode(), "Error sachgebiet property.");
-        assertEquals("2.3", sachgebiet.getListVersionID(), "Error sachgebiet current-version property.");
-        var instanzbehoerde = verfahrensdaten.getInstanzdatens().getFirst().getAuswahlInstanzbehoerde().getGericht();
-        assertEquals("D2601", instanzbehoerde.getCode(), "Error auswahl-instanzbehoerde-gericht property.");
-        assertEquals("3.6", instanzbehoerde.getListVersionID(), "Error auswahl-instanzbehoerde-gericht current-version property.");
+        assertEquals("0", verfahrensdaten.getInstanzdatens().get(0).getInstanznummer());
+
+        var instanzBeteiligter = verfahrensdaten.getInstanzdatens().get(0).getAuswahlInstanzbehoerde().getBeteiligter();
+        assertEquals("2", instanzBeteiligter.getRefBeteiligtennummer(), "Static 2, provided that LHM is always specified as the second participant.");
+        assertEquals("KVU: GP-ID_Kassenkontonummer_Datum", verfahrensdaten.getInstanzdatens().get(0).getAktenzeichen().getAuswahlAktenzeichen().getAktenzeichenFreitext());
+
+        var instanzGericht = verfahrensdaten.getInstanzdatens().get(1);
+        assertEquals("026", instanzGericht.getSachgebiet().getCode(), "Error sachgebiet property.");
+        assertEquals("2.3", instanzGericht.getSachgebiet().getListVersionID(), "Error sachgebiet property.");
+        assertEquals("1", instanzGericht.getInstanznummer());
+
+        assertEquals("D2601", instanzGericht.getAuswahlInstanzbehoerde().getGericht().getCode(), "Error auswahl-instanzbehoerde-gericht property.");
+        assertEquals("3.6", instanzGericht.getAuswahlInstanzbehoerde().getGericht().getListVersionID(), "Error auswahl-instanzbehoerde-gericht current-version property.");
 
         assertEquals("2", verfahrensdaten.getBeteiligungs().getLast().getRolles().getLast().getRollennummer(), "Two rollen in whole document expected.");
         assertEquals(BigInteger.ONE, verfahrensdaten.getBeteiligungs().getLast().getRolles().getLast().getNr(),
@@ -152,6 +159,9 @@ public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends 
         assertEquals("12:00", fachdaten.getBussgeldbescheid().getTat().getAnfangsuhrzeit());
         assertEquals("2024-10-01", fachdaten.getBussgeldbescheid().getTat().getEndedatum());
         assertEquals("13:05", fachdaten.getBussgeldbescheid().getTat().getEndeuhrzeit());
+
+        assertEquals(10.5, fachdaten.getBussgeldbescheid().getAuslagen());
+        assertEquals(15.10, fachdaten.getBussgeldbescheid().getGeldbusse());
 
         assertEquals("KVU EH-TATSTR1", fachdaten.getBussgeldbescheid().getTat().getTatorts().getFirst().getAnschrifts().getFirst().getStrasse());
         assertEquals("KVU EH-TATHNR1", fachdaten.getBussgeldbescheid().getTat().getTatorts().getFirst().getAnschrifts().getFirst().getHausnummer());

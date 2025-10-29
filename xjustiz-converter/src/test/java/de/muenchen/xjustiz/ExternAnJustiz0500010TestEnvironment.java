@@ -9,15 +9,16 @@ import de.muenchen.xjustiz.xjustiz0500straf.content.fachdaten.Tatort;
 import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Anschrift;
 import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Beteiligung;
 import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Rolle;
+import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.instanzdaten.Aktenzeichen;
+import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.instanzdaten.Instanztype;
 import de.muenchen.xjustiz.xjustiz0500straf.content.schriftgutobjekte.*;
 import de.muenchen.xjustiz.xoev.codelisten.*;
 import jakarta.xml.bind.JAXBContext;
+
 import java.io.StringReader;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 
@@ -104,6 +105,9 @@ public class ExternAnJustiz0500010TestEnvironment {
         FachdatenContent fachdatenContent = new FachdatenContent();
         fachdatenContent.setAnfangsDatumUhrzeit(LocalDateTime.of(2024, 10, 1, 12, 0));
         fachdatenContent.setEndeDatumUhrzeit(LocalDateTime.of(2024, 10, 1, 13, 5));
+        fachdatenContent.setAuslagen(10.50);
+        fachdatenContent.setGeldbusse(15.10);
+
         Tatort tatortContent = new Tatort();
         tatortContent.getStrasseHausnummer().add(new StrasseHausnummer("KVU EH-TATSTR1", "KVU EH-TATHNR1"));
         tatortContent.getStrasseHausnummer().add(new StrasseHausnummer("KVU EH-TATSTR2", "KVU EH-TATHNR2"));
@@ -234,6 +238,15 @@ public class ExternAnJustiz0500010TestEnvironment {
         NachrichtenkopfContent nachrichtenkopfContent = new NachrichtenkopfContent();
         nachrichtenkopfContent.setAktenzeichen("Aktenzeichen");
         return nachrichtenkopfContent;
+
+    }
+
+    protected Map<Instanztype, Aktenzeichen> createInstanzdaten() {
+
+        Map<Instanztype, Aktenzeichen> auswahlInstanzbehoerden = new TreeMap<>();
+        auswahlInstanzbehoerden.put(Instanztype.GERICHT, new Aktenzeichen("neu"));
+        auswahlInstanzbehoerden.put(Instanztype.BETEILIGTER, new Aktenzeichen("KVU: GP-ID_Kassenkontonummer_Datum"));
+        return auswahlInstanzbehoerden;
 
     }
 

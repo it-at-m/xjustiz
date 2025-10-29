@@ -3,7 +3,10 @@ package de.muenchen.xjustiz.xjustiz0500straf.builder;
 import de.muenchen.xjustiz.generated.*;
 import de.muenchen.xjustiz.xjustiz0500straf.config.NachrichtenProperty;
 import de.muenchen.xjustiz.xjustiz0500straf.content.GrunddatenContent;
-import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.*;
+import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Anschrift;
+import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Beteiligter;
+import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Beteiligung;
+import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Rolle;
 import de.muenchen.xjustiz.xoev.XJustizProperty;
 import de.muenchen.xjustiz.xoev.codelisten.*;
 import org.springframework.stereotype.Component;
@@ -45,21 +48,62 @@ public class GrunddatenBuilder extends Builder {
 
         TypeGDSGrunddaten grunddaten = new TypeGDSGrunddaten();
 
-        TypeGDSInstanzdaten instanzGericht = new TypeGDSInstanzdaten();
-        TypeGDSBehoerde behoerde = new TypeGDSBehoerde();
-
         TypeGDSGrunddaten.Verfahrensdaten verfahrensdaten = new TypeGDSGrunddaten.Verfahrensdaten();
-        TypeGDSInstanzdaten instanzSachgebiet = new TypeGDSInstanzdaten();
-        instanzSachgebiet.setAuswahlInstanzbehoerde(behoerde);
 
-        instanzSachgebiet.setSachgebiet(
-                (CodeGDSSachgebietTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_SACHGEBIET_TYP_3, XoevCodeGDSSachgebietTyp3.OWI_SACHEN.getDescriptor()));
-        verfahrensdaten.getInstanzdatens().add(instanzSachgebiet);
+        grunddatenContent.getInstanzdaten().ifPresent(instanzen ->
+                instanzen.forEach((type, fileNumber) -> {
+
+                                switch (type) {
+                                    case BETEILIGTER: {
+                                        TypeGDSInstanzdaten instanzSachgebietBeteiligter = new TypeGDSInstanzdaten();
+                                        instanzSachgebietBeteiligter.setInstanznummer("0");
+                                        TypeGDSBehoerde abteilung = new TypeGDSBehoerde();
+                                        var beteiligtenNummer = new TypeGDSRefBeteiligtennummer();
+                                        beteiligtenNummer.setRefBeteiligtennummer("2");
+                                        abteilung.setBeteiligter(beteiligtenNummer);
+                                        instanzSachgebietBeteiligter.setAuswahlInstanzbehoerde(abteilung);
+
+                                        var aktenzeichen = new TypeGDSAktenzeichen();
+                                        var auswahlAktenzeichen = new TypeGDSAktenzeichen.AuswahlAktenzeichen();
+                                        auswahlAktenzeichen.setAktenzeichenFreitext(fileNumber.getFreitext());
+                                        aktenzeichen.setAuswahlAktenzeichen(auswahlAktenzeichen);
+                                        instanzSachgebietBeteiligter.setAktenzeichen(aktenzeichen);
+
+                                        verfahrensdaten.getInstanzdatens().add(instanzSachgebietBeteiligter);
+
+                                        break;
+
+                                    }
+                                    case GERICHT: {
+
+                                        TypeGDSInstanzdaten instanzGericht = new TypeGDSInstanzdaten();
+                                        TypeGDSBehoerde behoerde = new TypeGDSBehoerde();
+
+                                        instanzGericht.setInstanznummer("1");
+                                        instanzGericht.setAuswahlInstanzbehoerde(behoerde);
+
+                                        instanzGericht.setSachgebiet(
+                                                (CodeGDSSachgebietTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_SACHGEBIET_TYP_3, XoevCodeGDSSachgebietTyp3.OWI_SACHEN.getDescriptor()));
+
+                                        instanzGericht.getAuswahlInstanzbehoerde().setGericht(
+                                                (CodeGDSGerichteTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_GERICHTE_TYP_3, XoevCodeGDSGerichteTyp3.AMTSGERICHT_MUENCHEN.getDescriptor()));
+
+                                        var aktenzeichen = new TypeGDSAktenzeichen();
+                                        var auswahlAktenzeichen = new TypeGDSAktenzeichen.AuswahlAktenzeichen();
+                                        auswahlAktenzeichen.setAktenzeichenFreitext(fileNumber.getFreitext());
+                                        aktenzeichen.setAuswahlAktenzeichen(auswahlAktenzeichen);
+                                        instanzGericht.setAktenzeichen(aktenzeichen);
+
+                                        verfahrensdaten.getInstanzdatens().add(instanzGericht);
+
+                                        break;
+
+                                    } default: throw new IllegalArgumentException("Unknown instance type: " + type);
+                                }
+                        }
+                ));
+
         grunddaten.setVerfahrensdaten(verfahrensdaten);
-
-        instanzGericht.setAuswahlInstanzbehoerde(behoerde);
-        instanzGericht.getAuswahlInstanzbehoerde().setGericht(
-                (CodeGDSGerichteTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_GERICHTE_TYP_3, XoevCodeGDSGerichteTyp3.AMTSGERICHT_MUENCHEN.getDescriptor()));
 
         grunddatenContent.getBeteiligungen()
                 .ifPresent(beteiligungen -> beteiligungen.forEach(beteiligung -> verfahrensdaten.getBeteiligungs().add(beteiligungBuilder(beteiligung))));

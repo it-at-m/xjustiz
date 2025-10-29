@@ -43,7 +43,7 @@ public class ExternAnJustiz0500010OrganisationByConfigPropertyTest extends Exter
     public void init() throws Exception {
 
         Exchange request = ExchangeBuilder.anExchange(camelContext).withBody(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
-                new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention()))), createSchriftgutAktenzeichenStrukuriert())).build();
+                new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention())), createInstanzdaten()), createSchriftgutAktenzeichenStrukuriert())).build();
         var response = startxJustiz0500strafBuilderTest.send(testRoute, request);
         var xml = response.getMessage().getBody(String.class);
         this.externAnJustiz0500010 = parseXML(xml);
@@ -73,13 +73,16 @@ public class ExternAnJustiz0500010OrganisationByConfigPropertyTest extends Exter
 
         TypeGDSGrunddaten.Verfahrensdaten verfahrensdaten = this.externAnJustiz0500010.getGrunddaten().getVerfahrensdaten();
 
-        assertEquals(1, verfahrensdaten.getInstanzdatens().size());
-        var sachgebiet = verfahrensdaten.getInstanzdatens().getFirst().getSachgebiet();
-        assertEquals("026", sachgebiet.getCode(), "Error sachgebiet property.");
-        assertEquals("2.3", sachgebiet.getListVersionID(), "Error sachgebiet current-version property.");
-        var instanzbehoerde = verfahrensdaten.getInstanzdatens().getFirst().getAuswahlInstanzbehoerde().getGericht();
+        assertEquals(2, verfahrensdaten.getInstanzdatens().size());
+        var gericht = verfahrensdaten.getInstanzdatens().get(1).getSachgebiet();
+        assertEquals("026", gericht.getCode(), "Error sachgebiet property.");
+        assertEquals("2.3", gericht.getListVersionID(), "Error sachgebiet current-version property.");
+        var instanzbehoerde = verfahrensdaten.getInstanzdatens().get(1).getAuswahlInstanzbehoerde().getGericht();
         assertEquals("D2601", instanzbehoerde.getCode(), "Error auswahl-instanzbehoerde-gericht property.");
         assertEquals("3.6", instanzbehoerde.getListVersionID(), "Error auswahl-instanzbehoerde-gericht current-version property.");
+
+        assertEquals("1", verfahrensdaten.getInstanzdatens().get(1).getInstanznummer());
+        assertEquals("neu", verfahrensdaten.getInstanzdatens().get(1).getAktenzeichen().getAuswahlAktenzeichen().getAktenzeichenFreitext());
 
         assertEquals("2", verfahrensdaten.getBeteiligungs().getLast().getRolles().getLast().getRollennummer(), "Two rollen in whole document expected.");
         assertEquals(BigInteger.ONE, verfahrensdaten.getBeteiligungs().getLast().getRolles().getLast().getNr(),

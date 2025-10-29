@@ -10,18 +10,15 @@ import lombok.*;
 @NoArgsConstructor
 public class FachdatenContent {
 
-    @Getter
-    @Setter
+    private Double geldbusse;
+    private Double auslagen;
+
+    private LocalDateTime datumUhrzeit;
+
     private LocalDateTime anfangsDatumUhrzeit;
 
-    @Getter
-    @Setter
     private LocalDateTime endeDatumUhrzeit;
 
     private final List<Tatort> tatorte = new ArrayList<>();
-
-    public List<Tatort> getTatorte() {
-        return tatorte;
-    }
 
 }
