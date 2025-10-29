@@ -9,6 +9,7 @@
     </parent>
 
     <groupId>de.muenchen.oss</groupId>
+    <name>xjustiz</name>
     <artifactId>xjustiz</artifactId>
     <version>0.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
