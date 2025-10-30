@@ -11,7 +11,7 @@
     <groupId>de.muenchen.oss</groupId>
     <name>xjustiz</name>
     <artifactId>xjustiz</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <description>Spring Boot Starter to generate https://xjustiz.justiz.de messages.</description>
