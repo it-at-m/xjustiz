@@ -15,7 +15,7 @@
     <!-- Core Frameworks -->
         <camel.spring.boot.dependencies>4.11.0</camel.spring.boot.dependencies>
         <spring.boot>3.4.4</spring.boot>
-        <xjustiz.converter>0.0.2</xjustiz.converter>
+        <xjustiz.converter>${project.version}</xjustiz.converter>
     </properties>
 
     <dependencyManagement>
