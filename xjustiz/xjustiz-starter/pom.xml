@@ -9,7 +9,7 @@
     </parent>
     <name>xjustiz-starter</name>
     <artifactId>xjustiz-starter</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.5-SNAPSHOT</version>
 
   <properties>
     <!-- Core Frameworks -->
