@@ -4,13 +4,13 @@
 
     <groupId>de.muenchen.oss</groupId>
     <artifactId>xjustiz-converter</artifactId>
-    <version>0.0.5-SNAPSHOT</version>
+    <version>0.0.5</version>
     <name>xjusitz-converter</name>
 
     <parent>
         <groupId>de.muenchen.oss</groupId>
         <artifactId>xjustiz</artifactId>
-        <version>0.0.5-SNAPSHOT</version>
+        <version>0.0.5</version>
     </parent>
 
     <properties>
