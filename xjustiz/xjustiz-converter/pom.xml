@@ -5,6 +5,7 @@
     <groupId>de.muenchen.oss</groupId>
     <artifactId>xjustiz-converter</artifactId>
     <version>0.0.3-SNAPSHOT</version>
+    <name>xjusitz-converter</name>
 
     <parent>
         <groupId>de.muenchen.oss</groupId>
