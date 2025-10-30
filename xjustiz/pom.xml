@@ -11,10 +11,9 @@
     <groupId>de.muenchen.oss</groupId>
     <name>xjustiz</name>
     <artifactId>xjustiz</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.6-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>xjustiz</name>
     <description>Spring Boot Starter to generate https://xjustiz.justiz.de messages.</description>
     <url>https://github.com/it-at-m/xjustiz-starter</url>
 
@@ -31,7 +30,7 @@
         <url>https://github.com/it-at-m/xjustiz.git</url>
         <connection>scm:git:https://github.com/it-at-m/xjustiz.git</connection>
         <developerConnection>scm:git:https://github.com/it-at-m/xjustiz.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>0.0.2</tag>
     </scm>
 
     <modules>
