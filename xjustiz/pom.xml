@@ -14,7 +14,6 @@
     <version>0.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>xjustiz</name>
     <description>Spring Boot Starter to generate https://xjustiz.justiz.de messages.</description>
     <url>https://github.com/it-at-m/xjustiz-starter</url>
 
