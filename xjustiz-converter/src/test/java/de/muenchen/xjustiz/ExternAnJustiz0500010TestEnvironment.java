@@ -17,6 +17,7 @@ import jakarta.xml.bind.JAXBContext;
 
 import java.io.StringReader;
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -100,19 +101,21 @@ public class ExternAnJustiz0500010TestEnvironment {
 
     }
 
-    protected FachdatenContent createFachdaten() {
+    protected FachdatenContent createFachdaten() throws DatatypeConfigurationException {
 
         FachdatenContent fachdatenContent = new FachdatenContent();
         fachdatenContent.setAnfangsDatumUhrzeit(LocalDateTime.of(2024, 10, 1, 12, 0));
         fachdatenContent.setEndeDatumUhrzeit(LocalDateTime.of(2024, 10, 1, 13, 5));
         fachdatenContent.setAuslagen(10.50);
         fachdatenContent.setGeldbusse(15.10);
+        fachdatenContent.setErlassdatum(LocalDate.of(2025, 11, 03));
+        fachdatenContent.setRechtskraftdatum(DatatypeFactory.newInstance().newXMLGregorianCalendar(2025, 11, 3,0,0,0,0,0 ));
 
         Tatort tatortContent = new Tatort();
-        tatortContent.getStrasseHausnummer().add(new StrasseHausnummer("KVU EH-TATSTR1", "KVU EH-TATHNR1"));
-        tatortContent.getStrasseHausnummer().add(new StrasseHausnummer("KVU EH-TATSTR2", "KVU EH-TATHNR2"));
-        tatortContent.setOrt("KVU EH-TATORT");
-        tatortContent.setOrtsbeschreibung("KVU ???");
+        tatortContent.getStrasseHausnummer().add(new StrasseHausnummer("EH-TATSTR1", "EH-TATHNR1"));
+        tatortContent.getStrasseHausnummer().add(new StrasseHausnummer("EH-TATSTR2", "EH-TATHNR2"));
+        tatortContent.setOrt("EH-TATORT");
+        tatortContent.setOrtsbeschreibung("Location");
 
         fachdatenContent.getTatorte().add(tatortContent);
         return fachdatenContent;
@@ -245,7 +248,7 @@ public class ExternAnJustiz0500010TestEnvironment {
 
         Map<Instanztype, Aktenzeichen> auswahlInstanzbehoerden = new TreeMap<>();
         auswahlInstanzbehoerden.put(Instanztype.GERICHT, new Aktenzeichen("neu"));
-        auswahlInstanzbehoerden.put(Instanztype.BETEILIGTER, new Aktenzeichen("KVU: GP-ID_Kassenkontonummer_Datum"));
+        auswahlInstanzbehoerden.put(Instanztype.BETEILIGTER, new Aktenzeichen("GP-ID_Kassenkontonummer_Datum"));
         return auswahlInstanzbehoerden;
 
     }

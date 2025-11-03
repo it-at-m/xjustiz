@@ -25,12 +25,18 @@ public class FachdatenBuilder extends Builder {
 
         TypeSTRAFOWIBussgeldbescheid bussgeldbescheid = new TypeSTRAFOWIBussgeldbescheid();
 
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        bussgeldbescheid.setErlassdatum(fachdatenContent.getErlassdatum().format(dateFormatter));
+        TypeSTRAFRechtskraft rechtskraft = new TypeSTRAFRechtskraft();
+        rechtskraft.setRechtskraftdatum(fachdatenContent.getRechtskraftdatum());
+        bussgeldbescheid.setRechtskraft(rechtskraft);
+
         bussgeldbescheid.setGeldbusse(fachdatenContent.getGeldbusse());
         bussgeldbescheid.setAuslagen(fachdatenContent.getAuslagen());
 
         TypeSTRAFOWITat tat = new TypeSTRAFOWITat();
 
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
         tat.setAnfangsdatum(fachdatenContent.getAnfangsDatumUhrzeit().format(dateFormatter));
         tat.setEndedatum(fachdatenContent.getEndeDatumUhrzeit().format(dateFormatter));
 

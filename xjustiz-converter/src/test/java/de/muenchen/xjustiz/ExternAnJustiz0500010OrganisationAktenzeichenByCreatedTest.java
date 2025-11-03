@@ -23,6 +23,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+
 @SpringBootApplication(scanBasePackages = "de.muenchen.xjustiz")
 @CamelSpringBootTest
 @SpringBootTest(classes = { XJustizDocumentRouteBuilder.class })
@@ -79,7 +82,7 @@ public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends 
 
         var instanzBeteiligter = verfahrensdaten.getInstanzdatens().get(0).getAuswahlInstanzbehoerde().getBeteiligter();
         assertEquals("2", instanzBeteiligter.getRefBeteiligtennummer(), "Static 2, provided that LHM is always specified as the second participant.");
-        assertEquals("KVU: GP-ID_Kassenkontonummer_Datum", verfahrensdaten.getInstanzdatens().get(0).getAktenzeichen().getAuswahlAktenzeichen().getAktenzeichenFreitext());
+        assertEquals("GP-ID_Kassenkontonummer_Datum", verfahrensdaten.getInstanzdatens().get(0).getAktenzeichen().getAuswahlAktenzeichen().getAktenzeichenFreitext());
 
         var instanzGericht = verfahrensdaten.getInstanzdatens().get(1);
         assertEquals("026", instanzGericht.getSachgebiet().getCode(), "Error sachgebiet property.");
@@ -152,7 +155,7 @@ public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends 
     }
 
     @Test
-    void test_fachdaten() {
+    void test_fachdaten() throws DatatypeConfigurationException {
 
         NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.Fachdaten fachdaten = this.externAnJustiz0500010.getFachdaten();
         assertEquals("2024-10-01", fachdaten.getBussgeldbescheid().getTat().getAnfangsdatum());
@@ -160,18 +163,20 @@ public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends 
         assertEquals("2024-10-01", fachdaten.getBussgeldbescheid().getTat().getEndedatum());
         assertEquals("13:05", fachdaten.getBussgeldbescheid().getTat().getEndeuhrzeit());
 
+        assertEquals("2025-11-03", fachdaten.getBussgeldbescheid().getErlassdatum());
+        assertEquals(DatatypeFactory.newInstance().newXMLGregorianCalendar(2025, 11, 3,-2147483648,-2147483648,-2147483648,-2147483648,0 ), fachdaten.getBussgeldbescheid().getRechtskraft().getRechtskraftdatum());
         assertEquals(10.5, fachdaten.getBussgeldbescheid().getAuslagen());
         assertEquals(15.10, fachdaten.getBussgeldbescheid().getGeldbusse());
 
-        assertEquals("KVU EH-TATSTR1", fachdaten.getBussgeldbescheid().getTat().getTatorts().getFirst().getAnschrifts().getFirst().getStrasse());
-        assertEquals("KVU EH-TATHNR1", fachdaten.getBussgeldbescheid().getTat().getTatorts().getFirst().getAnschrifts().getFirst().getHausnummer());
-        assertEquals("KVU EH-TATORT", fachdaten.getBussgeldbescheid().getTat().getTatorts().getFirst().getAnschrifts().getFirst().getOrt());
-        assertEquals("KVU ???", fachdaten.getBussgeldbescheid().getTat().getTatorts().getFirst().getOrtsbeschreibung());
+        assertEquals("EH-TATSTR1", fachdaten.getBussgeldbescheid().getTat().getTatorts().getFirst().getAnschrifts().getFirst().getStrasse());
+        assertEquals("EH-TATHNR1", fachdaten.getBussgeldbescheid().getTat().getTatorts().getFirst().getAnschrifts().getFirst().getHausnummer());
+        assertEquals("EH-TATORT", fachdaten.getBussgeldbescheid().getTat().getTatorts().getFirst().getAnschrifts().getFirst().getOrt());
+        assertEquals("Location", fachdaten.getBussgeldbescheid().getTat().getTatorts().getFirst().getOrtsbeschreibung());
 
-        assertEquals("KVU EH-TATSTR2", fachdaten.getBussgeldbescheid().getTat().getTatorts().getLast().getAnschrifts().getLast().getStrasse());
-        assertEquals("KVU EH-TATHNR2", fachdaten.getBussgeldbescheid().getTat().getTatorts().getLast().getAnschrifts().getLast().getHausnummer());
-        assertEquals("KVU EH-TATORT", fachdaten.getBussgeldbescheid().getTat().getTatorts().getLast().getAnschrifts().getLast().getOrt());
-        assertEquals("KVU ???", fachdaten.getBussgeldbescheid().getTat().getTatorts().getLast().getOrtsbeschreibung());
+        assertEquals("EH-TATSTR2", fachdaten.getBussgeldbescheid().getTat().getTatorts().getLast().getAnschrifts().getLast().getStrasse());
+        assertEquals("EH-TATHNR2", fachdaten.getBussgeldbescheid().getTat().getTatorts().getLast().getAnschrifts().getLast().getHausnummer());
+        assertEquals("EH-TATORT", fachdaten.getBussgeldbescheid().getTat().getTatorts().getLast().getAnschrifts().getLast().getOrt());
+        assertEquals("Location", fachdaten.getBussgeldbescheid().getTat().getTatorts().getLast().getOrtsbeschreibung());
 
     }
 

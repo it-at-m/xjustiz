@@ -16,8 +16,8 @@ public class XJustizDocumentRouteBuilder extends RouteBuilder {
                 .to("log:de.muenchen.xjustiz.xjustiz-document-processor?level=DEBUG")
                 .process("builderConnector")
                 .marshal().jaxb()
-                .to("validator:xsd/XJustiz-3.5.1-XSD/xjustiz_0500_straf_3_5.xsd")
-                .to("log:de.muenchen.xjustiz.xjustiz-document-processor?level=DEBUG");
+                .to("log:de.muenchen.xjustiz.xjustiz-document-processor?level=DEBUG")
+                .to("validator:xsd/XJustiz-3.5.1-XSD/xjustiz_0500_straf_3_5.xsd");
 
     }
 }

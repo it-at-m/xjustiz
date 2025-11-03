@@ -21,6 +21,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+
 @SpringBootApplication(scanBasePackages = "de.muenchen.xjustiz")
 @CamelSpringBootTest
 @SpringBootTest(classes = { XJustizDocumentRouteBuilder.class })
@@ -52,7 +54,7 @@ public class ErrorHandlingTest extends ExternAnJustiz0500010TestEnvironment {
     }
 
     @Test
-    void test_xmlValidationError() {
+    void test_xmlValidationError() throws DatatypeConfigurationException {
 
         Exchange request = ExchangeBuilder.anExchange(camelContext)
                 .withBody(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(), new GrunddatenContent(xmlValidationErrorMissingNachname(), Map.of()), createSchriftgutAktenzeichenStrukuriert())).build();
