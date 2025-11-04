@@ -24,7 +24,7 @@ import org.springframework.test.context.ActiveProfiles;
 @CamelSpringBootTest
 @SpringBootTest(classes = { XJustizDocumentRouteBuilder.class })
 @ActiveProfiles({ "default", "organisation" })
-public class ErrorHandlingTest extends ExternAnJustiz0500010TestEnvironment {
+class ErrorHandlingTest extends ExternAnJustiz0500010TestEnvironment {
 
     @Produce()
     private ProducerTemplate startxJustiz0500strafBuilderTest;
@@ -42,26 +42,26 @@ public class ErrorHandlingTest extends ExternAnJustiz0500010TestEnvironment {
          * List.of() creates an immutable list. GrunddatenBuilder is not able to add a new configured
          * organisation.
          */
-        Exchange request = ExchangeBuilder.anExchange(camelContext)
+        final Exchange request = ExchangeBuilder.anExchange(camelContext)
                 .withBody(new ContentContainer(new NachrichtenkopfContent(), new FachdatenContent(), new GrunddatenContent(List.of(), Map.of()),
                         new SchriftgutContent()))
                 .build();
-        var response = startxJustiz0500strafBuilderTest.send(testRoute, request);
+        final Exchange response = startxJustiz0500strafBuilderTest.send(testRoute, request);
         assertNotNull(response.getException());
-        var exception = response.getException();
+        final Exception exception = response.getException();
         assertEquals("java.lang.UnsupportedOperationException", exception.getClass().getName());
     }
 
     @Test
     void test_xmlValidationError() throws DatatypeConfigurationException {
 
-        Exchange request = ExchangeBuilder.anExchange(camelContext)
+        final Exchange request = ExchangeBuilder.anExchange(camelContext)
                 .withBody(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
                         new GrunddatenContent(xmlValidationErrorMissingNachname(), Map.of()), createSchriftgutAktenzeichenStrukuriert()))
                 .build();
-        var response = startxJustiz0500strafBuilderTest.send(testRoute, request);
+        final Exchange response = startxJustiz0500strafBuilderTest.send(testRoute, request);
         assertNotNull(response.getException());
-        var exception = response.getException();
+        final Exception exception = response.getException();
         assertEquals("org.apache.camel.support.processor.validation.SchemaValidationException", exception.getClass().getName());
     }
 

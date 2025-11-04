@@ -11,7 +11,7 @@ public class CodelistenProperty {
     private String kennung;
     private Map<String, Map<String, String>> codelistVersions;
 
-    public String currentCodelistValueWithKey(String key) {
+    public String currentCodelistValueWithKey(final String key) {
         try {
             return codelistVersions.entrySet().stream().filter(entry -> entry.getKey().endsWith(getKeyCurrentVersion()))
                     .map(Map.Entry::getValue).toList().getFirst().entrySet().stream().filter(entry -> entry.getKey().equals(key)).map(Map.Entry::getValue)

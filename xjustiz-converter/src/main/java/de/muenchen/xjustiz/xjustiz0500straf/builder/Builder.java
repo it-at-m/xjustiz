@@ -7,7 +7,7 @@ public class Builder extends XJustizBuilder {
 
     protected final NachrichtenProperty nachrichtenProperty;
 
-    public Builder(XJustizProperty xjustizProperty, NachrichtenProperty nachrichtenProperty) {
+    public Builder(final XJustizProperty xjustizProperty, final NachrichtenProperty nachrichtenProperty) {
         super(xjustizProperty);
         this.nachrichtenProperty = nachrichtenProperty;
     }

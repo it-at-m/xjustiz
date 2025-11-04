@@ -13,7 +13,7 @@ public class Geburt {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    public void setGeburtsdatum(String datumString) {
+    public void setGeburtsdatum(final String datumString) {
         this.geburtsdatum = LocalDate.parse(datumString, FORMATTER);
     }
 

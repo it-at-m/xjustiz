@@ -10,7 +10,7 @@ public enum XoevCodeGDSAnschriftstypen {
 
     private final String descriptor;
 
-    XoevCodeGDSAnschriftstypen(String descriptor) {
+    XoevCodeGDSAnschriftstypen(final String descriptor) {
         this.descriptor = descriptor;
     }
 }

@@ -10,7 +10,7 @@ public enum XoevCodeGDSDokumentklasse {
 
     private final String descriptor;
 
-    XoevCodeGDSDokumentklasse(String descriptor) {
+    XoevCodeGDSDokumentklasse(final String descriptor) {
         this.descriptor = descriptor;
     }
 }

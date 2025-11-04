@@ -12,44 +12,44 @@ import org.springframework.stereotype.Component;
 @Component
 public class FachdatenBuilder extends Builder {
 
-    public FachdatenBuilder(XJustizProperty xjustizProperty, NachrichtenProperty nachrichtenProperty) {
+    public FachdatenBuilder(final XJustizProperty xjustizProperty, final NachrichtenProperty nachrichtenProperty) {
         super(xjustizProperty, nachrichtenProperty);
     }
 
-    public NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.Fachdaten build(FachdatenContent fachdatenContent) {
+    public NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.Fachdaten build(final FachdatenContent fachdatenContent) {
 
         /**
          * Fachdaten
          */
-        NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.Fachdaten fachdaten = new NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.Fachdaten();
+        final NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.Fachdaten fachdaten = new NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.Fachdaten();
 
-        TypeSTRAFOWIBussgeldbescheid bussgeldbescheid = new TypeSTRAFOWIBussgeldbescheid();
+        final TypeSTRAFOWIBussgeldbescheid bussgeldbescheid = new TypeSTRAFOWIBussgeldbescheid();
 
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         bussgeldbescheid.setErlassdatum(fachdatenContent.getErlassdatum().format(dateFormatter));
-        TypeSTRAFRechtskraft rechtskraft = new TypeSTRAFRechtskraft();
+        final TypeSTRAFRechtskraft rechtskraft = new TypeSTRAFRechtskraft();
         rechtskraft.setRechtskraftdatum(fachdatenContent.getRechtskraftdatum());
         bussgeldbescheid.setRechtskraft(rechtskraft);
 
         bussgeldbescheid.setGeldbusse(fachdatenContent.getGeldbusse());
         bussgeldbescheid.setAuslagen(fachdatenContent.getAuslagen());
 
-        TypeSTRAFOWITat tat = new TypeSTRAFOWITat();
+        final TypeSTRAFOWITat tat = new TypeSTRAFOWITat();
 
         tat.setAnfangsdatum(fachdatenContent.getAnfangsDatumUhrzeit().format(dateFormatter));
         tat.setEndedatum(fachdatenContent.getEndeDatumUhrzeit().format(dateFormatter));
 
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         tat.setAnfangsuhrzeit(fachdatenContent.getAnfangsDatumUhrzeit().format(timeFormatter));
         tat.setEndeuhrzeit(fachdatenContent.getEndeDatumUhrzeit().format(timeFormatter));
 
         fachdatenContent.getTatorte().forEach(t -> {
-            TypeSTRAFTatort tatort = new TypeSTRAFTatort();
+            final TypeSTRAFTatort tatort = new TypeSTRAFTatort();
             tatort.setOrtsbeschreibung(t.getOrtsbeschreibung());
 
             t.getStrasseHausnummer().forEach(sh -> {
 
-                TypeSTRAFTatort.Anschrift anschrift = new TypeSTRAFTatort.Anschrift();
+                final TypeSTRAFTatort.Anschrift anschrift = new TypeSTRAFTatort.Anschrift();
                 anschrift.setAnschriftstyp((CodeGDSAnschriftstyp) createCodeGDSClass(XoevCodeGDS.CODE_GDS_ANSCHRIFTSTYP,
                         XoevCodeGDSAnschriftstypen.TATORTANSCHRIFT.getDescriptor()));
 

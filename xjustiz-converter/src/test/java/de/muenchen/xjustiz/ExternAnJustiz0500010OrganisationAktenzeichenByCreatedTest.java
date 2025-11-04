@@ -29,7 +29,7 @@ import org.springframework.test.context.ActiveProfiles;
 @CamelSpringBootTest
 @SpringBootTest(classes = { XJustizDocumentRouteBuilder.class })
 @ActiveProfiles({ "default" })
-public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends ExternAnJustiz0500010TestEnvironment {
+class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends ExternAnJustiz0500010TestEnvironment {
 
     @Produce()
     private ProducerTemplate startxJustiz0500strafBuilderTest;
@@ -45,26 +45,26 @@ public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends 
     @BeforeEach
     public void init() throws Exception {
 
-        Exchange request = ExchangeBuilder.anExchange(camelContext)
+        final Exchange request = ExchangeBuilder.anExchange(camelContext)
                 .withBody(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
                         new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention(), createApplicant())), createInstanzdaten()),
                         createSchriftgutAktenzeichenStrukuriert()))
                 .build();
-        var response = startxJustiz0500strafBuilderTest.send(testRoute, request);
+        final Exchange response = startxJustiz0500strafBuilderTest.send(testRoute, request);
         assertNull(response.getException(), "Error during XML creation.");
-        var xml = response.getMessage().getBody(String.class);
+        final String xml = response.getMessage().getBody(String.class);
         this.externAnJustiz0500010 = parseXML(xml);
     }
 
     @Test
     void test_nachrichtenkopf() {
 
-        TypeGDSNachrichtenkopf nachrichtenkopf = this.externAnJustiz0500010.getNachrichtenkopf();
+        final TypeGDSNachrichtenkopf nachrichtenkopf = this.externAnJustiz0500010.getNachrichtenkopf();
         assertEquals("D2601", nachrichtenkopf.getAuswahlEmpfaenger().getEmpfaengerGericht().getCode(),
                 "Error auswahl-empfaenger-gericht property.");
         assertEquals("Stadt München", nachrichtenkopf.getAuswahlAbsender().getAbsenderSonstige(),
                 "Error auswahl-absender-kommunikationspartner-sonstige property.");
-        var ereignis = nachrichtenkopf.getEreignises().getFirst();
+        final CodeGDSEreignisTyp3 ereignis = nachrichtenkopf.getEreignises().getFirst();
         assertEquals("117", ereignis.getCode(), "Error nachrichtenkopf-ereignis property.");
         assertEquals("1.11", ereignis.getListVersionID(), "Error nachrichtenkopf-ereignis current-version property.");
 
@@ -76,16 +76,16 @@ public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends 
     @Test
     void test_grunddaten() {
 
-        TypeGDSGrunddaten.Verfahrensdaten verfahrensdaten = this.externAnJustiz0500010.getGrunddaten().getVerfahrensdaten();
+        final TypeGDSGrunddaten.Verfahrensdaten verfahrensdaten = this.externAnJustiz0500010.getGrunddaten().getVerfahrensdaten();
 
         assertEquals("0", verfahrensdaten.getInstanzdatens().get(0).getInstanznummer());
 
-        var instanzBeteiligter = verfahrensdaten.getInstanzdatens().get(0).getAuswahlInstanzbehoerde().getBeteiligter();
+        final TypeGDSRefBeteiligtennummer instanzBeteiligter = verfahrensdaten.getInstanzdatens().get(0).getAuswahlInstanzbehoerde().getBeteiligter();
         assertEquals("2", instanzBeteiligter.getRefBeteiligtennummer(), "Static 2, provided that LHM is always specified as the second participant.");
         assertEquals("GP-ID_Kassenkontonummer_Datum",
                 verfahrensdaten.getInstanzdatens().get(0).getAktenzeichen().getAuswahlAktenzeichen().getAktenzeichenFreitext());
 
-        var instanzGericht = verfahrensdaten.getInstanzdatens().get(1);
+        final TypeGDSInstanzdaten instanzGericht = verfahrensdaten.getInstanzdatens().get(1);
         assertEquals("026", instanzGericht.getSachgebiet().getCode(), "Error sachgebiet property.");
         assertEquals("2.3", instanzGericht.getSachgebiet().getListVersionID(), "Error sachgebiet property.");
         assertEquals("1", instanzGericht.getInstanznummer());
@@ -99,14 +99,14 @@ public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends 
                 "Only one rolle with same rollenbezeichnung expected.");
         assertEquals("2", verfahrensdaten.getBeteiligungs().getLast().getBeteiligter().getBeteiligtennummer(), "Two beteiligter in whole document expected.");
 
-        List<TypeGDSBeteiligung> beteiligungenNatuerlichePerson = verfahrensdaten.getBeteiligungs().stream()
+        final List<TypeGDSBeteiligung> beteiligungenNatuerlichePerson = verfahrensdaten.getBeteiligungs().stream()
                 .filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson() != null).toList();
         assertEquals(1, beteiligungenNatuerlichePerson.size(), "Wrong number of beteiligungen property.");
-        var rolleNatuerlichePerson = beteiligungenNatuerlichePerson.getFirst().getRolles().getFirst();
+        final TypeGDSBeteiligung.Rolle rolleNatuerlichePerson = beteiligungenNatuerlichePerson.getFirst().getRolles().getFirst();
         assertEquals("040", rolleNatuerlichePerson.getRollenbezeichnung().getCode());
         assertEquals("3.5", rolleNatuerlichePerson.getRollenbezeichnung().getListVersionID());
 
-        List<TypeGDSNatuerlichePerson> natuerlichePersonen = beteiligungenNatuerlichePerson.stream()
+        final List<TypeGDSNatuerlichePerson> natuerlichePersonen = beteiligungenNatuerlichePerson.stream()
                 .filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson() != null)
                 .map(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson()).toList();
         assertEquals(1, natuerlichePersonen.size(), "Wrong number of natuerlichePerson property.");
@@ -132,14 +132,14 @@ public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends 
 
         assertEquals("1", natuerlichePersonen.getFirst().getGeschlecht().getCode());
 
-        List<TypeGDSBeteiligung> beteiligungenOrganisation = verfahrensdaten.getBeteiligungs().stream()
+        final List<TypeGDSBeteiligung> beteiligungenOrganisation = verfahrensdaten.getBeteiligungs().stream()
                 .filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation() != null).toList();
         assertEquals(1, beteiligungenOrganisation.size(), "Wrong number of beteiligungen property.");
-        var rolleOrganisation = beteiligungenOrganisation.getFirst().getRolles().getFirst();
+        final TypeGDSBeteiligung.Rolle rolleOrganisation = beteiligungenOrganisation.getFirst().getRolles().getFirst();
         assertEquals("046", rolleOrganisation.getRollenbezeichnung().getCode());
         assertEquals("3.5", rolleOrganisation.getRollenbezeichnung().getListVersionID());
 
-        List<TypeGDSOrganisation> organisationen = verfahrensdaten.getBeteiligungs().stream()
+        final List<TypeGDSOrganisation> organisationen = verfahrensdaten.getBeteiligungs().stream()
                 .filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation() != null)
                 .map(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation()).toList();
         assertEquals(1, organisationen.size(), "Wrong number of organisationen property.");
@@ -159,7 +159,7 @@ public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends 
     @Test
     void test_fachdaten() throws DatatypeConfigurationException {
 
-        NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.Fachdaten fachdaten = this.externAnJustiz0500010.getFachdaten();
+        final NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.Fachdaten fachdaten = this.externAnJustiz0500010.getFachdaten();
         assertEquals("2024-10-01", fachdaten.getBussgeldbescheid().getTat().getAnfangsdatum());
         assertEquals("12:00", fachdaten.getBussgeldbescheid().getTat().getAnfangsuhrzeit());
         assertEquals("2024-10-01", fachdaten.getBussgeldbescheid().getTat().getEndedatum());
@@ -186,7 +186,7 @@ public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends 
     @Test
     void test_schriftgutobjekte() {
 
-        TypeGDSSchriftgutobjekte schriftgutobjekte = this.externAnJustiz0500010.getSchriftgutobjekte();
+        final TypeGDSSchriftgutobjekte schriftgutobjekte = this.externAnJustiz0500010.getSchriftgutobjekte();
         assertEquals("CEEF2150-F915-1F1F-1176-906D00000000", schriftgutobjekte.getAnschreiben().getRefSgo());
 
         assertEquals("CEEF2150-F915-1F1F-1177-906D00000000", schriftgutobjekte.getDokuments().getFirst().getIdentifikation().getId());

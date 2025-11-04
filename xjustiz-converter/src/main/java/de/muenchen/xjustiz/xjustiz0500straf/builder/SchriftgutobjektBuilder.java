@@ -14,16 +14,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class SchriftgutobjektBuilder extends XJustizBuilder {
 
-    public SchriftgutobjektBuilder(XJustizProperty xjustizProperty) {
+    public SchriftgutobjektBuilder(final XJustizProperty xjustizProperty) {
         super(xjustizProperty);
     }
 
-    public TypeGDSSchriftgutobjekte build(SchriftgutContent schriftgutContent) {
+    public TypeGDSSchriftgutobjekte build(final SchriftgutContent schriftgutContent) {
 
-        TypeGDSSchriftgutobjekte schriftobjekte = new TypeGDSSchriftgutobjekte();
+        final TypeGDSSchriftgutobjekte schriftobjekte = new TypeGDSSchriftgutobjekte();
 
         schriftgutContent.getAnschreiben().ifPresent(refsgo -> {
-            TypeGDSRefSGO anschreiben = new TypeGDSRefSGO();
+            final TypeGDSRefSGO anschreiben = new TypeGDSRefSGO();
             anschreiben.setRefSgo(refsgo);
             schriftobjekte.setAnschreiben(anschreiben);
         });
@@ -39,34 +39,35 @@ public class SchriftgutobjektBuilder extends XJustizBuilder {
         return schriftobjekte;
     }
 
-    private List<TypeGDSDokument> createDocuments(List<Dokument> contentDokumente) {
+    private List<TypeGDSDokument> createDocuments(final List<Dokument> contentDokumente) {
 
-        List<TypeGDSDokument> documents = new ArrayList<>();
+        final List<TypeGDSDokument> documents = new ArrayList<>();
 
         contentDokumente.forEach(contentDokument -> {
 
-            TypeGDSDokument document = new TypeGDSDokument();
+            final TypeGDSDokument document = new TypeGDSDokument();
 
             document.setIdentifikation(createIdentifikation(contentDokument.getIdentifikation()));
 
-            TypeGDSDokument.XjustizFachspezifischeDaten fachspezifischeDaten = new TypeGDSDokument.XjustizFachspezifischeDaten();
+            final TypeGDSDokument.XjustizFachspezifischeDaten fachspezifischeDaten = new TypeGDSDokument.XjustizFachspezifischeDaten();
 
             fachspezifischeDaten.setDokumentklasse((CodeGDSDokumentklasseTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_DOKUMENTKLASSE,
                     contentDokument.getFachspezifischeDatenDokument().getDokumentklasse().getDescriptor()));
             fachspezifischeDaten.setAnzeigename(contentDokument.getFachspezifischeDatenDokument().getAnzeigename());
 
-            List<TypeGDSDokument.XjustizFachspezifischeDaten.Datei> dateien = new ArrayList<>();
+            final List<TypeGDSDokument.XjustizFachspezifischeDaten.Datei> dateien = new ArrayList<>();
 
             contentDokument.getFachspezifischeDatenDokument().getDateien().forEach(d -> {
-                TypeGDSDokument.XjustizFachspezifischeDaten.Datei datei = new TypeGDSDokument.XjustizFachspezifischeDaten.Datei();
+                final TypeGDSDokument.XjustizFachspezifischeDaten.Datei datei = new TypeGDSDokument.XjustizFachspezifischeDaten.Datei();
                 datei.setDateiname(d.getDateiname());
 
-                if (contentDokument.getFachspezifischeDatenDokument().getDokumentklasse() == XoevCodeGDSDokumentklasse.ANTRAG)
+                if (contentDokument.getFachspezifischeDatenDokument().getDokumentklasse() == XoevCodeGDSDokumentklasse.ANTRAG) {
                     datei.setBestandteil((CodeGDSBestandteiltyp) createCodeGDSClass(XoevCodeGDS.CODE_GDS_BESTANDTEILTYP,
                             XoevCodeGDSBestandteiltyp.ORIGINAL.getDescriptor()));
-                else
+                } else {
                     datei.setBestandteil((CodeGDSBestandteiltyp) createCodeGDSClass(XoevCodeGDS.CODE_GDS_BESTANDTEILTYP,
                             XoevCodeGDSBestandteiltyp.REPRAESENTANT.getDescriptor()));
+                }
 
                 datei.setVersionsnummer(d.getVersionsnummer());
                 dateien.add(datei);
@@ -81,38 +82,38 @@ public class SchriftgutobjektBuilder extends XJustizBuilder {
         return documents;
     }
 
-    private List<TypeGDSAkte> createDossier(List<Akte> contentAkten) {
+    private List<TypeGDSAkte> createDossier(final List<Akte> contentAkten) {
 
-        List<TypeGDSAkte> dossiers = new ArrayList<>();
+        final List<TypeGDSAkte> dossiers = new ArrayList<>();
         contentAkten.forEach(contentAkte -> {
 
-            TypeGDSAkte dossier = new TypeGDSAkte();
+            final TypeGDSAkte dossier = new TypeGDSAkte();
 
             contentAkte.getIdentifikation().ifPresent(identifikation -> {
                 dossier.setIdentifikation(createIdentifikation(identifikation));
             });
 
             contentAkte.getLaufzeit().ifPresent(laufzeit -> {
-                TypeGDSXdomeaZeitraumType zeitraum = new TypeGDSXdomeaZeitraumType();
-                laufzeit.getBeginn().ifPresent(beginn -> zeitraum.setBeginn(beginn));
-                laufzeit.getEnde().ifPresent(ende -> zeitraum.setEnde(ende));
+                final TypeGDSXdomeaZeitraumType zeitraum = new TypeGDSXdomeaZeitraumType();
+                laufzeit.getBeginn().ifPresent(zeitraum::setBeginn);
+                laufzeit.getEnde().ifPresent(zeitraum::setEnde);
                 dossier.setLaufzeit(zeitraum);
             });
 
             contentAkte.getAnwendungspezifischeErweiterung().ifPresent(anwendungsspezifischeErweiterung -> {
-                TypeGDSXdomeaAnwendungsspezifischeErweiterungType erweiterung = new TypeGDSXdomeaAnwendungsspezifischeErweiterungType();
+                final TypeGDSXdomeaAnwendungsspezifischeErweiterungType erweiterung = new TypeGDSXdomeaAnwendungsspezifischeErweiterungType();
                 erweiterung.setKennung(anwendungsspezifischeErweiterung.getKennung());
                 erweiterung.setName(anwendungsspezifischeErweiterung.getName());
                 dossier.setAnwendungsspezifischeErweiterung(erweiterung);
             });
 
-            TypeGDSAkte.XjustizFachspezifischeDaten fachspezifischeDaten = new TypeGDSAkte.XjustizFachspezifischeDaten();
+            final TypeGDSAkte.XjustizFachspezifischeDaten fachspezifischeDaten = new TypeGDSAkte.XjustizFachspezifischeDaten();
             fachspezifischeDaten
                     .setAktentyp((CodeGDSAktentyp) createCodeGDSClass(XoevCodeGDS.CODE_GDS_AKTENTYP, XoevCodeGDSAktentyp.BUSSGELDAKTE.getDescriptor()));
 
-            TypeGDSAktenzeichen aktenzeichen = new TypeGDSAktenzeichen();
+            final TypeGDSAktenzeichen aktenzeichen = new TypeGDSAktenzeichen();
 
-            TypeGDSBehoerde behoerde = new TypeGDSBehoerde();
+            final TypeGDSBehoerde behoerde = new TypeGDSBehoerde();
             behoerde.setGericht((CodeGDSGerichteTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_GERICHTE_TYP_3,
                     XoevCodeGDSGerichteTyp3.AMTSGERICHT_MUENCHEN.getDescriptor()));
             aktenzeichen.setAuswahlAzVergebendeStation(behoerde);
@@ -121,17 +122,18 @@ public class SchriftgutobjektBuilder extends XJustizBuilder {
 
             contentAkte.getFachspezifischeDatenAkte().ifPresent(fachspezifischeDatenAkte -> {
 
-                if (fachspezifischeDatenAkte.isAktenzeichenArt())
+                if (fachspezifischeDatenAkte.isAktenzeichenArt()) {
                     aktenzeichen.setAzArt((CodeGDSAktenzeichenart) createCodeGDSClass(XoevCodeGDS.CODE_GDS_AKTENZEICHENART,
                             XoevCodeGDSAktenzeichenart.AKTUELL.getDescriptor()));
+                }
 
-                TypeGDSAktenzeichen.AuswahlAktenzeichen auswahlAktenzeichen = new TypeGDSAktenzeichen.AuswahlAktenzeichen();
+                final TypeGDSAktenzeichen.AuswahlAktenzeichen auswahlAktenzeichen = new TypeGDSAktenzeichen.AuswahlAktenzeichen();
                 fachspezifischeDatenAkte.getFreitext().ifPresent(freitext -> {
                     auswahlAktenzeichen.setAktenzeichenFreitext(freitext);
                 });
 
                 fachspezifischeDatenAkte.getAktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert().ifPresent(auswahlAktenzeichenStrukturiert -> {
-                    TypeGDSAktenzeichen.AuswahlAktenzeichen.AktenzeichenStrukturiert strukturiert = new TypeGDSAktenzeichen.AuswahlAktenzeichen.AktenzeichenStrukturiert();
+                    final TypeGDSAktenzeichen.AuswahlAktenzeichen.AktenzeichenStrukturiert strukturiert = new TypeGDSAktenzeichen.AuswahlAktenzeichen.AktenzeichenStrukturiert();
                     strukturiert.setSachgebietsschluessel(
                             auswahlAktenzeichenStrukturiert.getSachgebietsschluessel());
                     strukturiert.setZusatzkennung(
@@ -161,8 +163,8 @@ public class SchriftgutobjektBuilder extends XJustizBuilder {
         return dossiers;
     }
 
-    private static TypeGDSXdomeaIdentifikationObjektType createIdentifikation(Identifikation contentIdentifikation) {
-        TypeGDSXdomeaIdentifikationObjektType identifikation = new TypeGDSXdomeaIdentifikationObjektType();
+    private static TypeGDSXdomeaIdentifikationObjektType createIdentifikation(final Identifikation contentIdentifikation) {
+        final TypeGDSXdomeaIdentifikationObjektType identifikation = new TypeGDSXdomeaIdentifikationObjektType();
         identifikation.setId(contentIdentifikation.getId());
         identifikation.setNummerImUebergeordnetenContainer(contentIdentifikation.getNummerImUebergeordnetenContainer());
         return identifikation;

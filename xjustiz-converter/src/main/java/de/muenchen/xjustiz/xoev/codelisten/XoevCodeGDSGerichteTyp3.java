@@ -9,7 +9,7 @@ public enum XoevCodeGDSGerichteTyp3 {
 
     private final String descriptor;
 
-    XoevCodeGDSGerichteTyp3(String descriptor) {
+    XoevCodeGDSGerichteTyp3(final String descriptor) {
         this.descriptor = descriptor;
     }
 

@@ -4,12 +4,12 @@ import java.util.Optional;
 import lombok.Getter;
 
 @Getter
-public class FachspezifischeDatenAkte {
+public final class FachspezifischeDatenAkte {
     private final AktenzeichenStrukuriert aktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert;
     private final String freitext;
     private final boolean aktenzeichenArt;
 
-    private FachspezifischeDatenAkte(Builder builder) {
+    private FachspezifischeDatenAkte(final Builder builder) {
         this.aktenzeichenAuswahlAktenzeichenAktenzeichenStrukturiert = builder.aktenzeichen;
         this.freitext = builder.freitext;
         this.aktenzeichenArt = builder.aktenzeichenArt;
@@ -24,13 +24,13 @@ public class FachspezifischeDatenAkte {
         private String freitext;
         private boolean aktenzeichenArt;
 
-        public Builder choiceAktenzeichen(AktenzeichenStrukuriert aktenzeichen, boolean aktenzeichenArt) {
+        public Builder choiceAktenzeichen(final AktenzeichenStrukuriert aktenzeichen, final boolean aktenzeichenArt) {
             this.aktenzeichen = aktenzeichen;
             this.aktenzeichenArt = aktenzeichenArt;
             return this;
         }
 
-        public Builder choiceFreitext(String freitext, boolean aktenzeichenArt) {
+        public Builder choiceFreitext(final String freitext, final boolean aktenzeichenArt) {
             this.freitext = freitext;
             this.aktenzeichenArt = aktenzeichenArt;
             return this;
