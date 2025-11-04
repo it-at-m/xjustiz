@@ -13,7 +13,7 @@ public enum XoevGeschlecht {
 
     private final String descriptor;
 
-    XoevGeschlecht(String descriptor) {
+    XoevGeschlecht(final String descriptor) {
         this.descriptor = descriptor;
     }
 }

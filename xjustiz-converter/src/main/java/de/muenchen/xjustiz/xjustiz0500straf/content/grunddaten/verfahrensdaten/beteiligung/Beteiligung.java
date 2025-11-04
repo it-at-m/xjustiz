@@ -15,9 +15,9 @@ public class Beteiligung {
         return Optional.ofNullable(rollen);
     }
 
-    public void addRolle(Rolle rolle) {
+    public void addRolle(final Rolle rolle) {
         if (this.rollen == null) {
-            this.rollen = new ArrayList<Rolle>();
+            this.rollen = new ArrayList<>();
         }
         this.rollen.add(rolle);
     }

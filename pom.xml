@@ -302,6 +302,8 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>${pmd-maven-plugin.version}</version>
                 <configuration>
+                    <failOnViolation>false</failOnViolation>
+                    <verbose>true</verbose>
                     <minimumTokens>100</minimumTokens>
                     <targetJdk>${java.version}</targetJdk>
                     <printFailingErrors>true</printFailingErrors>

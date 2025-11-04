@@ -9,7 +9,7 @@ public enum XoevCodeGDSRegisterzeichen {
 
     private final String descriptor;
 
-    XoevCodeGDSRegisterzeichen(String descriptor) {
+    XoevCodeGDSRegisterzeichen(final String descriptor) {
         this.descriptor = descriptor;
     }
 }

@@ -11,7 +11,7 @@ public enum XoevCodeGDSRollenbezeichnungTyp3 {
 
     private final String descriptor;
 
-    XoevCodeGDSRollenbezeichnungTyp3(String descriptor) {
+    XoevCodeGDSRollenbezeichnungTyp3(final String descriptor) {
         this.descriptor = descriptor;
     }
 }

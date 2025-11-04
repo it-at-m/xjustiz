@@ -20,7 +20,7 @@ public enum XoevCodeGDS {
 
     private final String descriptor;
 
-    XoevCodeGDS(String value) {
+    XoevCodeGDS(final String value) {
         this.descriptor = value;
     }
 }

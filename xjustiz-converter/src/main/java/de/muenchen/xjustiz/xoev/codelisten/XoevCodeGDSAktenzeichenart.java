@@ -8,7 +8,7 @@ public enum XoevCodeGDSAktenzeichenart {
 
     private final String descriptor;
 
-    XoevCodeGDSAktenzeichenart(String descriptor) {
+    XoevCodeGDSAktenzeichenart(final String descriptor) {
         this.descriptor = descriptor;
     }
 }

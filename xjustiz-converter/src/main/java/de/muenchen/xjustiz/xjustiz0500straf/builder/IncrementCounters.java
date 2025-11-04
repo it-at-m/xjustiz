@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class IncrementCounters {
 
-    int beteiligtenNummer = 0;
-    int entireXmlRollennummer = 0;
+    private int beteiligtenNummer = 0;
+    private int entireXmlRollennummer = 0;
 
-    Map<String, BigInteger> rollenbezeichnungCounter = new HashMap<>();
+    private final Map<String, BigInteger> rollenbezeichnungCounter = new HashMap<>();
 
     public int incrementBeteiligtenNummer() {
         return ++beteiligtenNummer;
@@ -27,10 +27,10 @@ public class IncrementCounters {
         rollenbezeichnungCounter.clear();
     }
 
-    public BigInteger incrementRollenbezeichnungCounter(String rollenbezeichnung) {
+    public BigInteger incrementRollenbezeichnungCounter(final String rollenbezeichnung) {
 
         if (rollenbezeichnungCounter.containsKey(rollenbezeichnung)) {
-            var counter = rollenbezeichnungCounter.get(rollenbezeichnung);
+            BigInteger counter = rollenbezeichnungCounter.get(rollenbezeichnung);
             counter = counter.add(BigInteger.ONE);
             rollenbezeichnungCounter.put(rollenbezeichnung, counter);
             return counter;

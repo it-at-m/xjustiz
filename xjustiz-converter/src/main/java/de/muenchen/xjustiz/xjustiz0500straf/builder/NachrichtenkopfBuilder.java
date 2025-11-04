@@ -18,11 +18,11 @@ public class NachrichtenkopfBuilder extends Builder {
     @Value("${xjustiz.version}")
     protected String xJustizVersion;
 
-    public NachrichtenkopfBuilder(XJustizProperty xjustizProperty, NachrichtenProperty nachrichtenProperty, NachrichtenkopfContent nachrichtenkopfContent) {
+    public NachrichtenkopfBuilder(final XJustizProperty xjustizProperty, final NachrichtenProperty nachrichtenProperty) {
         super(xjustizProperty, nachrichtenProperty);
     }
 
-    public TypeGDSNachrichtenkopf build(NachrichtenkopfContent nachrichtenkopfContent) {
+    public TypeGDSNachrichtenkopf build(final NachrichtenkopfContent nachrichtenkopfContent) {
 
         /**
          *
@@ -37,17 +37,17 @@ public class NachrichtenkopfBuilder extends Builder {
          *
          */
 
-        TypeGDSNachrichtenkopf nachrichtenkopf = new TypeGDSNachrichtenkopf();
+        final TypeGDSNachrichtenkopf nachrichtenkopf = new TypeGDSNachrichtenkopf();
 
         nachrichtenkopf.setXjustizVersion(xJustizVersion);
 
-        TypeGDSNachrichtenkopf.AuswahlAbsender absender = new TypeGDSNachrichtenkopf.AuswahlAbsender();
+        final TypeGDSNachrichtenkopf.AuswahlAbsender absender = new TypeGDSNachrichtenkopf.AuswahlAbsender();
         nachrichtenkopf.getAktenzeichenAbsenders().add(nachrichtenkopfContent.getAktenzeichen());
         absender.setAbsenderSonstige(nachrichtenProperty.getNachrichtenkopf().getAuswahlAbsenderSonstige());
         nachrichtenkopf.setAuswahlAbsender(absender);
 
         nachrichtenkopf.getAktenzeichenEmpfaengers().add("neu");
-        TypeGDSNachrichtenkopf.AuswahlEmpfaenger empfaenger = new TypeGDSNachrichtenkopf.AuswahlEmpfaenger();
+        final TypeGDSNachrichtenkopf.AuswahlEmpfaenger empfaenger = new TypeGDSNachrichtenkopf.AuswahlEmpfaenger();
         empfaenger.setEmpfaengerGericht(
                 (CodeGDSGerichteTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_GERICHTE_TYP_3, XoevCodeGDSGerichteTyp3.AMTSGERICHT_MUENCHEN.getDescriptor()));
         nachrichtenkopf.setAuswahlEmpfaenger(empfaenger);
@@ -58,7 +58,7 @@ public class NachrichtenkopfBuilder extends Builder {
         nachrichtenkopf.getEreignises()
                 .add((CodeGDSEreignisTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_EREIGNIS_TYP_3, XoevCodeGDSEreignisTyp3.NEUEINGANG_E_HAFT.getDescriptor()));
 
-        TypeGDSHerstellerinformation herstellerinformation = new TypeGDSHerstellerinformation();
+        final TypeGDSHerstellerinformation herstellerinformation = new TypeGDSHerstellerinformation();
         herstellerinformation.setNameDesProdukts(nachrichtenProperty.getNachrichtenkopf().getAuswahlHerstellerinformationProduktName());
         herstellerinformation.setHerstellerDesProdukts(nachrichtenProperty.getNachrichtenkopf().getAuswahlHerstellerinformationProdukt());
         herstellerinformation.setVersion(nachrichtenProperty.getNachrichtenkopf().getAuswahlHerstellerinformationProduktVersion());

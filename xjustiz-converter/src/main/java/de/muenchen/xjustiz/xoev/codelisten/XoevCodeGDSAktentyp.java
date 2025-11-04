@@ -9,7 +9,7 @@ public enum XoevCodeGDSAktentyp {
 
     private final String descriptor;
 
-    XoevCodeGDSAktentyp(String descriptor) {
+    XoevCodeGDSAktentyp(final String descriptor) {
         this.descriptor = descriptor;
     }
 }

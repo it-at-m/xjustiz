@@ -10,7 +10,7 @@ public enum XoevCodeGDSBestandteiltyp {
 
     private final String descriptor;
 
-    XoevCodeGDSBestandteiltyp(String descriptor) {
+    XoevCodeGDSBestandteiltyp(final String descriptor) {
         this.descriptor = descriptor;
     }
 }

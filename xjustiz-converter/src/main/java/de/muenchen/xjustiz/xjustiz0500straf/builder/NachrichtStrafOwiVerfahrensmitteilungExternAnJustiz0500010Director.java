@@ -14,9 +14,9 @@ public class NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director 
     private NachrichtenkopfBuilder nachrichtenkopfBuilder;
     private FachdatenBuilder fachdatenBuilder;
 
-    public NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 build(ContentContainer contentContainer) {
+    public NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 build(final ContentContainer contentContainer) {
 
-        NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 message0500010 = new NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010();
+        final NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 message0500010 = new NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010();
 
         contentContainer.getNachrichtenkopfContent().ifPresentOrElse(n -> message0500010.setNachrichtenkopf(nachrichtenkopfBuilder.build(n)), () -> {
             throw new IllegalArgumentException("Grunddaten expected");

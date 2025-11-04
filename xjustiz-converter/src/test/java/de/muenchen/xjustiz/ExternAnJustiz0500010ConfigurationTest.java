@@ -2,6 +2,7 @@ package de.muenchen.xjustiz;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import de.muenchen.xjustiz.generated.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010;
 import de.muenchen.xjustiz.xjustiz0500straf.content.ContentContainer;
 import de.muenchen.xjustiz.xjustiz0500straf.content.GrunddatenContent;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import org.springframework.test.context.ActiveProfiles;
 @CamelSpringBootTest
 @SpringBootTest(classes = { XJustizDocumentRouteBuilder.class })
 @ActiveProfiles({ "default" })
-public class ExternAnJustiz0500010ConfigurationTest extends ExternAnJustiz0500010TestEnvironment {
+class ExternAnJustiz0500010ConfigurationTest extends ExternAnJustiz0500010TestEnvironment {
 
     @Produce()
     private ProducerTemplate startTest;
@@ -34,11 +35,11 @@ public class ExternAnJustiz0500010ConfigurationTest extends ExternAnJustiz050001
     @Test
     void test_organisationNotConfigured() throws Exception {
 
-        var xml = startTest.requestBody(testRoute, new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
+        final String xml = startTest.requestBody(testRoute, new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
                 new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention())), Map.of()),
                 createSchriftgutAktenzeichenStrukuriert()), String.class);
 
-        var externAnJustiz0500010 = parseXML(xml);
+        final NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 externAnJustiz0500010 = parseXML(xml);
 
         assertEquals("1", externAnJustiz0500010.getGrunddaten().getVerfahrensdaten().getBeteiligungs().getLast().getBeteiligter().getBeteiligtennummer(),
                 "All participants are numbered incrementally. Only one beteiligter in whole document expected.");

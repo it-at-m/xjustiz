@@ -8,16 +8,16 @@ import lombok.Data;
 @Data
 public class Anschriften {
 
-    protected List<Anschrift> anschriften;
+    protected List<Anschrift> anschriftenList;
 
-    public Optional<List<Anschrift>> getAnschriften() {
-        return Optional.ofNullable(anschriften);
+    public Optional<List<Anschrift>> getAnschriftenList() {
+        return Optional.ofNullable(anschriftenList);
     }
 
-    public void addAnschrift(Anschrift anschrift) {
-        if (anschriften == null) {
-            anschriften = new ArrayList<>();
+    public void addAnschrift(final Anschrift anschrift) {
+        if (anschriftenList == null) {
+            anschriftenList = new ArrayList<>();
         }
-        anschriften.add(anschrift);
+        anschriftenList.add(anschrift);
     }
 }
