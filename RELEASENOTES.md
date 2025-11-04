@@ -1,5 +1,22 @@
 # Release-Notes
 
+## 4.11.2025
+### Hinzugefuegt
+- Erlassdatum, Rechtskraftdatum
+
+## 30.10.2025
+### Build-Infrastruktur
+- Maven-release eingerichtet.
+
+## 29.10.2025
+### Hinzugefuegt
+- Auslagen, Geldbusse
+- Verfahrensdaten Instansdaten erweitert.
+
+## 1.10.2025
+### Aenderung
+- Ruecksetzten der xJustiz Version 3.6.2 auf 3.5.1.
+
 ## 13.08.2025
 ### Hinzugefuegt
 - Realisierung xjustiz_0500_straf_3_6.xsd nachricht.straf.owi.verfahrensmitteilung.externAnJustiz.0500010.
