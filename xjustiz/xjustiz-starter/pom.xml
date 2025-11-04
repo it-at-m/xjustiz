@@ -5,11 +5,11 @@
     <parent>
         <groupId>de.muenchen.oss</groupId>
         <artifactId>xjustiz</artifactId>
-        <version>0.0.5-SNAPSHOT</version>
+        <version>0.0.7</version>
     </parent>
     <name>xjustiz-starter</name>
     <artifactId>xjustiz-starter</artifactId>
-    <version>0.0.5-SNAPSHOT</version>
+    <version>0.0.7</version>
 
   <properties>
     <!-- Core Frameworks -->
