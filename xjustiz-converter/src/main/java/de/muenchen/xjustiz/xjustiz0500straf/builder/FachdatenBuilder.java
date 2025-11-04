@@ -36,7 +36,6 @@ public class FachdatenBuilder extends Builder {
 
         TypeSTRAFOWITat tat = new TypeSTRAFOWITat();
 
-
         tat.setAnfangsdatum(fachdatenContent.getAnfangsDatumUhrzeit().format(dateFormatter));
         tat.setEndedatum(fachdatenContent.getEndeDatumUhrzeit().format(dateFormatter));
 

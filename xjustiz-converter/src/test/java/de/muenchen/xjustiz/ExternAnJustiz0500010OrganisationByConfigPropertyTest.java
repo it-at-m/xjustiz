@@ -43,7 +43,8 @@ public class ExternAnJustiz0500010OrganisationByConfigPropertyTest extends Exter
     public void init() throws Exception {
 
         Exchange request = ExchangeBuilder.anExchange(camelContext).withBody(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
-                new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention())), createInstanzdaten()), createSchriftgutAktenzeichenStrukuriert())).build();
+                new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention())), createInstanzdaten()),
+                createSchriftgutAktenzeichenStrukuriert())).build();
         var response = startxJustiz0500strafBuilderTest.send(testRoute, request);
         var xml = response.getMessage().getBody(String.class);
         this.externAnJustiz0500010 = parseXML(xml);

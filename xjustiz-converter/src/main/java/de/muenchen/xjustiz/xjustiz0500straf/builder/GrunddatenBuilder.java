@@ -50,58 +50,60 @@ public class GrunddatenBuilder extends Builder {
 
         TypeGDSGrunddaten.Verfahrensdaten verfahrensdaten = new TypeGDSGrunddaten.Verfahrensdaten();
 
-        grunddatenContent.getInstanzdaten().ifPresent(instanzen ->
-                instanzen.forEach((type, fileNumber) -> {
+        grunddatenContent.getInstanzdaten().ifPresent(instanzen -> instanzen.forEach((type, fileNumber) -> {
 
-                                switch (type) {
-                                    case BETEILIGTER: {
-                                        TypeGDSInstanzdaten instanzSachgebietBeteiligter = new TypeGDSInstanzdaten();
-                                        instanzSachgebietBeteiligter.setInstanznummer("0");
-                                        TypeGDSBehoerde abteilung = new TypeGDSBehoerde();
-                                        var beteiligtenNummer = new TypeGDSRefBeteiligtennummer();
-                                        beteiligtenNummer.setRefBeteiligtennummer("2");
-                                        abteilung.setBeteiligter(beteiligtenNummer);
-                                        instanzSachgebietBeteiligter.setAuswahlInstanzbehoerde(abteilung);
+            switch (type) {
+            case BETEILIGTER: {
+                TypeGDSInstanzdaten instanzSachgebietBeteiligter = new TypeGDSInstanzdaten();
+                instanzSachgebietBeteiligter.setInstanznummer("0");
+                TypeGDSBehoerde abteilung = new TypeGDSBehoerde();
+                var beteiligtenNummer = new TypeGDSRefBeteiligtennummer();
+                beteiligtenNummer.setRefBeteiligtennummer("2");
+                abteilung.setBeteiligter(beteiligtenNummer);
+                instanzSachgebietBeteiligter.setAuswahlInstanzbehoerde(abteilung);
 
-                                        var aktenzeichen = new TypeGDSAktenzeichen();
-                                        var auswahlAktenzeichen = new TypeGDSAktenzeichen.AuswahlAktenzeichen();
-                                        auswahlAktenzeichen.setAktenzeichenFreitext(fileNumber.getFreitext());
-                                        aktenzeichen.setAuswahlAktenzeichen(auswahlAktenzeichen);
-                                        instanzSachgebietBeteiligter.setAktenzeichen(aktenzeichen);
+                var aktenzeichen = new TypeGDSAktenzeichen();
+                var auswahlAktenzeichen = new TypeGDSAktenzeichen.AuswahlAktenzeichen();
+                auswahlAktenzeichen.setAktenzeichenFreitext(fileNumber.getFreitext());
+                aktenzeichen.setAuswahlAktenzeichen(auswahlAktenzeichen);
+                instanzSachgebietBeteiligter.setAktenzeichen(aktenzeichen);
 
-                                        verfahrensdaten.getInstanzdatens().add(instanzSachgebietBeteiligter);
+                verfahrensdaten.getInstanzdatens().add(instanzSachgebietBeteiligter);
 
-                                        break;
+                break;
 
-                                    }
-                                    case GERICHT: {
+            }
+            case GERICHT: {
 
-                                        TypeGDSInstanzdaten instanzGericht = new TypeGDSInstanzdaten();
-                                        TypeGDSBehoerde behoerde = new TypeGDSBehoerde();
+                TypeGDSInstanzdaten instanzGericht = new TypeGDSInstanzdaten();
+                TypeGDSBehoerde behoerde = new TypeGDSBehoerde();
 
-                                        instanzGericht.setInstanznummer("1");
-                                        instanzGericht.setAuswahlInstanzbehoerde(behoerde);
+                instanzGericht.setInstanznummer("1");
+                instanzGericht.setAuswahlInstanzbehoerde(behoerde);
 
-                                        instanzGericht.setSachgebiet(
-                                                (CodeGDSSachgebietTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_SACHGEBIET_TYP_3, XoevCodeGDSSachgebietTyp3.OWI_SACHEN.getDescriptor()));
+                instanzGericht.setSachgebiet(
+                        (CodeGDSSachgebietTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_SACHGEBIET_TYP_3,
+                                XoevCodeGDSSachgebietTyp3.OWI_SACHEN.getDescriptor()));
 
-                                        instanzGericht.getAuswahlInstanzbehoerde().setGericht(
-                                                (CodeGDSGerichteTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_GERICHTE_TYP_3, XoevCodeGDSGerichteTyp3.AMTSGERICHT_MUENCHEN.getDescriptor()));
+                instanzGericht.getAuswahlInstanzbehoerde().setGericht(
+                        (CodeGDSGerichteTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_GERICHTE_TYP_3,
+                                XoevCodeGDSGerichteTyp3.AMTSGERICHT_MUENCHEN.getDescriptor()));
 
-                                        var aktenzeichen = new TypeGDSAktenzeichen();
-                                        var auswahlAktenzeichen = new TypeGDSAktenzeichen.AuswahlAktenzeichen();
-                                        auswahlAktenzeichen.setAktenzeichenFreitext(fileNumber.getFreitext());
-                                        aktenzeichen.setAuswahlAktenzeichen(auswahlAktenzeichen);
-                                        instanzGericht.setAktenzeichen(aktenzeichen);
+                var aktenzeichen = new TypeGDSAktenzeichen();
+                var auswahlAktenzeichen = new TypeGDSAktenzeichen.AuswahlAktenzeichen();
+                auswahlAktenzeichen.setAktenzeichenFreitext(fileNumber.getFreitext());
+                aktenzeichen.setAuswahlAktenzeichen(auswahlAktenzeichen);
+                instanzGericht.setAktenzeichen(aktenzeichen);
 
-                                        verfahrensdaten.getInstanzdatens().add(instanzGericht);
+                verfahrensdaten.getInstanzdatens().add(instanzGericht);
 
-                                        break;
+                break;
 
-                                    } default: throw new IllegalArgumentException("Unknown instance type: " + type);
-                                }
-                        }
-                ));
+            }
+            default:
+                throw new IllegalArgumentException("Unknown instance type: " + type);
+            }
+        }));
 
         grunddaten.setVerfahrensdaten(verfahrensdaten);
 

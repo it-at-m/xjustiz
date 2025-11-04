@@ -14,7 +14,6 @@ import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.i
 import de.muenchen.xjustiz.xjustiz0500straf.content.schriftgutobjekte.*;
 import de.muenchen.xjustiz.xoev.codelisten.*;
 import jakarta.xml.bind.JAXBContext;
-
 import java.io.StringReader;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -109,7 +108,7 @@ public class ExternAnJustiz0500010TestEnvironment {
         fachdatenContent.setAuslagen(10.50);
         fachdatenContent.setGeldbusse(15.10);
         fachdatenContent.setErlassdatum(LocalDate.of(2025, 11, 03));
-        fachdatenContent.setRechtskraftdatum(DatatypeFactory.newInstance().newXMLGregorianCalendar(2025, 11, 3,0,0,0,0,0 ));
+        fachdatenContent.setRechtskraftdatum(DatatypeFactory.newInstance().newXMLGregorianCalendar(2025, 11, 3, 0, 0, 0, 0, 0));
 
         Tatort tatortContent = new Tatort();
         tatortContent.getStrasseHausnummer().add(new StrasseHausnummer("EH-TATSTR1", "EH-TATHNR1"));

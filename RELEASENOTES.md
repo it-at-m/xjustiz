@@ -2,7 +2,8 @@
 
 ## 4.11.2025
 ### Hinzugefuegt
-- Erlassdatum, Rechtskraftdatum
+- Erlassdatum, Rechtskraftdatum.
+- Spotless aktiviert.
 
 ## 30.10.2025
 ### Build-Infrastruktur

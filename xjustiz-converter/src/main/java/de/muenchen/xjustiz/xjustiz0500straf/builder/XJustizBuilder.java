@@ -4,9 +4,8 @@ import de.muenchen.xjustiz.generated.*;
 import de.muenchen.xjustiz.xoev.CodelistenProperty;
 import de.muenchen.xjustiz.xoev.XJustizProperty;
 import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDS;
-import lombok.RequiredArgsConstructor;
-
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class XJustizBuilder {

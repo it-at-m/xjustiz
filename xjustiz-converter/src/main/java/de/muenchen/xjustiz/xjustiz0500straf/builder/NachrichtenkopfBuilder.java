@@ -18,8 +18,6 @@ public class NachrichtenkopfBuilder extends Builder {
     @Value("${xjustiz.version}")
     protected String xJustizVersion;
 
-
-
     public NachrichtenkopfBuilder(XJustizProperty xjustizProperty, NachrichtenProperty nachrichtenProperty, NachrichtenkopfContent nachrichtenkopfContent) {
         super(xjustizProperty, nachrichtenProperty);
     }
@@ -50,7 +48,8 @@ public class NachrichtenkopfBuilder extends Builder {
 
         nachrichtenkopf.getAktenzeichenEmpfaengers().add("neu");
         TypeGDSNachrichtenkopf.AuswahlEmpfaenger empfaenger = new TypeGDSNachrichtenkopf.AuswahlEmpfaenger();
-        empfaenger.setEmpfaengerGericht((CodeGDSGerichteTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_GERICHTE_TYP_3, XoevCodeGDSGerichteTyp3.AMTSGERICHT_MUENCHEN.getDescriptor()));
+        empfaenger.setEmpfaengerGericht(
+                (CodeGDSGerichteTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_GERICHTE_TYP_3, XoevCodeGDSGerichteTyp3.AMTSGERICHT_MUENCHEN.getDescriptor()));
         nachrichtenkopf.setAuswahlEmpfaenger(empfaenger);
 
         nachrichtenkopf.setErstellungszeitpunkt(Calendar.getInstance());

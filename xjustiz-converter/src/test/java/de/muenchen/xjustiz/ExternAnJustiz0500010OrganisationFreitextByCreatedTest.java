@@ -1,8 +1,15 @@
 package de.muenchen.xjustiz;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import de.muenchen.xjustiz.generated.*;
 import de.muenchen.xjustiz.xjustiz0500straf.content.ContentContainer;
 import de.muenchen.xjustiz.xjustiz0500straf.content.GrunddatenContent;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
@@ -16,14 +23,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootApplication(scanBasePackages = "de.muenchen.xjustiz")
 @CamelSpringBootTest
@@ -47,7 +46,8 @@ public class ExternAnJustiz0500010OrganisationFreitextByCreatedTest extends Exte
 
         Exchange request = ExchangeBuilder.anExchange(camelContext)
                 .withBody(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
-                        new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention(), createApplicant())), Map.of()), createSchriftgutFreitext()))
+                        new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention(), createApplicant())), Map.of()),
+                        createSchriftgutFreitext()))
                 .build();
         var response = startxJustiz0500strafBuilderTest.send(testRoute, request);
         assertNull(response.getException(), "Error during XML creation.");
@@ -55,7 +55,7 @@ public class ExternAnJustiz0500010OrganisationFreitextByCreatedTest extends Exte
         this.externAnJustiz0500010 = parseXML(xml);
     }
 
-     @Test
+    @Test
     void test_schriftgutobjekte() {
 
         TypeGDSSchriftgutobjekte schriftgutobjekte = this.externAnJustiz0500010.getSchriftgutobjekte();
@@ -89,8 +89,7 @@ public class ExternAnJustiz0500010OrganisationFreitextByCreatedTest extends Exte
         assertEquals("XDOMEA-Erweiterung", schriftgutobjekte.getAktes().getFirst().getAnwendungsspezifischeErweiterung().getName());
 
         assertEquals("freitext", schriftgutobjekte.getAktes().getFirst().getXjustizFachspezifischeDaten().getAktenzeichens().getFirst()
-                 .getAuswahlAktenzeichen().getAktenzeichenFreitext());
-
+                .getAuswahlAktenzeichen().getAktenzeichenFreitext());
 
     }
 

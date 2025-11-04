@@ -106,7 +106,6 @@ public class SchriftgutobjektBuilder extends XJustizBuilder {
                 dossier.setAnwendungsspezifischeErweiterung(erweiterung);
             });
 
-
             TypeGDSAkte.XjustizFachspezifischeDaten fachspezifischeDaten = new TypeGDSAkte.XjustizFachspezifischeDaten();
             fachspezifischeDaten
                     .setAktentyp((CodeGDSAktentyp) createCodeGDSClass(XoevCodeGDS.CODE_GDS_AKTENTYP, XoevCodeGDSAktentyp.BUSSGELDAKTE.getDescriptor()));
@@ -123,7 +122,8 @@ public class SchriftgutobjektBuilder extends XJustizBuilder {
             contentAkte.getFachspezifischeDatenAkte().ifPresent(fachspezifischeDatenAkte -> {
 
                 if (fachspezifischeDatenAkte.isAktenzeichenArt())
-                    aktenzeichen.setAzArt((CodeGDSAktenzeichenart) createCodeGDSClass(XoevCodeGDS.CODE_GDS_AKTENZEICHENART, XoevCodeGDSAktenzeichenart.AKTUELL.getDescriptor()));
+                    aktenzeichen.setAzArt((CodeGDSAktenzeichenart) createCodeGDSClass(XoevCodeGDS.CODE_GDS_AKTENZEICHENART,
+                            XoevCodeGDSAktenzeichenart.AKTUELL.getDescriptor()));
 
                 TypeGDSAktenzeichen.AuswahlAktenzeichen auswahlAktenzeichen = new TypeGDSAktenzeichen.AuswahlAktenzeichen();
                 fachspezifischeDatenAkte.getFreitext().ifPresent(freitext -> {

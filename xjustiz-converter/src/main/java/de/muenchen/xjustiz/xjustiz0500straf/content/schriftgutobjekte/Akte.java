@@ -1,11 +1,9 @@
 package de.muenchen.xjustiz.xjustiz0500straf.content.schriftgutobjekte;
 
-import de.muenchen.xjustiz.xjustiz0500straf.content.FachdatenContent;
+import java.util.Optional;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-
-import java.util.Optional;
 
 /**
  * FachspezifischeDaten are supplemented in SchriftgutObjektBuilder.
@@ -13,7 +11,6 @@ import java.util.Optional;
 @Getter
 @RequiredArgsConstructor
 public class Akte {
-
 
     @NonNull
     private final Identifikation identifikation;
@@ -24,12 +21,15 @@ public class Akte {
     public Optional<Identifikation> getIdentifikation() {
         return Optional.ofNullable(identifikation);
     }
+
     public Optional<Laufzeit> getLaufzeit() {
         return Optional.ofNullable(laufzeit);
     }
+
     public Optional<AnwendungspezifischeErweiterung> getAnwendungspezifischeErweiterung() {
         return Optional.ofNullable(anwendungspezifischeErweiterung);
     }
+
     public Optional<FachspezifischeDatenAkte> getFachspezifischeDatenAkte() {
         return Optional.ofNullable(fachspezifischeDatenAkte);
     }

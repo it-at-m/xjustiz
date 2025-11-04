@@ -9,6 +9,8 @@ import de.muenchen.xjustiz.xjustiz0500straf.content.GrunddatenContent;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
@@ -22,9 +24,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
 
 @SpringBootApplication(scanBasePackages = "de.muenchen.xjustiz")
 @CamelSpringBootTest
@@ -48,7 +47,8 @@ public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends 
 
         Exchange request = ExchangeBuilder.anExchange(camelContext)
                 .withBody(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
-                        new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention(), createApplicant())), createInstanzdaten()), createSchriftgutAktenzeichenStrukuriert()))
+                        new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention(), createApplicant())), createInstanzdaten()),
+                        createSchriftgutAktenzeichenStrukuriert()))
                 .build();
         var response = startxJustiz0500strafBuilderTest.send(testRoute, request);
         assertNull(response.getException(), "Error during XML creation.");
@@ -82,7 +82,8 @@ public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends 
 
         var instanzBeteiligter = verfahrensdaten.getInstanzdatens().get(0).getAuswahlInstanzbehoerde().getBeteiligter();
         assertEquals("2", instanzBeteiligter.getRefBeteiligtennummer(), "Static 2, provided that LHM is always specified as the second participant.");
-        assertEquals("GP-ID_Kassenkontonummer_Datum", verfahrensdaten.getInstanzdatens().get(0).getAktenzeichen().getAuswahlAktenzeichen().getAktenzeichenFreitext());
+        assertEquals("GP-ID_Kassenkontonummer_Datum",
+                verfahrensdaten.getInstanzdatens().get(0).getAktenzeichen().getAuswahlAktenzeichen().getAktenzeichenFreitext());
 
         var instanzGericht = verfahrensdaten.getInstanzdatens().get(1);
         assertEquals("026", instanzGericht.getSachgebiet().getCode(), "Error sachgebiet property.");
@@ -90,7 +91,8 @@ public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends 
         assertEquals("1", instanzGericht.getInstanznummer());
 
         assertEquals("D2601", instanzGericht.getAuswahlInstanzbehoerde().getGericht().getCode(), "Error auswahl-instanzbehoerde-gericht property.");
-        assertEquals("3.6", instanzGericht.getAuswahlInstanzbehoerde().getGericht().getListVersionID(), "Error auswahl-instanzbehoerde-gericht current-version property.");
+        assertEquals("3.6", instanzGericht.getAuswahlInstanzbehoerde().getGericht().getListVersionID(),
+                "Error auswahl-instanzbehoerde-gericht current-version property.");
 
         assertEquals("2", verfahrensdaten.getBeteiligungs().getLast().getRolles().getLast().getRollennummer(), "Two rollen in whole document expected.");
         assertEquals(BigInteger.ONE, verfahrensdaten.getBeteiligungs().getLast().getRolles().getLast().getNr(),
@@ -164,7 +166,8 @@ public class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends 
         assertEquals("13:05", fachdaten.getBussgeldbescheid().getTat().getEndeuhrzeit());
 
         assertEquals("2025-11-03", fachdaten.getBussgeldbescheid().getErlassdatum());
-        assertEquals(DatatypeFactory.newInstance().newXMLGregorianCalendar(2025, 11, 3,-2147483648,-2147483648,-2147483648,-2147483648,0 ), fachdaten.getBussgeldbescheid().getRechtskraft().getRechtskraftdatum());
+        assertEquals(DatatypeFactory.newInstance().newXMLGregorianCalendar(2025, 11, 3, -2147483648, -2147483648, -2147483648, -2147483648, 0),
+                fachdaten.getBussgeldbescheid().getRechtskraft().getRechtskraftdatum());
         assertEquals(10.5, fachdaten.getBussgeldbescheid().getAuslagen());
         assertEquals(15.10, fachdaten.getBussgeldbescheid().getGeldbusse());
 

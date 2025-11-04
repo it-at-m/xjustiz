@@ -1,6 +1,7 @@
 package de.muenchen.xjustiz.xjustiz0500straf.content.schriftgutobjekte;
-import lombok.Getter;
+
 import java.util.Optional;
+import lombok.Getter;
 
 @Getter
 public class FachspezifischeDatenAkte {
