@@ -11,12 +11,6 @@ on:
         description: "Version to use for new local working copy (e.g., 1.2.4-SNAPSHOT)"
         required: true
         default: 0.0.2-SNAPSHOT
-      app-path:
-        type: choice
-        description: Service-Name
-        required: true
-        options:
-          - xjustiz
       skipDeployment:
         type: choice
         description: "Skip deployment to Maven Central?"
@@ -38,7 +32,7 @@ jobs:
       - id: maven-release-step
         uses: it-at-m/lhm_actions/action-templates/actions/action-maven-release@691ffa2542ed7cc1c53c416d22ace9a153d5152f # v1.0.21
         with:
-          app-path: ${{ github.event.inputs.app-path }}
+          app-path: ""
           releaseVersion: ${{ github.event.inputs.releaseVersion }}
           developmentVersion: ${{ github.event.inputs.developmentVersion }}
           skipDeployment: ${{ github.event.inputs.skipDeployment }}
@@ -55,5 +49,5 @@ jobs:
         uses: it-at-m/lhm_actions/action-templates/actions/action-create-github-release@691ffa2542ed7cc1c53c416d22ace9a153d5152f # v1.0.21
         with:
           artifact-name: ${{ needs.release-maven.outputs.ARTIFACT_NAME }}
-          tag-name: ${{ inputs.app-path }}-${{ github.event.inputs.releaseVersion }}
-          artifact-path: ${{ github.event.inputs.app-path }}/target/*.jar
+          tag-name: ${{ github.event.inputs.releaseVersion }}
+          artifact-path: target/*.jar
