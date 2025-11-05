@@ -7,17 +7,17 @@
     <parent>
         <groupId>de.muenchen.oss</groupId>
         <artifactId>xjustiz</artifactId>
-        <version>0.0.5-SNAPSHOT</version>
+        <version>0.0.7-SNAPSHOT</version>
     </parent>
 
     <artifactId>xjustiz-starter</artifactId>
-    <version>0.0.5-SNAPSHOT</version>
+    <version>0.0.7-SNAPSHOT</version>
 
   <properties>
     <!-- Core Frameworks -->
         <camel.spring.boot.dependencies>4.11.0</camel.spring.boot.dependencies>
         <spring.boot>3.4.4</spring.boot>
-        <xjustiz.converter>0.0.1-SNAPSHOT</xjustiz.converter>
+        <xjustiz.converter>0.0.7-SNAPSHOT</xjustiz.converter>
     </properties>
 
     <dependencyManagement>
