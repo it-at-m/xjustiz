@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>de.muenchen.oss</groupId>
-    <artifactId>xjustiz-converter</artifactId>
-    <version>0.0.8-SNAPSHOT</version>
 
     <parent>
         <groupId>de.muenchen.oss</groupId>
         <artifactId>xjustiz</artifactId>
-        <version>0.0.8-SNAPSHOT</version>
+        <version>0.0.7-SNAPSHOT</version>
     </parent>
+
+    <groupId>de.muenchen.oss</groupId>
+    <artifactId>xjustiz-converter</artifactId>
+    <version>0.0.7-SNAPSHOT</version>
+    <name>xjustiz-converter</name>
+    <description>Spring boot implementation project to generate https://xjustiz.justiz.de messages.</description>
 
     <properties>
         <jakarta.xml.bind>4.0.0</jakarta.xml.bind>
@@ -78,31 +82,32 @@
     </dependencies>
 
     <build>
-    <plugins>
-        <!-- https://www.mojohaus.org/jaxb2-maven-plugin/#/repo -->
-        <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>jaxb2-maven-plugin</artifactId>
-            <version>${org.codehaus.mojo}</version>
-            <executions>
-                <execution>
-                    <id>generate-jaxb</id>
-                    <goals>
-                        <goal>xjc</goal>
-                    </goals>
-                </execution>
-            </executions>
-            <configuration>
-                <sources>${project.basedir}/src/main/resources/xsd/XJustiz-3.5.1-XSD/xjustiz_0500_straf_3_5.xsd</sources>
-                <outputDirectory>${project.basedir}/target/generated-sources/jaxb</outputDirectory>
-                <packageName>de.muenchen.xjustiz.generated</packageName>
-                <extension>true</extension>
-                <xjbSources>
-                    <xjbSource>src/main/resources/xsd/global.xjb</xjbSource>
-                </xjbSources>
-            </configuration>
-        </plugin>
-    </plugins>
+        <plugins>
+            <!-- https://www.mojohaus.org/jaxb2-maven-plugin/#/repo -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>${org.codehaus.mojo}</version>
+                <executions>
+                    <execution>
+                        <id>generate-jaxb</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sources>${project.basedir}/src/main/resources/xsd/XJustiz-3.5.1-XSD/xjustiz_0500_straf_3_5.xsd
+                    </sources>
+                    <outputDirectory>${project.basedir}/target/generated-sources/jaxb</outputDirectory>
+                    <packageName>de.muenchen.xjustiz.generated</packageName>
+                    <extension>true</extension>
+                    <xjbSources>
+                        <xjbSource>src/main/resources/xsd/global.xjb</xjbSource>
+                    </xjbSources>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
-    
+
 </project>
