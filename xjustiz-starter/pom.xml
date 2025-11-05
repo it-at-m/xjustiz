@@ -12,6 +12,8 @@
 
     <artifactId>xjustiz-starter</artifactId>
     <version>0.0.7-SNAPSHOT</version>
+    <name>xjustiz-starter</name>
+    <description>Spring boot starter project to generate https://xjustiz.justiz.de messages.</description>
 
   <properties>
     <!-- Core Frameworks -->
