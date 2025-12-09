@@ -1,14 +1,19 @@
 package de.muenchen.xjustiz.xjustiz0500straf.builder;
 
-import de.muenchen.xjustiz.generated.*;
+import de.muenchen.xjustiz.generated.CodeGDSEreignisTyp3;
+import de.muenchen.xjustiz.generated.CodeGDSGerichteTyp3;
+import de.muenchen.xjustiz.generated.TypeGDSHerstellerinformation;
+import de.muenchen.xjustiz.generated.TypeGDSNachrichtenkopf;
 import de.muenchen.xjustiz.xjustiz0500straf.config.NachrichtenProperty;
 import de.muenchen.xjustiz.xjustiz0500straf.content.NachrichtenkopfContent;
 import de.muenchen.xjustiz.xoev.XJustizProperty;
 import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDS;
 import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDSEreignisTyp3;
 import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDSGerichteTyp3;
-import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.UUID;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -42,20 +47,24 @@ public class NachrichtenkopfBuilder extends Builder {
         nachrichtenkopf.setXjustizVersion(xJustizVersion);
 
         final TypeGDSNachrichtenkopf.AuswahlAbsender absender = new TypeGDSNachrichtenkopf.AuswahlAbsender();
-        nachrichtenkopf.getAktenzeichenAbsenders().add(nachrichtenkopfContent.getAktenzeichen());
+        nachrichtenkopf.getAktenzeichenAbsender().add(nachrichtenkopfContent.getAktenzeichen());
         absender.setAbsenderSonstige(nachrichtenProperty.getNachrichtenkopf().getAuswahlAbsenderSonstige());
         nachrichtenkopf.setAuswahlAbsender(absender);
 
-        nachrichtenkopf.getAktenzeichenEmpfaengers().add("neu");
+        nachrichtenkopf.getAktenzeichenEmpfaenger().add("neu");
         final TypeGDSNachrichtenkopf.AuswahlEmpfaenger empfaenger = new TypeGDSNachrichtenkopf.AuswahlEmpfaenger();
         empfaenger.setEmpfaengerGericht(
                 (CodeGDSGerichteTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_GERICHTE_TYP_3, XoevCodeGDSGerichteTyp3.AMTSGERICHT_MUENCHEN.getDescriptor()));
         nachrichtenkopf.setAuswahlEmpfaenger(empfaenger);
 
-        nachrichtenkopf.setErstellungszeitpunkt(Calendar.getInstance());
+        try {
+            nachrichtenkopf.setErstellungszeitpunkt(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()));
+        } catch (DatatypeConfigurationException e) {
+            throw new RuntimeException(e);
+        }
         nachrichtenkopf.setEigeneNachrichtenID(UUID.randomUUID().toString());
 
-        nachrichtenkopf.getEreignises()
+        nachrichtenkopf.getEreignis()
                 .add((CodeGDSEreignisTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_EREIGNIS_TYP_3, XoevCodeGDSEreignisTyp3.NEUEINGANG_E_HAFT.getDescriptor()));
 
         final TypeGDSHerstellerinformation herstellerinformation = new TypeGDSHerstellerinformation();

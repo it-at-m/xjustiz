@@ -6,7 +6,9 @@ import lombok.Getter;
 public enum XoevCodeGDSDokumentklasse {
 
     ANTRAG("antrag-behoerde"),
-    BESCHEID("bescheid");
+    BESCHEID("bescheid"),
+    KOSTENDOKUMENT("kostendokument"),
+    VERWERFUNGSBESCHEID("verwerfung");
 
     private final String descriptor;
 

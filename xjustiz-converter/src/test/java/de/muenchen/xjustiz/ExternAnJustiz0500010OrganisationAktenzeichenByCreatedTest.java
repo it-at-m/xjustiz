@@ -64,7 +64,7 @@ class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends ExternA
                 "Error auswahl-empfaenger-gericht property.");
         assertEquals("Stadt München", nachrichtenkopf.getAuswahlAbsender().getAbsenderSonstige(),
                 "Error auswahl-absender-kommunikationspartner-sonstige property.");
-        final CodeGDSEreignisTyp3 ereignis = nachrichtenkopf.getEreignises().getFirst();
+        final CodeGDSEreignisTyp3 ereignis = nachrichtenkopf.getEreignis().getFirst();
         assertEquals("117", ereignis.getCode(), "Error nachrichtenkopf-ereignis property.");
         assertEquals("1.11", ereignis.getListVersionID(), "Error nachrichtenkopf-ereignis current-version property.");
 
@@ -78,14 +78,14 @@ class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends ExternA
 
         final TypeGDSGrunddaten.Verfahrensdaten verfahrensdaten = this.externAnJustiz0500010.getGrunddaten().getVerfahrensdaten();
 
-        assertEquals("0", verfahrensdaten.getInstanzdatens().get(0).getInstanznummer());
+        assertEquals("0", verfahrensdaten.getInstanzdaten().get(0).getInstanznummer());
 
-        final TypeGDSRefBeteiligtennummer instanzBeteiligter = verfahrensdaten.getInstanzdatens().get(0).getAuswahlInstanzbehoerde().getBeteiligter();
+        final TypeGDSRefBeteiligtennummer instanzBeteiligter = verfahrensdaten.getInstanzdaten().get(0).getAuswahlInstanzbehoerde().getBeteiligter();
         assertEquals("2", instanzBeteiligter.getRefBeteiligtennummer(), "Static 2, provided that LHM is always specified as the second participant.");
         assertEquals("GP-ID_Kassenkontonummer_Datum",
-                verfahrensdaten.getInstanzdatens().get(0).getAktenzeichen().getAuswahlAktenzeichen().getAktenzeichenFreitext());
+                verfahrensdaten.getInstanzdaten().get(0).getAktenzeichen().getAuswahlAktenzeichen().getAktenzeichenFreitext());
 
-        final TypeGDSInstanzdaten instanzGericht = verfahrensdaten.getInstanzdatens().get(1);
+        final TypeGDSInstanzdaten instanzGericht = verfahrensdaten.getInstanzdaten().get(1);
         assertEquals("026", instanzGericht.getSachgebiet().getCode(), "Error sachgebiet property.");
         assertEquals("2.3", instanzGericht.getSachgebiet().getListVersionID(), "Error sachgebiet property.");
         assertEquals("1", instanzGericht.getInstanznummer());
@@ -94,15 +94,15 @@ class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends ExternA
         assertEquals("3.6", instanzGericht.getAuswahlInstanzbehoerde().getGericht().getListVersionID(),
                 "Error auswahl-instanzbehoerde-gericht current-version property.");
 
-        assertEquals("2", verfahrensdaten.getBeteiligungs().getLast().getRolles().getLast().getRollennummer(), "Two rollen in whole document expected.");
-        assertEquals(BigInteger.ONE, verfahrensdaten.getBeteiligungs().getLast().getRolles().getLast().getNr(),
+        assertEquals("2", verfahrensdaten.getBeteiligung().getLast().getRolle().getLast().getRollennummer(), "Two rollen in whole document expected.");
+        assertEquals(BigInteger.ONE, verfahrensdaten.getBeteiligung().getLast().getRolle().getLast().getNr(),
                 "Only one rolle with same rollenbezeichnung expected.");
-        assertEquals("2", verfahrensdaten.getBeteiligungs().getLast().getBeteiligter().getBeteiligtennummer(), "Two beteiligter in whole document expected.");
+        assertEquals("2", verfahrensdaten.getBeteiligung().getLast().getBeteiligter().getBeteiligtennummer(), "Two beteiligter in whole document expected.");
 
-        final List<TypeGDSBeteiligung> beteiligungenNatuerlichePerson = verfahrensdaten.getBeteiligungs().stream()
+        final List<TypeGDSBeteiligung> beteiligungenNatuerlichePerson = verfahrensdaten.getBeteiligung().stream()
                 .filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getNatuerlichePerson() != null).toList();
         assertEquals(1, beteiligungenNatuerlichePerson.size(), "Wrong number of beteiligungen property.");
-        final TypeGDSBeteiligung.Rolle rolleNatuerlichePerson = beteiligungenNatuerlichePerson.getFirst().getRolles().getFirst();
+        final TypeGDSBeteiligung.Rolle rolleNatuerlichePerson = beteiligungenNatuerlichePerson.getFirst().getRolle().getFirst();
         assertEquals("040", rolleNatuerlichePerson.getRollenbezeichnung().getCode());
         assertEquals("3.5", rolleNatuerlichePerson.getRollenbezeichnung().getListVersionID());
 
@@ -112,17 +112,17 @@ class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends ExternA
         assertEquals(1, natuerlichePersonen.size(), "Wrong number of natuerlichePerson property.");
         assertEquals(NatuerlichePerson.NACHNAME, natuerlichePersonen.getFirst().getVollerName().getNachname());
         assertEquals(NatuerlichePerson.VORNAME, natuerlichePersonen.getFirst().getVollerName().getVorname());
-        assertEquals(NatuerlichePerson.STRASSE, natuerlichePersonen.getFirst().getAnschrifts().getFirst().getStrasse());
-        assertEquals(NatuerlichePerson.HAUSNUMMER, natuerlichePersonen.getFirst().getAnschrifts().getFirst().getHausnummer());
-        assertEquals(NatuerlichePerson.POSTFACHNUMMER, natuerlichePersonen.getFirst().getAnschrifts().getFirst().getPostfachnummer());
-        assertEquals(NatuerlichePerson.ANSCHRIFTENZUATZ, natuerlichePersonen.getFirst().getAnschrifts().getFirst().getAnschriftenzusatzs().getFirst());
-        assertEquals(NatuerlichePerson.PLZ, natuerlichePersonen.getFirst().getAnschrifts().getFirst().getPostleitzahl());
-        assertEquals(NatuerlichePerson.POSTFACHNUMMER, natuerlichePersonen.getFirst().getAnschrifts().getFirst().getPostfachnummer());
+        assertEquals(NatuerlichePerson.STRASSE, natuerlichePersonen.getFirst().getAnschrift().getFirst().getStrasse());
+        assertEquals(NatuerlichePerson.HAUSNUMMER, natuerlichePersonen.getFirst().getAnschrift().getFirst().getHausnummer());
+        assertEquals(NatuerlichePerson.POSTFACHNUMMER, natuerlichePersonen.getFirst().getAnschrift().getFirst().getPostfachnummer());
+        assertEquals(NatuerlichePerson.ANSCHRIFTENZUATZ, natuerlichePersonen.getFirst().getAnschrift().getFirst().getAnschriftenzusatz().getFirst());
+        assertEquals(NatuerlichePerson.PLZ, natuerlichePersonen.getFirst().getAnschrift().getFirst().getPostleitzahl());
+        assertEquals(NatuerlichePerson.POSTFACHNUMMER, natuerlichePersonen.getFirst().getAnschrift().getFirst().getPostfachnummer());
 
-        assertEquals("000", natuerlichePersonen.getFirst().getAnschrifts().getFirst().getStaat().getCode());
-        assertEquals("7.0", natuerlichePersonen.getFirst().getAnschrifts().getFirst().getStaat().getListVersionID());
-        assertEquals(NatuerlichePerson.ORT, natuerlichePersonen.getFirst().getAnschrifts().getFirst().getOrt());
-        assertEquals(NatuerlichePerson.WOHNUNGSGEBER, natuerlichePersonen.getFirst().getAnschrifts().getFirst().getWohnungsgeber());
+        assertEquals("000", natuerlichePersonen.getFirst().getAnschrift().getFirst().getStaat().getCode());
+        assertEquals("7.0", natuerlichePersonen.getFirst().getAnschrift().getFirst().getStaat().getListVersionID());
+        assertEquals(NatuerlichePerson.ORT, natuerlichePersonen.getFirst().getAnschrift().getFirst().getOrt());
+        assertEquals(NatuerlichePerson.WOHNUNGSGEBER, natuerlichePersonen.getFirst().getAnschrift().getFirst().getWohnungsgeber());
 
         assertEquals(NatuerlichePerson.GEBURTSSORT, natuerlichePersonen.getFirst().getGeburt().getGeburtsort().getOrt());
         assertEquals(NatuerlichePerson.GEBURTSNAME, natuerlichePersonen.getFirst().getVollerName().getGeburtsname());
@@ -132,27 +132,27 @@ class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends ExternA
 
         assertEquals("1", natuerlichePersonen.getFirst().getGeschlecht().getCode());
 
-        final List<TypeGDSBeteiligung> beteiligungenOrganisation = verfahrensdaten.getBeteiligungs().stream()
+        final List<TypeGDSBeteiligung> beteiligungenOrganisation = verfahrensdaten.getBeteiligung().stream()
                 .filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation() != null).toList();
         assertEquals(1, beteiligungenOrganisation.size(), "Wrong number of beteiligungen property.");
-        final TypeGDSBeteiligung.Rolle rolleOrganisation = beteiligungenOrganisation.getFirst().getRolles().getFirst();
+        final TypeGDSBeteiligung.Rolle rolleOrganisation = beteiligungenOrganisation.getFirst().getRolle().getFirst();
         assertEquals("046", rolleOrganisation.getRollenbezeichnung().getCode());
         assertEquals("3.5", rolleOrganisation.getRollenbezeichnung().getListVersionID());
 
-        final List<TypeGDSOrganisation> organisationen = verfahrensdaten.getBeteiligungs().stream()
+        final List<TypeGDSOrganisation> organisationen = verfahrensdaten.getBeteiligung().stream()
                 .filter(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation() != null)
                 .map(beteiligung -> beteiligung.getBeteiligter().getAuswahlBeteiligter().getOrganisation()).toList();
         assertEquals(1, organisationen.size(), "Wrong number of organisationen property.");
         assertEquals("Created Bezeichnung Aktuell", organisationen.getFirst().getBezeichnung().getBezeichnungAktuell());
-        assertEquals("Created Strasse", organisationen.getFirst().getAnschrifts().getFirst().getStrasse());
-        assertEquals("Created Hausnummer", organisationen.getFirst().getAnschrifts().getFirst().getHausnummer());
-        assertEquals("Created Plz", organisationen.getFirst().getAnschrifts().getFirst().getPostleitzahl());
-        assertEquals("Created Ort", organisationen.getFirst().getAnschrifts().getFirst().getOrt());
+        assertEquals("Created Strasse", organisationen.getFirst().getAnschrift().getFirst().getStrasse());
+        assertEquals("Created Hausnummer", organisationen.getFirst().getAnschrift().getFirst().getHausnummer());
+        assertEquals("Created Plz", organisationen.getFirst().getAnschrift().getFirst().getPostleitzahl());
+        assertEquals("Created Ort", organisationen.getFirst().getAnschrift().getFirst().getOrt());
 
-        assertEquals("Created Iban", organisationen.getFirst().getBankverbindungs().getFirst().getIban());
+        assertEquals("Created Iban", organisationen.getFirst().getBankverbindung().getFirst().getIban());
 
-        assertEquals("003", organisationen.getFirst().getAnschrifts().getFirst().getAnschriftstyp().getCode());
-        assertEquals("3.0", organisationen.getFirst().getAnschrifts().getFirst().getAnschriftstyp().getListVersionID());
+        assertEquals("003", organisationen.getFirst().getAnschrift().getFirst().getAnschriftstyp().getCode());
+        assertEquals("3.0", organisationen.getFirst().getAnschrift().getFirst().getAnschriftstyp().getListVersionID());
 
     }
 
@@ -171,15 +171,15 @@ class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends ExternA
         assertEquals(10.5, fachdaten.getBussgeldbescheid().getAuslagen());
         assertEquals(15.10, fachdaten.getBussgeldbescheid().getGeldbusse());
 
-        assertEquals("EH-TATSTR1", fachdaten.getBussgeldbescheid().getTat().getTatorts().getFirst().getAnschrifts().getFirst().getStrasse());
-        assertEquals("EH-TATHNR1", fachdaten.getBussgeldbescheid().getTat().getTatorts().getFirst().getAnschrifts().getFirst().getHausnummer());
-        assertEquals("EH-TATORT", fachdaten.getBussgeldbescheid().getTat().getTatorts().getFirst().getAnschrifts().getFirst().getOrt());
-        assertEquals("Location", fachdaten.getBussgeldbescheid().getTat().getTatorts().getFirst().getOrtsbeschreibung());
+        assertEquals("EH-TATSTR1", fachdaten.getBussgeldbescheid().getTat().getTatort().getFirst().getAnschrift().getFirst().getStrasse());
+        assertEquals("EH-TATHNR1", fachdaten.getBussgeldbescheid().getTat().getTatort().getFirst().getAnschrift().getFirst().getHausnummer());
+        assertEquals("EH-TATORT", fachdaten.getBussgeldbescheid().getTat().getTatort().getFirst().getAnschrift().getFirst().getOrt());
+        assertEquals("Location", fachdaten.getBussgeldbescheid().getTat().getTatort().getFirst().getOrtsbeschreibung());
 
-        assertEquals("EH-TATSTR2", fachdaten.getBussgeldbescheid().getTat().getTatorts().getLast().getAnschrifts().getLast().getStrasse());
-        assertEquals("EH-TATHNR2", fachdaten.getBussgeldbescheid().getTat().getTatorts().getLast().getAnschrifts().getLast().getHausnummer());
-        assertEquals("EH-TATORT", fachdaten.getBussgeldbescheid().getTat().getTatorts().getLast().getAnschrifts().getLast().getOrt());
-        assertEquals("Location", fachdaten.getBussgeldbescheid().getTat().getTatorts().getLast().getOrtsbeschreibung());
+        assertEquals("EH-TATSTR2", fachdaten.getBussgeldbescheid().getTat().getTatort().getLast().getAnschrift().getLast().getStrasse());
+        assertEquals("EH-TATHNR2", fachdaten.getBussgeldbescheid().getTat().getTatort().getLast().getAnschrift().getLast().getHausnummer());
+        assertEquals("EH-TATORT", fachdaten.getBussgeldbescheid().getTat().getTatort().getLast().getAnschrift().getLast().getOrt());
+        assertEquals("Location", fachdaten.getBussgeldbescheid().getTat().getTatort().getLast().getOrtsbeschreibung());
 
     }
 
@@ -189,42 +189,42 @@ class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends ExternA
         final TypeGDSSchriftgutobjekte schriftgutobjekte = this.externAnJustiz0500010.getSchriftgutobjekte();
         assertEquals("CEEF2150-F915-1F1F-1176-906D00000000", schriftgutobjekte.getAnschreiben().getRefSgo());
 
-        assertEquals("CEEF2150-F915-1F1F-1177-906D00000000", schriftgutobjekte.getDokuments().getFirst().getIdentifikation().getId());
-        assertEquals(BigInteger.ONE, schriftgutobjekte.getDokuments().getFirst().getIdentifikation().getNummerImUebergeordnetenContainer());
-        assertEquals("016", schriftgutobjekte.getDokuments().getFirst().getXjustizFachspezifischeDaten().getDokumentklasse().getCode());
-        assertEquals("1.4", schriftgutobjekte.getDokuments().getFirst().getXjustizFachspezifischeDaten().getDokumentklasse().getListVersionID());
+        assertEquals("CEEF2150-F915-1F1F-1177-906D00000000", schriftgutobjekte.getDokument().getFirst().getIdentifikation().getId());
+        assertEquals(BigInteger.ONE, schriftgutobjekte.getDokument().getFirst().getIdentifikation().getNummerImUebergeordnetenContainer());
+        assertEquals("016", schriftgutobjekte.getDokument().getFirst().getXjustizFachspezifischeDaten().getDokumentklasse().getCode());
+        assertEquals("1.4", schriftgutobjekte.getDokument().getFirst().getXjustizFachspezifischeDaten().getDokumentklasse().getListVersionID());
         assertEquals("CEEF2150-F915-1F1F-1177-906D00000000_1000809085_5793341761427_20240807_EH.pdf",
-                schriftgutobjekte.getDokuments().getFirst().getXjustizFachspezifischeDaten().getAnzeigename());
+                schriftgutobjekte.getDokument().getFirst().getXjustizFachspezifischeDaten().getAnzeigename());
         assertEquals("1000809085_5793341761427_20240807_EH.pdf",
-                schriftgutobjekte.getDokuments().getFirst().getXjustizFachspezifischeDaten().getDateis().getFirst().getDateiname());
-        assertEquals(BigInteger.ONE, schriftgutobjekte.getDokuments().getFirst().getXjustizFachspezifischeDaten().getDateis().getFirst().getVersionsnummer());
-        assertEquals("001", schriftgutobjekte.getDokuments().getFirst().getXjustizFachspezifischeDaten().getDateis().getFirst().getBestandteil().getCode());
+                schriftgutobjekte.getDokument().getFirst().getXjustizFachspezifischeDaten().getDatei().getFirst().getDateiname());
+        assertEquals(BigInteger.ONE, schriftgutobjekte.getDokument().getFirst().getXjustizFachspezifischeDaten().getDatei().getFirst().getVersionsnummer());
+        assertEquals("001", schriftgutobjekte.getDokument().getFirst().getXjustizFachspezifischeDaten().getDatei().getFirst().getBestandteil().getCode());
 
-        assertEquals("CEEF2150-F915-1F1F-1178-906D00000000", schriftgutobjekte.getDokuments().getLast().getIdentifikation().getId());
-        assertEquals(BigInteger.ONE, schriftgutobjekte.getDokuments().getLast().getIdentifikation().getNummerImUebergeordnetenContainer());
-        assertEquals("017", schriftgutobjekte.getDokuments().getLast().getXjustizFachspezifischeDaten().getDokumentklasse().getCode());
+        assertEquals("CEEF2150-F915-1F1F-1178-906D00000000", schriftgutobjekte.getDokument().getLast().getIdentifikation().getId());
+        assertEquals(BigInteger.ONE, schriftgutobjekte.getDokument().getLast().getIdentifikation().getNummerImUebergeordnetenContainer());
+        assertEquals("017", schriftgutobjekte.getDokument().getLast().getXjustizFachspezifischeDaten().getDokumentklasse().getCode());
         assertEquals("CEEF2150-F915-1F1F-1178-906D00000000_1000809085_5793341761427_20240807_URB.pdf",
-                schriftgutobjekte.getDokuments().getLast().getXjustizFachspezifischeDaten().getAnzeigename());
+                schriftgutobjekte.getDokument().getLast().getXjustizFachspezifischeDaten().getAnzeigename());
         assertEquals("1000809085_5793341761427_20240807_URB.pdf",
-                schriftgutobjekte.getDokuments().getLast().getXjustizFachspezifischeDaten().getDateis().getFirst().getDateiname());
-        assertEquals(BigInteger.ONE, schriftgutobjekte.getDokuments().getLast().getXjustizFachspezifischeDaten().getDateis().getLast().getVersionsnummer());
-        assertEquals("002", schriftgutobjekte.getDokuments().getLast().getXjustizFachspezifischeDaten().getDateis().getLast().getBestandteil().getCode());
+                schriftgutobjekte.getDokument().getLast().getXjustizFachspezifischeDaten().getDatei().getFirst().getDateiname());
+        assertEquals(BigInteger.ONE, schriftgutobjekte.getDokument().getLast().getXjustizFachspezifischeDaten().getDatei().getLast().getVersionsnummer());
+        assertEquals("002", schriftgutobjekte.getDokument().getLast().getXjustizFachspezifischeDaten().getDatei().getLast().getBestandteil().getCode());
 
-        assertEquals("CEEF2150-F915-1F1F-1180-906D00000000", schriftgutobjekte.getAktes().getFirst().getIdentifikation().getId());
-        assertEquals(BigInteger.ONE, schriftgutobjekte.getAktes().getFirst().getIdentifikation().getNummerImUebergeordnetenContainer());
+        assertEquals("CEEF2150-F915-1F1F-1180-906D00000000", schriftgutobjekte.getAkte().getFirst().getIdentifikation().getId());
+        assertEquals(BigInteger.ONE, schriftgutobjekte.getAkte().getFirst().getIdentifikation().getNummerImUebergeordnetenContainer());
 
-        assertEquals("XDOMEA-BY", schriftgutobjekte.getAktes().getFirst().getAnwendungsspezifischeErweiterung().getKennung());
-        assertEquals("XDOMEA-Erweiterung", schriftgutobjekte.getAktes().getFirst().getAnwendungsspezifischeErweiterung().getName());
+        assertEquals("XDOMEA-BY", schriftgutobjekte.getAkte().getFirst().getAnwendungsspezifischeErweiterung().getKennung());
+        assertEquals("XDOMEA-Erweiterung", schriftgutobjekte.getAkte().getFirst().getAnwendungsspezifischeErweiterung().getName());
 
-        assertEquals("MusterSachgebietsschlüssel", schriftgutobjekte.getAktes().getFirst().getXjustizFachspezifischeDaten().getAktenzeichens().getFirst()
+        assertEquals("MusterSachgebietsschlüssel", schriftgutobjekte.getAkte().getFirst().getXjustizFachspezifischeDaten().getAktenzeichen().getFirst()
                 .getAuswahlAktenzeichen().getAktenzeichenStrukturiert().getSachgebietsschluessel());
-        assertEquals("MusterAbteilung", schriftgutobjekte.getAktes().getFirst().getXjustizFachspezifischeDaten().getAktenzeichens().getFirst()
+        assertEquals("MusterAbteilung", schriftgutobjekte.getAkte().getFirst().getXjustizFachspezifischeDaten().getAktenzeichen().getFirst()
                 .getAuswahlAktenzeichen().getAktenzeichenStrukturiert().getAbteilung());
-        assertEquals("MusterZusatzkennung", schriftgutobjekte.getAktes().getFirst().getXjustizFachspezifischeDaten().getAktenzeichens().getFirst()
+        assertEquals("MusterZusatzkennung", schriftgutobjekte.getAkte().getFirst().getXjustizFachspezifischeDaten().getAktenzeichen().getFirst()
                 .getAuswahlAktenzeichen().getAktenzeichenStrukturiert().getZusatzkennung());
-        assertEquals("1", schriftgutobjekte.getAktes().getFirst().getXjustizFachspezifischeDaten().getAktenzeichens().getFirst().getAuswahlAktenzeichen()
+        assertEquals("1", schriftgutobjekte.getAkte().getFirst().getXjustizFachspezifischeDaten().getAktenzeichen().getFirst().getAuswahlAktenzeichen()
                 .getAktenzeichenStrukturiert().getLaufendeNummer());
-        assertEquals("2025", schriftgutobjekte.getAktes().getFirst().getXjustizFachspezifischeDaten().getAktenzeichens().getFirst().getAuswahlAktenzeichen()
+        assertEquals("2025", schriftgutobjekte.getAkte().getFirst().getXjustizFachspezifischeDaten().getAktenzeichen().getFirst().getAuswahlAktenzeichen()
                 .getAktenzeichenStrukturiert().getJahr());
 
     }
