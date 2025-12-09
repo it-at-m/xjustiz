@@ -41,11 +41,11 @@ class ExternAnJustiz0500010ConfigurationTest extends ExternAnJustiz0500010TestEn
 
         final NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 externAnJustiz0500010 = parseXML(xml);
 
-        assertEquals("1", externAnJustiz0500010.getGrunddaten().getVerfahrensdaten().getBeteiligungs().getLast().getBeteiligter().getBeteiligtennummer(),
+        assertEquals("1", externAnJustiz0500010.getGrunddaten().getVerfahrensdaten().getBeteiligung().getLast().getBeteiligter().getBeteiligtennummer(),
                 "All participants are numbered incrementally. Only one beteiligter in whole document expected.");
-        assertNotNull(externAnJustiz0500010.getGrunddaten().getVerfahrensdaten().getBeteiligungs().getLast().getBeteiligter().getAuswahlBeteiligter()
+        assertNotNull(externAnJustiz0500010.getGrunddaten().getVerfahrensdaten().getBeteiligung().getLast().getBeteiligter().getAuswahlBeteiligter()
                 .getNatuerlichePerson(), "Natuerliche Person expected.");
-        assertNull(externAnJustiz0500010.getGrunddaten().getVerfahrensdaten().getBeteiligungs().getLast().getBeteiligter().getAuswahlBeteiligter()
+        assertNull(externAnJustiz0500010.getGrunddaten().getVerfahrensdaten().getBeteiligung().getLast().getBeteiligter().getAuswahlBeteiligter()
                 .getOrganisation(), "Organisation not expected");
     }
 

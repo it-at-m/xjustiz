@@ -1,5 +1,10 @@
 # Release-Notes
 
+## 5.12.2025
+### Hinzugefuegt
+- Namespaces (xoev-code, xoev-lc, xsi, tns) werden bei der XML Generierung beruecksichtigt.
+- Kostendokument, Verwerfung
+
 ## 4.11.2025
 ### Hinzugefuegt
 - Erlassdatum, Rechtskraftdatum.

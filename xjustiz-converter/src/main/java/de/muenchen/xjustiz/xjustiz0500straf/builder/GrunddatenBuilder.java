@@ -71,7 +71,7 @@ public class GrunddatenBuilder extends Builder {
         grunddaten.setVerfahrensdaten(verfahrensdaten);
 
         grunddatenContent.getBeteiligungen()
-                .ifPresent(beteiligungen -> beteiligungen.forEach(beteiligung -> verfahrensdaten.getBeteiligungs().add(beteiligungBuilder(beteiligung))));
+                .ifPresent(beteiligungen -> beteiligungen.forEach(beteiligung -> verfahrensdaten.getBeteiligung().add(beteiligungBuilder(beteiligung))));
 
         return grunddaten;
     }
@@ -97,7 +97,7 @@ public class GrunddatenBuilder extends Builder {
         aktenzeichen.setAuswahlAktenzeichen(auswahlAktenzeichen);
         instanzGericht.setAktenzeichen(aktenzeichen);
 
-        verfahrensdaten.getInstanzdatens().add(instanzGericht);
+        verfahrensdaten.getInstanzdaten().add(instanzGericht);
     }
 
     private static void handleBeteiligter(final Aktenzeichen fileNumber, final TypeGDSGrunddaten.Verfahrensdaten verfahrensdaten) {
@@ -115,7 +115,7 @@ public class GrunddatenBuilder extends Builder {
         aktenzeichen.setAuswahlAktenzeichen(auswahlAktenzeichen);
         instanzSachgebietBeteiligter.setAktenzeichen(aktenzeichen);
 
-        verfahrensdaten.getInstanzdatens().add(instanzSachgebietBeteiligter);
+        verfahrensdaten.getInstanzdaten().add(instanzSachgebietBeteiligter);
     }
 
     private TypeGDSBeteiligung beteiligungBuilder(final Beteiligung beteiligungContent) {
@@ -129,7 +129,7 @@ public class GrunddatenBuilder extends Builder {
                 rolle.setNr(incrementCounters.incrementRollenbezeichnungCounter(r.getRollenbezeichnung()));
                 rolle.setRollenbezeichnung(
                         (CodeGDSRollenbezeichnungTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_ROLLENBEZEICHNUNG_TYP_3, r.getRollenbezeichnung()));
-                xjustizBeteiligung.getRolles().add(rolle);
+                xjustizBeteiligung.getRolle().add(rolle);
             });
         });
 
@@ -167,13 +167,13 @@ public class GrunddatenBuilder extends Builder {
                     anschrift.setHausnummer(a.getHausnummer());
                     anschrift.setPostleitzahl(a.getPlz());
                     anschrift.setOrt(a.getOrt());
-                    organisation.getAnschrifts().add(anschrift);
+                    organisation.getAnschrift().add(anschrift);
                 });
             });
 
             final TypeGDSBankverbindung bankverbindung = new TypeGDSBankverbindung();
             bankverbindung.setIban(o.getIban());
-            organisation.getBankverbindungs().add(bankverbindung);
+            organisation.getBankverbindung().add(bankverbindung);
 
             beteiligter.getAuswahlBeteiligter().setOrganisation(organisation);
         });
@@ -227,8 +227,8 @@ public class GrunddatenBuilder extends Builder {
                     anschrift.setOrt(a.getOrt());
                     anschrift.setWohnungsgeber(a.getWohnungsgeber());
                     anschrift.setStaat((CodeGDSStaatenTyp3) createCodeGDSClass(XoevCodeGDS.CODE_GDS_STAATEN_TYP_3, a.getStaat()));
-                    anschrift.getAnschriftenzusatzs().add(a.getAnschriftenzusatz());
-                    person.getAnschrifts().add(anschrift);
+                    anschrift.getAnschriftenzusatz().add(a.getAnschriftenzusatz());
+                    person.getAnschrift().add(anschrift);
 
                 });
             });

@@ -61,34 +61,34 @@ class ExternAnJustiz0500010OrganisationFreitextByCreatedTest extends ExternAnJus
         final TypeGDSSchriftgutobjekte schriftgutobjekte = this.externAnJustiz0500010.getSchriftgutobjekte();
         assertEquals("CEEF2150-F915-1F1F-1176-906D00000000", schriftgutobjekte.getAnschreiben().getRefSgo());
 
-        assertEquals("CEEF2150-F915-1F1F-1177-906D00000000", schriftgutobjekte.getDokuments().getFirst().getIdentifikation().getId());
-        assertEquals(BigInteger.ONE, schriftgutobjekte.getDokuments().getFirst().getIdentifikation().getNummerImUebergeordnetenContainer());
-        assertEquals("016", schriftgutobjekte.getDokuments().getFirst().getXjustizFachspezifischeDaten().getDokumentklasse().getCode());
-        assertEquals("1.4", schriftgutobjekte.getDokuments().getFirst().getXjustizFachspezifischeDaten().getDokumentklasse().getListVersionID());
+        assertEquals("CEEF2150-F915-1F1F-1177-906D00000000", schriftgutobjekte.getDokument().getFirst().getIdentifikation().getId());
+        assertEquals(BigInteger.ONE, schriftgutobjekte.getDokument().getFirst().getIdentifikation().getNummerImUebergeordnetenContainer());
+        assertEquals("016", schriftgutobjekte.getDokument().getFirst().getXjustizFachspezifischeDaten().getDokumentklasse().getCode());
+        assertEquals("1.4", schriftgutobjekte.getDokument().getFirst().getXjustizFachspezifischeDaten().getDokumentklasse().getListVersionID());
         assertEquals("CEEF2150-F915-1F1F-1177-906D00000000_1000809085_5793341761427_20240807_EH.pdf",
-                schriftgutobjekte.getDokuments().getFirst().getXjustizFachspezifischeDaten().getAnzeigename());
+                schriftgutobjekte.getDokument().getFirst().getXjustizFachspezifischeDaten().getAnzeigename());
         assertEquals("1000809085_5793341761427_20240807_EH.pdf",
-                schriftgutobjekte.getDokuments().getFirst().getXjustizFachspezifischeDaten().getDateis().getFirst().getDateiname());
-        assertEquals(BigInteger.ONE, schriftgutobjekte.getDokuments().getFirst().getXjustizFachspezifischeDaten().getDateis().getFirst().getVersionsnummer());
-        assertEquals("001", schriftgutobjekte.getDokuments().getFirst().getXjustizFachspezifischeDaten().getDateis().getFirst().getBestandteil().getCode());
+                schriftgutobjekte.getDokument().getFirst().getXjustizFachspezifischeDaten().getDatei().getFirst().getDateiname());
+        assertEquals(BigInteger.ONE, schriftgutobjekte.getDokument().getFirst().getXjustizFachspezifischeDaten().getDatei().getFirst().getVersionsnummer());
+        assertEquals("001", schriftgutobjekte.getDokument().getFirst().getXjustizFachspezifischeDaten().getDatei().getFirst().getBestandteil().getCode());
 
-        assertEquals("CEEF2150-F915-1F1F-1178-906D00000000", schriftgutobjekte.getDokuments().getLast().getIdentifikation().getId());
-        assertEquals(BigInteger.ONE, schriftgutobjekte.getDokuments().getLast().getIdentifikation().getNummerImUebergeordnetenContainer());
-        assertEquals("017", schriftgutobjekte.getDokuments().getLast().getXjustizFachspezifischeDaten().getDokumentklasse().getCode());
+        assertEquals("CEEF2150-F915-1F1F-1178-906D00000000", schriftgutobjekte.getDokument().getLast().getIdentifikation().getId());
+        assertEquals(BigInteger.ONE, schriftgutobjekte.getDokument().getLast().getIdentifikation().getNummerImUebergeordnetenContainer());
+        assertEquals("017", schriftgutobjekte.getDokument().getLast().getXjustizFachspezifischeDaten().getDokumentklasse().getCode());
         assertEquals("CEEF2150-F915-1F1F-1178-906D00000000_1000809085_5793341761427_20240807_URB.pdf",
-                schriftgutobjekte.getDokuments().getLast().getXjustizFachspezifischeDaten().getAnzeigename());
+                schriftgutobjekte.getDokument().getLast().getXjustizFachspezifischeDaten().getAnzeigename());
         assertEquals("1000809085_5793341761427_20240807_URB.pdf",
-                schriftgutobjekte.getDokuments().getLast().getXjustizFachspezifischeDaten().getDateis().getFirst().getDateiname());
-        assertEquals(BigInteger.ONE, schriftgutobjekte.getDokuments().getLast().getXjustizFachspezifischeDaten().getDateis().getLast().getVersionsnummer());
-        assertEquals("002", schriftgutobjekte.getDokuments().getLast().getXjustizFachspezifischeDaten().getDateis().getLast().getBestandteil().getCode());
+                schriftgutobjekte.getDokument().getLast().getXjustizFachspezifischeDaten().getDatei().getFirst().getDateiname());
+        assertEquals(BigInteger.ONE, schriftgutobjekte.getDokument().getLast().getXjustizFachspezifischeDaten().getDatei().getLast().getVersionsnummer());
+        assertEquals("002", schriftgutobjekte.getDokument().getLast().getXjustizFachspezifischeDaten().getDatei().getLast().getBestandteil().getCode());
 
-        assertEquals("CEEF2150-F915-1F1F-1180-906D00000000", schriftgutobjekte.getAktes().getFirst().getIdentifikation().getId());
-        assertEquals(BigInteger.ONE, schriftgutobjekte.getAktes().getFirst().getIdentifikation().getNummerImUebergeordnetenContainer());
+        assertEquals("CEEF2150-F915-1F1F-1180-906D00000000", schriftgutobjekte.getAkte().getFirst().getIdentifikation().getId());
+        assertEquals(BigInteger.ONE, schriftgutobjekte.getAkte().getFirst().getIdentifikation().getNummerImUebergeordnetenContainer());
 
-        assertEquals("XDOMEA-BY", schriftgutobjekte.getAktes().getFirst().getAnwendungsspezifischeErweiterung().getKennung());
-        assertEquals("XDOMEA-Erweiterung", schriftgutobjekte.getAktes().getFirst().getAnwendungsspezifischeErweiterung().getName());
+        assertEquals("XDOMEA-BY", schriftgutobjekte.getAkte().getFirst().getAnwendungsspezifischeErweiterung().getKennung());
+        assertEquals("XDOMEA-Erweiterung", schriftgutobjekte.getAkte().getFirst().getAnwendungsspezifischeErweiterung().getName());
 
-        assertEquals("freitext", schriftgutobjekte.getAktes().getFirst().getXjustizFachspezifischeDaten().getAktenzeichens().getFirst()
+        assertEquals("freitext", schriftgutobjekte.getAkte().getFirst().getXjustizFachspezifischeDaten().getAktenzeichen().getFirst()
                 .getAuswahlAktenzeichen().getAktenzeichenFreitext());
 
     }

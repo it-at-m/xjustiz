@@ -57,9 +57,9 @@ public class FachdatenBuilder extends Builder {
                 anschrift.setHausnummer(sh.getHausnummer());
                 anschrift.setOrt(t.getOrt());
 
-                tatort.getAnschrifts().add(anschrift);
+                tatort.getAnschrift().add(anschrift);
             });
-            tat.getTatorts().add(tatort);
+            tat.getTatort().add(tatort);
         });
 
         bussgeldbescheid.setTat(tat);

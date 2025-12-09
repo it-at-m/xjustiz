@@ -29,11 +29,11 @@ public class SchriftgutobjektBuilder extends XJustizBuilder {
         });
 
         schriftgutContent.getDokumente().ifPresent(contentDokumente -> {
-            createDocuments(contentDokumente).forEach(d -> schriftobjekte.getDokuments().add(d));
+            createDocuments(contentDokumente).forEach(d -> schriftobjekte.getDokument().add(d));
         });
 
         schriftgutContent.getAkten().ifPresent(contentAkten -> {
-            createDossier(contentAkten).forEach(a -> schriftobjekte.getAktes().add(a));
+            createDossier(contentAkten).forEach(a -> schriftobjekte.getAkte().add(a));
         });
 
         return schriftobjekte;
@@ -72,7 +72,7 @@ public class SchriftgutobjektBuilder extends XJustizBuilder {
                 datei.setVersionsnummer(d.getVersionsnummer());
                 dateien.add(datei);
             });
-            dateien.forEach(d -> fachspezifischeDaten.getDateis().add(d));
+            dateien.forEach(d -> fachspezifischeDaten.getDatei().add(d));
 
             document.setXjustizFachspezifischeDaten(fachspezifischeDaten);
 
@@ -118,7 +118,7 @@ public class SchriftgutobjektBuilder extends XJustizBuilder {
                     XoevCodeGDSGerichteTyp3.AMTSGERICHT_MUENCHEN.getDescriptor()));
             aktenzeichen.setAuswahlAzVergebendeStation(behoerde);
 
-            fachspezifischeDaten.getAktenzeichens().add(aktenzeichen);
+            fachspezifischeDaten.getAktenzeichen().add(aktenzeichen);
 
             contentAkte.getFachspezifischeDatenAkte().ifPresent(fachspezifischeDatenAkte -> {
 
