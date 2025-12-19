@@ -5,12 +5,12 @@
     <parent>
         <groupId>de.muenchen.oss</groupId>
         <artifactId>xjustiz</artifactId>
-        <version>0.0.9</version>
+        <version>0.0.10-SNAPSHOT</version>
     </parent>
 
     <groupId>de.muenchen.oss</groupId>
     <artifactId>xjustiz-converter</artifactId>
-    <version>0.0.9</version>
+    <version>0.0.10-SNAPSHOT</version>
     <name>xjustiz-converter</name>
     <description>Spring boot implementation project to generate https://xjustiz.justiz.de messages.</description>
 
