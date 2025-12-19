@@ -2,13 +2,14 @@
 @XmlSchema(
         namespace = "http://www.xjustiz.de",
         xmlns = {
-                @XmlNs(prefix = "tns", namespaceURI = "http://www.xjustiz.de"),
-                @XmlNs(prefix = "xoev-code", namespaceURI = "http://xoev.de/schemata/code/1_0"),
-                @XmlNs(prefix = "xoev-lc", namespaceURI = "http://xoev.de/latinchars/1_1/datatypes"),
-                @XmlNs(prefix = "xsi", namespaceURI = "http://www.w3.org/2001/XMLSchema-instance")
+                @XmlNs(prefix = "xsi", namespaceURI = "http://www.w3.org/2001/XMLSchema-instance"),
+                @XmlNs(prefix = "din91379", namespaceURI = "urn:xoev-de:kosit:xoev:datentyp:din-91379_2022-08"),
+                @XmlNs(prefix = "tns", namespaceURI = "http://www.xjustiz.de")
         },
-        elementFormDefault = XmlNsForm.UNQUALIFIED
+        elementFormDefault = XmlNsForm.UNQUALIFIED,
+        location = "xjustiz_0500_straf_3_5.xsd"
 )
+
 package de.muenchen.xjustiz.generated;
 
 import jakarta.xml.bind.annotation.XmlNs;
