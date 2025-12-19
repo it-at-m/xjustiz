@@ -1,6 +1,7 @@
 package de.muenchen.xjustiz;
 
 import de.muenchen.xjustiz.config.JaxbConfig;
+import de.muenchen.xjustiz.config.XJustiz0500StrafProcessor;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,7 @@ public class XJustizDocumentRouteBuilder extends RouteBuilder {
                 .to("log:de.muenchen.xjustiz.xjustiz-document-processor?level=DEBUG")
                 .process("builderConnector")
                 .marshal().jaxb(JaxbConfig.CONTEXT_PATH)
+                .process(new XJustiz0500StrafProcessor())
                 .to("log:de.muenchen.xjustiz.xjustiz-document-processor?level=DEBUG")
                 .to("validator:xsd/XJustiz-3.5.1-XSD/xjustiz_0500_straf_3_5.xsd");
 

@@ -6,11 +6,6 @@ import jakarta.xml.bind.Marshaller;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * Not absolutely necessary with unqualified namespaces.
- * However, if further extensions are necessary, the class may be required again.
- */
-
 @Configuration
 public class JaxbConfig {
 
