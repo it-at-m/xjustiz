@@ -35,6 +35,7 @@
     <modules>
         <module>xjustiz-converter</module>
         <module>xjustiz-starter</module>
+        <module>xjustiz-0500-straf</module>
     </modules>
 
     <developers>
@@ -56,7 +57,7 @@
         <logstash-logback-encoder.version>8.1</logstash-logback-encoder.version>
 
         <!-- Linting & Formatting -->
-        <spotless-maven-plugin.version>2.44.5</spotless-maven-plugin.version>
+        <spotless-maven-plugin.version>2.46.0</spotless-maven-plugin.version>
         <itm-java-codeformat.version>1.0.10</itm-java-codeformat.version>
         <pmd-maven-plugin.version>3.26.0</pmd-maven-plugin.version>
 
@@ -82,10 +83,12 @@
         <p2.mirror>download.eclipse.org</p2.mirror>
 
         <!-- Others -->
-        <lombok.version>1.18.36</lombok.version>
+        <lombok.version>1.18.42</lombok.version>
         <mockito.version>5.14.2</mockito.version>
         <central-publishing-maven-plugin.version>0.7.0</central-publishing-maven-plugin.version>
         <maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
+        
+        <camel-spring-boot-dependencies.version>4.10.5</camel-spring-boot-dependencies.version>
 
     </properties>
 
@@ -266,6 +269,11 @@
                         <artifactId>itm-java-codeformat</artifactId>
                         <version>${itm-java-codeformat.version}</version>
                     </dependency>
+                    <dependency>
+			            <groupId>org.projectlombok</groupId>
+			            <artifactId>lombok</artifactId>
+			            <version>${lombok.version}</version>
+			        </dependency>
                 </dependencies>
                 <configuration>
                     <java>
@@ -274,6 +282,7 @@
                             <include>src/test/java/**/*.java</include> <!-- Check application tests code -->
                         </includes>
                         <eclipse>
+                        	<version>4.26</version>
                             <file>itm-java-codeformat/java_codestyle_formatter.xml</file>
                             <p2Mirrors>
                                 <p2Mirror>

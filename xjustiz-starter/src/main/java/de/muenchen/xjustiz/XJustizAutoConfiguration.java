@@ -1,13 +1,19 @@
 package de.muenchen.xjustiz;
 
-import de.muenchen.xjustiz.xjustiz0500straf.builder.*;
-import de.muenchen.xjustiz.xjustiz0500straf.config.NachrichtenProperty;
-import de.muenchen.xjustiz.xjustiz0500straf.content.NachrichtenkopfContent;
-import de.muenchen.xjustiz.xoev.XJustizProperty;
+
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+
+import de.muenchen.xjustiz.xjustiz0500straf.builder.FachdatenBuilder;
+import de.muenchen.xjustiz.xjustiz0500straf.builder.GrunddatenBuilder;
+import de.muenchen.xjustiz.xjustiz0500straf.builder.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director;
+import de.muenchen.xjustiz.xjustiz0500straf.builder.NachrichtenkopfBuilder;
+import de.muenchen.xjustiz.xjustiz0500straf.builder.SchriftgutobjektBuilder;
+import de.muenchen.xjustiz.xjustiz0500straf.config.NachrichtenProperty;
+import de.muenchen.xjustiz.xjustiz0500straf.content.NachrichtenkopfContent;
+import de.muenchen.xjustiz.xoev.XJustizProperty;
 
 @AutoConfiguration
 public class XJustizAutoConfiguration {
@@ -18,12 +24,12 @@ public class XJustizAutoConfiguration {
         return new XJustizDocumentRouteBuilder();
     }
 
-    @Bean
-    @ConditionalOnMissingBean
-    public BuilderConnector builderConnector(
-            final NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director nachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director) {
-        return new BuilderConnector(nachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director);
-    }
+//    @Bean
+//    @ConditionalOnMissingBean
+//    public BuilderConnector builderConnector(
+//            final NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director nachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director) {
+//        return new BuilderConnector(nachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director);
+//    }
 
     @Bean
     @ConditionalOnMissingBean

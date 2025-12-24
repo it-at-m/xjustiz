@@ -1,5 +1,5 @@
 # Release-Notes
-## 18.12.2026
+## 18.12.2025
 ### Aenderung
 - Standalone=true entfernt.
 - Namespaces geaendert (xsi:schemaLocation, xmlns:xsi, din91379, tns).
