@@ -1,11 +1,5 @@
 package de.muenchen.xjustiz;
 
-
-import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Bean;
-
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder.FachdatenBuilder;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder.GrunddatenBuilder;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director;
@@ -14,6 +8,10 @@ import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmittei
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.config.NachrichtenProperty;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.NachrichtenkopfContent;
 import de.muenchen.xjustiz.xoev.XJustizProperty;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
 
 @AutoConfiguration
 public class XJustizAutoConfiguration {
@@ -24,12 +22,12 @@ public class XJustizAutoConfiguration {
         return new XJustizDocumentRouteBuilder();
     }
 
-//    @Bean
-//    @ConditionalOnMissingBean
-//    public BuilderConnector builderConnector(
-//            final NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director nachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director) {
-//        return new BuilderConnector(nachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director);
-//    }
+    //    @Bean
+    //    @ConditionalOnMissingBean
+    //    public BuilderConnector builderConnector(
+    //            final NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director nachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director) {
+    //        return new BuilderConnector(nachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director);
+    //    }
 
     @Bean
     @ConditionalOnMissingBean

@@ -1,14 +1,20 @@
 package de.muenchen.xjustiz;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import de.muenchen.xjustiz.config.DynamicJsonUnmarshaller;
+import de.muenchen.xjustiz.config.DynamicXmlMarshaller;
+import de.muenchen.xjustiz.generated.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010;
+import de.muenchen.xjustiz.generated.TypeGDSSchriftgutobjekte;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.ContentContainer;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.GrunddatenContent;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
@@ -22,16 +28,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import de.muenchen.xjustiz.config.DynamicJsonUnmarshaller;
-import de.muenchen.xjustiz.config.DynamicXmlMarshaller;
-import de.muenchen.xjustiz.generated.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010;
-import de.muenchen.xjustiz.generated.TypeGDSSchriftgutobjekte;
-import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director;
-import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.ContentContainer;
-import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.GrunddatenContent;
 
 @SpringBootApplication(scanBasePackages = "de.muenchen.xjustiz")
 @CamelSpringBootTest
@@ -52,10 +48,10 @@ class ExternAnJustiz0500010OrganisationFreitextByCreatedTest extends ExternAnJus
     private NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director nachrichtDirector;
 
     private NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 externAnJustiz0500010;
-    
+
     @Autowired
     private ObjectMapper objectMapper;
- 
+
     @BeforeEach
     public void init() throws Exception {
 
@@ -64,7 +60,8 @@ class ExternAnJustiz0500010OrganisationFreitextByCreatedTest extends ExternAnJus
                 .withHeader(DynamicJsonUnmarshaller.UNMARSHAL_CLASS_TYPE, NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.class)
                 .withBody(objectMapper.writeValueAsString(nachrichtDirector.build(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
                         new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention(), createApplicant())), Map.of()),
-                        createSchriftgutFreitext())))).build();
+                        createSchriftgutFreitext()))))
+                .build();
 
         final Exchange response = startxJustiz0500strafBuilderTest.send(testRoute, request);
         assertNull(response.getException(), "Error during XML creation.");
