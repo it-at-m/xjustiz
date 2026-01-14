@@ -13,18 +13,33 @@ import lombok.*;
 @NoArgsConstructor
 public class FachdatenContent {
 
-    private Optional<LocalDate> erlassdatum = Optional.empty();
+    private LocalDate erlassdatum;
     private XMLGregorianCalendar rechtskraftdatum;
 
     private Double geldbusse;
     private Double auslagen;
 
-    private Optional<LocalDateTime> datumUhrzeit = Optional.empty();
+    private LocalDateTime datumUhrzeit;
 
-    private Optional<LocalDateTime> anfangsDatumUhrzeit = Optional.empty();
+    private LocalDateTime anfangsDatumUhrzeit;
 
-    private Optional<LocalDateTime> endeDatumUhrzeit = Optional.empty();
+    private LocalDateTime endeDatumUhrzeit;
 
     private final List<Tatort> tatorte = new ArrayList<>();
 
+    public Optional<LocalDate> getErlassdatum() {
+        return Optional.ofNullable(erlassdatum);
+    }
+
+    public Optional<LocalDateTime> getDatumUhrzeit() {
+        return Optional.ofNullable(datumUhrzeit);
+    }
+
+    public Optional<LocalDateTime> getAnfangsDatumUhrzeit() {
+        return Optional.ofNullable(anfangsDatumUhrzeit);
+    }
+
+    public Optional<LocalDateTime> getEndeDatumUhrzeit() {
+        return Optional.ofNullable(endeDatumUhrzeit);
+    }
 }

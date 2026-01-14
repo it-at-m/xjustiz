@@ -33,7 +33,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.TreeMap;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -119,11 +118,11 @@ class ExternAnJustiz0500010TestEnvironment {
     protected FachdatenContent createFachdaten() throws DatatypeConfigurationException {
 
         final FachdatenContent fachdatenContent = new FachdatenContent();
-        fachdatenContent.setAnfangsDatumUhrzeit(Optional.of(LocalDateTime.of(2024, 10, 1, 12, 0)));
-        fachdatenContent.setEndeDatumUhrzeit(Optional.of(LocalDateTime.of(2024, 10, 1, 13, 5)));
+        fachdatenContent.setAnfangsDatumUhrzeit(LocalDateTime.of(2024, 10, 1, 12, 0));
+        fachdatenContent.setEndeDatumUhrzeit(LocalDateTime.of(2024, 10, 1, 13, 5));
         fachdatenContent.setAuslagen(10.50);
         fachdatenContent.setGeldbusse(15.10);
-        fachdatenContent.setErlassdatum(Optional.of(LocalDate.of(2025, 11, 03)));
+        fachdatenContent.setErlassdatum(LocalDate.of(2025, 11, 03));
         fachdatenContent.setRechtskraftdatum(DatatypeFactory.newInstance().newXMLGregorianCalendar(2025, 11, 3, 0, 0, 0, 0, 0));
 
         final Tatort tatortContent = new Tatort();
@@ -158,10 +157,10 @@ class ExternAnJustiz0500010TestEnvironment {
     protected SchriftgutContent createSchriftgutAktenzeichenStrukuriert() {
 
         final SchriftgutContent schriftgutContent = new SchriftgutContent();
-        schriftgutContent.setAnschreiben(Optional.of("CEEF2150-F915-1F1F-1176-906D00000000"));
+        schriftgutContent.setAnschreiben("CEEF2150-F915-1F1F-1176-906D00000000");
 
-        schriftgutContent.setDokumente(Optional.of(createDocuments()));
-        schriftgutContent.setAkten(Optional.of(createDossiersIdentifikationLaufzeitErweiterungFachspezifischeDaten()));
+        schriftgutContent.setDokumente(createDocuments());
+        schriftgutContent.setAkten(createDossiersIdentifikationLaufzeitErweiterungFachspezifischeDaten());
 
         return schriftgutContent;
 
@@ -170,10 +169,10 @@ class ExternAnJustiz0500010TestEnvironment {
     protected SchriftgutContent createSchriftgutFreitext() {
 
         final SchriftgutContent schriftgutContent = new SchriftgutContent();
-        schriftgutContent.setAnschreiben(Optional.of("CEEF2150-F915-1F1F-1176-906D00000000"));
+        schriftgutContent.setAnschreiben("CEEF2150-F915-1F1F-1176-906D00000000");
 
-        schriftgutContent.setDokumente(Optional.of(createDocuments()));
-        schriftgutContent.setAkten(Optional.of(createDossiersFreitext()));
+        schriftgutContent.setDokumente(createDocuments());
+        schriftgutContent.setAkten(createDossiersFreitext());
 
         return schriftgutContent;
 

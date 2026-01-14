@@ -17,14 +17,6 @@
 	<description>Spring boot implementation project to generate
 		https://xjustiz.justiz.de messages.</description>
 
-	<!--<properties>
-		<jakarta.xml.bind>4.0.0</jakarta.xml.bind>
-		<org.glassfish.jaxb>4.0.2</org.glassfish.jaxb>
-		<org.codehaus.mojo>4.0.0</org.codehaus.mojo>
-		<com.fasterxml.jackson.core>2.18.4</com.fasterxml.jackson.core>
-		<camel-spring-boot-dependencies.version>4.10.5</camel-spring-boot-dependencies.version>
-	</properties>-->
-
 	<dependencyManagement>
 		<dependencies>
 			<!-- Camel BOM -->
@@ -57,47 +49,6 @@
 			<artifactId>camel-jackson-starter</artifactId>
 		</dependency>
 
-		<!--        <dependency>-->
-		<!--            <groupId>com.fasterxml.jackson.core</groupId>-->
-		<!--            <artifactId>jackson-annotations</artifactId>-->
-		<!--            <version>${com.fasterxml.jackson.core}</version>-->
-		<!--        </dependency>-->
-		<!--        <dependency>-->
-		<!--            <groupId>com.fasterxml.jackson.core</groupId>-->
-		<!--            <artifactId>jackson-core</artifactId>-->
-		<!--            <version>${com.fasterxml.jackson.core}</version>-->
-		<!--        </dependency>-->
-		<!--        <dependency>-->
-		<!--            <groupId>com.fasterxml.jackson.core</groupId>-->
-		<!--            <artifactId>jackson-databind</artifactId>-->
-		<!--            <version>${com.fasterxml.jackson.core}</version>-->
-		<!--        </dependency>-->
-
-		<!--         JAXB Runtime (Jakarta JAXB 3) -->
-		<!--        <dependency>-->
-		<!--            <groupId>org.glassfish.jaxb</groupId>-->
-		<!--            <artifactId>jaxb-runtime</artifactId>-->
-		<!--            <version>${org.glassfish.jaxb}</version>-->
-		<!--        </dependency>-->
-
-		<!--        <dependency>-->
-		<!--            <groupId>jakarta.xml.bind</groupId>-->
-		<!--            <artifactId>jakarta.xml.bind-api</artifactId>-->
-		<!--            <version>${jakarta.xml.bind}</version>-->
-		<!--        </dependency>-->
-
-		<!-- Test -->
-<!--		<dependency>-->
-<!--			<groupId>org.apache.camel</groupId>-->
-<!--			<artifactId>camel-test-spring-junit5</artifactId>-->
-<!--			<scope>test</scope>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-test</artifactId>-->
-<!--			<scope>test</scope>-->
-<!--		</dependency>-->
-
 		<!-- Logback Core -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
@@ -115,34 +66,5 @@
 		</dependency>
 
 	</dependencies>
-
-	<!--<build>
-		<plugins>
-			 https://www.mojohaus.org/jaxb2-maven-plugin/#/repo 
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>jaxb2-maven-plugin</artifactId>
-				<version>${org.codehaus.mojo}</version>
-				<executions>
-					<execution>
-						<id>generate-jaxb</id>
-						<goals>
-							<goal>xjc</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<sources>
-						${project.basedir}/src/main/resources/xsd/XJustiz-3.5.1-XSD/xjustiz_0500_straf_3_5.xsd
-                    </sources>
-					<outputDirectory>
-						${project.basedir}/target/generated-sources/jaxb</outputDirectory>
-					<packageName>de.muenchen.xjustiz.generated</packageName>
-					<extension>true</extension>
-					<noPackageLevelAnnotations>true</noPackageLevelAnnotations>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>-->
 
 </project>
