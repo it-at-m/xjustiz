@@ -1,4 +1,9 @@
 # Release-Notes
+## 24.12.2025
+### Refactoring
+- xJustiz Dokumentenerstellung in eigenes Maven Modul verschoben.
+- XML Generierung parameterisiert.
+
 ## 18.12.2025
 ### Aenderung
 - Standalone=true entfernt.

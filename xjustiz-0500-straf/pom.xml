@@ -7,7 +7,7 @@
   </parent>
   <artifactId>xjustiz-0500-straf</artifactId>
   <name>xjustiz-0500-straf</name>
-  <description>Implements NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 document</description>
+  <description>Implements xjustiz_0500_straf_x_x.xsd documents </description>
   
  <properties>
 		<!--<jakarta.xml.bind>4.0.0</jakarta.xml.bind>

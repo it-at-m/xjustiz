@@ -6,13 +6,13 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 
-import de.muenchen.xjustiz.xjustiz0500straf.builder.FachdatenBuilder;
-import de.muenchen.xjustiz.xjustiz0500straf.builder.GrunddatenBuilder;
-import de.muenchen.xjustiz.xjustiz0500straf.builder.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director;
-import de.muenchen.xjustiz.xjustiz0500straf.builder.NachrichtenkopfBuilder;
-import de.muenchen.xjustiz.xjustiz0500straf.builder.SchriftgutobjektBuilder;
-import de.muenchen.xjustiz.xjustiz0500straf.config.NachrichtenProperty;
-import de.muenchen.xjustiz.xjustiz0500straf.content.NachrichtenkopfContent;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder.FachdatenBuilder;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder.GrunddatenBuilder;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder.NachrichtenkopfBuilder;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder.SchriftgutobjektBuilder;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.config.NachrichtenProperty;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.NachrichtenkopfContent;
 import de.muenchen.xjustiz.xoev.XJustizProperty;
 
 @AutoConfiguration

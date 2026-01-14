@@ -29,9 +29,9 @@ import de.muenchen.xjustiz.config.DynamicJsonUnmarshaller;
 import de.muenchen.xjustiz.config.DynamicXmlMarshaller;
 import de.muenchen.xjustiz.generated.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010;
 import de.muenchen.xjustiz.generated.TypeGDSSchriftgutobjekte;
-import de.muenchen.xjustiz.xjustiz0500straf.builder.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director;
-import de.muenchen.xjustiz.xjustiz0500straf.content.ContentContainer;
-import de.muenchen.xjustiz.xjustiz0500straf.content.GrunddatenContent;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.ContentContainer;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.GrunddatenContent;
 
 @SpringBootApplication(scanBasePackages = "de.muenchen.xjustiz")
 @CamelSpringBootTest
