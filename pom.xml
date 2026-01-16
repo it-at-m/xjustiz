@@ -36,6 +36,7 @@
         <module>xjustiz-converter</module>
         <module>xjustiz-starter</module>
         <module>xjustiz-0500-straf</module>
+        <module>xjustiz-version-3-5-1</module>
     </modules>
 
     <developers>

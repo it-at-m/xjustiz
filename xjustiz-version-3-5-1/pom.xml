@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>de.muenchen.oss</groupId>
+        <artifactId>xjustiz</artifactId>
+        <version>0.0.10-SNAPSHOT</version>
+    </parent>
+    <artifactId>xjustiz-version-3-5-1</artifactId>
+    <name>xjustiz-version-3-5-1</name>
+    <description>Provides xjustiz version 3.5.1 generated sources</description>
+
+    <properties>
+        <org.codehaus.mojo>4.0.0</org.codehaus.mojo>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>4.0.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>4.0.6</version>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- https://www.mojohaus.org/jaxb2-maven-plugin/#/repo -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>${org.codehaus.mojo}</version>
+                <executions>
+                    <execution>
+                        <id>generate-jaxb</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sources>
+                        ${project.basedir}/src/main/resources/xsd/XJustiz-3.5.1-XSD/xjustiz_0500_straf_3_5.xsd
+                    </sources>
+                    <outputDirectory>
+                        ${project.basedir}/target/generated-sources/jaxb
+                    </outputDirectory>
+                    <packageName>de.muenchen.xjustiz.generated</packageName>
+                    <extension>true</extension>
+                    <noPackageLevelAnnotations>true</noPackageLevelAnnotations>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

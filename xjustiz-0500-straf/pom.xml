@@ -1,86 +1,53 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>de.muenchen.oss</groupId>
-    <artifactId>xjustiz</artifactId>
-    <version>0.0.10-SNAPSHOT</version>
-  </parent>
-  <artifactId>xjustiz-0500-straf</artifactId>
-  <name>xjustiz-0500-straf</name>
-  <description>Implements xjustiz_0500_straf_x_x.xsd documents </description>
-  
- <properties>
-		<!--<jakarta.xml.bind>4.0.0</jakarta.xml.bind>
-		<org.glassfish.jaxb>4.0.2</org.glassfish.jaxb>-->
-		
-		<org.codehaus.mojo>4.0.0</org.codehaus.mojo>
-		
-		<!--<com.fasterxml.jackson.core>2.18.4</com.fasterxml.jackson.core>
-		<camel-spring-boot-dependencies.version>4.10.5</camel-spring-boot-dependencies.version>-->
-	</properties>
-  
-  <dependencyManagement>
-		<dependencies>
-			<!-- Camel BOM -->
-			<dependency>
-				<groupId>org.apache.camel.springboot</groupId>
-				<artifactId>camel-spring-boot-dependencies</artifactId>
-				<version>${camel-spring-boot-dependencies.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-  
-  <dependencies>
-  
-  	<dependency>
-  		<groupId>de.muenchen.oss</groupId>
-  		<artifactId>xjustiz-converter</artifactId>
-  		<version>0.0.10-SNAPSHOT</version>
-  	</dependency>
-  	
-  	<!-- Test -->
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-test-spring-junit5</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-  	
-  </dependencies>
-  
-  <build>
-		<plugins>
-			<!-- https://www.mojohaus.org/jaxb2-maven-plugin/#/repo -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>jaxb2-maven-plugin</artifactId>
-				<version>${org.codehaus.mojo}</version>
-				<executions>
-					<execution>
-						<id>generate-jaxb</id>
-						<goals>
-							<goal>xjc</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<sources>
-						${project.basedir}/src/main/resources/xsd/XJustiz-3.5.1-XSD/xjustiz_0500_straf_3_5.xsd
-                    </sources>
-					<outputDirectory>
-						${project.basedir}/target/generated-sources/jaxb</outputDirectory>
-					<packageName>de.muenchen.xjustiz.generated</packageName>
-					<extension>true</extension>
-					<noPackageLevelAnnotations>true</noPackageLevelAnnotations>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-  
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>de.muenchen.oss</groupId>
+        <artifactId>xjustiz</artifactId>
+        <version>0.0.10-SNAPSHOT</version>
+    </parent>
+    <artifactId>xjustiz-0500-straf</artifactId>
+    <name>xjustiz-0500-straf</name>
+    <description>Implements xjustiz_0500_straf_x_x.xsd documents</description>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Camel BOM -->
+            <dependency>
+                <groupId>org.apache.camel.springboot</groupId>
+                <artifactId>camel-spring-boot-dependencies</artifactId>
+                <version>${camel-spring-boot-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>de.muenchen.oss</groupId>
+            <artifactId>xjustiz-converter</artifactId>
+            <version>0.0.10-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>de.muenchen.oss</groupId>
+            <artifactId>xjustiz-version-3-5-1</artifactId>
+            <version>0.0.10-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-spring-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
 </project>

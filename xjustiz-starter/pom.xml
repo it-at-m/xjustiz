@@ -52,6 +52,11 @@
             <version>${xjustiz.version}</version>
         </dependency>
         <dependency>
+            <groupId>de.muenchen.oss</groupId>
+            <artifactId>xjustiz-version-3-5-1</artifactId>
+            <version>${xjustiz.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
