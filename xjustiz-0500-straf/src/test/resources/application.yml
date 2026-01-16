@@ -5,6 +5,8 @@ logging:
 
 xjustiz:
   version: 3.5.1
+  xsd:
+    path: xsd/XJustiz-3.5.1-XSD/
   codelisten:
     gds-rollenbezeichnung:
       current-version: 3.5
@@ -90,6 +92,8 @@ xjustiz:
         gds-registerzeichen-3-4:
           bussgeldverfahren: OWi
   xjustiz0500straf:
+    xsd:
+      name: xjustiz_0500_straf_3_5.xsd
     nachrichtenkopf:
       auswahl-absender-sonstige: Stadt München
       auswahl-herstellerinformation-produkt: KVU
@@ -98,3 +102,4 @@ xjustiz:
   interface:
     document:
       processor: direct:xjustiz-document-processor
+      json-adapter: direct:xjustiz-document-json-adapter

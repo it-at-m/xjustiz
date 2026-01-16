@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import de.muenchen.xjustiz.config.DynamicJsonUnmarshaller;
 import de.muenchen.xjustiz.config.DynamicXmlMarshaller;
 import de.muenchen.xjustiz.generated.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010;
@@ -39,14 +38,17 @@ class ExternAnJustiz0500010ConfigurationTest extends ExternAnJustiz0500010TestEn
     @Value("${xjustiz.interface.document.processor}")
     private String testRoute;
 
+    @Value("${xjustiz.xjustiz0500straf.xsd.name}")
+    private String schemaName;
+
+    @Value("${xjustiz.xsd.path}")
+    private String schemaPath;
+
     @Autowired
     private CamelContext camelContext;
 
     @Autowired
     private NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director nachrichtDirector;
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     /*
      * Read default spring profile application.yml without organisation
@@ -56,11 +58,12 @@ class ExternAnJustiz0500010ConfigurationTest extends ExternAnJustiz0500010TestEn
     void test_organisationNotConfigured() throws Exception {
 
         final Exchange request = ExchangeBuilder.anExchange(camelContext)
-                .withHeader(DynamicXmlMarshaller.SCHEMA_NAME, "xjustiz_0500_straf_3_5.xsd")
+                .withHeader(DynamicXmlMarshaller.SCHEMA_PATH, schemaPath)
+                .withHeader(DynamicXmlMarshaller.SCHEMA_NAME, schemaName)
                 .withHeader(DynamicJsonUnmarshaller.UNMARSHAL_CLASS_TYPE, NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.class)
-                .withBody(objectMapper.writeValueAsString(nachrichtDirector.build(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
+                .withBody(nachrichtDirector.build(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
                         new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention())), Map.of()),
-                        createSchriftgutAktenzeichenStrukuriert()))))
+                        createSchriftgutAktenzeichenStrukuriert())))
                 .build();
 
         final Exchange response = startTest.send(testRoute, request);

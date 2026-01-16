@@ -17,7 +17,7 @@
     <!-- Core Frameworks -->
         <camel.spring.boot.dependencies>4.11.0</camel.spring.boot.dependencies>
         <spring.boot>3.4.4</spring.boot>
-        <xjustiz.converter>0.0.10-SNAPSHOT</xjustiz.converter>
+        <xjustiz.version>0.0.10-SNAPSHOT</xjustiz.version>
     </properties>
 
     <dependencyManagement>
@@ -44,7 +44,12 @@
         <dependency>
             <groupId>de.muenchen.oss</groupId>
             <artifactId>xjustiz-converter</artifactId>
-            <version>0.0.10-SNAPSHOT</version>
+            <version>${xjustiz.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.muenchen.oss</groupId>
+            <artifactId>xjustiz-0500-straf</artifactId>
+            <version>${xjustiz.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

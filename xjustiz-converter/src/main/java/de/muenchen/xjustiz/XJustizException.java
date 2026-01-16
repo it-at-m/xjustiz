@@ -10,4 +10,9 @@ public class XJustizException extends RuntimeException {
     public XJustizException(final String message, final Throwable cause) {
         super(message, cause);
     }
+
+    public XJustizException(final String message) {
+        super(message);
+    }
+
 }

@@ -16,7 +16,7 @@ import de.muenchen.xjustiz.generated.TypeGDSNatuerlichePerson;
 import de.muenchen.xjustiz.generated.TypeGDSOrganisation;
 import de.muenchen.xjustiz.generated.TypeGDSRefBeteiligtennummer;
 import de.muenchen.xjustiz.generated.TypeGDSSchriftgutobjekte;
-import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.ExternAnJustiz0500010DocumentStart;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.ContentContainer;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.GrunddatenContent;
 import java.math.BigInteger;
@@ -47,14 +47,20 @@ class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends ExternA
     @Produce()
     private ProducerTemplate startxJustiz0500strafBuilderTest;
 
-    @Value("${xjustiz.interface.document.processor}")
+    @Value("${xjustiz.interface.document.json-adapter}")
     private String testRoute;
+
+    @Value("${xjustiz.xjustiz0500straf.xsd.name}")
+    private String schemaName;
+
+    @Value("${xjustiz.xsd.path}")
+    private String schemaPath;
 
     @Autowired
     private CamelContext camelContext;
 
     @Autowired
-    private NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director nachrichtDirector;
+    private ExternAnJustiz0500010DocumentStart documentBuilder;
 
     private NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 externAnJustiz0500010;
 
@@ -65,9 +71,10 @@ class ExternAnJustiz0500010OrganisationAktenzeichenByCreatedTest extends ExternA
     public void init() throws Exception {
 
         final Exchange request = ExchangeBuilder.anExchange(camelContext)
-                .withHeader(DynamicXmlMarshaller.SCHEMA_NAME, "xjustiz_0500_straf_3_5.xsd")
+                .withHeader(DynamicXmlMarshaller.SCHEMA_PATH, schemaPath)
+                .withHeader(DynamicXmlMarshaller.SCHEMA_NAME, schemaName)
                 .withHeader(DynamicJsonUnmarshaller.UNMARSHAL_CLASS_TYPE, NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.class)
-                .withBody(objectMapper.writeValueAsString(nachrichtDirector.build(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
+                .withBody(objectMapper.writeValueAsString(documentBuilder.start(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
                         new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention(), createApplicant())), createInstanzdaten()),
                         createSchriftgutAktenzeichenStrukuriert()))))
                 .build();

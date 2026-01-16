@@ -35,8 +35,14 @@ class ErrorHandlingTest extends ExternAnJustiz0500010TestEnvironment {
     @Produce()
     private ProducerTemplate startxJustiz0500strafBuilderTest;
 
-    @Value("${xjustiz.interface.document.processor}")
+    @Value("${xjustiz.interface.document.json-adapter}")
     private String testRoute;
+
+    @Value("${xjustiz.xjustiz0500straf.xsd.name}")
+    private String schemaName;
+
+    @Value("${xjustiz.xsd.path}")
+    private String schemaPath;
 
     @Autowired
     private CamelContext camelContext;
@@ -51,7 +57,8 @@ class ErrorHandlingTest extends ExternAnJustiz0500010TestEnvironment {
     void test_xmlValidationError() throws DatatypeConfigurationException, JsonProcessingException {
 
         final Exchange request = ExchangeBuilder.anExchange(camelContext)
-                .withHeader(DynamicXmlMarshaller.SCHEMA_NAME, "xjustiz_0500_straf_3_5.xsd")
+                .withHeader(DynamicXmlMarshaller.SCHEMA_PATH, schemaPath)
+                .withHeader(DynamicXmlMarshaller.SCHEMA_NAME, schemaName)
                 .withHeader(DynamicJsonUnmarshaller.UNMARSHAL_CLASS_TYPE, NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.class)
                 .withBody(objectMapper.writeValueAsString(nachrichtDirector.build(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
                         new GrunddatenContent(xmlValidationErrorMissingNachname(), Map.of()), createSchriftgutAktenzeichenStrukuriert()))))

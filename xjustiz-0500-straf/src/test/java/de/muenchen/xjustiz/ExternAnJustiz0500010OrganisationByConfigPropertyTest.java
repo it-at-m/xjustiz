@@ -2,8 +2,6 @@ package de.muenchen.xjustiz;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import de.muenchen.xjustiz.config.DynamicJsonUnmarshaller;
 import de.muenchen.xjustiz.config.DynamicXmlMarshaller;
 import de.muenchen.xjustiz.generated.CodeGDSEreignisTyp3;
 import de.muenchen.xjustiz.generated.CodeGDSGerichteTyp3;
@@ -14,7 +12,7 @@ import de.muenchen.xjustiz.generated.TypeGDSGrunddaten;
 import de.muenchen.xjustiz.generated.TypeGDSNachrichtenkopf;
 import de.muenchen.xjustiz.generated.TypeGDSNatuerlichePerson;
 import de.muenchen.xjustiz.generated.TypeGDSOrganisation;
-import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.ExternAnJustiz0500010DocumentStart;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.ContentContainer;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.GrunddatenContent;
 import java.math.BigInteger;
@@ -46,26 +44,29 @@ class ExternAnJustiz0500010OrganisationByConfigPropertyTest extends ExternAnJust
     @Value("${xjustiz.interface.document.processor}")
     private String testRoute;
 
+    @Value("${xjustiz.xjustiz0500straf.xsd.name}")
+    private String schemaName;
+
+    @Value("${xjustiz.xsd.path}")
+    private String schemaPath;
+
     @Autowired
     private CamelContext camelContext;
 
     @Autowired
-    private NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director nachrichtDirector;
+    private ExternAnJustiz0500010DocumentStart documentBuilder;
 
     private NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010 externAnJustiz0500010;
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @BeforeEach
     public void init() throws Exception {
 
         final Exchange request = ExchangeBuilder.anExchange(camelContext)
-                .withHeader(DynamicXmlMarshaller.SCHEMA_NAME, "xjustiz_0500_straf_3_5.xsd")
-                .withHeader(DynamicJsonUnmarshaller.UNMARSHAL_CLASS_TYPE, NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.class)
-                .withBody(objectMapper.writeValueAsString(nachrichtDirector.build(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
+                .withHeader(DynamicXmlMarshaller.SCHEMA_PATH, schemaPath)
+                .withHeader(DynamicXmlMarshaller.SCHEMA_NAME, schemaName)
+                .withBody(documentBuilder.start(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
                         new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention())), createInstanzdaten()),
-                        createSchriftgutAktenzeichenStrukuriert()))))
+                        createSchriftgutAktenzeichenStrukuriert())))
                 .build();
 
         final Exchange response = startxJustiz0500strafBuilderTest.send(testRoute, request);

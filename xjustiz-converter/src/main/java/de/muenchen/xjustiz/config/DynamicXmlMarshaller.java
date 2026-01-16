@@ -7,6 +7,7 @@ import org.apache.camel.Processor;
 
 public class DynamicXmlMarshaller implements Processor {
 
+    public static final String SCHEMA_PATH = "XJustiz_Schema_Path";
     public static final String SCHEMA_NAME = "XJustiz_Schema_Name";
 
     @Override

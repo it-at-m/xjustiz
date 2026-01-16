@@ -16,14 +16,19 @@ public class XJustizDocumentRouteBuilder extends RouteBuilder {
                 .handled(false);
 
         from("{{xjustiz.interface.document.processor}}").routeId("xjustiz-document-processor")
-                .description("Insert values into xjustiz document and marshal to xml.")
+                .description("Marshal xjustiz document to xml and add required namespaces.")
                 .log(LoggingLevel.DEBUG, "de.muenchen.xjustiz", "${body}")
-                .process("dynamicJsonUnmarshaller")
                 .process(new DynamicXmlMarshaller())
                 .marshal().jaxb()
                 .process(new DynamicSchemaLocation())
                 .to("log:de.muenchen.xjustiz.xjustiz-document-processor?level=DEBUG")
-                .toD("validator:xsd/XJustiz-3.5.1-XSD/${header." + DynamicXmlMarshaller.SCHEMA_NAME + "}");
+                .toD(String.format("validator:${header.%s}${header.%s}", DynamicXmlMarshaller.SCHEMA_PATH, DynamicXmlMarshaller.SCHEMA_NAME));
+
+        from("{{xjustiz.interface.document.json-adapter}}").routeId("xjustiz-document-json-adapter")
+                .description("Unmarshall JSON to xjustiz document.")
+                .log(LoggingLevel.DEBUG, "de.muenchen.xjustiz", "${body}")
+                .process("dynamicJsonUnmarshaller")
+                .to("{{xjustiz.interface.document.processor}}");
 
     }
 }
