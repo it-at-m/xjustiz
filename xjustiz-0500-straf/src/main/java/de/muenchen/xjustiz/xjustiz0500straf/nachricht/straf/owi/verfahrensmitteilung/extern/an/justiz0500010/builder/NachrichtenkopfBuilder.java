@@ -1,9 +1,9 @@
 package de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder;
 
-import de.muenchen.xjustiz.generated.CodeGDSEreignisTyp3;
-import de.muenchen.xjustiz.generated.CodeGDSGerichteTyp3;
-import de.muenchen.xjustiz.generated.TypeGDSHerstellerinformation;
-import de.muenchen.xjustiz.generated.TypeGDSNachrichtenkopf;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSEreignisTyp3;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSGerichteTyp3;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeGDSHerstellerinformation;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeGDSNachrichtenkopf;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.config.NachrichtenProperty;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.NachrichtenkopfContent;
 import de.muenchen.xjustiz.xoev.XJustizProperty;

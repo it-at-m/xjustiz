@@ -7,6 +7,7 @@ xjustiz:
   version: 3.5.1
   xsd:
     path: xsd/XJustiz-3.5.1-XSD/
+    generated-package-base: de.muenchen.xjustiz.generated
   codelisten:
     gds-rollenbezeichnung:
       current-version: 3.5

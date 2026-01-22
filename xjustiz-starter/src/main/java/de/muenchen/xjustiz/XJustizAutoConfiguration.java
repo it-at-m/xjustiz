@@ -2,6 +2,7 @@ package de.muenchen.xjustiz;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.muenchen.xjustiz.config.DynamicJsonUnmarshaller;
+import de.muenchen.xjustiz.config.DynamicXmlMarshaller;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +24,11 @@ public class XJustizAutoConfiguration {
     @Bean
     public DynamicJsonUnmarshaller dynamicJsonUnmarshaller(final ObjectMapper objectMapper) {
         return new DynamicJsonUnmarshaller(objectMapper);
+    }
+
+    @Bean
+    public DynamicXmlMarshaller dynamicXmlMarshaller() {
+        return new DynamicXmlMarshaller();
     }
 
 }

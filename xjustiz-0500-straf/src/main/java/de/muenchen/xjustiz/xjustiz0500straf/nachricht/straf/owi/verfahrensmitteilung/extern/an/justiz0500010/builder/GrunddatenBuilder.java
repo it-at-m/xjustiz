@@ -1,6 +1,26 @@
 package de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder;
 
-import de.muenchen.xjustiz.generated.*;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.*;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSAnschriftstyp;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSGerichteTyp3;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSGeschlecht;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSRollenbezeichnungTyp3;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSSachgebietTyp3;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSStaatenTyp3;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeGDSAktenzeichen;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeGDSAnschrift;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeGDSBankverbindung;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeGDSBehoerde;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeGDSBeteiligter;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeGDSBeteiligung;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeGDSGeburt;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeGDSGrunddaten;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeGDSInstanzdaten;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeGDSNameNatuerlichePerson;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeGDSNatuerlichePerson;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeGDSOrganisation;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeGDSOrtsangabe;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeGDSRefBeteiligtennummer;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.config.NachrichtenProperty;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.GrunddatenContent;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.grunddaten.verfahrensdaten.beteiligung.Anschrift;

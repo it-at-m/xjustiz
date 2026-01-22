@@ -49,7 +49,14 @@
 			<artifactId>camel-jackson-starter</artifactId>
 		</dependency>
 
-		<!-- Logback Core -->
+        <!-- Commons IO -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+         <version>2.21.0</version>
+        </dependency>
+
+       <!-- Logback Core -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>

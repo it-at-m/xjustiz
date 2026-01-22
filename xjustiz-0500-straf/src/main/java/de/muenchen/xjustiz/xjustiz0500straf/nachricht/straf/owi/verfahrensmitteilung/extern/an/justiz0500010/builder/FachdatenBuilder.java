@@ -1,6 +1,11 @@
 package de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder;
 
-import de.muenchen.xjustiz.generated.*;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSAnschriftstyp;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeSTRAFOWIBussgeldbescheid;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeSTRAFOWITat;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeSTRAFRechtskraft;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeSTRAFTatort;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.config.NachrichtenProperty;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.FachdatenContent;
 import de.muenchen.xjustiz.xoev.XJustizProperty;

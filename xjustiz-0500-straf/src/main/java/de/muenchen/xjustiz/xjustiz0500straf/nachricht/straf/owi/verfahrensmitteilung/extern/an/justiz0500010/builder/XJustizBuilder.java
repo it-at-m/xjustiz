@@ -1,6 +1,16 @@
 package de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder;
 
-import de.muenchen.xjustiz.generated.*;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSAktentyp;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSAktenzeichenart;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSAnschriftstyp;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSBestandteiltyp;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSDokumentklasseTyp3;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSEreignisTyp3;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSGerichteTyp3;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSRegisterzeichenTyp3;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSRollenbezeichnungTyp3;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSSachgebietTyp3;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSStaatenTyp3;
 import de.muenchen.xjustiz.xoev.CodelistenProperty;
 import de.muenchen.xjustiz.xoev.XJustizProperty;
 import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDS;

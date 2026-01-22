@@ -7,6 +7,9 @@ logging:
     de.muenchen.xjustiz.xjustiz-document-converter: INFO
 
 xjustiz:
-  route:
-    converter:
-      from: ...
+  xsd:
+    generated-package-base: # Must be configured
+  interface:
+    document:
+      processor: # Must be configured
+      json-adapter: # Must be configured

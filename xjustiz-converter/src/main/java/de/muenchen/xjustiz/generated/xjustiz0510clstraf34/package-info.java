@@ -7,10 +7,10 @@
                 @XmlNs(prefix = "tns", namespaceURI = "http://www.xjustiz.de")
         },
         elementFormDefault = XmlNsForm.UNQUALIFIED,
-        location = "xjustiz_0500_straf_3_5.xsd"
+        location = "xjustiz_0510_cl_straf_3_4.xsd"
 )
 
-package de.muenchen.xjustiz.generated;
+package de.muenchen.xjustiz.generated.xjustiz0510clstraf34;
 
 import jakarta.xml.bind.annotation.XmlNs;
 import jakarta.xml.bind.annotation.XmlNsForm;

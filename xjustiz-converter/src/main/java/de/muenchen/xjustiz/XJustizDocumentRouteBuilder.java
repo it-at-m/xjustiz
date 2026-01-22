@@ -18,7 +18,7 @@ public class XJustizDocumentRouteBuilder extends RouteBuilder {
         from("{{xjustiz.interface.document.processor}}").routeId("xjustiz-document-processor")
                 .description("Marshal xjustiz document to xml and add required namespaces.")
                 .log(LoggingLevel.DEBUG, "de.muenchen.xjustiz", "${body}")
-                .process(new DynamicXmlMarshaller())
+                .process("dynamicXmlMarshaller")
                 .marshal().jaxb()
                 .process(new DynamicSchemaLocation())
                 .to("log:de.muenchen.xjustiz.xjustiz-document-processor?level=DEBUG")
