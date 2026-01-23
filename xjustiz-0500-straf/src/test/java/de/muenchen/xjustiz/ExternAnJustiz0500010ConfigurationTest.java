@@ -60,7 +60,6 @@ class ExternAnJustiz0500010ConfigurationTest extends ExternAnJustiz0500010TestEn
         final Exchange request = ExchangeBuilder.anExchange(camelContext)
                 .withHeader(DynamicXmlMarshaller.SCHEMA_PATH, schemaPath)
                 .withHeader(DynamicXmlMarshaller.SCHEMA_NAME, schemaName)
-                .withHeader(DynamicJsonUnmarshaller.UNMARSHAL_CLASS_TYPE, NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010.class)
                 .withBody(nachrichtDirector.build(new ContentContainer(createNachrichtenkopfContent(), createFachdaten(),
                         new GrunddatenContent(new ArrayList<>(List.of(createPersonSubjectToCoerceiveDetention())), Map.of()),
                         createSchriftgutAktenzeichenStrukuriert())))

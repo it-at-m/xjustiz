@@ -4,6 +4,8 @@ logging:
     de.muenchen.xjustiz.xjustiz-document-processor: DEBUG
 
 xjustiz:
+  xsd:
+    generated-package-base: de.muenchen.xjustiz.generated
   interface:
     document:
       processor: direct:xjustiz-document-processor
