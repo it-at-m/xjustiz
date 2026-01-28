@@ -10,7 +10,7 @@
 
     <groupId>de.muenchen.oss</groupId>
     <artifactId>xjustiz</artifactId>
-    <version>0.0.10-SNAPSHOT</version>
+    <version>0.0.10</version>
     <packaging>pom</packaging>
 
     <name>xjustiz</name>
@@ -29,7 +29,7 @@
         <url>https://github.com/it-at-m/xjustiz.git</url>
         <connection>scm:git:https://github.com/it-at-m/xjustiz.git</connection>
         <developerConnection>scm:git:https://github.com/it-at-m/xjustiz.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>xjustiz-0.0.10</tag>
     </scm>
 
     <modules>
