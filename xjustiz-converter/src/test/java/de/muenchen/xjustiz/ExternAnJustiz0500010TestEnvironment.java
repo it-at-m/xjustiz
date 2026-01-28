@@ -17,7 +17,6 @@ import jakarta.xml.bind.JAXBContext;
 import java.io.StringReader;
 import java.math.BigInteger;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -103,8 +102,11 @@ class ExternAnJustiz0500010TestEnvironment {
     protected FachdatenContent createFachdaten() throws DatatypeConfigurationException {
 
         final FachdatenContent fachdatenContent = new FachdatenContent();
-        fachdatenContent.setAnfangsDatumUhrzeit(LocalDateTime.of(2024, 10, 1, 12, 0));
-        fachdatenContent.setEndeDatumUhrzeit(LocalDateTime.of(2024, 10, 1, 13, 5));
+        fachdatenContent.setAnfangDatum("2024-10-01");
+        fachdatenContent.setAnfangUhrzeit("12:00");
+        fachdatenContent.setEndeDatum("2024-10-01");
+        fachdatenContent.setEndeUhrzeit("13:05");
+
         fachdatenContent.setAuslagen(10.50);
         fachdatenContent.setGeldbusse(15.10);
         fachdatenContent.setErlassdatum(LocalDate.of(2025, 11, 03));

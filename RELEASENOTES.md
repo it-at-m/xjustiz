@@ -1,4 +1,9 @@
 # Release-Notes
+
+## 27.01.2026
+### Aenderung
+- xjustiz0500Straf-Builder: Tatzeitraum-Datum und -Uhrzeit fuer Anfang/Ende optional (minOccurs="0").
+
 ## 18.12.2026
 ### Aenderung
 - Standalone=true entfernt.
