@@ -1,10 +1,15 @@
 # Release-Notes
+
+## 27.01.2026
+### Aenderung
+- xjustiz0500Straf-Builder: Tatzeitraum-Datum und -Uhrzeit fuer Anfang/Ende optional (minOccurs="0").
+
 ## 24.12.2025
 ### Refactoring
 - xJustiz Dokumentenerstellung in eigenes Maven Modul verschoben.
 - XML Generierung parameterisiert.
 
-## 18.12.2025
+## 18.12.2026
 ### Aenderung
 - Standalone=true entfernt.
 - Namespaces geaendert (xsi:schemaLocation, xmlns:xsi, din91379, tns).

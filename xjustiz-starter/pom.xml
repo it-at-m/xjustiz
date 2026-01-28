@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>xjustiz-starter</artifactId>
-    <version>0.0.10-SNAPSHOT</version>
+    <version>0.0.11-SNAPSHOT</version>
     <name>xjustiz-starter</name>
     <description>Spring boot starter project to generate https://xjustiz.justiz.de messages.</description>
 
@@ -17,7 +17,7 @@
     <!-- Core Frameworks -->
         <camel.spring.boot.dependencies>4.11.0</camel.spring.boot.dependencies>
         <spring.boot>3.4.4</spring.boot>
-        <xjustiz.version>0.0.10-SNAPSHOT</xjustiz.version>
+        <xjustiz.version>0.0.11-SNAPSHOT</xjustiz.version>
     </properties>
 
     <dependencyManagement>
@@ -69,11 +69,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot</artifactId>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-        	<groupId>de.muenchen.oss</groupId>
-        	<artifactId>xjustiz-0500-straf</artifactId>
-        	<version>0.0.10-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

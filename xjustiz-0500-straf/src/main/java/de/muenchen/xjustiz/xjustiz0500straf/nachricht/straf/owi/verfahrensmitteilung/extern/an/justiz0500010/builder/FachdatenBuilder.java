@@ -43,12 +43,10 @@ public class FachdatenBuilder extends Builder {
 
         final TypeSTRAFOWITat tat = new TypeSTRAFOWITat();
 
-        fachdatenContent.getAnfangsDatumUhrzeit().ifPresent(date -> tat.setAnfangsdatum(date.format(dateFormatter)));
-        fachdatenContent.getEndeDatumUhrzeit().ifPresent(date -> tat.setEndedatum(date.format(dateFormatter)));
-
-        final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-        fachdatenContent.getAnfangsDatumUhrzeit().ifPresent(time -> tat.setAnfangsuhrzeit(time.format(timeFormatter)));
-        fachdatenContent.getEndeDatumUhrzeit().ifPresent(time -> tat.setEndeuhrzeit(time.format(timeFormatter)));
+        fachdatenContent.getAnfangDatum().ifPresent(date -> tat.setAnfangsdatum(date));
+        fachdatenContent.getAnfangUhrzeit().ifPresent(time -> tat.setAnfangsuhrzeit(time));
+        fachdatenContent.getEndeDatum().ifPresent(date -> tat.setEndedatum(date));
+        fachdatenContent.getEndeUhrzeit().ifPresent(time -> tat.setEndeuhrzeit(time));
 
         fachdatenContent.getTatorte().forEach(t -> {
             final TypeSTRAFTatort tatort = new TypeSTRAFTatort();

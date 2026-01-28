@@ -21,9 +21,13 @@ public class FachdatenContent {
 
     private LocalDateTime datumUhrzeit;
 
-    private LocalDateTime anfangsDatumUhrzeit;
+    private String anfangDatum;
 
-    private LocalDateTime endeDatumUhrzeit;
+    private String anfangUhrzeit;
+
+    private String endeDatum;
+
+    private String endeUhrzeit;
 
     private final List<Tatort> tatorte = new ArrayList<>();
 
@@ -35,11 +39,20 @@ public class FachdatenContent {
         return Optional.ofNullable(datumUhrzeit);
     }
 
-    public Optional<LocalDateTime> getAnfangsDatumUhrzeit() {
-        return Optional.ofNullable(anfangsDatumUhrzeit);
+    public Optional<String> getAnfangDatum() {
+        return Optional.ofNullable(anfangDatum);
     }
 
-    public Optional<LocalDateTime> getEndeDatumUhrzeit() {
-        return Optional.ofNullable(endeDatumUhrzeit);
+    public Optional<String> getAnfangUhrzeit() {
+        return Optional.ofNullable(anfangUhrzeit);
     }
+
+    public Optional<String> getEndeDatum() {
+        return Optional.ofNullable(endeDatum);
+    }
+
+    public Optional<String> getEndeUhrzeit() {
+        return Optional.ofNullable(endeUhrzeit);
+    }
+
 }
