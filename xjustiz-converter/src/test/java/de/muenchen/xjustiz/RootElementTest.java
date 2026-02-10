@@ -1,5 +1,10 @@
 package de.muenchen.xjustiz;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import de.muenchen.xjustiz.config.DynamicXmlMarshaller;
 import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSGerichteTyp3;
 import de.muenchen.xjustiz.generated.xjustiz0500straf35.NachrichtGdsBasisnachricht0005006;
@@ -24,11 +29,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootApplication()
 @CamelSpringBootTest
@@ -74,7 +74,9 @@ public class RootElementTest {
         assertNull(response.getException(), "Error during XML creation.");
         final String xml = response.getMessage().getBody(String.class);
 
-        assertTrue(xml.contains("<tns:nachricht.gds.basisnachricht.0005006 xmlns:tns=\"http://www.xjustiz.de\" xmlns:din91379=\"urn:xoev-de:kosit:xoev:datentyp:din-91379_2022-08\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.xjustiz.de xjustiz_0005_nachrichten_3_1.xsd\">"), "Message root element is invalid.");
+        assertTrue(xml.contains(
+                "<tns:nachricht.gds.basisnachricht.0005006 xmlns:tns=\"http://www.xjustiz.de\" xmlns:din91379=\"urn:xoev-de:kosit:xoev:datentyp:din-91379_2022-08\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.xjustiz.de xjustiz_0005_nachrichten_3_1.xsd\">"),
+                "Message root element is invalid.");
 
     }
 
@@ -144,7 +146,8 @@ public class RootElementTest {
         final Exchange response = sendToDocumentProcessor.send(request);
         assertNotNull(response.getException(), "Error during XML creation.");
         FileNotFoundException exception = response.getException(FileNotFoundException.class);
-        assertEquals("Cannot find resource: changeMexjustiz_0005_nachrichten_3_1.xsd for URI: changeMexjustiz_0005_nachrichten_3_1.xsd", exception.getMessage());
+        assertEquals("Cannot find resource: changeMexjustiz_0005_nachrichten_3_1.xsd for URI: changeMexjustiz_0005_nachrichten_3_1.xsd",
+                exception.getMessage());
 
     }
 
@@ -185,7 +188,9 @@ public class RootElementTest {
         assertNull(response.getException(), "Error during XML creation.");
         final String xml = response.getMessage().getBody(String.class);
 
-        assertTrue(xml.contains("<tns:nachricht.int.abgabeInnerhalbDerJustiz.3300001 xmlns:tns=\"http://www.xjustiz.de\" xmlns:din91379=\"urn:xoev-de:kosit:xoev:datentyp:din-91379_2022-08\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.xjustiz.de xjustiz_3300_justizintern_1_0.xsd\">"), "Message root element is invalid.");
+        assertTrue(xml.contains(
+                "<tns:nachricht.int.abgabeInnerhalbDerJustiz.3300001 xmlns:tns=\"http://www.xjustiz.de\" xmlns:din91379=\"urn:xoev-de:kosit:xoev:datentyp:din-91379_2022-08\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.xjustiz.de xjustiz_3300_justizintern_1_0.xsd\">"),
+                "Message root element is invalid.");
 
     }
 

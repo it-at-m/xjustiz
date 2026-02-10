@@ -1,7 +1,7 @@
 package de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder;
 
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.config.NachrichtenProperty;
-import de.muenchen.xjustiz.xoev.XJustizProperty;
+import de.muenchen.xjustizlib.xoev.XJustizProperty;
 
 public class Builder extends XJustizBuilder {
 

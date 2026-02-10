@@ -1,0 +1,212 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.8 Chrome/140.0.7339.240 Electron/38.4.0 Safari/537.36" version="28.2.8">
+  <diagram name="Seite-1" id="slN0BFmFWgDs8Le-9xAA">
+    <mxGraphModel dx="976" dy="1044" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-5" value="xjustiz-converter" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="30" y="293" width="428" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-46" value="Apache Camel" style="html=1;whiteSpace=wrap;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="53" y="323" width="190" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-66" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Route : xjustiz-documen-processor&lt;/font&gt;" style="html=1;whiteSpace=wrap;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="60" y="353" width="177" height="311" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-27" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;[package-name]/package-info.java&lt;/font&gt;" style="html=1;whiteSpace=wrap;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="264" y="349" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-2" value="xjustiz-lib" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="540" y="240" width="220" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-3" value="xjustiz-version-x-x-x" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="30" y="28" width="730" height="172" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-4" value="xjustiz-starter" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="20" y="970" width="759" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-6" value="xjustiz-0500-straf" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="469" y="355" width="291" height="582" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-7" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;de.muenchen.xjustiz.generated.xjustiz0000grunddatensatz35&lt;/font&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;...&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 9px; font-weight: 400;&quot;&gt;de.muenchen.xjustiz.generated.xjustiz3310cljustizintern01&lt;/span&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="452" y="56" width="288" height="124" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-8" value="&lt;div&gt;&lt;span style=&quot;font-size: 9px; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 9px;&quot;&gt;&lt;i&gt;[schema path]/[schema name] :&lt;/i&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 9px; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 9px;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 9px; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;.../xjustiz_0000_grunddatensatz_3_5.xsd&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;...&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;.../xjustiz_3310_cl_justizintern_0_1.xsd&lt;/font&gt;&lt;/font&gt;&lt;/div&gt;" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="62" y="80" width="270" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-23" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;,,,.generated.xjustiz0005nachrichten31&lt;/font&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;...&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 9px; font-weight: normal;&quot;&gt;...&lt;/span&gt;&lt;span style=&quot;font-size: 9px; font-weight: 400;&quot;&gt;generated.xjustiz3300justizintern10&lt;/span&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="268" y="392" width="170" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-39" value="" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=1;exitY=0.807;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="226" y="431.36799999999994" as="sourcePoint" />
+            <mxPoint x="270" y="431" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-62" value="Use" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="Ltdcg-JDF5429wzwpOrB-39" vertex="1" connectable="0">
+          <mxGeometry x="-0.0718" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-40" value="&lt;p style=&quot;margin:0px;margin-top:6px;text-align:center;&quot;&gt;&lt;font size=&quot;1&quot;&gt;&lt;b&gt;Validator&lt;/b&gt;&lt;/font&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:8px;&quot;&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;+ SchemaPath: String&lt;br&gt;+ SchemaName: String&lt;/font&gt;&lt;/p&gt;" style="align=left;overflow=fill;html=1;dropTarget=0;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="71" y="587" width="155" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-41" value="" style="shape=component;jettyWidth=8;jettyHeight=4;" parent="Ltdcg-JDF5429wzwpOrB-40" vertex="1">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-24" y="4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-42" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0.382;exitY=-0.002;exitDx=0;exitDy=0;entryX=0.201;entryY=0.994;entryDx=0;entryDy=0;entryPerimeter=0;exitPerimeter=0;" parent="1" target="Ltdcg-JDF5429wzwpOrB-7" edge="1">
+          <mxGeometry x="-0.0396" width="160" relative="1" as="geometry">
+            <mxPoint x="506.16200000000003" y="353.836" as="sourcePoint" />
+            <mxPoint x="505.5" y="233" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-47" value="&lt;span style=&quot;font-size: 9px;&quot;&gt;DynamicSchemaLocation&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="71" y="487" width="155" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-48" value="&lt;span style=&quot;font-size: 9px;&quot;&gt;+ SchemaName: String&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="Ltdcg-JDF5429wzwpOrB-47" vertex="1">
+          <mxGeometry y="26" width="155" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-49" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="Ltdcg-JDF5429wzwpOrB-47" vertex="1">
+          <mxGeometry y="50" width="155" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-50" value="&lt;span style=&quot;font-size: 9px;&quot;&gt;+ configure(Exchange): Exchange&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="Ltdcg-JDF5429wzwpOrB-47" vertex="1">
+          <mxGeometry y="58" width="155" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-52" value="&lt;span style=&quot;font-size: 9px;&quot;&gt;DynamicXmlMarshaller&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="71" y="388" width="155" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-53" value="&lt;span style=&quot;font-size: 9px;&quot;&gt;+ SchemaName: String&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="Ltdcg-JDF5429wzwpOrB-52" vertex="1">
+          <mxGeometry y="26" width="155" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-54" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="Ltdcg-JDF5429wzwpOrB-52" vertex="1">
+          <mxGeometry y="50" width="155" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-55" value="&lt;span style=&quot;font-size: 9px;&quot;&gt;+ configure(Exchange): Exchange&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="Ltdcg-JDF5429wzwpOrB-52" vertex="1">
+          <mxGeometry y="58" width="155" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-59" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.322;entryY=0.976;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" target="Ltdcg-JDF5429wzwpOrB-8">
+          <mxGeometry x="-0.2628" y="-1" width="160" relative="1" as="geometry">
+            <mxPoint x="148" y="324" as="sourcePoint" />
+            <mxPoint x="148" y="231" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-60" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0.787;exitY=-0.005;exitDx=0;exitDy=0;entryX=0.718;entryY=1.063;entryDx=0;entryDy=0;exitPerimeter=0;entryPerimeter=0;" parent="1" source="Ltdcg-JDF5429wzwpOrB-6" target="Ltdcg-JDF5429wzwpOrB-2" edge="1">
+          <mxGeometry x="-0.425" width="160" relative="1" as="geometry">
+            <mxPoint x="698.4870000000001" y="360.22" as="sourcePoint" />
+            <mxPoint x="698" y="332" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-63" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=69;entryPerimeter=0;" parent="1" source="Ltdcg-JDF5429wzwpOrB-8" target="Ltdcg-JDF5429wzwpOrB-7" edge="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="190" y="435" as="sourcePoint" />
+            <mxPoint x="350" y="435" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-64" value="generate" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="Ltdcg-JDF5429wzwpOrB-63" vertex="1" connectable="0">
+          <mxGeometry x="-0.0876" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-67" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Route : xjustiz-documen-json-adapter&lt;/font&gt;" style="html=1;whiteSpace=wrap;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="59.5" y="673" width="177" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-68" value="&lt;span style=&quot;font-size: 9px;&quot;&gt;DynamicJsonUnmarshaller&lt;/span&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="70.5" y="696" width="155" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-69" value="&lt;span style=&quot;font-size: 9px;&quot;&gt;+ Class: &amp;lt;?&amp;gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="Ltdcg-JDF5429wzwpOrB-68" vertex="1">
+          <mxGeometry y="26" width="155" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-70" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="Ltdcg-JDF5429wzwpOrB-68" vertex="1">
+          <mxGeometry y="50" width="155" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-71" value="&lt;span style=&quot;font-size: 9px;&quot;&gt;+ configure(Exchange): Exchange&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="Ltdcg-JDF5429wzwpOrB-68" vertex="1">
+          <mxGeometry y="58" width="155" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-72" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;de.muenchen.xjustizlib.xoev&lt;/span&gt;&lt;/font&gt;" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="570" y="266" width="180" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-74" value="NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010" style="html=1;whiteSpace=wrap;verticalAlign=top;fontSize=9;" parent="1" vertex="1">
+          <mxGeometry x="490" y="404" width="260" height="514" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-77" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;...content&lt;/font&gt;&lt;/span&gt;" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="499" y="577" width="70" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-78" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;...builder&lt;/font&gt;&lt;/span&gt;" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="498" y="757" width="70" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-79" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;...config&lt;/font&gt;&lt;/span&gt;" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="500" y="423" width="68" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-87" value="&lt;font size=&quot;1&quot;&gt;NachrichtenProperty&lt;/font&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="510" y="462" width="220" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-88" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;+ nachrichtenkopf: NachrichenkopfProperty&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;+ grunddaten: GrunddatenProperty&lt;/font&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="Ltdcg-JDF5429wzwpOrB-87" vertex="1">
+          <mxGeometry y="26" width="220" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-89" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="Ltdcg-JDF5429wzwpOrB-87" vertex="1">
+          <mxGeometry y="70" width="220" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-90" value="&lt;span style=&quot;font-size: 9px;&quot;&gt;+ setter / getter&amp;nbsp;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="Ltdcg-JDF5429wzwpOrB-87" vertex="1">
+          <mxGeometry y="78" width="220" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-91" value="&lt;font size=&quot;1&quot;&gt;ContentContainer&lt;/font&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="500" y="619" width="220" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-92" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;+ nachrichtenContent: NachrichenContent&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;+ fachdatenContent: FachdatenContent&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;+ grunddatenContent: GrunddatenContent&lt;div style=&quot;font-size: 12px;&quot;&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;+ SchriftgutContent: SchriftgutContent&lt;/font&gt;&lt;/div&gt;&lt;/font&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="Ltdcg-JDF5429wzwpOrB-91" vertex="1">
+          <mxGeometry y="26" width="220" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-93" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="Ltdcg-JDF5429wzwpOrB-91" vertex="1">
+          <mxGeometry y="90" width="220" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-94" value="&lt;span style=&quot;font-size: 9px;&quot;&gt;+ setter / getter&amp;nbsp;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="Ltdcg-JDF5429wzwpOrB-91" vertex="1">
+          <mxGeometry y="98" width="220" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-95" value="&lt;font size=&quot;1&quot;&gt;NachrichtStrafOwiVer..Justiz0500010Director&lt;/font&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="510" y="798" width="220" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-96" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;+ Builder für die Contents ...&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="Ltdcg-JDF5429wzwpOrB-95" vertex="1">
+          <mxGeometry y="26" width="220" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-97" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="Ltdcg-JDF5429wzwpOrB-95" vertex="1">
+          <mxGeometry y="50" width="220" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-98" value="&lt;span style=&quot;font-size: 9px;&quot;&gt;+ build(ContentContainer) &lt;/span&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;:&amp;nbsp;&amp;nbsp;NachrichtStrafOwiVer...ExternAnJustiz0500010&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="Ltdcg-JDF5429wzwpOrB-95" vertex="1">
+          <mxGeometry y="58" width="220" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-102" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;«@AutoConfiguration»&lt;br&gt;&lt;b style=&quot;&quot;&gt;NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz05000010AutoConfiguration&lt;/b&gt;&lt;/font&gt;" style="html=1;dropTarget=0;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="354" y="1010" width="410" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-103" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" parent="Ltdcg-JDF5429wzwpOrB-102" vertex="1">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-104" value="&lt;font style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;«@AutoConfiguration»&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;&lt;b&gt;XJustizAutoConfiguration&lt;/b&gt;&lt;/span&gt;&lt;/font&gt;" style="html=1;dropTarget=0;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="42" y="1010" width="278" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-105" value="" style="shape=module;jettyWidth=8;jettyHeight=4;" parent="Ltdcg-JDF5429wzwpOrB-104" vertex="1">
+          <mxGeometry x="1" width="20" height="20" relative="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-106" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0.75;exitY=0;exitDx=0;exitDy=0;" parent="1" source="Ltdcg-JDF5429wzwpOrB-4" edge="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="900" as="sourcePoint" />
+            <mxPoint x="588" y="940" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ltdcg-JDF5429wzwpOrB-107" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0.18;exitY=-0.012;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.296;entryY=1.006;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="Ltdcg-JDF5429wzwpOrB-4" target="Ltdcg-JDF5429wzwpOrB-5" edge="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="340" y="900" as="sourcePoint" />
+            <mxPoint x="500" y="900" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

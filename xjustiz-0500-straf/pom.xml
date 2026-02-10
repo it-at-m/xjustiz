@@ -4,11 +4,15 @@
     <parent>
         <groupId>de.muenchen.oss</groupId>
         <artifactId>xjustiz</artifactId>
-        <version>0.0.10-SNAPSHOT</version>
+        <version>0.0.11-SNAPSHOT</version>
     </parent>
     <artifactId>xjustiz-0500-straf</artifactId>
     <name>xjustiz-0500-straf</name>
     <description>Implements xjustiz_0500_straf_x_x.xsd documents</description>
+
+    <properties>
+        <xjustiz.version>0.0.11-SNAPSHOT</xjustiz.version>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
@@ -28,12 +32,17 @@
         <dependency>
             <groupId>de.muenchen.oss</groupId>
             <artifactId>xjustiz-converter</artifactId>
-            <version>0.0.10-SNAPSHOT</version>
+            <version>${xjustiz.version}</version>
         </dependency>
         <dependency>
             <groupId>de.muenchen.oss</groupId>
             <artifactId>xjustiz-version-3-5-1</artifactId>
-            <version>0.0.10-SNAPSHOT</version>
+            <version>${xjustiz.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.muenchen.oss</groupId>
+            <artifactId>xjustiz-lib</artifactId>
+            <version>${xjustiz.version}</version>
         </dependency>
 
         <!-- Test -->
@@ -47,6 +56,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
 
     </dependencies>
 

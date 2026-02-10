@@ -1,6 +1,6 @@
-package de.muenchen.xjustiz.xoev;
+package de.muenchen.xjustizlib.xoev;
 
-import de.muenchen.xjustiz.XJustizException;
+import de.muenchen.xjustizlib.XJustizLibException;
 import java.util.Map;
 import lombok.Data;
 
@@ -18,7 +18,7 @@ public class CodelistenProperty {
                     .findFirst().get();
 
         } catch (Exception e) {
-            throw new XJustizException(String.format("XOEV XRepository 'codelist.value' not found : %s.%s (https://www.xrepository.de/details/%s).",
+            throw new XJustizLibException(String.format("XOEV XRepository 'codelist.value' not found : %s.%s (https://www.xrepository.de/details/%s).",
                     this.codelistVersions.keySet().toArray()[0], key, this.kennung), e);
         }
     }

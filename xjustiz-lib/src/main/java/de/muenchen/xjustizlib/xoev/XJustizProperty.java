@@ -1,4 +1,4 @@
-package de.muenchen.xjustiz.xoev;
+package de.muenchen.xjustizlib.xoev;
 
 import java.util.Map;
 import lombok.Data;

@@ -6,10 +6,10 @@ import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeGDSHerstellerinforma
 import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeGDSNachrichtenkopf;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.config.NachrichtenProperty;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.NachrichtenkopfContent;
-import de.muenchen.xjustiz.xoev.XJustizProperty;
-import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDS;
-import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDSEreignisTyp3;
-import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDSGerichteTyp3;
+import de.muenchen.xjustizlib.xoev.XJustizProperty;
+import de.muenchen.xjustizlib.xoev.codelisten.XoevCodeGDS;
+import de.muenchen.xjustizlib.xoev.codelisten.XoevCodeGDSEreignisTyp3;
+import de.muenchen.xjustizlib.xoev.codelisten.XoevCodeGDSGerichteTyp3;
 import java.util.GregorianCalendar;
 import java.util.UUID;
 import javax.xml.datatype.DatatypeConfigurationException;

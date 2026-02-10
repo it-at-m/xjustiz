@@ -1,6 +1,5 @@
 package de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder;
 
-import de.muenchen.xjustiz.generated.xjustiz0500straf35.*;
 import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSAnschriftstyp;
 import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSGerichteTyp3;
 import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSGeschlecht;
@@ -28,8 +27,12 @@ import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmittei
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.grunddaten.verfahrensdaten.beteiligung.Beteiligung;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.grunddaten.verfahrensdaten.beteiligung.Rolle;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.grunddaten.verfahrensdaten.instanzdaten.Aktenzeichen;
-import de.muenchen.xjustiz.xoev.XJustizProperty;
-import de.muenchen.xjustiz.xoev.codelisten.*;
+import de.muenchen.xjustizlib.xoev.XJustizProperty;
+import de.muenchen.xjustizlib.xoev.codelisten.XoevCodeGDS;
+import de.muenchen.xjustizlib.xoev.codelisten.XoevCodeGDSAnschriftstypen;
+import de.muenchen.xjustizlib.xoev.codelisten.XoevCodeGDSGerichteTyp3;
+import de.muenchen.xjustizlib.xoev.codelisten.XoevCodeGDSRollenbezeichnungTyp3;
+import de.muenchen.xjustizlib.xoev.codelisten.XoevCodeGDSSachgebietTyp3;
 import org.springframework.stereotype.Component;
 
 @Component

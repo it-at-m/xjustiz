@@ -5,7 +5,7 @@
     <parent>
         <groupId>de.muenchen.oss</groupId>
         <artifactId>xjustiz</artifactId>
-        <version>0.0.10-SNAPSHOT</version>
+        <version>0.0.11-SNAPSHOT</version>
     </parent>
 
     <artifactId>xjustiz-starter</artifactId>
@@ -54,6 +54,11 @@
         <dependency>
             <groupId>de.muenchen.oss</groupId>
             <artifactId>xjustiz-version-3-5-1</artifactId>
+            <version>${xjustiz.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.muenchen.oss</groupId>
+            <artifactId>xjustiz-lib</artifactId>
             <version>${xjustiz.version}</version>
         </dependency>
         <dependency>

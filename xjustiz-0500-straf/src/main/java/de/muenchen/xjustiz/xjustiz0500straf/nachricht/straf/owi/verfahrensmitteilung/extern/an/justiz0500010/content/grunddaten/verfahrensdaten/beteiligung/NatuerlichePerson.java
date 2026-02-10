@@ -1,6 +1,6 @@
 package de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.grunddaten.verfahrensdaten.beteiligung;
 
-import de.muenchen.xjustiz.xoev.codelisten.XoevGeschlecht;
+import de.muenchen.xjustizlib.xoev.codelisten.XoevGeschlecht;
 import java.util.Optional;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

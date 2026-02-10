@@ -11,6 +11,7 @@ import de.muenchen.xjustiz.generated.xjustiz0500straf35.NachrichtStrafOwiVerfahr
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.ContentContainer;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.GrunddatenContent;
+import de.muenchen.xjustizlib.xoev.XJustizProperty;
 import java.util.Map;
 import javax.xml.datatype.DatatypeConfigurationException;
 import org.apache.camel.CamelContext;
@@ -23,6 +24,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -30,6 +32,7 @@ import org.springframework.test.context.ActiveProfiles;
 @CamelSpringBootTest
 @SpringBootTest(classes = { XJustizDocumentRouteBuilder.class })
 @ActiveProfiles({ "default", "organisation" })
+@EnableConfigurationProperties(XJustizProperty.class)
 class ErrorHandlingTest extends ExternAnJustiz0500010TestEnvironment {
 
     @Produce()

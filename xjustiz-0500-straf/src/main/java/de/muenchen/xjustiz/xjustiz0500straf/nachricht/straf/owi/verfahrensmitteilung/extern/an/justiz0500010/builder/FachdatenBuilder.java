@@ -8,9 +8,9 @@ import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeSTRAFRechtskraft;
 import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeSTRAFTatort;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.config.NachrichtenProperty;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.FachdatenContent;
-import de.muenchen.xjustiz.xoev.XJustizProperty;
-import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDS;
-import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDSAnschriftstypen;
+import de.muenchen.xjustizlib.xoev.XJustizProperty;
+import de.muenchen.xjustizlib.xoev.codelisten.XoevCodeGDS;
+import de.muenchen.xjustizlib.xoev.codelisten.XoevCodeGDSAnschriftstypen;
 import java.time.format.DateTimeFormatter;
 import org.springframework.stereotype.Component;
 

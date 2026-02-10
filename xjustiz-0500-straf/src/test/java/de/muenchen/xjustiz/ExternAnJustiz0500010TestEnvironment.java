@@ -1,23 +1,34 @@
 package de.muenchen.xjustiz;
 
-import de.muenchen.xjustiz.generated.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010;
-import de.muenchen.xjustiz.xjustiz0500straf.content.FachdatenContent;
-import de.muenchen.xjustiz.xjustiz0500straf.content.NachrichtenkopfContent;
-import de.muenchen.xjustiz.xjustiz0500straf.content.SchriftgutContent;
-import de.muenchen.xjustiz.xjustiz0500straf.content.fachdaten.StrasseHausnummer;
-import de.muenchen.xjustiz.xjustiz0500straf.content.fachdaten.Tatort;
-import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Anschrift;
-import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Beteiligung;
-import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.beteiligung.Rolle;
-import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.instanzdaten.Aktenzeichen;
-import de.muenchen.xjustiz.xjustiz0500straf.content.grunddaten.verfahrensdaten.instanzdaten.Instanztype;
-import de.muenchen.xjustiz.xjustiz0500straf.content.schriftgutobjekte.*;
-import de.muenchen.xjustiz.xoev.codelisten.*;
+import de.muenchen.xjustiz.generated.xjustiz0500straf35.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.FachdatenContent;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.NachrichtenkopfContent;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.SchriftgutContent;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.fachdaten.StrasseHausnummer;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.fachdaten.Tatort;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.grunddaten.verfahrensdaten.beteiligung.Anschrift;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.grunddaten.verfahrensdaten.beteiligung.Beteiligung;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.grunddaten.verfahrensdaten.beteiligung.Rolle;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.grunddaten.verfahrensdaten.instanzdaten.Aktenzeichen;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.grunddaten.verfahrensdaten.instanzdaten.Instanztype;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.schriftgutobjekte.Akte;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.schriftgutobjekte.AktenzeichenStrukuriert;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.schriftgutobjekte.AnwendungspezifischeErweiterung;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.schriftgutobjekte.Datei;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.schriftgutobjekte.Dokument;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.schriftgutobjekte.FachspezifischeDatenAkte;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.schriftgutobjekte.FachspezifischeDatenDokument;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.schriftgutobjekte.Identifikation;
+import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.schriftgutobjekte.Laufzeit;
+import de.muenchen.xjustizlib.xoev.codelisten.XoevCodeGDSAnschriftstypen;
+import de.muenchen.xjustizlib.xoev.codelisten.XoevCodeGDSDokumentklasse;
+import de.muenchen.xjustizlib.xoev.codelisten.XoevCodeGDSRollenbezeichnungTyp3;
+import de.muenchen.xjustizlib.xoev.codelisten.XoevCodeGDSStaatenTyp3;
+import de.muenchen.xjustizlib.xoev.codelisten.XoevGeschlecht;
 import jakarta.xml.bind.JAXBContext;
 import java.io.StringReader;
 import java.math.BigInteger;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -148,10 +159,10 @@ class ExternAnJustiz0500010TestEnvironment {
     protected SchriftgutContent createSchriftgutAktenzeichenStrukuriert() {
 
         final SchriftgutContent schriftgutContent = new SchriftgutContent();
-        schriftgutContent.setAnschreiben(Optional.of("CEEF2150-F915-1F1F-1176-906D00000000"));
+        schriftgutContent.setAnschreiben("CEEF2150-F915-1F1F-1176-906D00000000");
 
-        schriftgutContent.setDokumente(Optional.of(createDocuments()));
-        schriftgutContent.setAkten(Optional.of(createDossiersIdentifikationLaufzeitErweiterungFachspezifischeDaten()));
+        schriftgutContent.setDokumente(createDocuments());
+        schriftgutContent.setAkten(createDossiersIdentifikationLaufzeitErweiterungFachspezifischeDaten());
 
         return schriftgutContent;
 
@@ -160,10 +171,10 @@ class ExternAnJustiz0500010TestEnvironment {
     protected SchriftgutContent createSchriftgutFreitext() {
 
         final SchriftgutContent schriftgutContent = new SchriftgutContent();
-        schriftgutContent.setAnschreiben(Optional.of("CEEF2150-F915-1F1F-1176-906D00000000"));
+        schriftgutContent.setAnschreiben("CEEF2150-F915-1F1F-1176-906D00000000");
 
-        schriftgutContent.setDokumente(Optional.of(createDocuments()));
-        schriftgutContent.setAkten(Optional.of(createDossiersFreitext()));
+        schriftgutContent.setDokumente(createDocuments());
+        schriftgutContent.setAkten(createDossiersFreitext());
 
         return schriftgutContent;
 

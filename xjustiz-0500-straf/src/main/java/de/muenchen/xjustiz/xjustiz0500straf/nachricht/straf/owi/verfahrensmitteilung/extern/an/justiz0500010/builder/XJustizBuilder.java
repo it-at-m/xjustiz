@@ -11,9 +11,9 @@ import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSRegisterzeichenTy
 import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSRollenbezeichnungTyp3;
 import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSSachgebietTyp3;
 import de.muenchen.xjustiz.generated.xjustiz0500straf35.CodeGDSStaatenTyp3;
-import de.muenchen.xjustiz.xoev.CodelistenProperty;
-import de.muenchen.xjustiz.xoev.XJustizProperty;
-import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDS;
+import de.muenchen.xjustizlib.xoev.CodelistenProperty;
+import de.muenchen.xjustizlib.xoev.XJustizProperty;
+import de.muenchen.xjustizlib.xoev.codelisten.XoevCodeGDS;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 

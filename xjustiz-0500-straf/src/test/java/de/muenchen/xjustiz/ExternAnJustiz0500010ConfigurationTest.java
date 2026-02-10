@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import de.muenchen.xjustiz.config.DynamicJsonUnmarshaller;
 import de.muenchen.xjustiz.config.DynamicXmlMarshaller;
 import de.muenchen.xjustiz.generated.xjustiz0500straf35.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.builder.NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010Director;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.ContentContainer;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.GrunddatenContent;
+import de.muenchen.xjustizlib.xoev.XJustizProperty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -30,13 +31,14 @@ import org.springframework.test.context.ActiveProfiles;
 @CamelSpringBootTest
 @SpringBootTest(classes = { XJustizDocumentRouteBuilder.class })
 @ActiveProfiles({ "default" })
+@EnableConfigurationProperties(XJustizProperty.class)
 class ExternAnJustiz0500010ConfigurationTest extends ExternAnJustiz0500010TestEnvironment {
 
     @Produce()
     private ProducerTemplate startTest;
 
     @Value("${xjustiz.interface.document.processor}")
-    private String testRoute;
+    private String documentInstanceRoute;
 
     @Value("${xjustiz.xjustiz0500straf.xsd.name}")
     private String schemaName;
@@ -65,7 +67,7 @@ class ExternAnJustiz0500010ConfigurationTest extends ExternAnJustiz0500010TestEn
                         createSchriftgutAktenzeichenStrukuriert())))
                 .build();
 
-        final Exchange response = startTest.send(testRoute, request);
+        final Exchange response = startTest.send(documentInstanceRoute, request);
         assertNull(response.getException(), "Error during XML creation.");
         final String xml = response.getMessage().getBody(String.class);
 

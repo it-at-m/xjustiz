@@ -15,6 +15,7 @@ import de.muenchen.xjustiz.generated.xjustiz0500straf35.TypeGDSOrganisation;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.ExternAnJustiz0500010DocumentStart;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.ContentContainer;
 import de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.GrunddatenContent;
+import de.muenchen.xjustizlib.xoev.XJustizProperty;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -36,13 +38,14 @@ import org.springframework.test.context.ActiveProfiles;
 @CamelSpringBootTest
 @SpringBootTest(classes = { XJustizDocumentRouteBuilder.class })
 @ActiveProfiles({ "default", "organisation" })
+@EnableConfigurationProperties(XJustizProperty.class)
 class ExternAnJustiz0500010OrganisationByConfigPropertyTest extends ExternAnJustiz0500010TestEnvironment {
 
     @Produce()
     private ProducerTemplate startxJustiz0500strafBuilderTest;
 
     @Value("${xjustiz.interface.document.processor}")
-    private String testRoute;
+    private String documentInstanceRoute;
 
     @Value("${xjustiz.xjustiz0500straf.xsd.name}")
     private String schemaName;
@@ -69,7 +72,7 @@ class ExternAnJustiz0500010OrganisationByConfigPropertyTest extends ExternAnJust
                         createSchriftgutAktenzeichenStrukuriert())))
                 .build();
 
-        final Exchange response = startxJustiz0500strafBuilderTest.send(testRoute, request);
+        final Exchange response = startxJustiz0500strafBuilderTest.send(documentInstanceRoute, request);
         final String xml = response.getMessage().getBody(String.class);
         this.externAnJustiz0500010 = parseXML(xml);
     }

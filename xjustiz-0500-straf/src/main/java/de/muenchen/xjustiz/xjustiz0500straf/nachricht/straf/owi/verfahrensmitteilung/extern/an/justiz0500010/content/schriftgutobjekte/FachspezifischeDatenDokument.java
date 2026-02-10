@@ -1,6 +1,6 @@
 package de.muenchen.xjustiz.xjustiz0500straf.nachricht.straf.owi.verfahrensmitteilung.extern.an.justiz0500010.content.schriftgutobjekte;
 
-import de.muenchen.xjustiz.xoev.codelisten.XoevCodeGDSDokumentklasse;
+import de.muenchen.xjustizlib.xoev.codelisten.XoevCodeGDSDokumentklasse;
 import java.util.List;
 import lombok.Getter;
 import lombok.NonNull;
