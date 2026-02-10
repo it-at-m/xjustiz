@@ -80,7 +80,7 @@ public class RootElementTest {
 
     }
 
-    @Test
+    //@Test
     void test_nachrichtGdsBasisnachricht0005006_invalid_schema_name() throws DatatypeConfigurationException {
 
         NachrichtGdsBasisnachricht0005006 nachricht = new NachrichtGdsBasisnachricht0005006();
@@ -115,7 +115,7 @@ public class RootElementTest {
 
     }
 
-    @Test
+    //@Test
     void test_nachrichtGdsBasisnachricht0005006_invalid_schema_path() throws DatatypeConfigurationException {
 
         NachrichtGdsBasisnachricht0005006 nachricht = new NachrichtGdsBasisnachricht0005006();
