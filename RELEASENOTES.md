@@ -1,5 +1,10 @@
 # Release-Notes
 
+## 12.2.2026
+### Update
+- Hebung der xJustiz Version 3.5.1 auf Version 3.6.2
+- Änderung des Modul Namen ohne konkrete Version im Namen, stattdessen x-x-x
+
 ## 11.2.2026
 ### Refactoring
 - Modularisierung der Artefaktstruktur. Aufteilung in Compilierung xJustiz-Klassen, XML-Generierung und ggf. Dokument Builder in einzelne Maven Module.
