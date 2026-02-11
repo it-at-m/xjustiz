@@ -1,5 +1,9 @@
 # Release-Notes
 
+## 11.2.2026
+### Refactoring
+- Modularisierung der Artefaktstruktur. Aufteilung in Compilierung xJustiz-Klassen, XML-Generierung und ggf. Dokument Builder in einzelne Maven Module.
+
 ## 27.01.2026
 ### Aenderung
 - xjustiz0500Straf-Builder: Tatzeitraum-Datum und -Uhrzeit fuer Anfang/Ende optional (minOccurs="0").
