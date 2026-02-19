@@ -1034,22 +1034,22 @@
                         </configuration>
                     </execution>
 
-                    <execution>
-                        <id>xjustiz_2600_zwangsvollstreckung_3_4</id>
-                        <goals>
-                            <goal>xjc</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>${project.basedir}/src/main/resources/xsd/xjustiz-x-x-x-xsd/xjustiz_2600_zwangsvollstreckung_3_4.xsd</source>
-                            </sources>
-                            <arguments>
-                                <argument>-npa</argument>
-                            </arguments>
-                            <outputDirectory>${project.basedir}/target/generated-sources/jaxb/xjustiz2600zwangsvollstreckung34</outputDirectory>
-                            <packageName>de.muenchen.xjustiz.generated.xjustiz2600zwangsvollstreckung34</packageName>
-                        </configuration>
-                    </execution>
+<!--                    <execution>-->
+<!--                        <id>xjustiz_2600_zwangsvollstreckung_3_4</id>-->
+<!--                        <goals>-->
+<!--                            <goal>xjc</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <sources>-->
+<!--                                <source>${project.basedir}/src/main/resources/xsd/xjustiz-x-x-x-xsd/xjustiz_2600_zwangsvollstreckung_3_4.xsd</source>-->
+<!--                            </sources>-->
+<!--                            <arguments>-->
+<!--                                <argument>-npa</argument>-->
+<!--                            </arguments>-->
+<!--                            <outputDirectory>${project.basedir}/target/generated-sources/jaxb/xjustiz2600zwangsvollstreckung34</outputDirectory>-->
+<!--                            <packageName>de.muenchen.xjustiz.generated.xjustiz2600zwangsvollstreckung34</packageName>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
 
                     <execution>
                         <id>xjustiz_2610_cl_zwangsvollstreckung_3_2</id>
