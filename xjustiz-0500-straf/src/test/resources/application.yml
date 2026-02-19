@@ -4,9 +4,9 @@ logging:
     de.muenchen.xjustiz.xjustiz-document-processor: DEBUG
 
 xjustiz:
-  version: 3.5.1
+  version: 3.6.2
   xsd:
-    path: xsd/XJustiz-3.5.1-XSD/
+    path: xsd/xjustiz-x-x-x-xsd/
     generated-package-base: de.muenchen.xjustiz.generated
   codelisten:
     gds-rollenbezeichnung:
@@ -68,10 +68,10 @@ xjustiz:
           antrag-behoerde: '016'
           bescheid: '017'
     gds-bestandteiltyp:
-      current-version: 2.4
+      current-version: 2.5
       kennung: urn:xoev-de:xjustiz:codeliste:gds.bestandteiltyp
       codelist-versions:
-        gds-bestandteiltyp-2-4:
+        gds-bestandteiltyp-2-5:
           original: '001'
           repraesentant: '002'
     gds-aktentyp:
@@ -94,7 +94,7 @@ xjustiz:
           bussgeldverfahren: OWi
   xjustiz0500straf:
     xsd:
-      name: xjustiz_0500_straf_3_5.xsd
+      name: xjustiz_0500_straf_3_6.xsd
     nachrichtenkopf:
       auswahl-absender-sonstige: Stadt München
       auswahl-herstellerinformation-produkt: KVU

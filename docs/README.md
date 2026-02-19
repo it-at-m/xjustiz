@@ -23,7 +23,7 @@ stellt das Projekt eine um neue Dokumente erweiterbare Architektur in Form eines
 Dabei stehen drei Themen im Zentrum:
 
 * Die Bereitstellung von generierten Klassen aus dem xJustiz Standard.
-* das Marshalling der XML Repräsentation aus Klasseninstanzen. 
+* Das Marshalling der XML Repräsentation aus Klasseninstanzen. 
 * Die Implementierung von Builder/Factories zur Erstellung von xJustiz Dokumenten Klasseninstanzen mit den generierten Klassen.
 
 _Wie kann das xJustiz Projekt mit deinen Artefakten genutzt werden ?_
@@ -89,7 +89,7 @@ Sie sind daher z.Bsp. für die Implementierung von Builder/Factory Modulen wicht
 ## Maven Multi Modul Projektstruktur 
 
 Aus den Anforderungen bei der Umsetzung des Dokuments _NachrichtStrafOwiVerfahrensmitteilungExternAnJustiz0500010_ 
-aus der _xjustiz_0500_straf_3_5.xsd_ in der Version XJustiz 3.5.1 wurden bislang die folgenden Maven Module angelegt.
+aus der _xjustiz_0500_straf_3_5.xsd_ beginnend mit der Version XJustiz 3.5.1 wurden bislang die folgenden Maven Module angelegt.
 
 * **xjustiz-lib** : Bibliotheks Modul für Aufgaben die in unterschiedlichen Dokumentkontexten wiederkehren wie Datumsformatierung etc.
 * **xjustiz-version-x-x-x** : Kompiliert alle Klassen der XSDs des Standards in eigene Packages.
@@ -195,7 +195,7 @@ return code;
 ```
 
 ### xjustiz-version-x-x-x
-Die einzige Aufgabe des Maven Moduls _xjustiz-version-x-x-x_ ist es die unter _src/main/java/resources/xsd/XJustiz-3.5.1-XSD_ liegenden XSDs mit dem
+Die einzige Aufgabe des Maven Moduls _xjustiz-version-x-x-x_ ist es die unter _src/main/java/resources/xsd/xjustiz-version-x-x-x_ liegenden XSDs mit dem
 _jaxb2-maven-plugin_ in Java Klassen zu compilieren.
 
 Jede XSD hat ihr eigenes _execution_ Element, um die Klassen der XSD in einem eigenen _Java-Package_ zu isolieren.
@@ -206,19 +206,19 @@ alle Dokumentklassen ebenfalls in dem 'gemeinsamen' Package ohne Trennung liegen
 
 ```
 <execution>
-    <id>xjustiz_0000_grunddatensatz_3_5</id>
+    <id>xjustiz_0000_grunddatensatz_3_6</id>
     <goals>
         <goal>xjc</goal>
     </goals>
     <configuration>
         <sources>
-            <source>${project.basedir}/src/main/resources/xsd/XJustiz-3.5.1-XSD/xjustiz_0000_grunddatensatz_3_5.xsd</source>
+            <source>${project.basedir}/src/main/resources/xsd/xjustiz-x-x-x-xsd/xjustiz_0000_grunddatensatz_3_6.xsd</source>
         </sources>
         <arguments>
             <argument>-npa</argument>
         </arguments>
-        <outputDirectory>${project.basedir}/target/generated-sources/jaxb/xjustiz0000grunddatensatz35</outputDirectory>
-        <packageName>de.muenchen.xjustiz.generated.xjustiz0000grunddatensatz35</packageName>
+        <outputDirectory>${project.basedir}/target/generated-sources/jaxb/xjustiz0000grunddatensatz36</outputDirectory>
+        <packageName>de.muenchen.xjustiz.generated.xjustiz0000grunddatensatz36</packageName>
     </configuration>
 </execution>
 
@@ -236,50 +236,78 @@ einen CMD mit Python Interpreter ausgeführt werden können.
 
 
 ```
-Z.Bsp. :  $ python -X utf8 xsd_tree_recursive.py ../xjustiz-version-3-5-1/src/main/resources/xsd/XJustiz-3.5.1-XSD/xjustiz_0500_straf_3_5.xsd nachricht.straf.owi.verfahrensmitteilung.externAnJustiz.0500010
+Z.Bsp. :  $ python -X utf8 xsd_tree_recursive.py ../xjustiz-version-x-x-x/src/main/resources/xsd/xjustiz-x-x-x-xsd/xjustiz_0500_straf_3_6.xsd nachricht.straf.owi.verfahrensmitteilung.externAnJustiz.0500010
+Schema-Übersicht für: ..\xjustiz-version-x-x-x\src\main\resources\xsd\xjustiz-x-x-x-xsd\xjustiz_0500_straf_3_6.xsd
 
-Schema-Übersicht für: ..\xjustiz-version-3-5-1\src\main\resources\xsd\XJustiz-3.5.1-XSD\xjustiz_0500_straf_3_5.xsd
-
-└── Schema xjustiz_0500_straf_3_5.xsd [ns=tns]
-    └── {http://www.xjustiz.de}nachricht.straf.owi.verfahrensmitteilung.externAnJustiz.0500010 [ns=tns , file=xjustiz_0500_straf_3_5.xsd]
-        ├── {http://www.xjustiz.de}nachrichtenkopf : {http://www.xjustiz.de}Type.GDS.Nachrichtenkopf [ns=tns , file=xjustiz_0000_grunddatensatz_3_5.xsd]
-        │   ├── @xjustizVersion [ns=tns , file=xjustiz_0000_grunddatensatz_3_5.xsd]
-        │   ├── {http://www.xjustiz.de}aktenzeichen.absender (0..*) : {urn:xoev-de:kosit:xoev:datentyp:din-91379_2022-08}datatypeC [ns=tns , file=xjustiz_0000_grunddatensatz_3_5.xsd]
-        │   ├── {http://www.xjustiz.de}aktenzeichen.empfaenger (0..*) : {urn:xoev-de:kosit:xoev:datentyp:din-91379_2022-08}datatypeC [ns=tns , file=xjustiz_0000_grunddatensatz_3_5.xsd]
-        │   ├── {http://www.xjustiz.de}erstellungszeitpunkt : {http://www.w3.org/2001/XMLSchema}dateTime [ns=tns , file=xjustiz_0000_grunddatensatz_3_5.xsd]
-        │   ├── {http://www.xjustiz.de}auswahl_absender [ns=tns , file=xjustiz_0000_grunddatensatz_3_5.xsd]
-        │   │   ├── {http://www.xjustiz.de}absender.gericht : {http://www.xjustiz.de}Code.GDS.Gerichte.Typ3 [ns=tns , file=xjustiz_0000_grunddatensatz_3_5.xsd]
-        │   │   │   ├── @listURI (0..1) [ns=tns , file=xjustiz_0020_cl_gerichte_3_3.xsd]
-        │   │   │   ├── @listVersionID [ns=tns , file=xjustiz_0020_cl_gerichte_3_3.xsd]
-        │   │   │   └── code : {http://www.w3.org/2001/XMLSchema}token [ns=tns , file=xjustiz_0020_cl_gerichte_3_3.xsd]
-        │   │   ├── {http://www.xjustiz.de}absender.sonstige : {urn:xoev-de:kosit:xoev:datentyp:din-91379_2022-08}datatypeD [ns=tns , file=xjustiz_0000_grunddatensatz_3_5.xsd]
-        │   │   ├── {http://www.xjustiz.de}absender.rvTraeger : {http://www.xjustiz.de}Code.GDS.RVTraeger [ns=tns , file=xjustiz_0000_grunddatensatz_3_5.xsd]
-        │   │   │   ├── @listURI (0..1) [ns=tns , file=xjustiz_0010_cl_allgemein_3_6.xsd]
-        │   │   │   ├── @listVersionID (0..1) [ns=tns , file=xjustiz_0010_cl_allgemein_3_6.xsd]
-        │   │   │   └── code : {http://www.xjustiz.de}gds.rvtraeger [ns=tns , file=xjustiz_0010_cl_allgemein_3_6.xsd]
-        │   │   │       └── [bereits angezeigt]
-        │   │   └── {http://www.xjustiz.de}absender.polizeibehoerde : {http://www.xjustiz.de}Code.GDS.Polizeibehoerden.Typ3 [ns=tns , file=xjustiz_0000_grunddatensatz_3_5.xsd]
-        │   │       ├── @listURI (0..1) [ns=tns , file=xjustiz_0010_cl_allgemein_3_6.xsd]
-        │   │       ├── @listVersionID [ns=tns , file=xjustiz_0010_cl_allgemein_3_6.xsd]
-        │   │       └── code : {http://www.w3.org/2001/XMLSchema}token [ns=tns , file=xjustiz_0010_cl_allgemein_3_6.xsd]
-        │   │           └── [bereits angezeigt]
-        │   ├── {http://www.xjustiz.de}auswahl_empfaenger [ns=tns , file=xjustiz_0000_grunddatensatz_3_5.xsd]
-        │   │   ├── {http://www.xjustiz.de}empfaenger.gericht : {http://www.xjustiz.de}Code.GDS.Gerichte.Typ3 [ns=tns , file=xjustiz_0000_grunddatensatz_3_5.xsd]
-        │   │   │   ├── @listURI (0..1) [ns=tns , file=xjustiz_0020_cl_gerichte_3_3.xsd]
-        │   │   │   ├── @listVersionID [ns=tns , file=xjustiz_0020_cl_gerichte_3_3.xsd]
-        │   │   │   └── code : {http://www.w3.org/2001/XMLSchema}token [ns=tns , file=xjustiz_0020_cl_gerichte_3_3.xsd]
-        │   │   │       └── [bereits angezeigt]
-        │   │   ├── {http://www.xjustiz.de}empfaenger.sonstige : {urn:xoev-de:kosit:xoev:datentyp:din-91379_2022-08}datatypeD [ns=tns , file=xjustiz_0000_grunddatensatz_3_5.xsd]
-        │   │   ├── {http://www.xjustiz.de}empfaenger.rvTraeger : {http://www.xjustiz.de}Code.GDS.RVTraeger [ns=tns , file=xjustiz_0000_grunddatensatz_3_5.xsd]
-        │   │   │   ├── @listURI (0..1) [ns=tns , file=xjustiz_0010_cl_allgemein_3_6.xsd]
-        │   │   │   ├── @listVersionID (0..1) [ns=tns , file=xjustiz_0010_cl_allgemein_3_6.xsd]
-        │   │   │   └── code : {http://www.xjustiz.de}gds.rvtraeger [ns=tns , file=xjustiz_0010_cl_allgemein_3_6.xsd]
-        │   │   │       └── [bereits angezeigt]
-        │   │   └── {http://www.xjustiz.de}empfaenger.polizeibehoerde : {http://www.xjustiz.de}Code.GDS.Polizeibehoerden.Typ3 [ns=tns , file=xjustiz_0000_grunddatensatz_3_5.xsd]
-        │   │       ├── @listURI (0..1) [ns=tns , file=xjustiz_0010_cl_allgemein_3_6.xsd]
-        │   │       ├── @listVersionID [ns=tns , file=xjustiz_0010_cl_allgemein_3_6.xsd]
-        │   │       └── code : {http://www.w3.org/2001/XMLSchema}token [ns=tns , file=xjustiz_0010_cl_allgemein_3_6.xsd]
-        │   │           └── [bereits angezeigt]
+└── Schema xjustiz_0500_straf_3_6.xsd [ns=tns]
+    └── {http://www.xjustiz.de}nachricht.straf.owi.verfahrensmitteilung.externAnJustiz.0500010 [ns=tns , file=xjustiz_0500_straf_3_6.xsd]
+        ├── {http://www.xjustiz.de}nachrichtenkopf : {http://www.xjustiz.de}Type.GDS.Nachrichtenkopf [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   ├── @xjustizVersion [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   ├── {http://www.xjustiz.de}erstellungszeitpunkt : {http://www.w3.org/2001/XMLSchema}dateTime [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   ├── {http://www.xjustiz.de}absender [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   ├── {http://www.xjustiz.de}informationen : {http://www.xjustiz.de}Type.GDS.Kommunikationspartner [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   │   ├── {http://www.xjustiz.de}auswahl_kommunikationspartner [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   │   │   ├── {http://www.xjustiz.de}gericht : {http://www.xjustiz.de}Code.GDS.Gerichte.Typ3 [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   │   │   │   ├── @listURI (0..1) [ns=tns , file=xjustiz_0020_cl_gerichte_3_3.xsd]
+        │   │   │   │   │   ├── @listVersionID [ns=tns , file=xjustiz_0020_cl_gerichte_3_3.xsd]
+        │   │   │   │   │   └── code : {http://www.w3.org/2001/XMLSchema}token [ns=tns , file=xjustiz_0020_cl_gerichte_3_3.xsd]
+        │   │   │   │   ├── {http://www.xjustiz.de}sonstige : {urn:xoev-de:kosit:xoev:datentyp:din-91379_2022-08}datatypeD [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   │   │   ├── {http://www.xjustiz.de}rvTraeger : {http://www.xjustiz.de}Code.GDS.RVTraeger [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   │   │   │   ├── @listURI (0..1) [ns=tns , file=xjustiz_0010_cl_allgemein_3_7.xsd]
+        │   │   │   │   │   ├── @listVersionID (0..1) [ns=tns , file=xjustiz_0010_cl_allgemein_3_7.xsd]
+        │   │   │   │   │   └── code : {http://www.xjustiz.de}gds.rvtraeger [ns=tns , file=xjustiz_0010_cl_allgemein_3_7.xsd]
+        │   │   │   │   │       └── [bereits angezeigt]
+        │   │   │   │   ├── {http://www.xjustiz.de}polizeibehoerde : {http://www.xjustiz.de}Code.GDS.Polizeibehoerden.Typ3 [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   │   │   │   ├── @listURI (0..1) [ns=tns , file=xjustiz_0010_cl_allgemein_3_7.xsd]
+        │   │   │   │   │   ├── @listVersionID [ns=tns , file=xjustiz_0010_cl_allgemein_3_7.xsd]
+        │   │   │   │   │   └── code : {http://www.w3.org/2001/XMLSchema}token [ns=tns , file=xjustiz_0010_cl_allgemein_3_7.xsd]
+        │   │   │   │   │       └── [bereits angezeigt]
+        │   │   │   │   └── {http://www.xjustiz.de}finanzbehoerde : {http://www.xjustiz.de}Code.GDS.Finanzbehoerden.Typ3 [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   │   │       ├── @listURI (0..1) [ns=tns , file=xjustiz_0010_cl_allgemein_3_7.xsd]
+        │   │   │   │       ├── @listVersionID [ns=tns , file=xjustiz_0010_cl_allgemein_3_7.xsd]
+        │   │   │   │       └── code : {http://www.w3.org/2001/XMLSchema}token [ns=tns , file=xjustiz_0010_cl_allgemein_3_7.xsd]
+        │   │   │   │           └── [bereits angezeigt]
+        │   │   │   ├── {http://www.xjustiz.de}routingInformationAusSafeverzeichnis (0..1) : {urn:xoev-de:kosit:xoev:datentyp:din-91379_2022-08}datatypeC [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   │   └── {http://www.xjustiz.de}auswahl_verweisGrunddaten (0..1) [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   │       ├── {http://www.xjustiz.de}ref.instanznummer : {urn:xoev-de:kosit:xoev:datentyp:din-91379_2022-08}datatypeC [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   │       └── {http://www.xjustiz.de}ref.rollennummer : {http://www.xjustiz.de}Type.GDS.Ref.Rollennummer [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   │           └── {http://www.xjustiz.de}ref.rollennummer : {urn:xoev-de:kosit:xoev:datentyp:din-91379_2022-08}datatypeC [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   │               └── [bereits angezeigt]
+        │   │   ├── {http://www.xjustiz.de}aktenzeichen (0..1) : {urn:xoev-de:kosit:xoev:datentyp:din-91379_2022-08}datatypeC [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   └── {http://www.xjustiz.de}eigeneNachrichtenID : {http://www.xjustiz.de}Type.GDS.Xdomea.stringUUIDType [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   ├── {http://www.xjustiz.de}empfaenger [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   ├── {http://www.xjustiz.de}informationen : {http://www.xjustiz.de}Type.GDS.Kommunikationspartner [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   │   └── [bereits angezeigt]
+        │   │   ├── {http://www.xjustiz.de}auswahl_aktenzeichen [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   │   ├── {http://www.xjustiz.de}aktenzeichen.freitext : {urn:xoev-de:kosit:xoev:datentyp:din-91379_2022-08}datatypeC [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   │   ├── {http://www.xjustiz.de}aktenzeichen.neu : {http://www.w3.org/2001/XMLSchema}boolean [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   │   └── {http://www.xjustiz.de}aktenzeichen.unbekannt : {http://www.w3.org/2001/XMLSchema}boolean [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   └── {http://www.xjustiz.de}fremdeNachrichtenID (0..1) : {http://www.xjustiz.de}Type.GDS.Xdomea.stringUUIDType [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   ├── {http://www.xjustiz.de}nachrichtenuebergreifenderProzess (0..1) : {http://www.xjustiz.de}Type.GDS.NachrichtenuebergreifenderProzess [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   ├── {http://www.xjustiz.de}prozessID : {http://www.xjustiz.de}Type.GDS.Xdomea.stringUUIDType [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   ├── {http://www.xjustiz.de}nachrichtenNummer (0..1) : {http://www.w3.org/2001/XMLSchema}integer [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   └── {http://www.xjustiz.de}nachrichtenAnzahl (0..1) : {http://www.w3.org/2001/XMLSchema}integer [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   ├── {http://www.xjustiz.de}ereignis (0..*) : {http://www.xjustiz.de}Code.GDS.Ereignis.Typ3 [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   ├── @listURI (0..1) [ns=tns , file=xjustiz_0010_cl_allgemein_3_7.xsd]
+        │   │   ├── @listVersionID [ns=tns , file=xjustiz_0010_cl_allgemein_3_7.xsd]
+        │   │   └── code : {http://www.w3.org/2001/XMLSchema}token [ns=tns , file=xjustiz_0010_cl_allgemein_3_7.xsd]
+        │   │       └── [bereits angezeigt]
+        │   ├── {http://www.xjustiz.de}herstellerinformation : {http://www.xjustiz.de}Type.GDS.Herstellerinformation [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   ├── {http://www.xjustiz.de}nameDesProdukts : {urn:xoev-de:kosit:xoev:datentyp:din-91379_2022-08}datatypeD [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   ├── {http://www.xjustiz.de}herstellerDesProdukts : {urn:xoev-de:kosit:xoev:datentyp:din-91379_2022-08}datatypeD [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   └── {http://www.xjustiz.de}version : {urn:xoev-de:kosit:xoev:datentyp:din-91379_2022-08}datatypeC [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   ├── {http://www.xjustiz.de}sendungsprioritaet (0..1) : {http://www.xjustiz.de}Code.GDS.Sendungsprioritaet.Typ3 [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │   │   ├── @listURI (0..1) [ns=tns , file=xjustiz_0010_cl_allgemein_3_7.xsd]
+        │   │   ├── @listVersionID [ns=tns , file=xjustiz_0010_cl_allgemein_3_7.xsd]
+        │   │   └── code : {http://www.w3.org/2001/XMLSchema}token [ns=tns , file=xjustiz_0010_cl_allgemein_3_7.xsd]
+        │   │       └── [bereits angezeigt]
+        │   └── {http://www.xjustiz.de}auswahl_vertraulichkeit (0..1) [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │       ├── {http://www.xjustiz.de}vertraulichZuBehandelnGrund : {urn:xoev-de:kosit:xoev:datentyp:din-91379_2022-08}datatypeC [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │       └── {http://www.xjustiz.de}geheimhaltungsgrad : {http://www.xjustiz.de}Code.GDS.Geheimhaltungsgrad.Typ3 [ns=tns , file=xjustiz_0000_grunddatensatz_3_6.xsd]
+        │           ├── @listURI (0..1) [ns=tns , file=xjustiz_0010_cl_allgemein_3_7.xsd]
+        │           ├── @listVersionID [ns=tns , file=xjustiz_0010_cl_allgemein_3_7.xsd]
+        │           └── code : {http://www.w3.org/2001/XMLSchema}token [ns=tns , file=xjustiz_0010_cl_allgemein_3_7.xsd]
+        │               └── [bereits angezeigt]
 ...
 
 ```
@@ -337,7 +365,7 @@ Die nachfolgende Konfiguration ist der Testumgebung des _xjustiz-0500-straf_ Mod
 ```
 xjustiz:
   xsd:
-    path: xsd/XJustiz-3.5.1-XSD/                               <-- Zum Auffinden der XSD Dateien im verwendenten xjustiz-version-x-x-x Modul fuer die Validierung
+    path: xsd/xjustiz-x-x-x-xsd/                               <-- Zum Auffinden der XSD Dateien im verwendenten xjustiz-version-x-x-x Modul fuer die Validierung
     generated-package-base: de.muenchen.xjustiz.generated      <-- Zum Auffinden der [xsdIdentifier]/package-info.java
   interface:
     document:
@@ -374,7 +402,7 @@ public class CamelCallExample {
   public String xjustizExampleCall() {
   
         final Exchange request = ExchangeBuilder.anExchange(camelContext)
-                .withHeader(DynamicXmlMarshaller.SCHEMA_PATH, "xsd/XJustiz-3.5.1-XSD/")
+                .withHeader(DynamicXmlMarshaller.SCHEMA_PATH, "xsd/xjustiz-x-x-x-xsd/")
                 .withHeader(DynamicXmlMarshaller.SCHEMA_NAME, "xjustiz_2200_eeb_3_1.xsd")
                 .withBody([xJustiz-Document-Klasseninstanz])      <-- Bei Aufruf xjustiz.interface.document.processor
                 .build();
@@ -436,13 +464,13 @@ Damit kann die Apache Camel Route zur Generierung der xJustiz Dokumente gestarte
 ```
 ...
 xjustiz:
-  version: 3.5.1        # Version der xJustiz.
+  version: 3.6.2        # Version der xJustiz.
   xsd:                  
-    path: xsd/XJustiz-3.5.1-XSD/
+    path: xsd/xjustiz-x-x-x-xsd/
     generated-package-base: de.muenchen.xjustiz.generated
   xjustiz0500straf:
     xsd:
-      name: xjustiz_0500_straf_3_5.xsd   
+      name: xjustiz_0500_straf_3_6.xsd   
   interface:
       document:
         processor: direct:xjustiz-document-processor      #  Einstiegspunkt der Apache Camel Route fuer die Konvertierung. 

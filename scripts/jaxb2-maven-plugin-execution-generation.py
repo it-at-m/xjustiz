@@ -11,10 +11,10 @@ import os
 from pathlib import Path
 
 # Quellverzeichnis mit XSDs (relativ zum Projekt)
-XSD_DIR = Path("../xjustiz-version-3-5-1/src/main/resources/xsd/XJustiz-3.5.1-XSD")
+XSD_DIR = Path("../xjustiz-version-x-x-x/src/main/resources/xsd/xjustiz-x-x-x-xsd")
 
 # Maven-Platzhalter (als Text!)
-XSD_BASE = "${project.basedir}/src/main/resources/xsd/XJustiz-3.5.1-XSD"
+XSD_BASE = "${project.basedir}/src/main/resources/xsd/xjustiz-x-x-x-xsd"
 OUT_BASE = "${project.basedir}/target/generated-sources/jaxb"
 PKG_BASE = "de.muenchen.xjustiz.generated"
 

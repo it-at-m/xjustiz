@@ -7,7 +7,7 @@
                 @XmlNs(prefix = "tns", namespaceURI = "http://www.xjustiz.de")
         },
         elementFormDefault = XmlNsForm.UNQUALIFIED,
-        location = "xjustiz_1300_aussonderung_3_1.xsd"
+        location = "xjustiz_1300_aussonderung_3_2.xsd"
 )
 
 package de.muenchen.xjustiz.generated.xjustiz1300aussonderung31;

@@ -7,12 +7,12 @@
 	<parent>
 		<groupId>de.muenchen.oss</groupId>
 		<artifactId>xjustiz</artifactId>
-		<version>0.0.11-SNAPSHOT</version>
+		<version>0.1.0-SNAPSHOT</version>
 	</parent>
 
 	<groupId>de.muenchen.oss</groupId>
 	<artifactId>xjustiz-converter</artifactId>
-	<version>0.0.11-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 	<name>xjustiz-converter</name>
 	<description>Spring boot implementation project to generate
 		https://xjustiz.justiz.de messages.</description>
@@ -75,9 +75,9 @@
         <!-- Test -->
         <dependency>
             <groupId>de.muenchen.oss</groupId>
-            <artifactId>xjustiz-version-3-5-1</artifactId>
+            <artifactId>xjustiz-version-x-x-x </artifactId>
             <scope>test</scope>
-            <version>0.0.11-SNAPSHOT</version>
+            <version>0.1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
