@@ -74,9 +74,9 @@ public class Xjustiz0005NachrichtenxxRootElementTest {
     }
 
     /*
-        The test case is not executable in the GitHub pipeline
-        
-        @Test
+     * The test case is not executable in the GitHub pipeline
+     *
+     * @Test
      */
     void test_nachrichtGdsBasisnachricht0005006_invalid_schema_name() throws DatatypeConfigurationException {
 
