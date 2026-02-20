@@ -1,8 +1,22 @@
 # Release-Notes
 
+## 12.2.2026
+### Update
+- Hebung der xJustiz Version 3.5.1 auf Version 3.6.2
+- Änderung des Modul Namen ohne konkrete Version im Namen, stattdessen x-x-x
+
+## 11.2.2026
+### Refactoring
+- Modularisierung der Artefaktstruktur. Aufteilung in Compilierung xJustiz-Klassen, XML-Generierung und ggf. Dokument Builder in einzelne Maven Module.
+
 ## 27.01.2026
 ### Aenderung
 - xjustiz0500Straf-Builder: Tatzeitraum-Datum und -Uhrzeit fuer Anfang/Ende optional (minOccurs="0").
+
+## 24.12.2025
+### Refactoring
+- xJustiz Dokumentenerstellung in eigenes Maven Modul verschoben.
+- XML Generierung parameterisiert.
 
 ## 18.12.2026
 ### Aenderung

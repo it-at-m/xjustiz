@@ -1,7 +1,8 @@
 package de.muenchen.xjustiz;
 
-import de.muenchen.xjustiz.config.JaxbConfig;
-import de.muenchen.xjustiz.config.XJustiz0500StrafProcessor;
+import de.muenchen.xjustiz.config.DynamicSchemaLocation;
+import de.muenchen.xjustiz.config.DynamicXmlMarshaller;
+import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
@@ -15,13 +16,19 @@ public class XJustizDocumentRouteBuilder extends RouteBuilder {
                 .handled(false);
 
         from("{{xjustiz.interface.document.processor}}").routeId("xjustiz-document-processor")
-                .description("Insert values into xjustiz document and marshal to xml.")
+                .description("Marshal xjustiz document to xml and add required namespaces.")
+                .log(LoggingLevel.DEBUG, "de.muenchen.xjustiz", "${body}")
+                .process("dynamicXmlMarshaller")
+                .marshal().jaxb()
+                .process(new DynamicSchemaLocation())
                 .to("log:de.muenchen.xjustiz.xjustiz-document-processor?level=DEBUG")
-                .process("builderConnector")
-                .marshal().jaxb(JaxbConfig.CONTEXT_PATH)
-                .process(new XJustiz0500StrafProcessor())
-                .to("log:de.muenchen.xjustiz.xjustiz-document-processor?level=DEBUG")
-                .to("validator:xsd/XJustiz-3.5.1-XSD/xjustiz_0500_straf_3_5.xsd");
+                .toD(String.format("validator:${header.%s}${header.%s}", DynamicXmlMarshaller.SCHEMA_PATH, DynamicXmlMarshaller.SCHEMA_NAME));
+
+        from("{{xjustiz.interface.document.json-adapter}}").routeId("xjustiz-document-json-adapter")
+                .description("Unmarshall JSON to xjustiz document.")
+                .log(LoggingLevel.DEBUG, "de.muenchen.xjustiz", "${body}")
+                .process("dynamicJsonUnmarshaller")
+                .to("{{xjustiz.interface.document.processor}}");
 
     }
 }

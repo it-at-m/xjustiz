@@ -1,84 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>de.muenchen.oss</groupId>
-        <artifactId>xjustiz</artifactId>
-        <version>0.0.11-SNAPSHOT</version>
-    </parent>
+	<parent>
+		<groupId>de.muenchen.oss</groupId>
+		<artifactId>xjustiz</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+	</parent>
 
-    <groupId>de.muenchen.oss</groupId>
-    <artifactId>xjustiz-converter</artifactId>
-    <version>0.0.11-SNAPSHOT</version>
-    <name>xjustiz-converter</name>
-    <description>Spring boot implementation project to generate https://xjustiz.justiz.de messages.</description>
+	<groupId>de.muenchen.oss</groupId>
+	<artifactId>xjustiz-converter</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+	<name>xjustiz-converter</name>
+	<description>Spring boot implementation project to generate
+		https://xjustiz.justiz.de messages.</description>
 
-    <properties>
-        <jakarta.xml.bind>4.0.0</jakarta.xml.bind>
-        <org.glassfish.jaxb>4.0.2</org.glassfish.jaxb>
-        <org.codehaus.mojo>4.0.0</org.codehaus.mojo>
-        <com.fasterxml.jackson.core>2.18.4</com.fasterxml.jackson.core>
-        <camel-spring-boot-dependencies.version>4.10.5</camel-spring-boot-dependencies.version>
-    </properties>
+	<dependencyManagement>
+		<dependencies>
+			<!-- Camel BOM -->
+			<dependency>
+				<groupId>org.apache.camel.springboot</groupId>
+				<artifactId>camel-spring-boot-dependencies</artifactId>
+				<version>${camel-spring-boot-dependencies.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
-    <dependencyManagement>
-        <dependencies>
-            <!-- Camel BOM -->
-            <dependency>
-                <groupId>org.apache.camel.springboot</groupId>
-                <artifactId>camel-spring-boot-dependencies</artifactId>
-                <version>${camel-spring-boot-dependencies.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+	<dependencies>
 
-    <dependencies>
+		<!-- Camel -->
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-spring-boot-starter</artifactId>
+		</dependency>
 
-        <!-- Camel -->
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-jaxb-starter</artifactId>
+		</dependency>
+
+		<!-- json -->
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-jackson-starter</artifactId>
+		</dependency>
+
+        <!-- Commons IO -->
         <dependency>
-            <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-spring-boot-starter</artifactId>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+         <version>2.21.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-jaxb-starter</artifactId>
-        </dependency>
+       <!-- Logback Core -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+		</dependency>
 
-        <!-- json -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>${com.fasterxml.jackson.core}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>${com.fasterxml.jackson.core}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${com.fasterxml.jackson.core}</version>
-        </dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
 
-        <!-- JAXB Runtime (Jakarta JAXB 3) -->
-        <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>${org.glassfish.jaxb}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>jakarta.xml.bind</groupId>
-            <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>${jakarta.xml.bind}</version>
-        </dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
 
         <!-- Test -->
+        <dependency>
+            <groupId>de.muenchen.oss</groupId>
+            <artifactId>xjustiz-version-x-x-x </artifactId>
+            <scope>test</scope>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-test-spring-junit5</artifactId>
@@ -90,33 +90,6 @@
             <scope>test</scope>
         </dependency>
 
-    </dependencies>
-
-    <build>
-        <plugins>
-            <!-- https://www.mojohaus.org/jaxb2-maven-plugin/#/repo -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jaxb2-maven-plugin</artifactId>
-                <version>${org.codehaus.mojo}</version>
-                <executions>
-                    <execution>
-                        <id>generate-jaxb</id>
-                        <goals>
-                            <goal>xjc</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <sources>${project.basedir}/src/main/resources/xsd/XJustiz-3.5.1-XSD/xjustiz_0500_straf_3_5.xsd
-                    </sources>
-                    <outputDirectory>${project.basedir}/target/generated-sources/jaxb</outputDirectory>
-                    <packageName>de.muenchen.xjustiz.generated</packageName>
-                    <extension>true</extension>
-                    <noPackageLevelAnnotations>true</noPackageLevelAnnotations>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+	</dependencies>
 
 </project>
