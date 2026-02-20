@@ -223,6 +223,8 @@ alle Dokumentklassen ebenfalls in dem 'gemeinsamen' Package ohne Trennung liegen
 </execution>
 
 ```
+#### XSD-Bindings
+Wegen zu langer Klassennamen war bei einer XSD eine Anpassung der Namen per _main/resources/bindings.xjb_ erforderlich.
 
 #### Python Scripte
 Im Projektverzeichnis _xjustiz/scripts_ liegen verschiedene Python Scripte für die Auswertung von xJustiz XSDs die auf
