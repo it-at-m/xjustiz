@@ -409,7 +409,7 @@ public class CamelCallExample {
                 .withBody([xJustiz-Document-Klasseninstanz])      <-- Bei Aufruf xjustiz.interface.document.processor
                 .build();
   
-        var response  = xjustizDocumentProducer.send request);
+        var response  = xjustizDocumentProducer.send(request);
         String xml = response.getMessage().getBody(String.class);
         Exception exception = response.getException();
         ...
