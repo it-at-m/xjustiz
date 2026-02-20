@@ -9,7 +9,7 @@
     </parent>
     <artifactId>xjustiz-version-x-x-x</artifactId>
     <name>xjustiz-version-x-x-x</name>
-    <description>Provides xjustiz version x.x.x generated sources. Please refer to the release notes for the current xJustiz version. </description>
+    <description>Provides xjustiz version x.x.x generated sources. Please refer to the release notes for the current xJustiz version.</description>
 
     <properties>
         <org.codehaus.mojo>4.0.0</org.codehaus.mojo>
@@ -62,7 +62,6 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jaxb2-maven-plugin</artifactId>
                 <version>${org.codehaus.mojo}</version>
-
 
                 <executions>
                     <execution>
@@ -1034,22 +1033,24 @@
                         </configuration>
                     </execution>
 
-<!--                    <execution>-->
-<!--                        <id>xjustiz_2600_zwangsvollstreckung_3_4</id>-->
-<!--                        <goals>-->
-<!--                            <goal>xjc</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <sources>-->
-<!--                                <source>${project.basedir}/src/main/resources/xsd/xjustiz-x-x-x-xsd/xjustiz_2600_zwangsvollstreckung_3_4.xsd</source>-->
-<!--                            </sources>-->
-<!--                            <arguments>-->
-<!--                                <argument>-npa</argument>-->
-<!--                            </arguments>-->
-<!--                            <outputDirectory>${project.basedir}/target/generated-sources/jaxb/xjustiz2600zwangsvollstreckung34</outputDirectory>-->
-<!--                            <packageName>de.muenchen.xjustiz.generated.xjustiz2600zwangsvollstreckung34</packageName>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
+                    <execution>
+                        <id>xjustiz_2600_zwangsvollstreckung_3_4</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.basedir}/src/main/resources/xsd/xjustiz-x-x-x-xsd/xjustiz_2600_zwangsvollstreckung_3_4.xsd</source>
+                            </sources>
+                            <arguments>
+                                <argument>-npa</argument>
+                                <argument>-b</argument>
+                                <argument>${project.basedir}/src/main/resources/bindings.xjb</argument>
+                            </arguments>
+                            <outputDirectory>${project.basedir}/target/generated-sources/jaxb/xjustiz2600zwangsvollstreckung34</outputDirectory>
+                            <packageName>de.muenchen.xjustiz.generated.xjustiz2600zwangsvollstreckung34</packageName>
+                        </configuration>
+                    </execution>
 
                     <execution>
                         <id>xjustiz_2610_cl_zwangsvollstreckung_3_2</id>

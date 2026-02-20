@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jxb:bindings
+    xmlns:jxb="https://jakarta.ee/xml/ns/jaxb"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+    jxb:version="3.0">
+
+    <jxb:bindings schemaLocation="xsd/xjustiz-x-x-x-xsd/xjustiz_2600_zwangsvollstreckung_3_4.xsd">
+        <jxb:schemaBindings>
+            <jxb:package name="de.muenchen.xjustiz.gen.x2600zv34"/>
+        </jxb:schemaBindings>
+
+        <jxb:bindings node="//xs:complexType[@name='Type.ZVSTR.Anspruch.PfUEB']">
+            <jxb:class name="AnspruchPfUEB"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:complexType[@name='Type.ZVSTR.Forderungsaufstellung.Vollstreckungsauftrag']">
+            <jxb:class name="ForderungsaufstellungVA"/>
+        </jxb:bindings>
+
+        <jxb:bindings node="//xs:element[@name='auswahl_ohneOderNachPfaendungsversuch']/xs:complexType">
+            <jxb:class name="OhneNachPfaendungsversuch"/>
+        </jxb:bindings>
+
+        <jxb:bindings node="//xs:element[@name='auswahl_abnahmeVermoegensauskunftOderRuecksendungVollstreckungsunterlagen']/xs:complexType">
+            <jxb:class name="AuswahlAbnahmeOderRuecksendung"/>
+        </jxb:bindings>
+
+        <jxb:bindings node="//xs:element[@name='nachVorherigemPfaendungsversuch']/xs:complexType">
+            <jxb:class name="NachPfaendungsversuch"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:element[@name='schuldnerWiederholtNichtAngetroffen']/xs:complexType">
+            <jxb:class name="SchuldnerNichtAngetroffen"/>
+        </jxb:bindings>
+
+    </jxb:bindings>
+</jxb:bindings>
