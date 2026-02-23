@@ -1,17 +1,16 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>de.muenchen.oss</groupId>
         <artifactId>xjustiz</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>0.1.0</version>
     </parent>
     <artifactId>xjustiz-0500-straf</artifactId>
     <name>xjustiz-0500-straf</name>
     <description>Implements xjustiz_0500_straf_x_x.xsd documents</description>
 
     <properties>
-        <xjustiz.version>0.1.0-SNAPSHOT</xjustiz.version>
+        <xjustiz.version>0.1.0</xjustiz.version>
     </properties>
 
     <dependencyManagement>
