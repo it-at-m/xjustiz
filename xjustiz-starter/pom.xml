@@ -5,11 +5,11 @@
     <parent>
         <groupId>de.muenchen.oss</groupId>
         <artifactId>xjustiz</artifactId>
-        <version>0.1.0</version>
+        <version>0.1.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>xjustiz-starter</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1-SNAPSHOT</version>
     <name>xjustiz-starter</name>
     <description>Spring boot starter project to generate https://xjustiz.justiz.de messages.</description>
 
@@ -17,7 +17,7 @@
     <!-- Core Frameworks -->
         <camel.spring.boot.dependencies>4.11.0</camel.spring.boot.dependencies>
         <spring.boot>3.4.4</spring.boot>
-        <xjustiz.version>0.1.0</xjustiz.version>
+        <xjustiz.version>0.1.1-SNAPSHOT</xjustiz.version>
     </properties>
 
     <dependencyManagement>
