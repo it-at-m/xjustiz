@@ -17,8 +17,7 @@ Quelle : Spezifikation_XJustiz_351_06_03_2025.pdf, S.1
 Das xJustiz Projekt ist aus der Notwendigkeit entstanden, im Rahmen eines Fachverfahrens ein xJustiz Standard konformes 
 XML Dokument für den Austausch mit der Justiz zu erstellen.
 
-Um das Rad bei neuen Dokumentanforderungen nicht immer wieder in Rahmen eines singulären Projekts neu erfinden zu müssen,
-stellt das Projekt eine um neue Dokumente erweiterbare Architektur in Form eines _Maven Multimodul Projekts_ zur Verfügung. 
+Ziel des Projekts ist es statt xJustiz Dokumente in einem Projektkontext singulär umzusetzen, die Implementierung der Dokumente in einem gemeinsamen Projekt zusammen zu fassen, um möglichst wiederverwendbare Module zu bekommen und damit die Bereitstellung von Dokumenten im xJustiz Standard für andere zu vereinfachen. Zu diesem Zweck stellt das Projekt eine um neue Dokumente erweiterbare Architektur in Form eines _Maven Multimodul Projekts_ zur Verfügung. 
 
 Dabei stehen drei Themen im Zentrum:
 
@@ -26,9 +25,9 @@ Dabei stehen drei Themen im Zentrum:
 * Das Marshalling der XML Repräsentation aus Klasseninstanzen. 
 * Die Implementierung von Builder/Factories zur Erstellung von xJustiz Dokumenten Klasseninstanzen mit den generierten Klassen.
 
-_Wie kann das xJustiz Projekt mit deinen Artefakten genutzt werden ?_
-Will man ein eigenes Dokument erstellen, können ohne weiteren Aufwand die jeweiligen Klassen aus dem _xjustiz-version-x-x-x_ Projekt verwendet werden.
-Ebenso kann mit dem _xjustiz-converter_ ohne weiteren Aufwand das XML Marshalling durchgeführt werden - muss es aber nicht. 
+_Wie kann das xJustiz Projekt mit deinen Artefakten genutzt werden ?_</br>
+Will man ein eigenes Dokument erstellen, können ohne weiteren Aufwand die jeweiligen Klassen aus dem _xjustiz-version-x-x-x_ Projekt verwendet werden.</br>
+Ebenso kann mit dem _xjustiz-converter_ ohne weiteren Aufwand das XML Marshalling durchgeführt werden - muss es aber nicht.</br> 
 Zuletzt kann aus den Anforderungen der eigenen Dokumentenerstelllung noch eine Builder/Factory Implementierung abgeleitet werden, 
 die die Erstellung der Dokumenten Klasseninstanzen unterstützt. Dies ist mit Eigeninitiative verbunden, die aber auch ohne Builder/Factory anfällt, 
 wenn die eforderlichen Klasseninstanzen mit den fachlichen Inhalten aus der eigenen Domain angereichert werden.  
