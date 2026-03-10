@@ -130,7 +130,7 @@ xjustiz:
            [XÖV Attributname wg Zuordnung]          
 ```
 
-Daher ist es möglich in der Konfiguration zur Dokumentation "alte" Codelisten beizubehaltem und neue hinzuzufügen.
+Daher ist es möglich in der Konfiguration zur Dokumentation "alte" Codelisten beizubehalten und neue hinzuzufügen.
 Siehe das Beispiel der _gds-ereignis_ mit den Versionen 1-10 und 1-11.
 In den Buildern wird die Codelisten Version verwendet, die als _current-version_ eingetragen ist. 
 Im Beispiel der _gds-ereignis_ also die Version 1.11. Beim Hinzufügen einer neuen Codelisten Version 
@@ -320,11 +320,11 @@ Das Maven Modul _xjustiz-converter_ bekommt als _Input_ die um Informationen erg
 2. Anreichern des _XML Wurzelelements_ um die Namespace Anforderungen des xJustiz Standards.
 3. _Validierung_ des erstellten und geänderten XMLs mit seiner XSD Datei.
 
-Werden alle drei Schritte erfolgreich durchlaufen, erfolgt die _Output_ des erstellten und validierten XMLs. Im Fehlerfall 
+Werden alle drei Schritte erfolgreich durchlaufen, erfolgt der _Output_ des erstellten und validierten XMLs. Im Fehlerfall 
 erfolgt die Rückgabe der Fehlernachricht.
 
 Im Modul _xjustiz-version-x-x-x_ werden alle Dokumentklassen in isolierte Packages ausgegeben. Damit der _xjustiz-converter_ 
-seine Aufgaben Marshalling, Anreicherung und Validierung  erledigen kann braucht er bei seinem Aufruf daher den 
+seine Aufgaben Marshalling, Anreicherung und Validierung erledigen kann braucht er bei seinem Aufruf daher den 
 _Packagenamen_ und den _Namen der XSD Datei_ für das xJustiz Dokument das zur Bearbeitung ansteht.
 
 #### Bearbeitung des XML Wurzelements 
