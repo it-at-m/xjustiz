@@ -1,0 +1,9 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "github>it-at-m/refarch//refarch-tools/refarch-renovate/refarch-renovate-config.json5",
+  ],
+  "description": "At 12:00am on the 15th"
+  "schedule": ["0 0 15 * *"],
+  "timezone": "Europe/Berlin"
+}
