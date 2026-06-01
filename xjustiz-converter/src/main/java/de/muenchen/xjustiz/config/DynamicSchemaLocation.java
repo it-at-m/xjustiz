@@ -2,6 +2,7 @@ package de.muenchen.xjustiz.config;
 
 import java.io.StringReader;
 import java.io.StringWriter;
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
@@ -26,11 +27,11 @@ public class DynamicSchemaLocation implements Processor {
 
         Element root = document.getDocumentElement();
 
-        root.setAttribute(
+        root.setAttributeNS("http://www.w3.org/2001/XMLSchema-instance",
                 "xsi:schemaLocation",
                 "http://www.xjustiz.de " + schemaName);
 
-        root.setAttribute(
+        root.setAttributeNS(XMLConstants.XMLNS_ATTRIBUTE_NS_URI,
                 "xmlns:xsi",
                 "http://www.w3.org/2001/XMLSchema-instance");
 
