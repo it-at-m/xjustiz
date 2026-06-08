@@ -1,5 +1,9 @@
 # Release-Notes
 
+## 8.6.2026
+### Refactoring
+- Debug-Ausgaben hinzugefügt. DynamicSchemaLocation als Spring Bean.  
+
 ## 12.2.2026
 ### Update
 - Hebung der xJustiz Version 3.5.1 auf Version 3.6.2

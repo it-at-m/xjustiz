@@ -2,6 +2,7 @@ package de.muenchen.xjustiz;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.muenchen.xjustiz.config.DynamicJsonUnmarshaller;
+import de.muenchen.xjustiz.config.DynamicSchemaLocation;
 import de.muenchen.xjustiz.config.DynamicXmlMarshaller;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -16,7 +17,7 @@ import org.springframework.context.annotation.DependsOn;
 public class XJustizAutoConfiguration {
 
     @Bean
-    @DependsOn("dynamicJsonUnmarshaller")
+    @DependsOn({ "dynamicJsonUnmarshaller", "dynamicSchemaLocation" })
     public XJustizDocumentRouteBuilder xJustizDocumentRouteBuilder() {
         return new XJustizDocumentRouteBuilder();
     }
@@ -29,6 +30,11 @@ public class XJustizAutoConfiguration {
     @Bean
     public DynamicXmlMarshaller dynamicXmlMarshaller() {
         return new DynamicXmlMarshaller();
+    }
+
+    @Bean
+    public DynamicSchemaLocation dynamicSchemaLocation() {
+        return new DynamicSchemaLocation();
     }
 
 }
