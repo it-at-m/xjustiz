@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 public class TestContext {
 
     @Bean
-    public DynamicJsonUnmarshaller dynamicJsonUnmarshaller() {
-        return new DynamicJsonUnmarshaller();
+    public DynamicJsonUnmarshaller dynamicJsonUnmarshaller(ObjectMapper mapper) {
+        return new DynamicJsonUnmarshaller(mapper);
     }
 
     @Bean
@@ -29,4 +29,5 @@ public class TestContext {
     public ObjectMapper objectMapper() {
         return new ObjectMapper();
     }
+
 }

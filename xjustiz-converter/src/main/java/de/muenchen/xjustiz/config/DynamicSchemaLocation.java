@@ -14,7 +14,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 @Log4j2
-//@Component
 public class DynamicSchemaLocation implements Processor {
 
     @Override

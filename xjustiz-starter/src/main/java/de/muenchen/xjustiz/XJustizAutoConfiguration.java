@@ -1,5 +1,6 @@
 package de.muenchen.xjustiz;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import de.muenchen.xjustiz.config.DynamicJsonUnmarshaller;
 import de.muenchen.xjustiz.config.DynamicSchemaLocation;
 import de.muenchen.xjustiz.config.DynamicXmlMarshaller;
@@ -22,8 +23,8 @@ public class XJustizAutoConfiguration {
     }
 
     @Bean
-    public DynamicJsonUnmarshaller dynamicJsonUnmarshaller() {
-        return new DynamicJsonUnmarshaller();
+    public DynamicJsonUnmarshaller dynamicJsonUnmarshaller(ObjectMapper mapper) {
+        return new DynamicJsonUnmarshaller(mapper);
     }
 
     @Bean

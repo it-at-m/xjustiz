@@ -1,5 +1,6 @@
 package de.muenchen.xjustiz;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import de.muenchen.xjustiz.config.DynamicJsonUnmarshaller;
 import de.muenchen.xjustiz.config.DynamicSchemaLocation;
 import de.muenchen.xjustiz.config.DynamicXmlMarshaller;
@@ -10,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 public class TestContext {
 
     @Bean
-    public DynamicJsonUnmarshaller dynamicJsonUnmarshaller() {
-        return new DynamicJsonUnmarshaller();
+    public DynamicJsonUnmarshaller dynamicJsonUnmarshaller(ObjectMapper mapper) {
+        return new DynamicJsonUnmarshaller(mapper);
     }
 
     @Bean
@@ -22,5 +23,10 @@ public class TestContext {
     @Bean
     public DynamicSchemaLocation dynamicSchemaLocation() {
         return new DynamicSchemaLocation();
+    }
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
     }
 }

@@ -9,7 +9,6 @@ import org.apache.camel.Processor;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Value;
 
-//@Component
 public class DynamicXmlMarshaller implements Processor {
 
     public static final String SCHEMA_PATH = "XJustiz_Schema_Path";

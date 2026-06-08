@@ -3,16 +3,17 @@ package de.muenchen.xjustiz.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.muenchen.xjustiz.XJustizException;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.component.jackson.JacksonDataFormat;
 
-//@Component()
+@RequiredArgsConstructor
 public class DynamicJsonUnmarshaller implements Processor {
 
     public static final String UNMARSHAL_CLASS_TYPE = "Unmarshal_Class_Type";
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
 
     @Override
     public void process(Exchange exchange) throws Exception {
