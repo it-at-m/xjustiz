@@ -10,12 +10,11 @@ import javax.xml.transform.stream.StreamResult;
 import lombok.extern.log4j.Log4j2;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 @Log4j2
-@Component
+//@Component
 public class DynamicSchemaLocation implements Processor {
 
     @Override

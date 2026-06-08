@@ -3,9 +3,8 @@ package de.muenchen.xjustiz;
 import de.muenchen.xjustiz.config.DynamicXmlMarshaller;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
-import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class XJustizDocumentRouteBuilder extends RouteBuilder {
 
     @Override
