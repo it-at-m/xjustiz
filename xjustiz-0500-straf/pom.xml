@@ -3,14 +3,14 @@
     <parent>
         <groupId>de.muenchen.oss</groupId>
         <artifactId>xjustiz</artifactId>
-        <version>0.1.1-SNAPSHOT</version>
+        <version>0.1.1</version>
     </parent>
     <artifactId>xjustiz-0500-straf</artifactId>
     <name>xjustiz-0500-straf</name>
     <description>Implements xjustiz_0500_straf_x_x.xsd documents</description>
 
     <properties>
-        <xjustiz.version>0.1.1-SNAPSHOT</xjustiz.version>
+        <xjustiz.version>0.1.1</xjustiz.version>
     </properties>
 
     <dependencyManagement>
