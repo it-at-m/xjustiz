@@ -4,7 +4,7 @@
     <parent>
         <groupId>de.muenchen.oss</groupId>
         <artifactId>xjustiz</artifactId>
-        <version>0.1.1</version>
+        <version>0.1.2-SNAPSHOT</version>
     </parent>
     <artifactId>xjustiz-version-x-x-x</artifactId>
     <name>xjustiz-version-x-x-x</name>
