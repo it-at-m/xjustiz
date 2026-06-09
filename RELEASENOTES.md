@@ -2,7 +2,8 @@
 
 ## 8.6.2026
 ### Refactoring
-- Debug-Ausgaben hinzugefügt. DynamicSchemaLocation als Spring Bean.  
+- Debug-Ausgaben hinzugefügt. DynamicSchemaLocation als Spring Bean.
+- Bean Konfiguration in AutoConfiguration zentralisiert.
 
 ## 12.2.2026
 ### Update
