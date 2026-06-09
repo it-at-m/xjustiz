@@ -1,7 +1,7 @@
 
 logging:
   level:
-    de.muenchen.xjustiz.xjustiz-document-processor: DEBUG
+    de.muenchen.xjustiz: DEBUG
 
 xjustiz:
   xsd:

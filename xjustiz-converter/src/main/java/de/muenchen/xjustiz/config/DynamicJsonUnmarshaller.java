@@ -7,9 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.component.jackson.JacksonDataFormat;
-import org.springframework.stereotype.Component;
 
-@Component(value = "dynamicJsonUnmarshaller")
 @RequiredArgsConstructor
 public class DynamicJsonUnmarshaller implements Processor {
 
